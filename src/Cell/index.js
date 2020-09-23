@@ -3,7 +3,13 @@ import "./index.css";
 
 const Cell = (props) => {
   let cell = () => {
-    return <div className="cell"> </div>;
+    if (props.data.start) {
+      return <div className="cell" id="start"> </div>;
+    }else if (props.data.end) {
+      return <div className="cell" id="end"> </div>;
+    } else {
+      return <div className="cell"> </div>;
+    }
   };
   return cell();
 };

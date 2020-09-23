@@ -5,7 +5,7 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      rows: 20,
+      rows: 21,
       columns: 30,
     };
   }
