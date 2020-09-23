@@ -1,0 +1,9 @@
+.row {
+  display: flex;
+  height: 10px;
+  border-top: 1px solid black;
+}
+
+.row:last-child {
+  border-bottom: 1px solid black;
+}

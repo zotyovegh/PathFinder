@@ -1,4 +1,3 @@
-
 import React, { Component, createRef } from "react";
 import Grid from "../../path-finder/src/Grid";
 
@@ -6,8 +5,8 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      rows: 4,
-      columns: 4,
+      rows: 20,
+      columns: 30,
     };
   }
 
