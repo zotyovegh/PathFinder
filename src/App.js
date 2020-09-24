@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import Grid from "../../path-finder/src/Grid";
 
 class App extends Component {

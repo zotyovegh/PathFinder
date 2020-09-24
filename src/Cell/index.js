@@ -7,6 +7,8 @@ const Cell = (props) => {
       return <div className="cell" id="start"> </div>;
     }else if (props.data.end) {
       return <div className="cell" id="end"> </div>;
+    }else if (props.data.visited) {
+      return <div className="cell" id="visited"> </div>;
     } else {
       return <div className="cell"> </div>;
     }

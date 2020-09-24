@@ -17,19 +17,19 @@ class Grid extends Component {
   }
 
   doDijkstra = () => {
-    const startCell = this.state.grid[START_CELL_ROW][START_CELL_COL];
-    const finishCell = this.state.grid[FINISH_CELL_ROW][FINISH_CELL_COL];
-    const visitedCells = dijkstra(this.state.grid, startCell, finishCell);
-    console.log(visitedCells);
-    for (let i = 0; i <= visitedCells.length-1; i++) {
+    const {grid} = this.state;
+    const startCell = grid[START_CELL_ROW][START_CELL_COL];
+    const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
+    const visitedCells = dijkstra(grid, startCell, finishCell);
+
+    for (let i = 0; i <= visitedCells.length; i++) {
       setTimeout(() => {
         const cell = visitedCells[i];
         const grid = this.state.grid.slice();
 
-        console.log(cell);
-        grid[cell.y][cell.x].visited = true;
+        grid[cell.row][cell.col].visited = true;
         this.setState({ grid: grid });
-      }, 10 * i);
+      }, 20 * i);
     }
   };
 
@@ -40,8 +40,8 @@ class Grid extends Component {
       grid.push([]);
       for (let j = 0; j < props.columns; j++) {
         grid[i].push({
-          x: j,
-          y: i,
+          row: i,
+          col: j,
           start: false,
           end: false,
           distance: Infinity,
