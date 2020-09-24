@@ -27,6 +27,7 @@ class Grid extends Component {
           start: false,
           end: false,
           distance: Infinity,
+          visited: false,
           isWall: false,
         });
       }
