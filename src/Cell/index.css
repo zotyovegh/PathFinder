@@ -19,3 +19,8 @@
 .cell:first-child {
   border-left: 1px solid black;
 }
+
+.visited {
+  background-color: blue;
+  
+}

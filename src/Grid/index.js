@@ -21,6 +21,16 @@ class Grid extends Component {
     const finishCell = this.state.grid[FINISH_CELL_ROW][FINISH_CELL_COL];
     const visitedCells = dijkstra(this.state.grid, startCell, finishCell);
     console.log(visitedCells);
+    for (let i = 0; i <= visitedCells.length-1; i++) {
+      setTimeout(() => {
+        const cell = visitedCells[i];
+        const grid = this.state.grid.slice();
+
+        console.log(cell);
+        grid[cell.y][cell.x].visited = true;
+        this.setState({ grid: grid });
+      }, 10 * i);
+    }
   };
 
   createGrid = (props) => {
