@@ -17,19 +17,18 @@ class Grid extends Component {
   }
 
   doDijkstra = () => {
-    const {grid} = this.state;
+    const { grid } = this.state;
     const startCell = grid[START_CELL_ROW][START_CELL_COL];
     const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
     const visitedCells = dijkstra(grid, startCell, finishCell);
-
-    for (let i = 0; i <= visitedCells.length; i++) {
+    for (let i = 0; i <= visitedCells.length - 1; i++) {
       setTimeout(() => {
         const cell = visitedCells[i];
-        const grid = this.state.grid.slice();
+        const grid = this.state.grid;
 
         grid[cell.row][cell.col].visited = true;
         this.setState({ grid: grid });
-      }, 20 * i);
+      }, 13 * i);
     }
   };
 
