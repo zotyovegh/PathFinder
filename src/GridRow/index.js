@@ -4,7 +4,15 @@ import "./index.css";
 
 const GridRow = (props) => {
   let cells = props.cells.map((data, index) => {
-    return <Cell key={index} data={data} />;
+    return (
+      <Cell
+        key={index}
+        data={data}
+        onMouseDown={props.onMouseDown}
+        onMouseEnter={props.onMouseEnter}
+        onMouseUp={props.onMouseUp}
+      />
+    );
   });
   //
 

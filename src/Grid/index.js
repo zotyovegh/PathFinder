@@ -16,6 +16,16 @@ class Grid extends Component {
     };
   }
 
+  onMouseDown = () => {
+    console.log("down");
+  };
+  onMouseEnter = () => {
+    console.log("enter");
+  };
+  onMouseUp = () => {
+    console.log("up");
+  };
+
   doDijkstra = () => {
     const { grid } = this.state;
     const startCell = grid[START_CELL_ROW][START_CELL_COL];
@@ -58,7 +68,9 @@ class Grid extends Component {
 
   render() {
     let grid = this.state.grid.map((row, index) => {
-      return <GridRow cells={row} key={index} />;
+      return <GridRow cells={row} key={index} onMouseDown={this.onMouseDown}
+      onMouseEnter={this.onMouseEnter}
+      onMouseUp={this.onMouseUp}/>;
     });
     return (
       <div>
