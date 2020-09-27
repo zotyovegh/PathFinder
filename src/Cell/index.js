@@ -29,6 +29,17 @@ const Cell = (props) => {
           {" "}
         </div>
       );
+    }else if (props.data.isWall) {
+      return (
+        <div className="cell" id="wall" onMouseDown={() => props.onMouseDown(props.data)}
+        onMouseEnter={() => props.onMouseEnter(props.data)}
+        onMouseUp={() => props.onMouseUp(props.data)}
+        onContextMenu={(e) => {
+          e.preventDefault();
+        }}>
+          {" "}
+        </div>
+      );
     } else if (props.data.visited) {
       return (
         <div className="cell" id="visited" onMouseDown={() => props.onMouseDown(props.data)}

@@ -13,17 +13,24 @@ class Grid extends Component {
     super(props);
     this.state = {
       grid: this.createGrid(props),
+      isMouseDown: false,
     };
   }
 
-  onMouseDown = () => {
-    console.log("down");
+  onMouseDown = (cell) => {
+    console.log(cell);
   };
-  onMouseEnter = () => {
-    console.log("enter");
+  onMouseEnter = (cell) => {
+    console.log(cell);
   };
-  onMouseUp = () => {
-    console.log("up");
+  onMouseUp = () => {};
+
+  manageWall = (cell) => {
+    let newCell = cell;
+    let newGrid = this.state.grid;
+    newCell.isWall = !newCell.isWall;
+    newGrid[cell.x][cell.y] = newCell;
+    this.setState({ grid: newGrid });
   };
 
   doDijkstra = () => {
@@ -68,9 +75,15 @@ class Grid extends Component {
 
   render() {
     let grid = this.state.grid.map((row, index) => {
-      return <GridRow cells={row} key={index} onMouseDown={this.onMouseDown}
-      onMouseEnter={this.onMouseEnter}
-      onMouseUp={this.onMouseUp}/>;
+      return (
+        <GridRow
+          cells={row}
+          key={index}
+          onMouseDown={this.onMouseDown}
+          onMouseEnter={this.onMouseEnter}
+          onMouseUp={this.onMouseUp}
+        />
+      );
     });
     return (
       <div>
