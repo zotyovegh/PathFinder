@@ -22,6 +22,9 @@ class Grid extends Component {
     this.setState({ isMouseDown: true });
   };
   onMouseEnter = (cell) => {
+    if (cell.start || cell.end) {
+      return;
+    }
     if (this.state.isMouseDown) {
       this.manageWall(cell);
     }
@@ -34,7 +37,7 @@ class Grid extends Component {
     let newCell = cell;
     let newGrid = this.state.grid;
     newCell.isWall = !newCell.isWall;
-    console.log(newCell);
+    newCell.visited = false;
     newGrid[cell.row][cell.col] = newCell;
     this.setState({ grid: newGrid });
   };
