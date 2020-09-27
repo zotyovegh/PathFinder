@@ -18,23 +18,18 @@ class Grid extends Component {
   }
 
   onMouseDown = (cell) => {
-    console.log("down");
-
-    let newGrid = this.manageWall(cell);
-    this.setState({ grid: newGrid, isMouseDown: true });
+    this.manageWall(cell);
+    this.setState({ isMouseDown: true });
   };
   onMouseEnter = (cell) => {
-    console.log("enter");
     if (cell.start || cell.end) {
       return;
     }
     if (this.state.isMouseDown) {
-      let newGrid = this.manageWall(cell);
-      this.setState({ grid: newGrid });
+      this.manageWall(cell);
     }
   };
   onMouseUp = () => {
-    console.log("up");
     this.setState({ isMouseDown: false });
   };
 
@@ -44,7 +39,7 @@ class Grid extends Component {
     newCell.isWall = !newCell.isWall;
     newCell.visited = false;
     newGrid[cell.row][cell.col] = newCell;
-    return newGrid;
+    this.setState({ grid: newGrid });
   };
 
   doDijkstra = () => {
@@ -55,11 +50,11 @@ class Grid extends Component {
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       setTimeout(() => {
         const cell = visitedCells[i];
-        if (!cell.start && !cell.end) {
-          document.getElementById(`cell-${cell.row}-${cell.col}`).id =
-            "visited";
-        }
-      }, 5 * i);
+        const grid = this.state.grid;
+
+        grid[cell.row][cell.col].visited = true;
+        this.setState({ grid: grid });
+      }, 13 * i);
     }
   };
 
@@ -91,7 +86,6 @@ class Grid extends Component {
     let grid = this.state.grid.map((row, index) => {
       return (
         <GridRow
-          row={index}
           cells={row}
           key={index}
           onMouseDown={this.onMouseDown}

@@ -8,22 +8,22 @@
   border-right: 1px solid black;
 }
 
-.cell:first-child {
-  border-left: 1px solid black;
-}
-#visited {
-  background-color: blue;
-}
-.start {
+#start {
   background-color: green;
 }
 
-.end {
+#end {
   background-color: red;
 }
 
-.wall {
+#wall {
   background-color: black;
 }
 
+.cell:first-child {
+  border-left: 1px solid black;
+}
 
+#visited {
+  background-color: blue;
+}
