@@ -16,6 +16,10 @@
   background-color: red;
 }
 
+#wall {
+  background-color: black;
+}
+
 .cell:first-child {
   border-left: 1px solid black;
 }

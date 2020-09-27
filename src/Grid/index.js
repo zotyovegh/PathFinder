@@ -18,18 +18,24 @@ class Grid extends Component {
   }
 
   onMouseDown = (cell) => {
-    console.log(cell);
+    this.manageWall(cell);
+    this.setState({ isMouseDown: true });
   };
   onMouseEnter = (cell) => {
-    console.log(cell);
+    if (this.state.isMouseDown) {
+      this.manageWall(cell);
+    }
   };
-  onMouseUp = () => {};
+  onMouseUp = () => {
+    this.setState({ isMouseDown: false });
+  };
 
   manageWall = (cell) => {
     let newCell = cell;
     let newGrid = this.state.grid;
     newCell.isWall = !newCell.isWall;
-    newGrid[cell.x][cell.y] = newCell;
+    console.log(newCell);
+    newGrid[cell.row][cell.col] = newCell;
     this.setState({ grid: newGrid });
   };
 
