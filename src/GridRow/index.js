@@ -6,6 +6,8 @@ const GridRow = (props) => {
   let cells = props.cells.map((data, index) => {
     return (
       <Cell
+        row={props.row}
+        col={index}
         key={index}
         data={data}
         onMouseDown={props.onMouseDown}
