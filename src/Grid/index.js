@@ -18,8 +18,11 @@ class Grid extends Component {
   }
 
   onMouseDown = (cell) => {
-    this.manageWall(cell);
     this.setState({ isMouseDown: true });
+    if (cell.start || cell.end) {
+      return;
+    }
+    this.manageWall(cell);
   };
   onMouseEnter = (cell) => {
     if (cell.start || cell.end) {
