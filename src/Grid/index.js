@@ -3,11 +3,6 @@ import GridRow from "../GridRow";
 import "./index.css";
 import { dijkstra } from "../Methods/methods";
 
-const START_CELL_ROW = 10;
-const START_CELL_COL = 4;
-const FINISH_CELL_ROW = 10;
-const FINISH_CELL_COL = 25;
-
 class Grid extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +11,10 @@ class Grid extends Component {
       isMouseDown: false,
       isStartOn: false,
       isEndOn: false,
+      startRow: props.startR,
+      startCol: props.startC,
+      endRow: props.endR,
+      endCol: props.endC,
     };
   }
 
@@ -37,8 +36,24 @@ class Grid extends Component {
         return;
       }
       if (this.state.isStartOn) {
+        let newGrid = this.state.grid.slice();
+        newGrid[this.state.startRow][this.state.startCol].start = false;
+        newGrid[cell.row][cell.col].start = true;
+        this.setState({
+          grid: newGrid,
+          startRow: cell.row,
+          startCol: cell.col,
+        });
         return;
       } else if (this.state.isEndOn) {
+        let newGrid = this.state.grid.slice();
+        newGrid[this.state.endRow][this.state.endCol].end = false;
+        newGrid[cell.row][cell.col].end = true;
+        this.setState({
+          grid: newGrid,
+          endRow: cell.row,
+          endCol: cell.col,
+        });
         return;
       }
 
@@ -60,8 +75,8 @@ class Grid extends Component {
 
   doDijkstra = () => {
     const { grid } = this.state;
-    const startCell = grid[START_CELL_ROW][START_CELL_COL];
-    const finishCell = grid[FINISH_CELL_ROW][FINISH_CELL_COL];
+    const startCell = grid[this.state.startRow][this.state.startCol];
+    const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       setTimeout(() => {
@@ -92,8 +107,8 @@ class Grid extends Component {
       }
     }
 
-    grid[START_CELL_ROW][START_CELL_COL].start = true;
-    grid[FINISH_CELL_ROW][FINISH_CELL_COL].end = true;
+    grid[props.startR][props.startC].start = true;
+    grid[props.endR][props.endC].end = true;
 
     return grid;
   };

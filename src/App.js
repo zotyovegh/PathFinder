@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Grid rows={this.state.rows} columns={this.state.columns} />
+        <Grid rows={this.state.rows} columns={this.state.columns} startR={10} startC={4}endR={10} endC={25}/>
       </div>
     );
   }
