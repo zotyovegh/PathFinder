@@ -96,7 +96,7 @@ class Grid extends Component {
     });
     return (
       <div>
-        <div className="grid">
+        <div className="grid" onMouseLeave={this.onMouseUp}>
           {grid}
         </div>
         <button onClick={this.doDijkstra}>Dijkstra</button>
