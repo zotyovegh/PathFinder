@@ -14,26 +14,39 @@ class Grid extends Component {
     this.state = {
       grid: this.createGrid(props),
       isMouseDown: false,
+      isStartOn: false,
+      isEndOn: false,
     };
   }
 
   onMouseDown = (cell) => {
     this.setState({ isMouseDown: true });
-    if (cell.start || cell.end) {
+    if (cell.start) {
+      this.setState({ isStartOn: true });
+      return;
+    }
+    if (cell.end) {
+      this.setState({ isEndOn: true });
       return;
     }
     this.manageWall(cell);
   };
   onMouseEnter = (cell) => {
-    if (cell.start || cell.end) {
-      return;
-    }
     if (this.state.isMouseDown) {
+      if (cell.start || cell.end) {
+        return;
+      }
+      if (this.state.isStartOn) {
+        return;
+      } else if (this.state.isEndOn) {
+        return;
+      }
+
       this.manageWall(cell);
     }
   };
   onMouseUp = () => {
-    this.setState({ isMouseDown: false });
+    this.setState({ isMouseDown: false, isStartOn: false, isEndOn: false });
   };
 
   manageWall = (cell) => {
