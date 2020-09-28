@@ -15,10 +15,14 @@ class Grid extends Component {
       startCol: props.startC,
       endRow: props.endR,
       endCol: props.endC,
+      status: "pending",
     };
   }
 
   onMouseDown = (cell) => {
+    if (this.state.status === "running") {
+      return;
+    }
     this.setState({ isMouseDown: true });
     if (cell.start) {
       this.setState({ isStartOn: true });
@@ -31,6 +35,9 @@ class Grid extends Component {
     this.manageWall(cell);
   };
   onMouseEnter = (cell) => {
+    if (this.state.status === "running") {
+      return;
+    }
     if (this.state.isMouseDown) {
       if (cell.start || cell.end) {
         return;
@@ -63,6 +70,9 @@ class Grid extends Component {
     }
   };
   onMouseUp = () => {
+    if (this.state.status === "running") {
+      return;
+    }
     this.setState({ isMouseDown: false, isStartOn: false, isEndOn: false });
   };
 
@@ -76,6 +86,7 @@ class Grid extends Component {
   };
 
   doDijkstra = () => {
+    this.setState({ status: "running" });
     const { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
@@ -87,6 +98,9 @@ class Grid extends Component {
 
         grid[cell.row][cell.col].visited = true;
         this.setState({ grid: grid });
+        if (i === visitedCells.length - 1) {
+          this.setState({ status: "pending" });
+        }
       }, 13 * i);
     }
   };
