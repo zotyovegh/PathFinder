@@ -96,7 +96,9 @@ class Grid extends Component {
     });
     return (
       <div>
-        <div className="grid">{grid}</div>
+        <div className="grid">
+          {grid}
+        </div>
         <button onClick={this.doDijkstra}>Dijkstra</button>
       </div>
     );

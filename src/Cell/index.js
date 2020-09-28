@@ -8,7 +8,10 @@ const Cell = (props) => {
         <div
           className="cell"
           id="start"
-          onMouseDown={() => props.onMouseDown(props.data)}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            props.onMouseDown(props.data);
+          }}
           onMouseEnter={() => props.onMouseEnter(props.data)}
           onMouseUp={() => props.onMouseUp(props.data)}
           onContextMenu={(e) => {
@@ -20,44 +23,75 @@ const Cell = (props) => {
       );
     } else if (props.data.end) {
       return (
-        <div className="cell" id="end" onMouseDown={() => props.onMouseDown(props.data)}
-        onMouseEnter={() => props.onMouseEnter(props.data)}
-        onMouseUp={() => props.onMouseUp(props.data)}
-        onContextMenu={(e) => {
-          e.preventDefault();
-        }}>
+        <div
+          className="cell"
+          id="end"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            props.onMouseDown(props.data);
+          }}
+          onMouseEnter={() => props.onMouseEnter(props.data)}
+          onMouseUp={() => props.onMouseUp(props.data)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
           {" "}
         </div>
       );
-    }else if (props.data.isWall) {
+    } else if (props.data.isWall) {
       return (
-        <div className="cell" id="wall" onMouseDown={() => props.onMouseDown(props.data)}
-        onMouseEnter={() => props.onMouseEnter(props.data)}
-        onMouseUp={() => props.onMouseUp(props.data)}
-        onContextMenu={(e) => {
-          e.preventDefault();
-        }}>
+        <div
+          className="cell"
+          id="wall"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            props.onMouseDown(props.data);
+          }}
+          onMouseEnter={() => props.onMouseEnter(props.data)}
+          onMouseUp={() => props.onMouseUp(props.data)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
           {" "}
         </div>
       );
     } else if (props.data.visited) {
       return (
-        <div className="cell" id="visited" onMouseDown={() => props.onMouseDown(props.data)}
-        onMouseEnter={() => props.onMouseEnter(props.data)}
-        onMouseUp={() => props.onMouseUp(props.data)}
-        onContextMenu={(e) => {
-          e.preventDefault();
-        }}>
+        <div
+          className="cell"
+          id="visited"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            props.onMouseDown(props.data);
+          }}
+          onMouseEnter={() => props.onMouseEnter(props.data)}
+          onMouseUp={() => props.onMouseUp(props.data)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
           {" "}
         </div>
       );
     } else {
-      return <div className="cell" onMouseDown={() => props.onMouseDown(props.data)}
-      onMouseEnter={() => props.onMouseEnter(props.data)}
-      onMouseUp={() => props.onMouseUp(props.data)}
-      onContextMenu={(e) => {
-        e.preventDefault();
-      }}> </div>;
+      return (
+        <div
+          className="cell"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            props.onMouseDown(props.data);
+          }}
+          onMouseEnter={() => props.onMouseEnter(props.data)}
+          onMouseUp={() => props.onMouseUp(props.data)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+        >
+          {" "}
+        </div>
+      );
     }
   };
   return cell();
