@@ -153,6 +153,9 @@ class Grid extends Component {
   };
 
   clearGrid = () => {
+    if (this.state.status === "running") {
+      return;
+    }
     this.clearVisitedCells();
     this.setState({ status: "pending" });
   };
