@@ -52,6 +52,11 @@ class Grid extends Component {
           startRow: cell.row,
           startCol: cell.col,
         });
+        if (this.state.status === "finished") {
+          this.clearGrid();
+          this.doDijkstraFast();
+        }
+
         return;
       } else if (this.state.isEndOn) {
         let newGrid = this.state.grid.slice();
@@ -63,6 +68,10 @@ class Grid extends Component {
           endRow: cell.row,
           endCol: cell.col,
         });
+        if (this.state.status === "finished") {
+          this.clearGrid();
+          this.doDijkstraFast();
+        }
         return;
       }
 
@@ -116,6 +125,20 @@ class Grid extends Component {
     }
   };
 
+  doDijkstraFast = () => {
+    const { grid } = this.state;
+    const startCell = grid[this.state.startRow][this.state.startCol];
+    const finishCell = grid[this.state.endRow][this.state.endCol];
+    const visitedCells = dijkstra(grid, startCell, finishCell);
+    for (let i = 0; i <= visitedCells.length - 1; i++) {
+      const cell = visitedCells[i];
+      const grid = this.state.grid;
+
+      grid[cell.row][cell.col].visited = true;
+      this.setState({ grid: grid });
+    }
+  };
+
   clearGrid = () => {
     let newGrid = this.state.grid;
     for (let i = 0; i < this.props.rows; i++) {
@@ -124,7 +147,7 @@ class Grid extends Component {
         newGrid[i][j].distance = Infinity;
       }
     }
-    this.setState({grid: newGrid});
+    this.setState({ grid: newGrid });
   };
 
   createGrid = (props) => {
