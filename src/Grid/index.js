@@ -86,7 +86,18 @@ class Grid extends Component {
   };
 
   doDijkstra = () => {
+    if (this.state.status === "running") {
+      return;
+    }
+    if (this.state.status === "finished") {
+      console.log("again");
+      this.setState({ grid: this.getUnvisitedGrid() });
+    } else {
+      console.log("first");
+    }
+
     this.setState({ status: "running" });
+
     const { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
@@ -99,10 +110,20 @@ class Grid extends Component {
         grid[cell.row][cell.col].visited = true;
         this.setState({ grid: grid });
         if (i === visitedCells.length - 1) {
-          this.setState({ status: "pending" });
+          this.setState({ status: "finished" });
         }
       }, 13 * i);
     }
+  };
+
+  getUnvisitedGrid = () => {
+    let grid = this.state.grid;
+    for (let i = 0; i < this.props.rows; i++) {
+      for (let j = 0; j < this.props.columns; j++) {
+        grid[i][j].visited = false;
+      }
+    }
+    return grid;
   };
 
   createGrid = (props) => {
@@ -147,6 +168,7 @@ class Grid extends Component {
           {grid}
         </div>
         <button onClick={this.doDijkstra}>Dijkstra</button>
+        
       </div>
     );
   }
