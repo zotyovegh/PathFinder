@@ -121,6 +121,7 @@ class Grid extends Component {
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.columns; j++) {
         newGrid[i][j].visited = false;
+        newGrid[i][j].distance = Infinity;
       }
     }
     this.setState({grid: newGrid});
