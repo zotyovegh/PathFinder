@@ -91,7 +91,7 @@ class Grid extends Component {
     }
     if (this.state.status === "finished") {
       console.log("again");
-      this.setState({ grid: this.getUnvisitedGrid() });
+      this.clearGrid();
     } else {
       console.log("first");
     }
@@ -116,14 +116,14 @@ class Grid extends Component {
     }
   };
 
-  getUnvisitedGrid = () => {
-    let grid = this.state.grid;
+  clearGrid = () => {
+    let newGrid = this.state.grid;
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.columns; j++) {
-        grid[i][j].visited = false;
+        newGrid[i][j].visited = false;
       }
     }
-    return grid;
+    this.setState({grid: newGrid});
   };
 
   createGrid = (props) => {
@@ -168,7 +168,7 @@ class Grid extends Component {
           {grid}
         </div>
         <button onClick={this.doDijkstra}>Dijkstra</button>
-        
+        <button onClick={this.clearGrid}>Clear grid</button>
       </div>
     );
   }
