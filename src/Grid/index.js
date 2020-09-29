@@ -55,7 +55,7 @@ class Grid extends Component {
         });
         if (this.state.status === "finished") {
           this.clearVisitedCells();
-          this.doDijkstraFast();
+          this.animateDijkstraFast();
         }
 
         return;
@@ -71,7 +71,7 @@ class Grid extends Component {
         });
         if (this.state.status === "finished") {
           this.clearVisitedCells();
-          this.doDijkstraFast();
+          this.animateDijkstraFast();
         }
         return;
       }
@@ -96,10 +96,6 @@ class Grid extends Component {
   };
 
   doDijkstra = () => {
-    this.visualizeDijkstra();
-  };
-
-  visualizeDijkstra = () => {
     if (this.state.status === "running") {
       return;
     }
@@ -113,6 +109,11 @@ class Grid extends Component {
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
+
+    this.animateDijkstraSlow(visitedCells);
+  };
+
+  animateDijkstraSlow = (visitedCells) => {
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       setTimeout(() => {
         const cell = visitedCells[i];
@@ -127,7 +128,7 @@ class Grid extends Component {
     }
   };
 
-  doDijkstraFast = () => {
+  animateDijkstraFast = () => {
     const { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
