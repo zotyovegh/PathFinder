@@ -53,7 +53,7 @@ class Grid extends Component {
           startCol: cell.col,
         });
         if (this.state.status === "finished") {
-          this.clearGrid();
+          this.clearVisitedCells();
           this.doDijkstraFast();
         }
 
@@ -69,7 +69,7 @@ class Grid extends Component {
           endCol: cell.col,
         });
         if (this.state.status === "finished") {
-          this.clearGrid();
+          this.clearVisitedCells();
           this.doDijkstraFast();
         }
         return;
@@ -100,7 +100,7 @@ class Grid extends Component {
     }
     if (this.state.status === "finished") {
       console.log("again");
-      this.clearGrid();
+      this.clearVisitedCells();
     } else {
       console.log("first");
     }
@@ -139,7 +139,8 @@ class Grid extends Component {
     }
   };
 
-  clearGrid = () => {
+  clearVisitedCells = () => {
+    console.log(this.state.status);
     let newGrid = this.state.grid;
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.columns; j++) {
@@ -148,6 +149,11 @@ class Grid extends Component {
       }
     }
     this.setState({ grid: newGrid });
+  };
+
+  clearGrid = () => {
+    this.clearVisitedCells();
+    this.setState({ status: "pending" });
   };
 
   createGrid = (props) => {
