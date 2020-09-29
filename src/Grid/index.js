@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GridRow from "../GridRow";
 import "./index.css";
-import { dijkstra } from "../Methods/methods";
+import { dijkstra, getCellsInOrder } from "../Methods/methods";
 
 class Grid extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class Grid extends Component {
       endRow: props.endR,
       endCol: props.endC,
       status: "pending",
+      previous: null,
     };
   }
 
@@ -95,14 +96,15 @@ class Grid extends Component {
   };
 
   doDijkstra = () => {
+    this.visualizeDijkstra();
+  };
+
+  visualizeDijkstra = () => {
     if (this.state.status === "running") {
       return;
     }
     if (this.state.status === "finished") {
-      console.log("again");
       this.clearVisitedCells();
-    } else {
-      console.log("first");
     }
 
     this.setState({ status: "running" });
@@ -140,7 +142,6 @@ class Grid extends Component {
   };
 
   clearVisitedCells = () => {
-    console.log(this.state.status);
     let newGrid = this.state.grid;
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.columns; j++) {
