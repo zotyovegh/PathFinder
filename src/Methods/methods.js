@@ -16,7 +16,7 @@ export function dijkstra(grid, startCell, endCell) {
     if (nextCell.isWall) continue;
 
     if (nextCell.distance === Infinity) return visitedCells;
-    nextCell.isVisited = true;
+    nextCell.visited = true;
     visitedCells.push(nextCell);
     if (nextCell === endCell) {
       return visitedCells;

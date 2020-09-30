@@ -104,16 +104,17 @@ class Grid extends Component {
 
     this.setState({ status: "running" });
 
-    const { grid } = this.state;
-    const startCell = grid[this.state.startRow][this.state.startCol];
-    const finishCell = grid[this.state.endRow][this.state.endCol];
+    const { grid, startRow, startCol, endRow, endCol } = this.state;
+    const startCell = grid[startRow][startCol];
+    const finishCell = grid[endRow][endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
-
+   /* const cellsInOrder = getCellsInOrder(finishCell);
+    console.log(cellsInOrder);*/
     this.animateDijkstraSlow(visitedCells);
   };
 
   animateDijkstraSlow = (visitedCells) => {
-    for (let i = 0; i <= visitedCells.length - 1; i++) {
+    /*for (let i = 0; i <= visitedCells.length - 1; i++) {
       setTimeout(() => {
         const cell = visitedCells[i];
         const grid = this.state.grid;
@@ -124,11 +125,11 @@ class Grid extends Component {
           this.setState({ status: "finished" });
         }
       }, 13 * i);
-    }
+    }*/
   };
 
   animateDijkstraFast = () => {
-    const { grid } = this.state;
+   /* const { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
@@ -138,7 +139,7 @@ class Grid extends Component {
 
       grid[cell.row][cell.col].visited = true;
       this.setState({ grid: grid });
-    }
+    }*/
   };
 
   clearVisitedCells = () => {
