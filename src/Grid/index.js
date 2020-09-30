@@ -16,7 +16,6 @@ class Grid extends Component {
       endRow: props.endR,
       endCol: props.endC,
       status: "pending",
-      previous: null,
     };
   }
 
@@ -175,6 +174,7 @@ class Grid extends Component {
           distance: Infinity,
           visited: false,
           isWall: false,
+          previous: null,
         });
       }
     }
