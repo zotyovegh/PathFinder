@@ -25,7 +25,7 @@
 }
 
 .cell-visited {
-  background-color: blue;
+  background-color: rgb(95, 190, 248);
 }
 
 .cell:first-child {

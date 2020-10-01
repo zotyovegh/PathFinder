@@ -120,14 +120,11 @@ class Grid extends Component {
 
         document.getElementById(`cell-${cell.row}-${cell.col}`).className =
           "cell cell-visited";
-        /* const grid = this.state.grid;
 
-        grid[cell.row][cell.col].visited = true;
-        this.setState({ grid: grid });*/
         if (i === visitedCells.length - 1) {
           this.setState({ status: "finished" });
         }
-      }, 10 * i);
+      }, 5 * i);
     }
   };
 
@@ -141,10 +138,6 @@ class Grid extends Component {
       document.getElementById(`cell-${cell.row}-${cell.col}`).className =
         "cell cell-visited";
 
-      /*  const grid = this.state.grid;
-
-      grid[cell.row][cell.col].visited = true;
-      this.setState({ grid: grid });*/
     }
   };
 
