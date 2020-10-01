@@ -104,7 +104,7 @@ class Grid extends Component {
 
     this.setState({ status: "running" });
 
-    let {grid} =this.state;
+    let { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
@@ -147,6 +147,7 @@ class Grid extends Component {
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.columns; j++) {
         newGrid[i][j].visited = false;
+        newGrid[i][j].isVisited = false;
         newGrid[i][j].distance = Infinity;
         newGrid[i][j].previous = null;
       }

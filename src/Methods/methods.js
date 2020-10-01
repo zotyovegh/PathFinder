@@ -16,7 +16,7 @@ export function dijkstra(grid, startCell, endCell) {
     if (nextCell.isWall) continue;
 
     if (nextCell.distance === Infinity) return visitedCells;
-    nextCell.visited = true;
+    nextCell.isVisited = true;
     visitedCells.push(nextCell);
     if (nextCell === endCell) {
       return visitedCells;
@@ -42,7 +42,9 @@ function getUnvisitedNeighbors(cell, grid) {
     neighbors.push(grid[row][col + 1]);
   }
 
-  const unvisitedNeighbors = neighbors.filter((neighbor) => !neighbor.visited);
+  const unvisitedNeighbors = neighbors.filter(
+    (neighbor) => !neighbor.isVisited
+  );
 
   for (const neighbor of unvisitedNeighbors) {
     neighbor.distance = cell.distance + 1;
