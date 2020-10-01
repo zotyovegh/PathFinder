@@ -52,15 +52,20 @@ class Grid extends Component {
           newGrid[cell.row][cell.col].end = true;
         }
         newGrid[cell.row][cell.col].isWall = false;
-        this.setState({
-          grid: newGrid,
-          startRow: cell.row,
-          startCol: cell.col,
-        });
-        if (this.state.status === "finished") {
-          this.clearVisitedCells();
-          this.animateDijkstraFast();
-        }
+        this.setState(
+          {
+            grid: newGrid,
+            startRow: cell.row,
+            startCol: cell.col,
+          },
+          () => {
+            if (this.state.status === "finished") {
+              this.clearVisitedCells();
+              this.animateDijkstraFast();
+            }
+          }
+        );
+
         return;
       }
       this.manageWall(cell);
@@ -97,7 +102,6 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
-    console.log(cellsInOrder);
     this.animateDijkstraSlow(visitedCells);
   };
 
