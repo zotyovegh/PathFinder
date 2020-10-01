@@ -2,23 +2,22 @@ import React from "react";
 import "./index.css";
 function getColor(props) {
   if (props.data.start) {
-    return "start";
+    return "cell-start";
   } else if (props.data.end) {
-    return "end";
+    return "cell-end";
   } else if (props.data.isWall) {
-    return "wall";
-  } else if (props.data.visited) {
-    return "visited";
+    return "cell-wall";
   } else {
     return "";
   }
 }
+
 const Cell = (props) => {
   let cell = () => {
     return (
       <div
-        className="cell"
-        id={getColor(props)}
+        className={`cell ${getColor(props)}`}
+        id={`cell-${props.data.row}-${props.data.col}`}
         onMouseDown={(e) => {
           e.preventDefault();
           props.onMouseDown(props.data);

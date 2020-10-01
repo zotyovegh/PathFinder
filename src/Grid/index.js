@@ -117,14 +117,17 @@ class Grid extends Component {
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       setTimeout(() => {
         const cell = visitedCells[i];
-        const grid = this.state.grid;
+
+        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+          "cell cell-visited";
+        /* const grid = this.state.grid;
 
         grid[cell.row][cell.col].visited = true;
-        this.setState({ grid: grid });
+        this.setState({ grid: grid });*/
         if (i === visitedCells.length - 1) {
           this.setState({ status: "finished" });
         }
-      }, 15 * i);
+      }, 10 * i);
     }
   };
 
@@ -135,10 +138,13 @@ class Grid extends Component {
     const visitedCells = dijkstra(grid, startCell, finishCell);
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       const cell = visitedCells[i];
-      const grid = this.state.grid;
+      document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+        "cell cell-visited";
+
+      /*  const grid = this.state.grid;
 
       grid[cell.row][cell.col].visited = true;
-      this.setState({ grid: grid });
+      this.setState({ grid: grid });*/
     }
   };
 
@@ -146,10 +152,17 @@ class Grid extends Component {
     let newGrid = this.state.grid;
     for (let i = 0; i < this.props.rows; i++) {
       for (let j = 0; j < this.props.columns; j++) {
-        newGrid[i][j].visited = false;
-        newGrid[i][j].isVisited = false;
-        newGrid[i][j].distance = Infinity;
-        newGrid[i][j].previous = null;
+        let cell = newGrid[i][j];
+        cell.visited = false;
+        cell.isVisited = false;
+        cell.distance = Infinity;
+        cell.previous = null;
+        if (!cell.start) {
+          if (!cell.end) {
+            document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+              "cell cell-empty";
+          }
+        }
       }
     }
     this.setState({ grid: newGrid });
