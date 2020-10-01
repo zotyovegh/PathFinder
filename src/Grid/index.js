@@ -42,10 +42,15 @@ class Grid extends Component {
       if (cell.start || cell.end) {
         return;
       }
-      if (this.state.isStartOn) {
+      if (this.state.isStartOn || this.state.isEndOn) {
         let newGrid = this.state.grid.slice();
-        newGrid[this.state.startRow][this.state.startCol].start = false;
-        newGrid[cell.row][cell.col].start = true;
+        if (this.state.isStartOn) {
+          newGrid[this.state.startRow][this.state.startCol].start = false;
+          newGrid[cell.row][cell.col].start = true;
+        } else if (this.state.isEndOn) {
+          newGrid[this.state.endRow][this.state.endCol].end = false;
+          newGrid[cell.row][cell.col].end = true;
+        }
         newGrid[cell.row][cell.col].isWall = false;
         this.setState({
           grid: newGrid,
@@ -56,25 +61,8 @@ class Grid extends Component {
           this.clearVisitedCells();
           this.animateDijkstraFast();
         }
-
-        return;
-      } else if (this.state.isEndOn) {
-        let newGrid = this.state.grid.slice();
-        newGrid[this.state.endRow][this.state.endCol].end = false;
-        newGrid[cell.row][cell.col].end = true;
-        newGrid[cell.row][cell.col].isWall = false;
-        this.setState({
-          grid: newGrid,
-          endRow: cell.row,
-          endCol: cell.col,
-        });
-        if (this.state.status === "finished") {
-          this.clearVisitedCells();
-          this.animateDijkstraFast();
-        }
         return;
       }
-
       this.manageWall(cell);
     }
   };
