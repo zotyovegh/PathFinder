@@ -129,8 +129,10 @@ class Grid extends Component {
     const visitedCells = dijkstra(grid, startCell, finishCell);
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       const cell = visitedCells[i];
-      document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-        "cell cell-visited";
+      if (!cell.start && !cell.end) {
+        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+          "cell cell-visited";
+      }
     }
   };
 
