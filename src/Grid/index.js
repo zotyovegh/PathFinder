@@ -157,12 +157,11 @@ class Grid extends Component {
         cell.isVisited = false;
         cell.distance = Infinity;
         cell.previous = null;
-        if (!cell.start) {
-          if (!cell.end) {
-            document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-              "cell cell-empty";
-          }
+        if (cell.start || cell.end || cell.isWall) {
+          continue;
         }
+        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+          "cell cell-empty";
       }
     }
     this.setState({ grid: newGrid });
