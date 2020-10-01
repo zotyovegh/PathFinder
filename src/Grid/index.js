@@ -42,15 +42,10 @@ class Grid extends Component {
       if (cell.start || cell.end) {
         return;
       }
-      if (this.state.isStartOn || this.state.isEndOn) {
+      if (this.state.isStartOn) {
         let newGrid = this.state.grid.slice();
-        if (this.state.isStartOn) {
-          newGrid[this.state.startRow][this.state.startCol].start = false;
-          newGrid[cell.row][cell.col].start = true;
-        } else if (this.state.isEndOn) {
-          newGrid[this.state.endRow][this.state.endCol].end = false;
-          newGrid[cell.row][cell.col].end = true;
-        }
+        newGrid[this.state.startRow][this.state.startCol].start = false;
+        newGrid[cell.row][cell.col].start = true;
         newGrid[cell.row][cell.col].isWall = false;
         this.setState(
           {
@@ -67,7 +62,28 @@ class Grid extends Component {
         );
 
         return;
+      } else if (this.state.isEndOn) {
+        let newGrid = this.state.grid.slice();
+        newGrid[this.state.endRow][this.state.endCol].end = false;
+        newGrid[cell.row][cell.col].end = true;
+        newGrid[cell.row][cell.col].isWall = false;
+        this.setState(
+          {
+            grid: newGrid,
+            endRow: cell.row,
+            endCol: cell.col,
+          },
+          () => {
+            if (this.state.status === "finished") {
+              this.clearVisitedCells();
+              this.animateDijkstraFast();
+            }
+          }
+        );
+
+        return;
       }
+
       this.manageWall(cell);
     }
   };
@@ -102,6 +118,7 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
+    console.log(cellsInOrder);
     this.animateDijkstraSlow(visitedCells);
   };
 
