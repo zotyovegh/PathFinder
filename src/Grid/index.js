@@ -114,15 +114,17 @@ class Grid extends Component {
   };
 
   animateDijkstraSlow = (visitedCells) => {
-    for (let i = 0; i <= visitedCells.length - 1; i++) {
+    for (let i = 0; i <= visitedCells.length; i++) {
+      const cell = visitedCells[i];
+
       setTimeout(() => {
-        const cell = visitedCells[i];
-
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-visited";
-
-        if (i === visitedCells.length - 1) {
+        if (i === visitedCells.length) {
           this.setState({ status: "finished" });
+          return;
+        }
+        if (!cell.start && !cell.end) {
+          document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+            "cell cell-visited";
         }
       }, 5 * i);
     }
@@ -137,7 +139,6 @@ class Grid extends Component {
       const cell = visitedCells[i];
       document.getElementById(`cell-${cell.row}-${cell.col}`).className =
         "cell cell-visited";
-
     }
   };
 
