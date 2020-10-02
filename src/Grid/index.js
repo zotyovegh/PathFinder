@@ -126,17 +126,12 @@ class Grid extends Component {
     for (let i = 0; i <= visitedCells.length; i++) {
       const cell = visitedCells[i];
       if (i === visitedCells.length) {
-        
         setTimeout(() => {
           this.animatePathSlow(cellsInOrder);
         }, 10 * i);
-        
+        return;
       }
       setTimeout(() => {
-        if (i === visitedCells.length) {
-          this.setState({ status: "finished" });
-          return;
-        }
         if (!cell.start && !cell.end) {
           document.getElementById(`cell-${cell.row}-${cell.col}`).className =
             "cell cell-visited";
@@ -146,11 +141,17 @@ class Grid extends Component {
   };
 
   animatePathSlow = (cellsInOrder) => {
-    for (let i = 0; i < cellsInOrder.length; i++) {
+    for (let i = 0; i <= cellsInOrder.length; i++) {
       setTimeout(() => {
+        if (i === cellsInOrder.length) {
+          this.setState({ status: "finished" });
+          return;
+        }
         const cell = cellsInOrder[i];
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-path";
+        if (!cell.start && !cell.end) {
+          document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+            "cell cell-path";
+        }
       }, 50 * i);
     }
   };
