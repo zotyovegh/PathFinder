@@ -46,7 +46,7 @@ class Grid extends Component {
         let newGrid = this.state.grid.slice();
         newGrid[this.state.startRow][this.state.startCol].start = false;
         newGrid[cell.row][cell.col].start = true;
-        newGrid[cell.row][cell.col].isWall = false;
+      //  newGrid[cell.row][cell.col].isWall = false;
         this.setState(
           {
             grid: newGrid,
@@ -66,7 +66,7 @@ class Grid extends Component {
         let newGrid = this.state.grid.slice();
         newGrid[this.state.endRow][this.state.endCol].end = false;
         newGrid[cell.row][cell.col].end = true;
-        newGrid[cell.row][cell.col].isWall = false;
+       // newGrid[cell.row][cell.col].isWall = false;
         this.setState(
           {
             grid: newGrid,

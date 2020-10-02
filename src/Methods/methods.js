@@ -13,7 +13,7 @@ export function dijkstra(grid, startCell, endCell) {
 
     const nextCell = unvisitedCells.shift();
 
-    if (nextCell.isWall) continue;
+    if (nextCell.isWall && !nextCell.start && !nextCell.end) continue;
 
     if (nextCell.distance === Infinity) return visitedCells;
     nextCell.isVisited = true;
