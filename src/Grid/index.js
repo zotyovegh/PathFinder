@@ -46,7 +46,6 @@ class Grid extends Component {
         let newGrid = this.state.grid.slice();
         newGrid[this.state.startRow][this.state.startCol].start = false;
         newGrid[cell.row][cell.col].start = true;
-        //  newGrid[cell.row][cell.col].isWall = false;
         this.setState(
           {
             grid: newGrid,
@@ -66,7 +65,6 @@ class Grid extends Component {
         let newGrid = this.state.grid.slice();
         newGrid[this.state.endRow][this.state.endCol].end = false;
         newGrid[cell.row][cell.col].end = true;
-        // newGrid[cell.row][cell.col].isWall = false;
         this.setState(
           {
             grid: newGrid,
@@ -245,7 +243,7 @@ class Grid extends Component {
   render() {
     let grid = this.state.grid.map((row, index) => {
       return (
-        <div key={index}  className="row">
+        <div key={index} className="row">
           {row.map((cell, cellIndex) => {
             return (
               <Cell
@@ -258,14 +256,6 @@ class Grid extends Component {
             );
           })}
         </div>
-
-        /*  <GridRow
-          cells={row}
-          key={index}
-          onMouseDown={this.onMouseDown}
-          onMouseEnter={this.onMouseEnter}
-          onMouseUp={this.onMouseUp}
-        />*/
       );
     });
     return (
