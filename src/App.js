@@ -5,8 +5,8 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      rows: this.getSize("rows"),
-      columns: this.getSize("cols"),
+      rows: this.getSize("row"),
+      columns: this.getSize("col"),
       startR: this.getPosition("row"),
       startC: this.getPosition("startCol"),
       endR: this.getPosition("row"),
@@ -17,11 +17,11 @@ class App extends Component {
   getPosition = (parameter) => {
     let position = null;
     if (parameter === "row") {
-      position = Math.floor(this.getSize("rows") / 2);
+      position = Math.floor(this.getSize("row") / 2);
     } else if (parameter === "startCol") {
-      position = Math.floor(this.getSize("cols") / 5);
+      position = Math.floor(this.getSize("col") / 5);
     } else if (parameter === "endCol") {
-      let x = this.getSize("cols");
+      let x = this.getSize("col");
       let margin = Math.ceil(x / 5);
       position = x - margin;
     }
@@ -31,12 +31,12 @@ class App extends Component {
 
   getSize = (type) => {
     let size = null;
-    if (type === "rows") {
+    if (type === "row") {
       size = (window.innerHeight / 30).toFixed(0) - 5;
       if (size < 10) {
         return 10;
       }
-    } else if (type === "cols") {
+    } else if (type === "col") {
       size = (window.innerWidth / 30).toFixed(0) - 5;
       if (size < 10) {
         return 10;

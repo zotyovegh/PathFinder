@@ -154,7 +154,7 @@ class Grid extends Component {
           document.getElementById(`cell-${cell.row}-${cell.col}`).className =
             "cell cell-path";
         }
-      }, 50 * i);
+      }, 20 * i);
     }
   };
 
