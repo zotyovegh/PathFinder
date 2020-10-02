@@ -170,6 +170,16 @@ class Grid extends Component {
     }
   };
 
+  animatePathFast = (cellsInOrder) => {
+    for (let i = 0; i < cellsInOrder.length; i++) {
+      const cell = cellsInOrder[i];
+      if (!cell.start && !cell.end) {
+        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+          "cell cell-path";
+      }
+    }
+  };
+
   clearVisitedCells = () => {
     let newGrid = this.state.grid;
     for (let i = 0; i < this.props.rows; i++) {
