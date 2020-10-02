@@ -119,33 +119,36 @@ class Grid extends Component {
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
     console.log(cellsInOrder);
-    this.animateDijkstraSlow(visitedCells);
+    this.animateDijkstraSlow(visitedCells, cellsInOrder);
   };
 
-  animateDijkstraSlow = (visitedCells) => {
+  animateDijkstraSlow = (visitedCells, cellsInOrder) => {
     for (let i = 0; i <= visitedCells.length; i++) {
       const cell = visitedCells[i];
 
       setTimeout(() => {
         if (i === visitedCells.length) {
           this.setState({ status: "finished" });
+          setTimeout(() => {
+            this.animatePathSlow(cellsInOrder);
+          }, 10 * i);
           return;
         }
         if (!cell.start && !cell.end) {
           document.getElementById(`cell-${cell.row}-${cell.col}`).className =
             "cell cell-visited";
         }
-      }, 5 * i);
+      }, 10 * i);
     }
   };
 
   animatePathSlow = (cellsInOrder) => {
-    for (let i = 1; i < cellsInOrder.length-1; i++) {
+    for (let i = 0; i < cellsInOrder.length; i++) {
       setTimeout(() => {
         const cell = cellsInOrder[i];
         document.getElementById(`cell-${cell.row}-${cell.col}`).className =
           "cell cell-path";
-      }, 50 * i);
+      }, 10 * i);
     }
   };
 
