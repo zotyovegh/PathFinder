@@ -118,7 +118,6 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
-    console.log(cellsInOrder);
     this.animateDijkstraSlow(visitedCells, cellsInOrder);
   };
 
@@ -161,11 +160,17 @@ class Grid extends Component {
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
+    const cellsInOrder = getCellsInOrder(finishCell);
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       const cell = visitedCells[i];
+
       if (!cell.start && !cell.end) {
         document.getElementById(`cell-${cell.row}-${cell.col}`).className =
           "cell cell-visited";
+      }
+      if (cell.end) {
+        this.animatePathFast(cellsInOrder);
+        return;
       }
     }
   };
