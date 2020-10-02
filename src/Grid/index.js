@@ -139,6 +139,16 @@ class Grid extends Component {
     }
   };
 
+  animatePathSlow = (cellsInOrder) => {
+    for (let i = 1; i < cellsInOrder.length-1; i++) {
+      setTimeout(() => {
+        const cell = cellsInOrder[i];
+        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+          "cell cell-path";
+      }, 50 * i);
+    }
+  };
+
   animateDijkstraFast = () => {
     const { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
