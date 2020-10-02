@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GridRow from "../GridRow";
+import Cell from "../Cell";
 import "./index.css";
 import { dijkstra, getCellsInOrder } from "../Methods/methods";
 
@@ -245,13 +245,27 @@ class Grid extends Component {
   render() {
     let grid = this.state.grid.map((row, index) => {
       return (
-        <GridRow
+        <div key={index}  className="row">
+          {row.map((cell, cellIndex) => {
+            return (
+              <Cell
+                key={cellIndex}
+                data={cell}
+                onMouseDown={this.onMouseDown}
+                onMouseEnter={this.onMouseEnter}
+                onMouseUp={this.onMouseUp}
+              />
+            );
+          })}
+        </div>
+
+        /*  <GridRow
           cells={row}
           key={index}
           onMouseDown={this.onMouseDown}
           onMouseEnter={this.onMouseEnter}
           onMouseUp={this.onMouseUp}
-        />
+        />*/
       );
     });
     return (

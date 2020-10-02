@@ -1,11 +1,21 @@
+.row {
+  display: flex;
+}
+.row:last-child {
+}
+
+.row:first-child {
+}
+
 .cell {
   width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
   font-weight: bold;
-  border-right: 1px solid black;
+  border: 1px solid rgb(83, 255, 246);
 }
 
 .cell-empty {
@@ -33,5 +43,7 @@
 }
 
 .cell:first-child {
-  border-left: 1px solid black;
+}
+
+.cell:last-child {
 }

@@ -1,9 +1,14 @@
-.row {
+/*.row {
   display: flex;
-  height: 30px;
-  border-top: 1px solid black;
+  border-top: 1px solid rgb(83, 255, 246);
 }
 
 .row:last-child {
   border-bottom: 1px solid black;
 }
+
+.row:first-child {
+  border-top: 1px solid black;
+}
+
+*/
