@@ -6,6 +6,7 @@ import {
   animateFast,
   animateSlow,
   clearVisitedCells,
+  createGrid,
 } from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/dijsktra";
 
@@ -13,7 +14,7 @@ class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      grid: this.createGrid(props),
+      grid: createGrid(props),
       isMouseDown: false,
       isStartOn: false,
       isEndOn: false,
@@ -41,6 +42,7 @@ class Grid extends Component {
     }
     this.manageWall(cell);
   };
+
   onMouseEnter = (cell) => {
     if (this.state.status === "running") {
       return;
@@ -136,37 +138,12 @@ class Grid extends Component {
     }
   };
 
-  clearGrid = () => {
+  clearGridFromVisitedCells = () => {
     if (this.state.status === "running") {
       return;
     }
     clearVisitedCells();
     this.setState({ status: "pending" });
-  };
-
-  createGrid = (props) => {
-    let grid = [];
-
-    for (let i = 0; i < props.rows; i++) {
-      grid.push([]);
-      for (let j = 0; j < props.columns; j++) {
-        grid[i].push({
-          row: i,
-          col: j,
-          start: false,
-          end: false,
-          distance: Infinity,
-          visited: false,
-          isWall: false,
-          previous: null,
-        });
-      }
-    }
-
-    grid[props.startR][props.startC].start = true;
-    grid[props.endR][props.endC].end = true;
-
-    return grid;
   };
 
   render() {
@@ -195,7 +172,7 @@ class Grid extends Component {
         <button onClick={() => this.doAlgorithm("slowDijkstra")}>
           Dijkstra
         </button>
-        <button onClick={this.clearGrid}>Clear grid</button>
+        <button onClick={this.clearGridFromVisitedCells}>Clear grid</button>
       </div>
     );
   }

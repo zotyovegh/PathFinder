@@ -1,3 +1,28 @@
+export function createGrid(props) {
+  let grid = [];
+
+  for (let i = 0; i < props.rows; i++) {
+    grid.push([]);
+    for (let j = 0; j < props.columns; j++) {
+      grid[i].push({
+        row: i,
+        col: j,
+        start: false,
+        end: false,
+        distance: Infinity,
+        visited: false,
+        isWall: false,
+        previous: null,
+      });
+    }
+  }
+
+  grid[props.startR][props.startC].start = true;
+  grid[props.endR][props.endC].end = true;
+
+  return grid;
+}
+
 export function getCellsInOrder(endCell) {
   const cells = [];
   let cell = endCell;
