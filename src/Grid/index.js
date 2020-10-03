@@ -24,6 +24,7 @@ class Grid extends Component {
       endRow: props.endR,
       endCol: props.endC,
       status: "pending",
+      currentAlg: "dijkstra",
     };
     window.gridComponent = this;
   }
@@ -41,7 +42,7 @@ class Grid extends Component {
       this.setState({ isEndOn: true });
       return;
     }
-    this.manageWall(cell);
+    this.placeWall(cell);
   };
 
   onMouseEnter = (cell) => {
@@ -65,7 +66,9 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              this.doAlgorithm("fastDijkstra");
+              if (this.state.currentAlg === "dijkstra") {
+                this.doAlgorithm("fastDijkstra");
+              }
             }
           }
         );
@@ -84,14 +87,16 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              this.doAlgorithm("fastDijkstra");
+              if (this.state.currentAlg === "dijkstra") {
+                this.doAlgorithm("fastDijkstra");
+              }
             }
           }
         );
         return;
       }
 
-      this.manageWall(cell);
+      this.placeWall(cell);
     }
   };
   onMouseUp = () => {
@@ -101,7 +106,7 @@ class Grid extends Component {
     this.setState({ isMouseDown: false, isStartOn: false, isEndOn: false });
   };
 
-  manageWall = (cell) => {
+  placeWall = (cell) => {
     let newCell = cell;
     let newGrid = this.state.grid;
     newCell.isWall = !newCell.isWall;
@@ -110,7 +115,9 @@ class Grid extends Component {
     this.setState({ grid: newGrid }, () => {
       if (this.state.status === "finished") {
         clearVisitedCells();
-        this.doAlgorithm("fastDijkstra");
+        if (this.state.currentAlg === "dijkstra") {
+          this.doAlgorithm("fastDijkstra");
+        }
       }
     });
   };
