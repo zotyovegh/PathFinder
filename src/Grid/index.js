@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Cell from "../Cell";
 import "./index.css";
-import { dijkstra, getCellsInOrder } from "../Methods/methods";
+import { getCellsInOrder } from "../Algorithms/methods";
+import { dijkstra } from "../Algorithms/dijsktra";
 
 class Grid extends Component {
   constructor(props) {
