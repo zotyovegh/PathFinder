@@ -139,6 +139,18 @@ class Grid extends Component {
     }
   };
 
+  clear = (type) => {
+    if (this.state.status === "running") {
+      return;
+    }
+    if (type === "path") {
+      clearVisitedCells();
+    } else if (type === "grid") {
+      clearBoard(this.props);
+    }
+    this.setState({ status: "pending" });
+  };
+
   render() {
     let grid = this.state.grid.map((row, index) => {
       return (
@@ -167,22 +179,14 @@ class Grid extends Component {
         </button>
         <button
           onClick={() => {
-            if (this.state.status === "running") {
-              return;
-            }
-            clearVisitedCells();
-            this.setState({ status: "pending" });
+            this.clear("path");
           }}
         >
           Clear path
         </button>
         <button
           onClick={() => {
-            if (this.state.status === "running") {
-              return;
-            }
-            clearBoard(this.props);
-            this.setState({ status: "pending" });
+            this.clear("grid");
           }}
         >
           Clear grid
