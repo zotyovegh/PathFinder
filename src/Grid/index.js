@@ -7,6 +7,7 @@ import {
   animateSlow,
   clearVisitedCells,
   createGrid,
+  clearBoard,
 } from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/dijsktra";
 
@@ -138,14 +139,6 @@ class Grid extends Component {
     }
   };
 
-  clearGridFromVisitedCells = () => {
-    if (this.state.status === "running") {
-      return;
-    }
-    clearVisitedCells();
-    this.setState({ status: "pending" });
-  };
-
   render() {
     let grid = this.state.grid.map((row, index) => {
       return (
@@ -172,7 +165,28 @@ class Grid extends Component {
         <button onClick={() => this.doAlgorithm("slowDijkstra")}>
           Dijkstra
         </button>
-        <button onClick={this.clearGridFromVisitedCells}>Clear grid</button>
+        <button
+          onClick={() => {
+            if (this.state.status === "running") {
+              return;
+            }
+            clearVisitedCells();
+            this.setState({ status: "pending" });
+          }}
+        >
+          Clear path
+        </button>
+        <button
+          onClick={() => {
+            if (this.state.status === "running") {
+              return;
+            }
+            clearBoard(this.props);
+            this.setState({ status: "pending" });
+          }}
+        >
+          Clear grid
+        </button>
       </div>
     );
   }

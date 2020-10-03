@@ -111,3 +111,14 @@ export function clearVisitedCells() {
   }
   window.gridComponent.setState({ grid: newGrid });
 }
+
+export function clearBoard(props) {
+  clearVisitedCells();
+  window.gridComponent.setState({
+    grid: createGrid(props),
+    startRow: props.startR,
+    startCol: props.startC,
+    endRow: props.endR,
+    endCol: props.endC,
+  });
+}
