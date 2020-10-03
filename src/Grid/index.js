@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Cell from "../Cell";
 import "./index.css";
-import { getCellsInOrder } from "../Algorithms/methods";
+import { getCellsInOrder, animateFast } from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/dijsktra";
 
 class Grid extends Component {
@@ -131,7 +131,7 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
-    this.animateFast(visitedCells, cellsInOrder);
+    animateFast(visitedCells, cellsInOrder);
   };
 
   animateSlow = (visitedCells, cellsInOrder) => {
@@ -165,31 +165,6 @@ class Grid extends Component {
             "cell cell-path";
         }
       }, 20 * i);
-    }
-  };
-
-  animateFast = (visitedCells, cellsInOrder) => {
-    for (let i = 0; i <= visitedCells.length - 1; i++) {
-      const cell = visitedCells[i];
-
-      if (!cell.start && !cell.end) {
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-visited";
-      }
-      if (cell.end) {
-        this.animatePathFast(cellsInOrder);
-        return;
-      }
-    }
-  };
-
-  animatePathFast = (cellsInOrder) => {
-    for (let i = 0; i < cellsInOrder.length; i++) {
-      const cell = cellsInOrder[i];
-      if (!cell.start && !cell.end) {
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-path";
-      }
     }
   };
 
