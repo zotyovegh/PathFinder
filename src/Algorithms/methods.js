@@ -56,6 +56,7 @@ function animatePathSlow(cellsInOrder) {
     setTimeout(() => {
       if (i === cellsInOrder.length) {
         //this.setState({ status: "finished" });
+        window.gridComponent.setState({ status: "finished" });
         return;
       }
       const cell = cellsInOrder[i];

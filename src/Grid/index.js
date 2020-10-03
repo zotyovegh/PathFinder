@@ -22,6 +22,7 @@ class Grid extends Component {
       endCol: props.endC,
       status: "pending",
     };
+    window.gridComponent = this;
   }
 
   onMouseDown = (cell) => {
