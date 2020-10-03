@@ -67,3 +67,22 @@ function animatePathSlow(cellsInOrder) {
     }, 20 * i);
   }
 }
+
+export function clearVisitedCells() {
+  let newGrid = window.gridComponent.state.grid;
+  for (let i = 0; i < window.gridComponent.props.rows; i++) {
+    for (let j = 0; j < window.gridComponent.props.columns; j++) {
+      let cell = newGrid[i][j];
+      cell.visited = false;
+      cell.isVisited = false;
+      cell.distance = Infinity;
+      cell.previous = null;
+      if (cell.start || cell.end || cell.isWall) {
+        continue;
+      }
+      document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+        "cell cell-empty";
+    }
+  }
+  window.gridComponent.setState({ grid: newGrid });
+}

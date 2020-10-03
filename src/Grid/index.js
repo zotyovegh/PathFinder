@@ -5,6 +5,7 @@ import {
   getCellsInOrder,
   animateFast,
   animateSlow,
+  clearVisitedCells,
 } from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/dijsktra";
 
@@ -60,7 +61,7 @@ class Grid extends Component {
           },
           () => {
             if (this.state.status === "finished") {
-              this.clearVisitedCells();
+              clearVisitedCells();
               this.doAlgorithm("fastDijkstra");
             }
           }
@@ -79,7 +80,7 @@ class Grid extends Component {
           },
           () => {
             if (this.state.status === "finished") {
-              this.clearVisitedCells();
+              clearVisitedCells();
               this.doAlgorithm("fastDijkstra");
             }
           }
@@ -105,7 +106,7 @@ class Grid extends Component {
     newGrid[cell.row][cell.col] = newCell;
     this.setState({ grid: newGrid }, () => {
       if (this.state.status === "finished") {
-        this.clearVisitedCells();
+        clearVisitedCells();
         this.doAlgorithm("fastDijkstra");
       }
     });
@@ -121,7 +122,7 @@ class Grid extends Component {
         return;
       }
       if (this.state.status === "finished") {
-        this.clearVisitedCells();
+        clearVisitedCells();
       }
 
       this.setState({ status: "running" });
@@ -135,30 +136,11 @@ class Grid extends Component {
     }
   };
 
-  clearVisitedCells = () => {
-    let newGrid = this.state.grid;
-    for (let i = 0; i < this.props.rows; i++) {
-      for (let j = 0; j < this.props.columns; j++) {
-        let cell = newGrid[i][j];
-        cell.visited = false;
-        cell.isVisited = false;
-        cell.distance = Infinity;
-        cell.previous = null;
-        if (cell.start || cell.end || cell.isWall) {
-          continue;
-        }
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-empty";
-      }
-    }
-    this.setState({ grid: newGrid });
-  };
-
   clearGrid = () => {
     if (this.state.status === "running") {
       return;
     }
-    this.clearVisitedCells();
+    clearVisitedCells();
     this.setState({ status: "pending" });
   };
 
