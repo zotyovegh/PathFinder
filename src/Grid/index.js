@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Cell from "../Cell";
 import "./index.css";
-import { getCellsInOrder, animateFast } from "../Algorithms/methods";
+import {
+  getCellsInOrder,
+  animateFast,
+  animateSlow,
+} from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/dijsktra";
 
 class Grid extends Component {
@@ -122,7 +126,7 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
-    this.animateSlow(visitedCells, cellsInOrder);
+    animateSlow(visitedCells, cellsInOrder);
   };
 
   doDijsktraFast = () => {
@@ -132,40 +136,6 @@ class Grid extends Component {
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
     animateFast(visitedCells, cellsInOrder);
-  };
-
-  animateSlow = (visitedCells, cellsInOrder) => {
-    for (let i = 0; i <= visitedCells.length; i++) {
-      const cell = visitedCells[i];
-      if (i === visitedCells.length) {
-        setTimeout(() => {
-          this.animatePathSlow(cellsInOrder);
-        }, 10 * i);
-        return;
-      }
-      setTimeout(() => {
-        if (!cell.start && !cell.end) {
-          document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-            "cell cell-visited";
-        }
-      }, 10 * i);
-    }
-  };
-
-  animatePathSlow = (cellsInOrder) => {
-    for (let i = 0; i <= cellsInOrder.length; i++) {
-      setTimeout(() => {
-        if (i === cellsInOrder.length) {
-          this.setState({ status: "finished" });
-          return;
-        }
-        const cell = cellsInOrder[i];
-        if (!cell.start && !cell.end) {
-          document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-            "cell cell-path";
-        }
-      }, 20 * i);
-    }
   };
 
   clearVisitedCells = () => {
