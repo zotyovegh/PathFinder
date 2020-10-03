@@ -56,7 +56,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               this.clearVisitedCells();
-              this.animateDijkstraFast();
+              this.doDijsktraFast();
             }
           }
         );
@@ -75,7 +75,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               this.clearVisitedCells();
-              this.animateDijkstraFast();
+              this.doDijsktraFast();
             }
           }
         );
@@ -102,7 +102,7 @@ class Grid extends Component {
     this.setState({ grid: newGrid }, () => {
       if (this.state.status === "finished") {
         this.clearVisitedCells();
-        this.animateDijkstraFast();
+        this.doDijsktraFast();
       }
     });
   };
@@ -122,10 +122,19 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
     const visitedCells = dijkstra(grid, startCell, finishCell);
     const cellsInOrder = getCellsInOrder(finishCell);
-    this.animateDijkstraSlow(visitedCells, cellsInOrder);
+    this.animateSlow(visitedCells, cellsInOrder);
   };
 
-  animateDijkstraSlow = (visitedCells, cellsInOrder) => {
+  doDijsktraFast = () => {
+    const { grid } = this.state;
+    const startCell = grid[this.state.startRow][this.state.startCol];
+    const finishCell = grid[this.state.endRow][this.state.endCol];
+    const visitedCells = dijkstra(grid, startCell, finishCell);
+    const cellsInOrder = getCellsInOrder(finishCell);
+    this.animateFast(visitedCells, cellsInOrder);
+  };
+
+  animateSlow = (visitedCells, cellsInOrder) => {
     for (let i = 0; i <= visitedCells.length; i++) {
       const cell = visitedCells[i];
       if (i === visitedCells.length) {
@@ -159,12 +168,7 @@ class Grid extends Component {
     }
   };
 
-  animateDijkstraFast = () => {
-    const { grid } = this.state;
-    const startCell = grid[this.state.startRow][this.state.startCol];
-    const finishCell = grid[this.state.endRow][this.state.endCol];
-    const visitedCells = dijkstra(grid, startCell, finishCell);
-    const cellsInOrder = getCellsInOrder(finishCell);
+  animateFast = (visitedCells, cellsInOrder) => {
     for (let i = 0; i <= visitedCells.length - 1; i++) {
       const cell = visitedCells[i];
 
