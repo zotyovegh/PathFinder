@@ -41,11 +41,9 @@ export function clearVisitedCells() {
       cell.visited = false;
       cell.distance = Infinity;
       cell.previous = null;
-      if (cell.isWall) {
+      if (cell.start || cell.end || cell.isWall) {
         document.getElementById(`num-${cell.row}-${cell.col}`).className =
           "num ";
-      }
-      if (cell.start || cell.end || cell.isWall) {
         continue;
       }
       document.getElementById(`cell-${cell.row}-${cell.col}`).className =
