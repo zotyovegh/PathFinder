@@ -32,7 +32,13 @@ class Grid extends Component {
   }
 
   handleChange(event) {
-    this.setState({ previousVisualization: !this.state.previousVisualization });
+    this.setState({ previousVisualization: !this.state.previousVisualization }, () => {
+      if (this.state.status === "finished") {
+        if (this.state.currentAlg === "dijkstra") {
+          this.doAlgorithm("fastDijkstra");
+        }
+      }
+    });
   }
 
   onMouseDown = (cell) => {
