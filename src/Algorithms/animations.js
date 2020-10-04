@@ -1,23 +1,21 @@
+import { placePreviousNumber } from "../Algorithms/methods";
+
 export function animateFast(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length - 1; i++) {
     const cell = visitedCells[i];
 
     if (cell.start && window.gridComponent.state.previousVisualization) {
-      document.getElementById(`num-${cell.row}-${cell.col}`).className =
-        "num num-start";
+      placePreviousNumber("num", "num num-start", cell);
     } else if (cell.end) {
       if (window.gridComponent.state.previousVisualization) {
-        document.getElementById(`num-${cell.row}-${cell.col}`).className =
-          "num num-end";
+        placePreviousNumber("num", "num num-end", cell);
       }
       animatePathFast(cellsInOrder);
     } else if (!cell.isWall) {
       if (!cell.start && !cell.end) {
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-visited";
+        placePreviousNumber("cell", "cell cell-visited", cell);
         if (window.gridComponent.state.previousVisualization) {
-          document.getElementById(`num-${cell.row}-${cell.col}`).className =
-            "num num-visited";
+          placePreviousNumber("num", "num num-visited", cell);
         }
       }
     }
@@ -28,11 +26,9 @@ function animatePathFast(cellsInOrder) {
   for (let i = 0; i < cellsInOrder.length; i++) {
     const cell = cellsInOrder[i];
     if (!cell.start && !cell.end) {
-      document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-        "cell cell-path";
+      placePreviousNumber("cell", "cell cell-path", cell);
       if (window.gridComponent.state.previousVisualization) {
-        document.getElementById(`num-${cell.row}-${cell.col}`).className =
-          "num num-path";
+        placePreviousNumber("num", "num num-path", cell);
       }
     }
   }
@@ -49,20 +45,16 @@ export function animateSlow(visitedCells, cellsInOrder) {
     }
     setTimeout(() => {
       if (cell.start && window.gridComponent.state.previousVisualization) {
-        document.getElementById(`num-${cell.row}-${cell.col}`).className =
-          "num num-start";
+        placePreviousNumber("num", "num num-start", cell);
       }
       if (cell.end && window.gridComponent.state.previousVisualization) {
-        document.getElementById(`num-${cell.row}-${cell.col}`).className =
-          "num num-end";
+        placePreviousNumber("num", "num num-end", cell);
       }
       if (!cell.isWall) {
         if (!cell.start && !cell.end) {
-          document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-            "cell cell-visited";
+          placePreviousNumber("cell", "cell cell-visited", cell);
           if (window.gridComponent.state.previousVisualization) {
-            document.getElementById(`num-${cell.row}-${cell.col}`).className =
-              "num num-visited";
+            placePreviousNumber("num", "num num-visited", cell);
           }
         }
       }
@@ -79,11 +71,9 @@ function animatePathSlow(cellsInOrder) {
       }
       const cell = cellsInOrder[i];
       if (!cell.start && !cell.end) {
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-path";
+        placePreviousNumber("cell", "cell cell-path", cell);
         if (window.gridComponent.state.previousVisualization) {
-          document.getElementById(`num-${cell.row}-${cell.col}`).className =
-            "num num-path";
+          placePreviousNumber("num", "num num-path", cell);
         }
       }
     }, 20 * i);

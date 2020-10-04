@@ -191,15 +191,15 @@ class Grid extends Component {
         >
           Clear grid
         </button>
-        {this.state.previousVisualization + " "}
-        <label class="switch">
+        Distance
+        <label className="switch">
           <input
             disabled={this.state.status === "running"}
             type="checkbox"
             defaultChecked={this.state.previousVisualization}
             onChange={this.handleChange}
           ></input>
-          <span class="slider round"></span>
+          <span className="slider round"></span>
         </label>
       </div>
     );
