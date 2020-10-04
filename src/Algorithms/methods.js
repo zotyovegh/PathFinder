@@ -36,16 +36,22 @@ export function getCellsInOrder(endCell) {
 export function animateFast(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length - 1; i++) {
     const cell = visitedCells[i];
-
-    if (!cell.start && !cell.end) {
-      document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-        "cell cell-visited";
+    if (cell.start) {
       document.getElementById(`num-${cell.row}-${cell.col}`).className =
-        "num num-visited";
+        "num num-start";
     }
     if (cell.end) {
       animatePathFast(cellsInOrder);
-      return;
+      document.getElementById(`num-${cell.row}-${cell.col}`).className =
+        "num num-end";
+    }
+    if (!cell.isWall) {
+      if (!cell.start && !cell.end) {
+        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+          "cell cell-visited";
+        document.getElementById(`num-${cell.row}-${cell.col}`).className =
+          "num num-visited";
+      }
     }
   }
 }
@@ -80,11 +86,13 @@ export function animateSlow(visitedCells, cellsInOrder) {
         document.getElementById(`num-${cell.row}-${cell.col}`).className =
           "num num-end";
       }
-      if (!cell.start && !cell.end) {
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-visited";
-        document.getElementById(`num-${cell.row}-${cell.col}`).className =
-          "num num-visited";
+      if (!cell.isWall) {
+        if (!cell.start && !cell.end) {
+          document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+            "cell cell-visited";
+          document.getElementById(`num-${cell.row}-${cell.col}`).className =
+            "num num-visited";
+        }
       }
     }, 10 * i);
   }
