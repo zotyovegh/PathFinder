@@ -175,6 +175,14 @@ class Grid extends Component {
         >
           Clear grid
         </button>
+        Distance  
+        <label class="switch">
+          <input
+            disabled={this.state.status === "running"}
+            type="checkbox"
+          ></input>
+          <span class="slider round"></span>
+        </label>
       </div>
     );
   }
