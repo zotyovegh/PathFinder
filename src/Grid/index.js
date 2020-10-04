@@ -31,14 +31,18 @@ class Grid extends Component {
     window.gridComponent = this;
   }
 
-  handleChange(event) {
-    this.setState({ previousVisualization: !this.state.previousVisualization }, () => {
-      if (this.state.status === "finished") {
-        if (this.state.currentAlg === "dijkstra") {
-          this.doAlgorithm("fastDijkstra");
+  handleChange() {
+    this.setState(
+      { previousVisualization: !this.state.previousVisualization },
+      () => {
+        if (this.state.status === "finished") {
+          clearVisitedCells();
+          if (this.state.currentAlg === "dijkstra") {
+            this.doAlgorithm("fastDijkstra");
+          }
         }
       }
-    });
+    );
   }
 
   onMouseDown = (cell) => {
