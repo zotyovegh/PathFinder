@@ -46,9 +46,6 @@ class Grid extends Component {
   };
 
   onMouseEnter = (cell) => {
-    if (this.state.status === "running") {
-      return;
-    }
     if (this.state.isMouseDown) {
       if (cell.start || cell.end) {
         return;
@@ -100,9 +97,6 @@ class Grid extends Component {
     }
   };
   onMouseUp = () => {
-    if (this.state.status === "running") {
-      return;
-    }
     this.setState({ isMouseDown: false, isStartOn: false, isEndOn: false });
   };
 
@@ -112,9 +106,6 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
 
     if (type === "slowDijkstra") {
-      if (this.state.status === "running") {
-        return;
-      }
       if (this.state.status === "finished") {
         clearVisitedCells();
       }
@@ -131,9 +122,6 @@ class Grid extends Component {
   };
 
   clear = (type) => {
-    if (this.state.status === "running") {
-      return;
-    }
     if (type === "path") {
       clearVisitedCells();
     } else if (type === "grid") {
@@ -165,10 +153,14 @@ class Grid extends Component {
         <div className="grid" onMouseLeave={this.onMouseUp}>
           {grid}
         </div>
-        <button onClick={() => this.doAlgorithm("slowDijkstra")}>
+        <button
+          disabled={this.state.status === "running"}
+          onClick={() => this.doAlgorithm("slowDijkstra")}
+        >
           Dijkstra
         </button>
         <button
+          disabled={this.state.status === "running"}
           onClick={() => {
             this.clear("path");
           }}
@@ -176,6 +168,7 @@ class Grid extends Component {
           Clear path
         </button>
         <button
+          disabled={this.state.status === "running"}
           onClick={() => {
             this.clear("grid");
           }}
