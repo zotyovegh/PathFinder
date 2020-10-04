@@ -28,7 +28,9 @@ const Cell = (props) => {
           e.preventDefault();
         }}
       >
-        {" "}
+        <div className="distanceNum">
+          {props.data.distance === Infinity ? "" : props.data.distance}
+        </div>
       </div>
     );
   };
