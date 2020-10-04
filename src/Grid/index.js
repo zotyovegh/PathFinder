@@ -25,8 +25,14 @@ class Grid extends Component {
       endCol: props.endC,
       status: "pending",
       currentAlg: "dijkstra",
+      previousVisualization: false,
     };
+    this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
+  }
+
+  handleChange(event) {
+    this.setState({ previousVisualization: !this.state.previousVisualization });
   }
 
   onMouseDown = (cell) => {
@@ -175,11 +181,13 @@ class Grid extends Component {
         >
           Clear grid
         </button>
-        Distance  
+        {this.state.previousVisualization + " "}
         <label class="switch">
           <input
             disabled={this.state.status === "running"}
             type="checkbox"
+            defaultChecked={this.state.previousVisualization}
+            onChange={this.handleChange}
           ></input>
           <span class="slider round"></span>
         </label>

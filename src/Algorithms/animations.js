@@ -1,3 +1,43 @@
+export function animateFast(visitedCells, cellsInOrder) {
+  for (let i = 0; i <= visitedCells.length - 1; i++) {
+    const cell = visitedCells[i];
+
+    if (cell.start && window.gridComponent.state.previousVisualization) {
+      document.getElementById(`num-${cell.row}-${cell.col}`).className =
+        "num num-start";
+    } else if (cell.end) {
+      if (window.gridComponent.state.previousVisualization) {
+        document.getElementById(`num-${cell.row}-${cell.col}`).className =
+          "num num-end";
+      }
+      animatePathFast(cellsInOrder);
+    } else if (!cell.isWall) {
+      if (!cell.start && !cell.end) {
+        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+          "cell cell-visited";
+        if (window.gridComponent.state.previousVisualization) {
+          document.getElementById(`num-${cell.row}-${cell.col}`).className =
+            "num num-visited";
+        }
+      }
+    }
+  }
+}
+
+function animatePathFast(cellsInOrder) {
+  for (let i = 0; i < cellsInOrder.length; i++) {
+    const cell = cellsInOrder[i];
+    if (!cell.start && !cell.end) {
+      document.getElementById(`cell-${cell.row}-${cell.col}`).className =
+        "cell cell-path";
+      if (window.gridComponent.state.previousVisualization) {
+        document.getElementById(`num-${cell.row}-${cell.col}`).className =
+          "num num-path";
+      }
+    }
+  }
+}
+
 export function animateSlow(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length; i++) {
     const cell = visitedCells[i];
@@ -8,11 +48,11 @@ export function animateSlow(visitedCells, cellsInOrder) {
       return;
     }
     setTimeout(() => {
-      if (cell.start) {
+      if (cell.start && window.gridComponent.state.previousVisualization) {
         document.getElementById(`num-${cell.row}-${cell.col}`).className =
           "num num-start";
       }
-      if (cell.end) {
+      if (cell.end && window.gridComponent.state.previousVisualization) {
         document.getElementById(`num-${cell.row}-${cell.col}`).className =
           "num num-end";
       }
@@ -20,8 +60,10 @@ export function animateSlow(visitedCells, cellsInOrder) {
         if (!cell.start && !cell.end) {
           document.getElementById(`cell-${cell.row}-${cell.col}`).className =
             "cell cell-visited";
-          document.getElementById(`num-${cell.row}-${cell.col}`).className =
-            "num num-visited";
+          if (window.gridComponent.state.previousVisualization) {
+            document.getElementById(`num-${cell.row}-${cell.col}`).className =
+              "num num-visited";
+          }
         }
       }
     }, 10 * i);
@@ -39,43 +81,11 @@ function animatePathSlow(cellsInOrder) {
       if (!cell.start && !cell.end) {
         document.getElementById(`cell-${cell.row}-${cell.col}`).className =
           "cell cell-path";
-        document.getElementById(`num-${cell.row}-${cell.col}`).className =
-          "num num-path";
+        if (window.gridComponent.state.previousVisualization) {
+          document.getElementById(`num-${cell.row}-${cell.col}`).className =
+            "num num-path";
+        }
       }
     }, 20 * i);
-  }
-}
-
-export function animateFast(visitedCells, cellsInOrder) {
-  for (let i = 0; i <= visitedCells.length - 1; i++) {
-    const cell = visitedCells[i];
-
-    if (cell.start) {
-      document.getElementById(`num-${cell.row}-${cell.col}`).className =
-        "num num-start";
-    } else if (cell.end) {
-      animatePathFast(cellsInOrder);
-      document.getElementById(`num-${cell.row}-${cell.col}`).className =
-        "num num-end";
-    } else if (!cell.isWall) {
-      if (!cell.start && !cell.end) {
-        document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-          "cell cell-visited";
-        document.getElementById(`num-${cell.row}-${cell.col}`).className =
-          "num num-visited";
-      }
-    }
-  }
-}
-
-function animatePathFast(cellsInOrder) {
-  for (let i = 0; i < cellsInOrder.length; i++) {
-    const cell = cellsInOrder[i];
-    if (!cell.start && !cell.end) {
-      document.getElementById(`cell-${cell.row}-${cell.col}`).className =
-        "cell cell-path";
-      document.getElementById(`num-${cell.row}-${cell.col}`).className =
-        "num num-path";
-    }
   }
 }
