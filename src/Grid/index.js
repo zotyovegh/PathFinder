@@ -3,13 +3,12 @@ import Cell from "../Cell";
 import "./index.css";
 import {
   getCellsInOrder,
-  animateFast,
-  animateSlow,
   clearVisitedCells,
   createGrid,
   clearBoard,
   placeWall,
 } from "../Algorithms/methods";
+import { animateFast, animateSlow } from "../Algorithms/animations";
 import { dijkstra } from "../Algorithms/dijsktra";
 
 class Grid extends Component {
