@@ -11,7 +11,6 @@
   font-weight: bold;
   border: 0.5px solid rgb(165, 255, 250);
   user-select: none;
-  color: rgba(0, 255, 255, 0);
 }
 
 .cell-empty {
@@ -21,13 +20,11 @@
 .cell-start {
   background-color: green;
   border: 0.5px solid green;
-  color: rgb(74, 255, 80);
 }
 
 .cell-end {
   background-color: red;
   border: 0.5px solid red;
-  color: rgba(0, 0, 0, 0.508);
 }
 
 .cell-wall {
@@ -38,19 +35,32 @@
 .cell-path {
   background-color: yellow;
   border: 0.5px solid yellow;
-  color: rgba(165, 165, 165, 0.898);
 }
 
 .cell-visited {
   background-color: rgb(64, 206, 227);
   border: 0.5px solid rgb(126, 238, 255);
-  color: rgba(208, 246, 255, 0.898);
 }
 
-.distanceNum {
-  font-size: 60%;
+.num {
+  font-size: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
+  color: rgba(0, 0, 0, 0);
+}
+.num-visited {
+  color: rgba(208, 246, 255, 0.898);
+}
+.num-path {
+  color: rgba(165, 165, 165, 0.898);
+}
+
+.num-start {
+  color: rgb(74, 255, 80);
+}
+
+.num-end {
+  color: rgba(0, 0, 0, 0.508);
 }

@@ -28,7 +28,10 @@ const Cell = (props) => {
           e.preventDefault();
         }}
       >
-        <div className="distanceNum">
+        <div
+          className={`num ${""}`}
+          id={`num-${props.data.row}-${props.data.col}`}
+        >
           {props.data.distance === Infinity ? "" : props.data.distance}
         </div>
       </div>
