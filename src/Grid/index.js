@@ -110,9 +110,10 @@ class Grid extends Component {
     let newCell = cell;
     let newGrid = this.state.grid;
     newCell.isWall = !newCell.isWall;
-    newCell.visited = false;
     document.getElementById(`num-${newCell.row}-${newCell.col}`).className =
       "num ";
+    newCell.visited = false;
+
     newGrid[cell.row][cell.col] = newCell;
     this.setState({ grid: newGrid }, () => {
       if (this.state.status === "finished") {

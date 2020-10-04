@@ -36,16 +36,15 @@ export function getCellsInOrder(endCell) {
 export function animateFast(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length - 1; i++) {
     const cell = visitedCells[i];
+
     if (cell.start) {
       document.getElementById(`num-${cell.row}-${cell.col}`).className =
         "num num-start";
-    }
-    if (cell.end) {
+    } else if (cell.end) {
       animatePathFast(cellsInOrder);
       document.getElementById(`num-${cell.row}-${cell.col}`).className =
         "num num-end";
-    }
-    if (!cell.isWall) {
+    } else if (!cell.isWall) {
       if (!cell.start && !cell.end) {
         document.getElementById(`cell-${cell.row}-${cell.col}`).className =
           "cell cell-visited";
@@ -102,7 +101,6 @@ function animatePathSlow(cellsInOrder) {
   for (let i = 0; i <= cellsInOrder.length; i++) {
     setTimeout(() => {
       if (i === cellsInOrder.length) {
-        //this.setState({ status: "finished" });
         window.gridComponent.setState({ status: "finished" });
         return;
       }
@@ -125,6 +123,10 @@ export function clearVisitedCells() {
       cell.visited = false;
       cell.distance = Infinity;
       cell.previous = null;
+      if (cell.isWall) {
+        document.getElementById(`num-${cell.row}-${cell.col}`).className =
+          "num ";
+      }
       if (cell.start || cell.end || cell.isWall) {
         continue;
       }
