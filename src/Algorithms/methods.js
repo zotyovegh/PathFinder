@@ -99,7 +99,6 @@ export function clearVisitedCells() {
     for (let j = 0; j < window.gridComponent.props.columns; j++) {
       let cell = newGrid[i][j];
       cell.visited = false;
-      cell.isVisited = false;
       cell.distance = Infinity;
       cell.previous = null;
       if (cell.start || cell.end || cell.isWall) {
