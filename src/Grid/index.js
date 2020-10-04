@@ -8,6 +8,7 @@ import {
   clearVisitedCells,
   createGrid,
   clearBoard,
+  placeWall,
 } from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/dijsktra";
 
@@ -42,7 +43,7 @@ class Grid extends Component {
       this.setState({ isEndOn: true });
       return;
     }
-    this.placeWall(cell);
+    placeWall(cell);
   };
 
   onMouseEnter = (cell) => {
@@ -96,7 +97,7 @@ class Grid extends Component {
         return;
       }
 
-      this.placeWall(cell);
+      placeWall(cell);
     }
   };
   onMouseUp = () => {
@@ -104,25 +105,6 @@ class Grid extends Component {
       return;
     }
     this.setState({ isMouseDown: false, isStartOn: false, isEndOn: false });
-  };
-
-  placeWall = (cell) => {
-    let newCell = cell;
-    let newGrid = this.state.grid;
-    newCell.isWall = !newCell.isWall;
-    document.getElementById(`num-${newCell.row}-${newCell.col}`).className =
-      "num ";
-    newCell.visited = false;
-
-    newGrid[cell.row][cell.col] = newCell;
-    this.setState({ grid: newGrid }, () => {
-      if (this.state.status === "finished") {
-        clearVisitedCells();
-        if (this.state.currentAlg === "dijkstra") {
-          this.doAlgorithm("fastDijkstra");
-        }
-      }
-    });
   };
 
   doAlgorithm = (type) => {

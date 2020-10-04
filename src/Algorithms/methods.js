@@ -148,3 +148,22 @@ export function clearBoard(props) {
     endCol: props.endC,
   });
 }
+
+export function placeWall(cell) {
+  let newCell = cell;
+  let newGrid = window.gridComponent.state.grid;
+  newCell.isWall = !newCell.isWall;
+  document.getElementById(`num-${newCell.row}-${newCell.col}`).className =
+    "num ";
+  newCell.visited = false;
+
+  newGrid[cell.row][cell.col] = newCell;
+  window.gridComponent.setState({ grid: newGrid }, () => {
+    if (window.gridComponent.state.status === "finished") {
+      clearVisitedCells();
+      if (window.gridComponent.state.currentAlg === "dijkstra") {
+        window.gridComponent.doAlgorithm("fastDijkstra");
+      }
+    }
+  });
+}
