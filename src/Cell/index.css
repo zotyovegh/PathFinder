@@ -33,8 +33,56 @@
 }
 
 .cell-path {
-  background-color: rgb(6, 238, 255);
-  border: 0.5px solid rgb(120, 246, 255);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: pathAnim;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  fill-rule: initial;
+  animation-play-state: running;  
+}
+
+@keyframes pathAnim {
+  
+  5% {
+    border: 0.5px solid rgb(255, 160, 97); 
+    background-color: rgb(255, 102, 0); 
+  }
+
+  10% {
+    border: 0.5px solid rgb(255, 152, 100);
+    background-color: rgb(212, 98, 42);
+  }
+
+  15% {
+    border: 0.5px solid rgb(255, 148, 133);
+    background-color: rgb(170, 95, 85);
+  }
+
+  25% {
+    border: 0.5px solid rgb(255, 159, 255);
+    background-color: rgb(127, 91, 127);
+  }
+
+  40% {
+    border: 0.5px solid rgb(131, 135, 255);
+    background-color: rgb(47, 52, 197);
+  }
+
+  70% {
+    border: 0.5px solid rgb(130, 184, 255);
+    background-color: rgb(34, 67, 167);
+  }
+
+  100% {
+    border: 0.5px solid rgb(94, 163, 252);
+    background-color: rgb(0, 81, 255);    
+  }
 }
 
 .cell-visited-animated {
@@ -42,7 +90,7 @@
   background-repeat: no-repeat;
   background-size: contain;
   animation-name: visitedAnim;
-  animation-duration: 1s;
+  animation-duration: 1.4s;
   animation-timing-function: ease-out;
   animation-delay: 0;
   animation-direction: alternate;
@@ -60,33 +108,33 @@
 
   10% {
     transform: scale(0.1);
-    background-color: rgb(28, 20, 0);
+    background-color: rgb(84, 60, 0);
   }
 
   20% {
     transform: scale(0.3);
-    background-color: rgb(59, 40, 0);
+    background-color: rgb(138, 94, 0);
   }
 
   40% {
     transform: scale(0.6);
-    background-color: rgb(157, 80, 0);
+    background-color: rgb(238, 135, 26);
   }
 
   60% {
-    transform: scale(0.8);
-    background-color: rgb(227, 155, 0);
+    transform: scale(1.0);
+    background-color: rgb(252, 184, 37);
   }
 
   80% {
     transform: scale(1.2);
-    background-color: rgb(244, 200, 0);
+    background-color: rgb(255, 214, 32);
   }
 
   100% {
     transform: scale(1);
     border: 0.5px solid rgba(255, 196, 87, 0.782);
-    background-color: rgb(255, 242, 0);
+    background-color: rgb(253, 245, 86);
   }
 }
 
@@ -113,9 +161,8 @@
 
 .cell-visited {
   border: 0.5px solid rgba(255, 196, 87, 0.782);
-    background-color: rgb(255, 242, 0);
+  background-color: rgb(255, 242, 0);
 }
-
 
 .num {
   font-size: 60%;
