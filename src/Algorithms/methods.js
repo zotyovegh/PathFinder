@@ -42,11 +42,11 @@ export function clearVisitedCells() {
       cell.distance = Infinity;
       cell.previous = null;
 
-      placePreviousNumber("num", "num", cell);
+      visualizeCell("num", "num", cell);
       if (cell.start || cell.end || cell.isWall) {
         continue;
       }
-      placePreviousNumber("cell", "cell cell-empty", cell);
+      visualizeCell("cell", "cell cell-empty", cell);
     }
   }
   window.gridComponent.setState({ grid: newGrid });
@@ -67,7 +67,7 @@ export function placeWall(cell) {
   let newCell = cell;
   let newGrid = window.gridComponent.state.grid;
   newCell.isWall = !newCell.isWall;
-  placePreviousNumber("num", "num", newCell);
+  visualizeCell("num", "num", newCell);
   newCell.visited = false;
 
   newGrid[cell.row][cell.col] = newCell;
@@ -81,7 +81,7 @@ export function placeWall(cell) {
   });
 }
 
-export function placePreviousNumber(category, name, cell) {
+export function visualizeCell(category, name, cell) {
   document.getElementById(
     `${category}-${cell.row}-${cell.col}`
   ).className = name;
