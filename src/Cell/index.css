@@ -28,8 +28,34 @@
 }
 
 .cell-wall {
-  background-color: rgb(55, 55, 55);
-  border: 0.5px solid rgb(55, 55, 55);
+  animation-name: wallAnimation;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes wallAnimation {
+  0% {
+    transform: scale(1.2);
+    background-color: rgb(12, 53, 71);
+    border: 0.5px solid rgb(12, 53, 71);
+  }
+
+  50% {
+    transform: scale(0.8);
+    background-color: rgb(12, 53, 71);
+    border: 0.5px solid rgb(12, 53, 71);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(6, 52, 72);
+    border: 0.5px solid rgb(6, 52, 72);
+  }
 }
 
 .cell-path {
@@ -90,7 +116,7 @@
 
 .cell-visited {
   border: 0.5px solid rgba(255, 196, 87, 0.782);
-  background-color: rgb(255, 242, 0);
+  background-color: rgb(253, 245, 86);
 }
 
 .cell-visited-animated {
