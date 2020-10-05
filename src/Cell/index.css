@@ -79,34 +79,33 @@
 
 @keyframes pathAnim {
   0% {
-    transform: scale(0.1);
+    transform: scale(1);
     background-color: rgba(0, 0, 0);
-    border-radius: 100%;
   }
 
   10% {
-    transform: scale(0.2);
+    transform: scale(1.05);
     background-color: rgb(84, 60, 0);
   }
 
   20% {
-    transform: scale(0.3);
+    transform: scale(1.1);
     background-color: rgb(138, 94, 0);
   }
 
   40% {
-    transform: scale(0.6);
-    background-color: rgb(238, 135, 26);
+    transform: scale(1.15);
+    background-color: rgb(208, 115, 26);
   }
 
   60% {
-    transform: scale(1);
-    background-color: rgb(252, 184, 37);
+    transform: scale(1.1);
+    background-color: rgb(222, 154, 37);
   }
 
   80% {
-    transform: scale(1.2);
-    background-color: rgb(255, 214, 32);
+    transform: scale(1.05);
+    background-color: rgb(255, 184, 32);
   }
 
   100% {
@@ -202,7 +201,7 @@
   color: rgba(0, 0, 0, 0.467);
 }
 .num-path {
-  color: rgba(255, 255, 255, 0.59);
+  color: rgba(0, 0, 0, 0.542);
 }
 
 .num-start {
@@ -210,5 +209,5 @@
 }
 
 .num-end {
-  color: rgba(0, 0, 0, 0.508);
+  color: rgb(255, 255, 255);
 }
