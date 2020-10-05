@@ -52,7 +52,7 @@ export function animateSlow(visitedCells, cellsInOrder) {
       }
       if (!cell.isWall) {
         if (!cell.start && !cell.end) {
-          placePreviousNumber("cell", "cell cell-visited", cell);
+          placePreviousNumber("cell", "cell cell-visited-animated", cell);
           if (window.gridComponent.state.previousVisualization) {
             placePreviousNumber("num", "num num-visited", cell);
           }
