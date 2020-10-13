@@ -37,12 +37,12 @@ function animatePathFast(cellsInOrder) {
 export function animateSlow(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length; i++) {
     const cell = visitedCells[i];
-   /* if (i === visitedCells.length) {
+    if (i === visitedCells.length) {
       setTimeout(() => {
         animatePathSlow(cellsInOrder);
-      }, 10 * i);
+      }, 500 * i);
       return;
-    }*/
+    }
     setTimeout(() => {
       if (cell.start && window.gridComponent.state.previousVisualization) {
         visualizeCell("num", "num num-start", cell);
@@ -58,7 +58,7 @@ export function animateSlow(visitedCells, cellsInOrder) {
           }
         }
       }
-    }, 1000 * i);
+    }, 500 * i);
   }
 }
 

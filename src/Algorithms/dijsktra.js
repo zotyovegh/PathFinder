@@ -20,7 +20,6 @@ export function dijkstra(grid, startCell, endCell) {
     nextCell.visited = true;
     visitedCells.push(nextCell);
     if (nextCell === endCell) {
-      console.log(visitedCells);
       unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
       return visitedCells;
     }
@@ -29,8 +28,6 @@ export function dijkstra(grid, startCell, endCell) {
 }
 let id = 0;
 function getUnvisitedNeighbors(cell, grid) {
-  console.log("++++++++");
-  console.log(cell);
   const neighbors = [];
   var { col, row } = cell;
 
@@ -40,41 +37,60 @@ function getUnvisitedNeighbors(cell, grid) {
     }
   }
   /* if (row > 0 && col < grid[0].length - 1) {
-    neighbors.push(grid[row - 1][col + 1]);
+    if (
+      !grid[row - 1][col + 1].visited &&
+      grid[row - 1][col + 1].previous === null
+    ) {
+      neighbors.push(grid[row - 1][col + 1]);
+    }
   }*/
   if (col < grid[0].length - 1) {
     if (!grid[row][col + 1].visited && grid[row][col + 1].previous === null) {
       neighbors.push(grid[row][col + 1]);
     }
   }
-  /*if (col < grid[0].length - 1 && row < grid.length - 1) {
-    neighbors.push(grid[row + 1][col + 1]);
+  /* if (col < grid[0].length - 1 && row < grid.length - 1) {
+    if (
+      !grid[row + 1][col + 1].visited &&
+      grid[row + 1][col + 1].previous === null
+    ) {
+      neighbors.push(grid[row + 1][col + 1]);
+    }
   }*/
   if (row < grid.length - 1) {
     if (!grid[row + 1][col].visited && grid[row + 1][col].previous === null) {
       neighbors.push(grid[row + 1][col]);
     }
   }
-  /* if (row < grid.length - 1 && col > 0) {
-    neighbors.push(grid[row + 1][col - 1]);
+  /*if (row < grid.length - 1 && col > 0) {
+    if (
+      !grid[row + 1][col - 1].visited &&
+      grid[row + 1][col - 1].previous === null
+    ) {
+      neighbors.push(grid[row + 1][col - 1]);
+    }
   }*/
   if (col > 0) {
     if (!grid[row][col - 1].visited && grid[row][col - 1].previous === null) {
       neighbors.push(grid[row][col - 1]);
     }
   }
-  /*if (col > 0 && row > 0) {
-    neighbors.push(grid[row - 1][col - 1]);
+  /* if (col > 0 && row > 0) {
+    if (
+      !grid[row - 1][col - 1].visited &&
+      grid[row - 1][col - 1].previous === null
+    ) {
+      neighbors.push(grid[row - 1][col - 1]);
+    }
   }*/
+
   for (const neighbor of neighbors) {
-    console.log(neighbor);
     neighbor.distance = cell.distance + 1;
     neighbor.previous = cell;
     (function () {
       neighbor.id = id;
     })(id++);
   }
-  console.log("---------");
 }
 
 /*
