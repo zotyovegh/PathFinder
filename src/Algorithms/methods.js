@@ -5,6 +5,7 @@ export function createGrid(props) {
     grid.push([]);
     for (let j = 0; j < props.columns; j++) {
       grid[i].push({
+        id: 0,
         row: i,
         col: j,
         start: false,

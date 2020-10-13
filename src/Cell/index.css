@@ -121,7 +121,9 @@
 }
 
 .cell-visited-animated {
-  background-position: center;
+  border: 0.5px solid rgba(1, 109, 167, 0.782);
+  background-color: rgb(0, 217, 228);
+  /*background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   animation-name: visitedAnim;
@@ -131,7 +133,7 @@
   animation-direction: alternate;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-  animation-play-state: running;
+  animation-play-state: running;*/
 }
 
 @keyframes visitedAnim {
