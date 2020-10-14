@@ -36,7 +36,7 @@ export function dijkstra(grid, startCell, endCell) {
     getUnvisitedNeighbors(nextCell, grid, direction);
     if (direction !== "START") {
       previousRow = nextCell.row;
-    }    
+    }
     direction = "CHANGED";
   }
 }
@@ -73,6 +73,7 @@ function Up(row, col, grid, neighbors) {
     }
   }
 }
+
 function Right(row, col, grid, neighbors) {
   if (col < grid[0].length - 1) {
     if (!grid[row][col + 1].visited && grid[row][col + 1].previous === null) {

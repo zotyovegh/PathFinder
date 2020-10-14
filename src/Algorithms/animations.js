@@ -35,14 +35,14 @@ function animatePathFast(cellsInOrder) {
 }
 
 export function animateSlow(visitedCells, cellsInOrder) {
-  for (let i = 0; i <= visitedCells.length-1; i++) {
+  for (let i = 0; i <= visitedCells.length; i++) {
     const cell = visitedCells[i];
-    /*if (i === visitedCells.length) {
+    if (i === visitedCells.length) {
       setTimeout(() => {
         animatePathSlow(cellsInOrder);
-      }, 500 * i);
+      }, 10 * i);
       return;
-    }*/
+    }
     setTimeout(() => {
       if (cell.start && window.gridComponent.state.previousVisualization) {
         visualizeCell("num", "num num-start", cell);
@@ -58,7 +58,7 @@ export function animateSlow(visitedCells, cellsInOrder) {
           }
         }
       }
-    }, 30 * i);
+    }, 10 * i);
   }
 }
 
@@ -76,7 +76,6 @@ function animatePathSlow(cellsInOrder) {
           visualizeCell("num", "num num-path", cell);
         }
       }
-
     }, 20 * i);
   }
 }
