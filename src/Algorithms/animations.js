@@ -58,7 +58,7 @@ export function animateSlow(visitedCells, cellsInOrder) {
           }
         }
       }
-    }, 10 * i);
+    }, 30 * i);
   }
 }
 

@@ -2,18 +2,26 @@ var id = 0;
 export function dijkstra(grid, startCell, endCell) {
   const visitedCells = [];
   startCell.distance = 0;
-  var direction = "DOWN";
+  var direction = "START";
+  var previousRow = startCell.row;
   const unvisitedCells = [];
   for (const row of grid) {
     for (const cell of row) {
       unvisitedCells.push(cell);
     }
   }
-  /*while (!!unvisitedCells.length) {
+  while (!!unvisitedCells.length) {
     unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
     unvisitedCells.sort((cell1, cell2) => cell1.distance - cell2.distance);
 
     const nextCell = unvisitedCells.shift();
+    if (direction !== "START") {
+      if (nextCell.row < previousRow) {
+        direction = "UP";
+      } else {
+        direction = "DOWN";
+      }
+    }
 
     if (nextCell.isWall && !nextCell.start && !nextCell.end) continue;
 
@@ -24,15 +32,20 @@ export function dijkstra(grid, startCell, endCell) {
       unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
       return visitedCells;
     }
-    getUnvisitedNeighbors(nextCell, grid);
-  }*/
+
+    getUnvisitedNeighbors(nextCell, grid, direction);
+    if (direction !== "START") {
+      previousRow = nextCell.row;
+    }    
+    direction = "CHANGED";
+  }
 }
 
 function getUnvisitedNeighbors(cell, grid, direction) {
   const neighbors = [];
   var { col, row } = cell;
 
-  if (direction === "DOWN") {
+  if (direction === "DOWN" || direction === "START") {
     Up(row, col, grid, neighbors);
     Right(row, col, grid, neighbors);
     Down(row, col, grid, neighbors);

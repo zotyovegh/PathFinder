@@ -12,7 +12,8 @@ function getColor(props) {
   }
 }
 
-const Cell = (props) => {
+const Cell = (props) => {  
+  let temporary = props.data.previous === null ? "" : props.data.previous.id;
   let cell = () => {
     return (
       <div
@@ -32,7 +33,7 @@ const Cell = (props) => {
           className={`num ${""}`}
           id={`num-${props.data.row}-${props.data.col}`}
         >
-          {props.data.distance === Infinity ? "" : props.data.distance}
+          {props.data.distance === Infinity ? "" : props.data.id + " " + temporary}
         </div>
       </div>
     );
