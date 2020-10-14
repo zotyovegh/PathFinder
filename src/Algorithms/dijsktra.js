@@ -73,11 +73,30 @@ function Up(row, col, grid, neighbors) {
     }
   }
 }
-
+function UpRight(row, col, grid, neighbors) {
+  if (row > 0 && col < grid[0].length - 1) {
+    if (
+      !grid[row - 1][col + 1].visited &&
+      grid[row - 1][col + 1].previous === null
+    ) {
+      neighbors.push(grid[row - 1][col + 1]);
+    }
+  }
+}
 function Right(row, col, grid, neighbors) {
   if (col < grid[0].length - 1) {
     if (!grid[row][col + 1].visited && grid[row][col + 1].previous === null) {
       neighbors.push(grid[row][col + 1]);
+    }
+  }
+}
+function RightDown(row, col, grid, neighbors) {
+  if (col < grid[0].length - 1 && row < grid.length - 1) {
+    if (
+      !grid[row + 1][col + 1].visited &&
+      grid[row + 1][col + 1].previous === null
+    ) {
+      neighbors.push(grid[row + 1][col + 1]);
     }
   }
 }
@@ -88,10 +107,30 @@ function Down(row, col, grid, neighbors) {
     }
   }
 }
+function DownLeft(row, col, grid, neighbors) {
+  if (row < grid.length - 1 && col > 0) {
+    if (
+      !grid[row + 1][col - 1].visited &&
+      grid[row + 1][col - 1].previous === null
+    ) {
+      neighbors.push(grid[row + 1][col - 1]);
+    }
+  }
+}
 function Left(row, col, grid, neighbors) {
   if (col > 0) {
     if (!grid[row][col - 1].visited && grid[row][col - 1].previous === null) {
       neighbors.push(grid[row][col - 1]);
+    }
+  }
+}
+function LeftUp(row, col, grid, neighbors) {
+  if (col > 0 && row > 0) {
+    if (
+      !grid[row - 1][col - 1].visited &&
+      grid[row - 1][col - 1].previous === null
+    ) {
+      neighbors.push(grid[row - 1][col - 1]);
     }
   }
 }

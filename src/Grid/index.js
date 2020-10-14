@@ -25,7 +25,7 @@ class Grid extends Component {
       endCol: props.endC,
       status: "pending",
       currentAlg: "dijkstra",
-      previousVisualization: true,
+      previousVisualization: false,
     };
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
