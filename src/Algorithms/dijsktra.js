@@ -1,4 +1,8 @@
 export function dijkstra(grid, startCell, endCell) {
+
+}
+
+export function dijkstraOld(grid, startCell, endCell) {
   const visitedCells = [];
   startCell.distance = 0;
   const unvisitedCells = [];
