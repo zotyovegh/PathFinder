@@ -1,5 +1,6 @@
 var id = 0;
-export function dijkstra(grid, startCell, endCell) {
+export function dijkstra(grid, startCell, endCell, isDiagonalOn) {
+  console.log(isDiagonalOn);
   const visitedCells = [];
   startCell.distance = 0;
   var direction = "START";

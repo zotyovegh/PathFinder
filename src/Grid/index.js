@@ -26,14 +26,30 @@ class Grid extends Component {
       status: "pending",
       currentAlg: "dijkstra",
       previousVisualization: false,
+      diagonalVisualization: false,
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleDistanceChange = this.handleDistanceChange.bind(this);
+    this.handleDiagonalChange = this.handleDiagonalChange.bind(this);
     window.gridComponent = this;
   }
 
-  handleChange() {
+  handleDistanceChange() {
     this.setState(
       { previousVisualization: !this.state.previousVisualization },
+      () => {
+        if (this.state.status === "finished") {
+          clearVisitedCells();
+          if (this.state.currentAlg === "dijkstra") {
+            this.doAlgorithm("fastDijkstra");
+          }
+        }
+      }
+    );
+  }
+
+  handleDiagonalChange() {
+    this.setState(
+      { diagonalVisualization: !this.state.diagonalVisualization },
       () => {
         if (this.state.status === "finished") {
           clearVisitedCells();
@@ -127,11 +143,11 @@ class Grid extends Component {
       }
 
       this.setState({ status: "running" });
-      const visitedCells = dijkstra(grid, startCell, finishCell);
+      const visitedCells = dijkstra(grid, startCell, finishCell, this.state.diagonalVisualization);
       const cellsInOrder = getCellsInOrder(finishCell);
       animateSlow(visitedCells, cellsInOrder);
     } else if (type === "fastDijkstra") {
-      const visitedCells = dijkstra(grid, startCell, finishCell);
+      const visitedCells = dijkstra(grid, startCell, finishCell, this.state.diagonalVisualization);
       const cellsInOrder = getCellsInOrder(finishCell);
       animateFast(visitedCells, cellsInOrder);
     }
@@ -197,7 +213,17 @@ class Grid extends Component {
             disabled={this.state.status === "running"}
             type="checkbox"
             defaultChecked={this.state.previousVisualization}
-            onChange={this.handleChange}
+            onChange={this.handleDistanceChange}
+          ></input>
+          <span className="slider round"></span>
+        </label>
+        Diagonal
+        <label className="switch">
+          <input
+            disabled={this.state.status === "running"}
+            type="checkbox"
+            defaultChecked={this.state.diagonalVisualization}
+            onChange={this.handleDiagonalChange}
           ></input>
           <span className="slider round"></span>
         </label>
