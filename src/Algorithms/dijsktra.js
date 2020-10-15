@@ -147,25 +147,3 @@ function LeftUp(row, col, grid, neighbors) {
     }
   }
 }
-
-/*
- if (direction === "DOWN" || direction === "START") {
-    Up(row, col, grid, neighbors);
-    Right(row, col, grid, neighbors);
-    Down(row, col, grid, neighbors);
-    Left(row, col, grid, neighbors);
-    UpRight(row, col, grid, neighbors);
-    RightDown(row, col, grid, neighbors);
-    DownLeft(row, col, grid, neighbors);
-    LeftUp(row, col, grid, neighbors);
-  } else if (direction === "UP") {
-    Down(row, col, grid, neighbors);
-    Left(row, col, grid, neighbors);
-    Up(row, col, grid, neighbors);
-    Right(row, col, grid, neighbors);
-    DownLeft(row, col, grid, neighbors);
-    LeftUp(row, col, grid, neighbors);
-    UpRight(row, col, grid, neighbors);
-    RightDown(row, col, grid, neighbors);
-  }
-*/
