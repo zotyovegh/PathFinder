@@ -1,16 +1,17 @@
 var id = 0;
 export function dijkstra(grid, startCell, endCell, isDiagonalOn) {
-  console.log(isDiagonalOn);
+  const unvisitedCells = [];
   const visitedCells = [];
-  startCell.distance = 0;
   var direction = "START";
   var previousRow = startCell.row;
-  const unvisitedCells = [];
+  startCell.distance = 0;
+
   for (const row of grid) {
     for (const cell of row) {
       unvisitedCells.push(cell);
     }
   }
+
   while (!!unvisitedCells.length) {
     unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
     unvisitedCells.sort((cell1, cell2) => cell1.distance - cell2.distance);
@@ -86,6 +87,31 @@ function Up(row, col, grid, neighbors) {
     }
   }
 }
+
+function Right(row, col, grid, neighbors) {
+  if (col < grid[0].length - 1) {
+    if (!grid[row][col + 1].visited && grid[row][col + 1].previous === null) {
+      neighbors.push(grid[row][col + 1]);
+    }
+  }
+}
+
+function Down(row, col, grid, neighbors) {
+  if (row < grid.length - 1) {
+    if (!grid[row + 1][col].visited && grid[row + 1][col].previous === null) {
+      neighbors.push(grid[row + 1][col]);
+    }
+  }
+}
+
+function Left(row, col, grid, neighbors) {
+  if (col > 0) {
+    if (!grid[row][col - 1].visited && grid[row][col - 1].previous === null) {
+      neighbors.push(grid[row][col - 1]);
+    }
+  }
+}
+
 function UpRight(row, col, grid, neighbors) {
   if (row > 0 && col < grid[0].length - 1) {
     if (grid[row - 1][col].isWall && grid[row][col + 1].isWall) {
@@ -99,13 +125,7 @@ function UpRight(row, col, grid, neighbors) {
     }
   }
 }
-function Right(row, col, grid, neighbors) {
-  if (col < grid[0].length - 1) {
-    if (!grid[row][col + 1].visited && grid[row][col + 1].previous === null) {
-      neighbors.push(grid[row][col + 1]);
-    }
-  }
-}
+
 function RightDown(row, col, grid, neighbors) {
   if (col < grid[0].length - 1 && row < grid.length - 1) {
     if (grid[row + 1][col].isWall && grid[row][col + 1].isWall) {
@@ -119,13 +139,7 @@ function RightDown(row, col, grid, neighbors) {
     }
   }
 }
-function Down(row, col, grid, neighbors) {
-  if (row < grid.length - 1) {
-    if (!grid[row + 1][col].visited && grid[row + 1][col].previous === null) {
-      neighbors.push(grid[row + 1][col]);
-    }
-  }
-}
+
 function DownLeft(row, col, grid, neighbors) {
   if (row < grid.length - 1 && col > 0) {
     if (grid[row + 1][col].isWall && grid[row][col - 1].isWall) {
@@ -139,13 +153,7 @@ function DownLeft(row, col, grid, neighbors) {
     }
   }
 }
-function Left(row, col, grid, neighbors) {
-  if (col > 0) {
-    if (!grid[row][col - 1].visited && grid[row][col - 1].previous === null) {
-      neighbors.push(grid[row][col - 1]);
-    }
-  }
-}
+
 function LeftUp(row, col, grid, neighbors) {
   if (col > 0 && row > 0) {
     if (grid[row][col - 1].isWall && grid[row - 1][col].isWall) {
