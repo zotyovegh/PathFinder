@@ -34,7 +34,7 @@ export function dijkstra(grid, startCell, endCell, isDiagonalOn) {
       return visitedCells;
     }
 
-    getUnvisitedNeighbors(nextCell, grid, direction);
+    getUnvisitedNeighbors(nextCell, grid, direction, isDiagonalOn);
     if (direction !== "START") {
       previousRow = nextCell.row;
     }
@@ -42,7 +42,7 @@ export function dijkstra(grid, startCell, endCell, isDiagonalOn) {
   }
 }
 
-function getUnvisitedNeighbors(cell, grid, direction) {
+function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn) {
   const neighbors = [];
   var { col, row } = cell;
 
@@ -51,11 +51,23 @@ function getUnvisitedNeighbors(cell, grid, direction) {
     Right(row, col, grid, neighbors);
     Down(row, col, grid, neighbors);
     Left(row, col, grid, neighbors);
+    if (isDiagonalOn) {
+      UpRight(row, col, grid, neighbors);
+      RightDown(row, col, grid, neighbors);
+      DownLeft(row, col, grid, neighbors);
+      LeftUp(row, col, grid, neighbors);
+    }
   } else if (direction === "UP") {
     Down(row, col, grid, neighbors);
     Left(row, col, grid, neighbors);
     Up(row, col, grid, neighbors);
     Right(row, col, grid, neighbors);
+    if (isDiagonalOn) {
+      DownLeft(row, col, grid, neighbors);
+      LeftUp(row, col, grid, neighbors);
+      UpRight(row, col, grid, neighbors);
+      RightDown(row, col, grid, neighbors);
+    }
   }
 
   for (const neighbor of neighbors) {
