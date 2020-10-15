@@ -88,6 +88,9 @@ function Up(row, col, grid, neighbors) {
 }
 function UpRight(row, col, grid, neighbors) {
   if (row > 0 && col < grid[0].length - 1) {
+    if (grid[row - 1][col].isWall && grid[row][col + 1].isWall) {
+      return;
+    }
     if (
       !grid[row - 1][col + 1].visited &&
       grid[row - 1][col + 1].previous === null
@@ -105,6 +108,9 @@ function Right(row, col, grid, neighbors) {
 }
 function RightDown(row, col, grid, neighbors) {
   if (col < grid[0].length - 1 && row < grid.length - 1) {
+    if (grid[row + 1][col].isWall && grid[row][col + 1].isWall) {
+      return;
+    }
     if (
       !grid[row + 1][col + 1].visited &&
       grid[row + 1][col + 1].previous === null
@@ -122,6 +128,9 @@ function Down(row, col, grid, neighbors) {
 }
 function DownLeft(row, col, grid, neighbors) {
   if (row < grid.length - 1 && col > 0) {
+    if (grid[row + 1][col].isWall && grid[row][col - 1].isWall) {
+      return;
+    }
     if (
       !grid[row + 1][col - 1].visited &&
       grid[row + 1][col - 1].previous === null
@@ -139,6 +148,9 @@ function Left(row, col, grid, neighbors) {
 }
 function LeftUp(row, col, grid, neighbors) {
   if (col > 0 && row > 0) {
+    if (grid[row][col - 1].isWall && grid[row - 1][col].isWall) {
+      return;
+    }
     if (
       !grid[row - 1][col - 1].visited &&
       grid[row - 1][col - 1].previous === null
