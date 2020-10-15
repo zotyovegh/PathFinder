@@ -82,88 +82,84 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn) {
 
 function Up(row, col, grid, neighbors) {
   if (row > 0) {
-    if (!grid[row - 1][col].visited && grid[row - 1][col].previous === null) {
-      neighbors.push(grid[row - 1][col]);
+    var cell = grid[row - 1][col];
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
 function Right(row, col, grid, neighbors) {
   if (col < grid[0].length - 1) {
-    if (!grid[row][col + 1].visited && grid[row][col + 1].previous === null) {
-      neighbors.push(grid[row][col + 1]);
+    let cell = grid[row][col + 1];
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
 function Down(row, col, grid, neighbors) {
   if (row < grid.length - 1) {
-    if (!grid[row + 1][col].visited && grid[row + 1][col].previous === null) {
-      neighbors.push(grid[row + 1][col]);
+    let cell = grid[row + 1][col];
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
 function Left(row, col, grid, neighbors) {
   if (col > 0) {
-    if (!grid[row][col - 1].visited && grid[row][col - 1].previous === null) {
-      neighbors.push(grid[row][col - 1]);
+    let cell = grid[row][col - 1];
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
 function UpRight(row, col, grid, neighbors) {
   if (row > 0 && col < grid[0].length - 1) {
+    let cell = grid[row - 1][col + 1];
     if (grid[row - 1][col].isWall && grid[row][col + 1].isWall) {
       return;
     }
-    if (
-      !grid[row - 1][col + 1].visited &&
-      grid[row - 1][col + 1].previous === null
-    ) {
-      neighbors.push(grid[row - 1][col + 1]);
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
 function RightDown(row, col, grid, neighbors) {
   if (col < grid[0].length - 1 && row < grid.length - 1) {
+    let cell = grid[row + 1][col + 1];
     if (grid[row + 1][col].isWall && grid[row][col + 1].isWall) {
       return;
     }
-    if (
-      !grid[row + 1][col + 1].visited &&
-      grid[row + 1][col + 1].previous === null
-    ) {
-      neighbors.push(grid[row + 1][col + 1]);
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
 function DownLeft(row, col, grid, neighbors) {
   if (row < grid.length - 1 && col > 0) {
+    let cell = grid[row + 1][col - 1];
     if (grid[row + 1][col].isWall && grid[row][col - 1].isWall) {
       return;
     }
-    if (
-      !grid[row + 1][col - 1].visited &&
-      grid[row + 1][col - 1].previous === null
-    ) {
-      neighbors.push(grid[row + 1][col - 1]);
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
 function LeftUp(row, col, grid, neighbors) {
   if (col > 0 && row > 0) {
+    let cell = grid[row - 1][col - 1];
     if (grid[row][col - 1].isWall && grid[row - 1][col].isWall) {
       return;
     }
-    if (
-      !grid[row - 1][col - 1].visited &&
-      grid[row - 1][col - 1].previous === null
-    ) {
-      neighbors.push(grid[row - 1][col - 1]);
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
