@@ -137,27 +137,28 @@ class Grid extends Component {
     let { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
+    var visitedCells = [];
+    var cellsInOrder = [];
 
     if (this.state.currentAlg === "dijkstra") {
-      if (this.state.status === "finished") {
-        clearVisitedCells();
-      }
-      const visitedCells = dijkstra(
+      visitedCells = dijkstra(
         grid,
         startCell,
         finishCell,
         this.state.diagonalVisualization
       );
-      const cellsInOrder = getCellsInOrder(finishCell);
-      
-      if (speed === "slow") {
-        this.setState({ status: "running" });
-        animateSlow(visitedCells, cellsInOrder);
-      } else if (speed === "fast") {
-        animateFast(visitedCells, cellsInOrder);
-      }
     } else if (this.state.currentAlg === "astar") {
-      console.log("astar");
+    }
+
+    cellsInOrder = getCellsInOrder(finishCell);
+    if (speed === "slow") {
+      if (this.state.status === "finished") {
+        clearVisitedCells();
+      }
+      this.setState({ status: "running" });
+      animateSlow(visitedCells, cellsInOrder);
+    } else if (speed === "fast") {
+      animateFast(visitedCells, cellsInOrder);
     }
   };
 

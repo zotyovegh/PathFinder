@@ -76,7 +76,7 @@ export function placeWall(cell) {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();
       if (window.gridComponent.state.currentAlg === "dijkstra") {
-        window.gridComponent.doAlgorithm("fastDijkstra");
+        window.gridComponent.doAlgorithm("fast");
       }
     }
   });
