@@ -41,7 +41,7 @@ class Grid extends Component {
         if (this.state.status === "finished") {
           clearVisitedCells();
           if (this.state.currentAlg === "dijkstra") {
-            this.doAlgorithm("fastDijkstra");
+            this.doAlgorithm("fast");
           }
         }
       }
@@ -55,7 +55,7 @@ class Grid extends Component {
         if (this.state.status === "finished") {
           clearVisitedCells();
           if (this.state.currentAlg === "dijkstra") {
-            this.doAlgorithm("fastDijkstra");
+            this.doAlgorithm("fast");
           }
         }
       }
@@ -102,7 +102,7 @@ class Grid extends Component {
             if (this.state.status === "finished") {
               clearVisitedCells();
               if (this.state.currentAlg === "dijkstra") {
-                this.doAlgorithm("fastDijkstra");
+                this.doAlgorithm("fast");
               }
             }
           }
@@ -123,7 +123,7 @@ class Grid extends Component {
             if (this.state.status === "finished") {
               clearVisitedCells();
               if (this.state.currentAlg === "dijkstra") {
-                this.doAlgorithm("fastDijkstra");
+                this.doAlgorithm("fast");
               }
             }
           }
@@ -138,34 +138,36 @@ class Grid extends Component {
     this.setState({ isMouseDown: false, isStartOn: false, isEndOn: false });
   };
 
-  doAlgorithm = (type) => {
+  doAlgorithm = (speed) => {
     let { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
 
-    if (type === "slowDijkstra") {
-      if (this.state.status === "finished") {
-        clearVisitedCells();
-      }
+    if (this.state.currentAlg === "dijkstra") {
+      if (speed === "slow") {
+        if (this.state.status === "finished") {
+          clearVisitedCells();
+        }
 
-      this.setState({ status: "running" });
-      const visitedCells = dijkstra(
-        grid,
-        startCell,
-        finishCell,
-        this.state.diagonalVisualization
-      );
-      const cellsInOrder = getCellsInOrder(finishCell);
-      animateSlow(visitedCells, cellsInOrder);
-    } else if (type === "fastDijkstra") {
-      const visitedCells = dijkstra(
-        grid,
-        startCell,
-        finishCell,
-        this.state.diagonalVisualization
-      );
-      const cellsInOrder = getCellsInOrder(finishCell);
-      animateFast(visitedCells, cellsInOrder);
+        this.setState({ status: "running" });
+        const visitedCells = dijkstra(
+          grid,
+          startCell,
+          finishCell,
+          this.state.diagonalVisualization
+        );
+        const cellsInOrder = getCellsInOrder(finishCell);
+        animateSlow(visitedCells, cellsInOrder);
+      } else if (speed === "fast") {
+        const visitedCells = dijkstra(
+          grid,
+          startCell,
+          finishCell,
+          this.state.diagonalVisualization
+        );
+        const cellsInOrder = getCellsInOrder(finishCell);
+        animateFast(visitedCells, cellsInOrder);
+      }
     }
   };
 
@@ -204,26 +206,17 @@ class Grid extends Component {
         <select
           value={this.state.currentAlg}
           onChange={this.handleChoiceChange}
+          disabled={this.state.status === "running"}
         >
           <option value="dijkstra">Dijkstra</option>
           <option value="astar">A* Search</option>
         </select>
-
-
-
-
         <button
           disabled={this.state.status === "running"}
-          onClick={() => this.doAlgorithm("slowDijkstra")}
+          onClick={() => this.doAlgorithm("slow")}
         >
-          Dijkstra
+          Start
         </button>
-
-
-
-
-
-
         <button
           disabled={this.state.status === "running"}
           onClick={() => {
