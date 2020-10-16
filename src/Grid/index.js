@@ -30,6 +30,7 @@ class Grid extends Component {
     };
     this.handleDistanceChange = this.handleDistanceChange.bind(this);
     this.handleDiagonalChange = this.handleDiagonalChange.bind(this);
+    this.handleChoiceChange = this.handleChoiceChange.bind(this);
     window.gridComponent = this;
   }
 
@@ -59,6 +60,11 @@ class Grid extends Component {
         }
       }
     );
+  }
+
+  handleChoiceChange(event) {
+    console.log(event.target.value);
+    this.setState({ currentAlg: event.target.value });
   }
 
   onMouseDown = (cell) => {
@@ -143,11 +149,21 @@ class Grid extends Component {
       }
 
       this.setState({ status: "running" });
-      const visitedCells = dijkstra(grid, startCell, finishCell, this.state.diagonalVisualization);
+      const visitedCells = dijkstra(
+        grid,
+        startCell,
+        finishCell,
+        this.state.diagonalVisualization
+      );
       const cellsInOrder = getCellsInOrder(finishCell);
       animateSlow(visitedCells, cellsInOrder);
     } else if (type === "fastDijkstra") {
-      const visitedCells = dijkstra(grid, startCell, finishCell, this.state.diagonalVisualization);
+      const visitedCells = dijkstra(
+        grid,
+        startCell,
+        finishCell,
+        this.state.diagonalVisualization
+      );
       const cellsInOrder = getCellsInOrder(finishCell);
       animateFast(visitedCells, cellsInOrder);
     }
@@ -185,12 +201,29 @@ class Grid extends Component {
         <div className="grid" onMouseLeave={this.onMouseUp}>
           {grid}
         </div>
+        <select
+          value={this.state.currentAlg}
+          onChange={this.handleChoiceChange}
+        >
+          <option value="dijkstra">Dijkstra</option>
+          <option value="astar">A* Search</option>
+        </select>
+
+
+
+
         <button
           disabled={this.state.status === "running"}
           onClick={() => this.doAlgorithm("slowDijkstra")}
         >
           Dijkstra
         </button>
+
+
+
+
+
+
         <button
           disabled={this.state.status === "running"}
           onClick={() => {
