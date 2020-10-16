@@ -74,9 +74,8 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn) {
   for (const neighbor of neighbors) {
     neighbor.distance = cell.distance + 1;
     neighbor.previous = cell;
-    (function () {
-      neighbor.id = id;
-    })(id++);
+    neighbor.id = id;
+    id++;
   }
 }
 
