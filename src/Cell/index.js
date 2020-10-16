@@ -13,32 +13,28 @@ function getColor(props) {
 }
 
 const Cell = (props) => {
-  let temporary = props.data.previous === null ? "" : props.data.previous.id;
-  let cell = () => {
-    return (
+  return (
+    <div
+      className={`cell ${getColor(props)}`}
+      id={`cell-${props.data.row}-${props.data.col}`}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        props.onMouseDown(props.data);
+      }}
+      onMouseEnter={() => props.onMouseEnter(props.data)}
+      onMouseUp={() => props.onMouseUp(props.data)}
+      onContextMenu={(e) => {
+        e.preventDefault();
+      }}
+    >
       <div
-        className={`cell ${getColor(props)}`}
-        id={`cell-${props.data.row}-${props.data.col}`}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          props.onMouseDown(props.data);
-        }}
-        onMouseEnter={() => props.onMouseEnter(props.data)}
-        onMouseUp={() => props.onMouseUp(props.data)}
-        onContextMenu={(e) => {
-          e.preventDefault();
-        }}
+        className={`num ${""}`}
+        id={`num-${props.data.row}-${props.data.col}`}
       >
-        <div
-          className={`num ${""}`}
-          id={`num-${props.data.row}-${props.data.col}`}
-        >
-          {props.data.distance === Infinity ? "" : props.data.distance}
-        </div>
+        {props.data.distance === Infinity ? "" : props.data.distance}
       </div>
-    );
-  };
-  return cell();
+    </div>
+  );
 };
 
 export default Cell;
