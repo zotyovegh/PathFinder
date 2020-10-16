@@ -28,9 +28,6 @@ class Grid extends Component {
       previousVisualization: false,
       diagonalVisualization: false,
     };
-    this.handleDistanceChange = this.handleDistanceChange.bind(this);
-    this.handleDiagonalChange = this.handleDiagonalChange.bind(this);
-    this.handleChoiceChange = this.handleChoiceChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
   }
@@ -63,14 +60,6 @@ class Grid extends Component {
     } else if (event.target.name === "choice") {
       this.setState({ currentAlg: event.target.value });
     }
-  }
-
-  handleDistanceChange() {}
-
-  handleDiagonalChange() {}
-
-  handleChoiceChange(event) {
-    console.log(event.target.value);
   }
 
   onMouseDown = (cell) => {
