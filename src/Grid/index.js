@@ -31,40 +31,46 @@ class Grid extends Component {
     this.handleDistanceChange = this.handleDistanceChange.bind(this);
     this.handleDiagonalChange = this.handleDiagonalChange.bind(this);
     this.handleChoiceChange = this.handleChoiceChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
   }
 
-  handleDistanceChange() {
-    this.setState(
-      { previousVisualization: !this.state.previousVisualization },
-      () => {
-        if (this.state.status === "finished") {
-          clearVisitedCells();
-          if (this.state.currentAlg === "dijkstra") {
-            this.doAlgorithm("fast");
+  handleChange(event) {
+    if (event.target.name === "distance") {
+      this.setState(
+        { previousVisualization: !this.state.previousVisualization },
+        () => {
+          if (this.state.status === "finished") {
+            clearVisitedCells();
+            if (this.state.currentAlg === "dijkstra") {
+              this.doAlgorithm("fast");
+            }
           }
         }
-      }
-    );
+      );
+    } else if (event.target.name === "diagonal") {
+      this.setState(
+        { diagonalVisualization: !this.state.diagonalVisualization },
+        () => {
+          if (this.state.status === "finished") {
+            clearVisitedCells();
+            if (this.state.currentAlg === "dijkstra") {
+              this.doAlgorithm("fast");
+            }
+          }
+        }
+      );
+    } else if (event.target.name === "choice") {
+      this.setState({ currentAlg: event.target.value });
+    }
   }
 
-  handleDiagonalChange() {
-    this.setState(
-      { diagonalVisualization: !this.state.diagonalVisualization },
-      () => {
-        if (this.state.status === "finished") {
-          clearVisitedCells();
-          if (this.state.currentAlg === "dijkstra") {
-            this.doAlgorithm("fast");
-          }
-        }
-      }
-    );
-  }
+  handleDistanceChange() {}
+
+  handleDiagonalChange() {}
 
   handleChoiceChange(event) {
     console.log(event.target.value);
-    this.setState({ currentAlg: event.target.value });
   }
 
   onMouseDown = (cell) => {
@@ -205,7 +211,8 @@ class Grid extends Component {
         </div>
         <select
           value={this.state.currentAlg}
-          onChange={this.handleChoiceChange}
+          onChange={this.handleChange}
+          name="choice"
           disabled={this.state.status === "running"}
         >
           <option value="dijkstra">Dijkstra</option>
@@ -239,7 +246,8 @@ class Grid extends Component {
             disabled={this.state.status === "running"}
             type="checkbox"
             defaultChecked={this.state.previousVisualization}
-            onChange={this.handleDistanceChange}
+            onChange={this.handleChange}
+            name="distance"
           ></input>
           <span className="slider round"></span>
         </label>
@@ -249,7 +257,8 @@ class Grid extends Component {
             disabled={this.state.status === "running"}
             type="checkbox"
             defaultChecked={this.state.diagonalVisualization}
-            onChange={this.handleDiagonalChange}
+            onChange={this.handleChange}
+            name="diagonal"
           ></input>
           <span className="slider round"></span>
         </label>
