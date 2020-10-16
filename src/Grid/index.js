@@ -9,7 +9,7 @@ import {
   placeWall,
 } from "../Algorithms/methods";
 import { animateFast, animateSlow } from "../Algorithms/animations";
-import { dijkstra } from "../Algorithms/dijsktra";
+import { dijkstra } from "../Algorithms/searchers/dijsktra";
 
 class Grid extends Component {
   constructor(props) {
@@ -138,7 +138,6 @@ class Grid extends Component {
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
     var visitedCells = [];
-    var cellsInOrder = [];
 
     if (this.state.currentAlg === "dijkstra") {
       visitedCells = dijkstra(
@@ -150,7 +149,8 @@ class Grid extends Component {
     } else if (this.state.currentAlg === "astar") {
     }
 
-    cellsInOrder = getCellsInOrder(finishCell);
+    //After search funtion is done    
+    const cellsInOrder = getCellsInOrder(finishCell);
     if (speed === "slow") {
       if (this.state.status === "finished") {
         clearVisitedCells();
