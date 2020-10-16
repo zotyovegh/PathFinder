@@ -10,6 +10,7 @@ import {
 } from "../Algorithms/methods";
 import { animateFast, animateSlow } from "../Algorithms/animations";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
+import { astar } from "../Algorithms/searchers/astar";
 
 class Grid extends Component {
   constructor(props) {
@@ -147,9 +148,15 @@ class Grid extends Component {
         this.state.diagonalVisualization
       );
     } else if (this.state.currentAlg === "astar") {
+      visitedCells = astar(
+        grid,
+        startCell,
+        finishCell,
+        this.state.diagonalVisualization
+      );
     }
 
-    //After search funtion is done    
+    //After search funtion is done
     const cellsInOrder = getCellsInOrder(finishCell);
     if (speed === "slow") {
       if (this.state.status === "finished") {
