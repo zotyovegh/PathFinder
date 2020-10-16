@@ -139,30 +139,25 @@ class Grid extends Component {
     const finishCell = grid[this.state.endRow][this.state.endCol];
 
     if (this.state.currentAlg === "dijkstra") {
+      if (this.state.status === "finished") {
+        clearVisitedCells();
+      }
+      const visitedCells = dijkstra(
+        grid,
+        startCell,
+        finishCell,
+        this.state.diagonalVisualization
+      );
+      const cellsInOrder = getCellsInOrder(finishCell);
+      
       if (speed === "slow") {
-        if (this.state.status === "finished") {
-          clearVisitedCells();
-        }
-
         this.setState({ status: "running" });
-        const visitedCells = dijkstra(
-          grid,
-          startCell,
-          finishCell,
-          this.state.diagonalVisualization
-        );
-        const cellsInOrder = getCellsInOrder(finishCell);
         animateSlow(visitedCells, cellsInOrder);
       } else if (speed === "fast") {
-        const visitedCells = dijkstra(
-          grid,
-          startCell,
-          finishCell,
-          this.state.diagonalVisualization
-        );
-        const cellsInOrder = getCellsInOrder(finishCell);
         animateFast(visitedCells, cellsInOrder);
       }
+    } else if (this.state.currentAlg === "astar") {
+      console.log("astar");
     }
   };
 
