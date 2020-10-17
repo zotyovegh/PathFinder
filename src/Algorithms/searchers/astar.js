@@ -24,7 +24,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
     var neighbors = nextCell.neighbors;
     for (let i = 0; i < neighbors.length; i++) {
       var neighbor = neighbors[i];
-      if (!closedSet.includes(neighbor)) {
+      if (!closedSet.includes(neighbor) && !neighbor.isWall) {
         var g = nextCell.g + 1;
 
         if (openSet.includes(neighbor)) {
