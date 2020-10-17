@@ -24,22 +24,20 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
 }
 
 function findNeighbors(grid) {
-  //DIAGONALLY AS WELL
+  //DIAGONALS NOT COUNTED 
   for (const row of grid) {
     for (const cell of row) {
-      for (let row = -1; row <= 1; row++) {
-        for (let col = -1; col <= 1; col++) {
-          if (cell.col + row >= 0 && cell.row + col >= 0) {
-            let rowOff = row + cell.col;
-            let colOff = col + cell.row;
-            if (rowOff < grid.length && colOff < grid[0].length) {
-              if (!(row === 0 && col === 0)) {
-                console.log("row: " + row + " col: " + col);
-                grid[cell.row][cell.col].neighbors.push(grid[row][col]);
-              }
-            }
-          }
-        }
+      if (cell.row < grid[0].length - 1) {
+        cell.neighbors.push(grid[cell.row + 1][cell.col]);
+      }
+      if (cell.row > 0) {
+        cell.neighbors.push(grid[cell.row - 1][cell.col]);
+      }
+      if (cell.col < grid.length - 1) {
+        cell.neighbors.push(grid[cell.row][cell.col + 1]);
+      }
+      if (cell.col > 0) {
+        cell.neighbors.push(grid[cell.row][cell.col - 1]);
       }
       console.log(cell);
     }
