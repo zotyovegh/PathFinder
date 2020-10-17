@@ -15,9 +15,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
     }
     var nextCell = openSet[lastCell];
     if (nextCell === endCell) {
-      console.log("done");
       return allSet;
     }
+    console.log(nextCell);
 
     eliminateFromSet(openSet, nextCell);
     closedSet.push(nextCell);
@@ -44,6 +44,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
       }
     }
   }
+  return allSet;
 }
 
 function findNeighbors(grid) {
