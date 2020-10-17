@@ -1,3 +1,4 @@
+//https://en.wikipedia.org/wiki/A*_search_algorithm
 export function astar(grid, startCell, endCell, isDiagonalOn) {
   const openSet = [];
   const closedSet = [];
@@ -16,6 +17,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
       return openSet;
     }
 
+    eliminateFromSet(openSet, nextCell);
     closedSet.push(nextCell);
   }
 }
