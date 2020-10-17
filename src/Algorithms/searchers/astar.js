@@ -3,6 +3,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
   findNeighbors(grid);
   const openSet = [];
   const closedSet = [];
+  const allSet = [];
   openSet.push(startCell);
 
   while (!!openSet.length) {
@@ -15,7 +16,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
     var nextCell = openSet[lastCell];
     if (nextCell === endCell) {
       console.log("done");
-      return openSet;
+      return allSet;
     }
 
     eliminateFromSet(openSet, nextCell);
@@ -33,6 +34,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
         } else {
           neighbor.g = g;
           openSet.push(neighbor);
+          allSet.push(neighbor);
         }
 
         neighbor.h = Math.hypot(
@@ -40,6 +42,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
           endCell.col - endCell.row
         );
         neighbor.f = neighbor.g + neighbor.h; //score
+        neighbor.previous = nextCell;
       }
     }
   }
@@ -61,7 +64,6 @@ function findNeighbors(grid) {
       if (cell.col > 0) {
         cell.neighbors.push(grid[cell.row][cell.col - 1]);
       }
-      
     }
   }
 }

@@ -40,7 +40,7 @@ export function animateSlow(visitedCells, cellsInOrder) {
     if (i === visitedCells.length) {
       setTimeout(() => {
         animatePathSlow(cellsInOrder);
-      }, 10 * i);
+      }, 25 * i);
       return;
     }
     setTimeout(() => {
@@ -58,7 +58,7 @@ export function animateSlow(visitedCells, cellsInOrder) {
           }
         }
       }
-    }, 10 * i);
+    }, 25 * i);
   }
 }
 

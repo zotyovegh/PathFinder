@@ -163,9 +163,9 @@ class Grid extends Component {
         clearVisitedCells();
       }
       this.setState({ status: "running" });
-     // animateSlow(visitedCells, cellsInOrder);
+      animateSlow(visitedCells, cellsInOrder);
     } else if (speed === "fast") {
-     // animateFast(visitedCells, cellsInOrder);
+      animateFast(visitedCells, cellsInOrder);
     }
   };
 
