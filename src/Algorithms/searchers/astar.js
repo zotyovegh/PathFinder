@@ -1,9 +1,9 @@
 //https://en.wikipedia.org/wiki/A*_search_algorithm
 export function astar(grid, startCell, endCell, isDiagonalOn) {
+  findNeighbors(grid);
   const openSet = [];
   const closedSet = [];
   openSet.push(startCell);
-  findNeighbors(grid);
 
   while (!!openSet.length) {
     var lastCell = 0;
@@ -20,11 +20,33 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
 
     eliminateFromSet(openSet, nextCell);
     closedSet.push(nextCell);
+    var neighbors = nextCell.neighbors;
+    for (let i = 0; i < neighbors.length; i++) {
+      var neighbor = neighbors[i];
+      if (!closedSet.includes(neighbor)) {
+        var g = nextCell.g + 1;
+
+        if (openSet.includes(neighbor)) {
+          if (g < neighbor.g) {
+            neighbor.g = g;
+          }
+        } else {
+          neighbor.g = g;
+          openSet.push(neighbor);
+        }
+
+        neighbor.h = Math.hypot(
+          neighbor.col - neighbor.row,
+          endCell.col - endCell.row
+        );
+        neighbor.f = neighbor.g + neighbor.h; //score
+      }
+    }
   }
 }
 
 function findNeighbors(grid) {
-  //DIAGONALS NOT COUNTED 
+  //DIAGONALS NOT COUNTED
   for (const row of grid) {
     for (const cell of row) {
       if (cell.row < grid[0].length - 1) {
@@ -39,7 +61,7 @@ function findNeighbors(grid) {
       if (cell.col > 0) {
         cell.neighbors.push(grid[cell.row][cell.col - 1]);
       }
-      console.log(cell);
+      
     }
   }
 }
