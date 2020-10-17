@@ -17,7 +17,6 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
     if (nextCell === endCell) {
       return allSet;
     }
-    console.log(nextCell);
 
     eliminateFromSet(openSet, nextCell);
     closedSet.push(nextCell);
@@ -51,13 +50,13 @@ function findNeighbors(grid) {
   //DIAGONALS NOT COUNTED
   for (const row of grid) {
     for (const cell of row) {
-      if (cell.row < grid[0].length - 1) {
+      if (cell.row < grid.length - 1) {
         cell.neighbors.push(grid[cell.row + 1][cell.col]);
       }
       if (cell.row > 0) {
         cell.neighbors.push(grid[cell.row - 1][cell.col]);
       }
-      if (cell.col < grid.length - 1) {
+      if (cell.col < grid[0].length - 1) {
         cell.neighbors.push(grid[cell.row][cell.col + 1]);
       }
       if (cell.col > 0) {
@@ -65,6 +64,7 @@ function findNeighbors(grid) {
       }
     }
   }
+  console.log(grid);
 }
 
 function eliminateFromSet(set, cell) {
