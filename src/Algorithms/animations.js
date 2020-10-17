@@ -1,6 +1,7 @@
 import { visualizeCell } from "../Algorithms/methods";
 
 export function animateFast(visitedCells, cellsInOrder) {
+  console.log("heyy");
   for (let i = 0; i <= visitedCells.length - 1; i++) {
     const cell = visitedCells[i];
 

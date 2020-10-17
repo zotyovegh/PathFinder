@@ -36,11 +36,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
           openSet.push(neighbor);
           allSet.push(neighbor);
         }
-
-        neighbor.h = Math.hypot(
-          neighbor.col - neighbor.row,
-          endCell.col - endCell.row
-        );
+        neighbor.h =
+          Math.abs(neighbor.row - endCell.row) +
+          Math.abs(neighbor.col - endCell.col);
         neighbor.f = neighbor.g + neighbor.h; //score
         neighbor.previous = nextCell;
       }
