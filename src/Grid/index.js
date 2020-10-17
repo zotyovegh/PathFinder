@@ -25,9 +25,13 @@ class Grid extends Component {
       endRow: props.endR,
       endCol: props.endC,
       status: "pending",
-      currentAlg: "dijkstra",
+      currentAlg: "astar",
       previousVisualization: false,
       diagonalVisualization: false,
+      //ASTAR scenario (this variables shall be handled differently later)
+      f: 0,
+      g: 0,
+      h: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
