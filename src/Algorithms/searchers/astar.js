@@ -24,7 +24,6 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     var nextCell = openSet[lastCell];
     if (nextCell === endCell) {
       DoAnimation(allSet, endCell, speed);
-
       return;
     }
 
@@ -41,7 +40,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
         if (openSet.includes(neighbor)) {
           if (g < neighbor.g) {
             neighbor.g = g;
-            
+
             betterPath = true;
           }
         } else {
@@ -64,7 +63,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     }
   }
 
-  // DoAnimation(allSet, endCell, speed);
+  DoAnimation(allSet, endCell, speed);
   return;
 }
 
@@ -149,7 +148,7 @@ function DoAnimation(allSet, finishCell, speed) {
     }
     window.gridComponent.setState({ status: "running" });
 
-    animateAstarSlow(allSet);
+    animateAstarSlow(allSet, cellsInOrder);
   } else if (speed === "fast") {
     // animateAstarFast(triedPaths, cellsInOrder);
   }

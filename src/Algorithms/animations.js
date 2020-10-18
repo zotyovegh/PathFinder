@@ -22,8 +22,15 @@ export function animateFast(visitedCells, cellsInOrder) {
   }
 }
 
-export function animateAstarSlow(allSet) {
-  for (let i = 0; i < allSet.length; i++) {
+export function animateAstarSlow(allSet, cellsInOrder) {
+  for (let i = 0; i <= allSet.length; i++) {
+    console.log(cellsInOrder);
+    if (i == allSet.length) {
+      setTimeout(() => {
+        animatePathSlow(cellsInOrder);
+      }, 20 * i);
+      return;
+    }
     setTimeout(() => {
       clearVisitedCells();
       var openSet = allSet[i][0];
