@@ -1,6 +1,6 @@
 //https://en.wikipedia.org/wiki/A*_search_algorithm
 export function astar(grid, startCell, endCell, isDiagonalOn) {
-  findNeighbors(grid);
+  findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   const closedSet = [];
   const allSet = [];
@@ -24,29 +24,34 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
     for (let i = 0; i < neighbors.length; i++) {
       var neighbor = neighbors[i];
       if (!closedSet.includes(neighbor) && !neighbor.isWall) {
+        var betterPath = false;
         var g = nextCell.g + 1;
 
         if (openSet.includes(neighbor)) {
           if (g < neighbor.g) {
             neighbor.g = g;
+            betterPath = true;
           }
         } else {
           neighbor.g = g;
           openSet.push(neighbor);
           allSet.push(neighbor);
+          betterPath = true;
         }
-        neighbor.h =
-          Math.abs(neighbor.row - endCell.row) +
-          Math.abs(neighbor.col - endCell.col);
-        neighbor.f = neighbor.g + neighbor.h; //score
-        neighbor.previous = nextCell;
+        if (betterPath) {
+          neighbor.h =
+            Math.abs(neighbor.row - endCell.row) +
+            Math.abs(neighbor.col - endCell.col);
+          neighbor.f = neighbor.g + neighbor.h; //score
+          neighbor.previous = nextCell;
+        }
       }
     }
   }
   return allSet;
 }
 
-function findNeighbors(grid) {
+function findNeighbors(grid, isDiagonalOn) {
   //DIAGONALS NOT COUNTED
   for (const row of grid) {
     for (const cell of row) {
@@ -69,45 +74,46 @@ function findNeighbors(grid) {
         //LEFT
         cell.neighbors.push(grid[cell.row][cell.col - 1]);
       }
-      if (cell.row > 0 && cell.col < grid[0].length - 1) {
-        //UPRIGHT
-        if (
-          !grid[cell.row - 1][cell.col].isWall ||
-          !grid[cell.row][cell.col + 1].isWall
-        ) {
-          cell.neighbors.push(grid[cell.row - 1][cell.col + 1]);
+      if (isDiagonalOn) {
+        if (cell.row > 0 && cell.col < grid[0].length - 1) {
+          //UPRIGHT
+          if (
+            !grid[cell.row - 1][cell.col].isWall ||
+            !grid[cell.row][cell.col + 1].isWall
+          ) {
+            cell.neighbors.push(grid[cell.row - 1][cell.col + 1]);
+          }
         }
-      }
-      if (cell.col < grid[0].length - 1 && cell.row < grid.length - 1) {
-        //RIGHTDOWN
-        if (
-          !grid[cell.row + 1][cell.col].isWall ||
-          !grid[cell.row][cell.col + 1].isWall
-        ) {
-          cell.neighbors.push(grid[cell.row + 1][cell.col + 1]);
+        if (cell.col < grid[0].length - 1 && cell.row < grid.length - 1) {
+          //RIGHTDOWN
+          if (
+            !grid[cell.row + 1][cell.col].isWall ||
+            !grid[cell.row][cell.col + 1].isWall
+          ) {
+            cell.neighbors.push(grid[cell.row + 1][cell.col + 1]);
+          }
         }
-      }
-      if (cell.row < grid.length - 1 && cell.col > 0) {
-        //DOWNLEFT
-        if (
-          !grid[cell.row + 1][cell.col].isWall ||
-          !grid[cell.row][cell.col - 1].isWall
-        ) {
-          cell.neighbors.push(grid[cell.row + 1][cell.col - 1]);
+        if (cell.row < grid.length - 1 && cell.col > 0) {
+          //DOWNLEFT
+          if (
+            !grid[cell.row + 1][cell.col].isWall ||
+            !grid[cell.row][cell.col - 1].isWall
+          ) {
+            cell.neighbors.push(grid[cell.row + 1][cell.col - 1]);
+          }
         }
-      }
-      if (cell.col > 0 && cell.row > 0) {
-        //LEFTUP
-        if (
-          !grid[cell.row][cell.col - 1].isWall ||
-          !grid[cell.row - 1][cell.col].isWall
-        ) {
-          cell.neighbors.push(grid[cell.row - 1][cell.col - 1]);
+        if (cell.col > 0 && cell.row > 0) {
+          //LEFTUP
+          if (
+            !grid[cell.row][cell.col - 1].isWall ||
+            !grid[cell.row - 1][cell.col].isWall
+          ) {
+            cell.neighbors.push(grid[cell.row - 1][cell.col - 1]);
+          }
         }
       }
     }
   }
-  console.log(grid);
 }
 
 function eliminateFromSet(set, cell) {
