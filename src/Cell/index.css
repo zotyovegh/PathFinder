@@ -130,6 +130,11 @@
   background-color: rgb(69, 255, 122);
 }
 
+.cell-activepath {
+  border: 0.5px solid rgba(218, 255, 133, 0.782);
+  background-color: rgb(231, 255, 126);
+}
+
 .cell-visited-animated {
   background-position: center;
   background-repeat: no-repeat;

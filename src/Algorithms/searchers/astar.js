@@ -41,10 +41,12 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
         if (openSet.includes(neighbor)) {
           if (g < neighbor.g) {
             neighbor.g = g;
+            
             betterPath = true;
           }
         } else {
           neighbor.g = g;
+          neighbor.previous = nextCell;
           openSet.push(neighbor);
 
           allSet.push([openSet.slice(0), closedSet.slice(0)]);
