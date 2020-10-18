@@ -9,19 +9,18 @@ import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 //https://en.wikipedia.org/wiki/A*_search_algorithm
 export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   findNeighbors(grid, isDiagonalOn);
-  let test = 0;
   const openSet = [];
   const closedSet = [];
-  const allSet = [];
+  var allSet = [];
   openSet.push(startCell);
-
   while (!!openSet.length) {
     var lastCell = 0;
-    for (let i = 0; i < openSet.length; i++) {
-      if (openSet[i].f < openSet[lastCell].f) {
-        lastCell = i;
+    for (let j = 0; j < openSet.length; j++) {
+      if (openSet[j].f < openSet[lastCell].f) {
+        lastCell = j;
       }
     }
+
     var nextCell = openSet[lastCell];
     if (nextCell === endCell) {
       DoAnimation(allSet, endCell, speed);
@@ -32,8 +31,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     eliminateFromSet(openSet, nextCell);
     closedSet.push(nextCell);
     var neighbors = nextCell.neighbors;
-    for (let i = 0; i < neighbors.length; i++) {
-      var neighbor = neighbors[i];
+
+    for (let k = 0; k < neighbors.length; k++) {
+      var neighbor = neighbors[k];
       if (!closedSet.includes(neighbor) && !neighbor.isWall) {
         var betterPath = false;
         var g = nextCell.g + 1;
@@ -46,7 +46,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
         } else {
           neighbor.g = g;
           openSet.push(neighbor);
-          allSet.push(openSet);
+
+          allSet.push([openSet.slice(0), closedSet.slice(0)]);
+
           betterPath = true;
         }
         if (betterPath) {
@@ -60,7 +62,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     }
   }
 
-  DoAnimation(allSet, endCell, speed);
+  // DoAnimation(allSet, endCell, speed);
   return;
 }
 
@@ -137,7 +139,7 @@ function eliminateFromSet(set, cell) {
   }
 }
 
-function DoAnimation(triedPaths, finishCell, speed) {
+function DoAnimation(allSet, finishCell, speed) {
   const cellsInOrder = getCellsInOrder(finishCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
@@ -145,8 +147,8 @@ function DoAnimation(triedPaths, finishCell, speed) {
     }
     window.gridComponent.setState({ status: "running" });
 
-    animateAstarSlow(triedPaths, cellsInOrder);
+    animateAstarSlow(allSet);
   } else if (speed === "fast") {
-    animateAstarFast(triedPaths, cellsInOrder);
+    // animateAstarFast(triedPaths, cellsInOrder);
   }
 }
