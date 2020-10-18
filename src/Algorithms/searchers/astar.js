@@ -1,6 +1,15 @@
+import {
+  animateFast,
+  animateSlow,
+  animateAstarSlow,
+  animateAstarFast,
+} from "../../Algorithms/animations";
+import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
+
 //https://en.wikipedia.org/wiki/A*_search_algorithm
-export function astar(grid, startCell, endCell, isDiagonalOn) {
+export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   findNeighbors(grid, isDiagonalOn);
+  let test = 0;
   const openSet = [];
   const closedSet = [];
   const allSet = [];
@@ -15,7 +24,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
     }
     var nextCell = openSet[lastCell];
     if (nextCell === endCell) {
-      return allSet;
+      DoAnimation(allSet, endCell, speed);
+
+      return;
     }
 
     eliminateFromSet(openSet, nextCell);
@@ -35,7 +46,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
         } else {
           neighbor.g = g;
           openSet.push(neighbor);
-          allSet.push(neighbor);
+          allSet.push(openSet);
           betterPath = true;
         }
         if (betterPath) {
@@ -48,7 +59,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn) {
       }
     }
   }
-  return allSet;
+
+  DoAnimation(allSet, endCell, speed);
+  return;
 }
 
 function findNeighbors(grid, isDiagonalOn) {
@@ -121,5 +134,19 @@ function eliminateFromSet(set, cell) {
     if (set[i] === cell) {
       set.splice(i, 1); //Removes cell by index from the array
     }
+  }
+}
+
+function DoAnimation(triedPaths, finishCell, speed) {
+  const cellsInOrder = getCellsInOrder(finishCell);
+  if (speed === "slow") {
+    if (window.gridComponent.state.status === "finished") {
+      clearVisitedCells();
+    }
+    window.gridComponent.setState({ status: "running" });
+
+    animateAstarSlow(triedPaths, cellsInOrder);
+  } else if (speed === "fast") {
+    animateAstarFast(triedPaths, cellsInOrder);
   }
 }

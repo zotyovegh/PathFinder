@@ -1,7 +1,6 @@
 import { visualizeCell } from "../Algorithms/methods";
 
 export function animateFast(visitedCells, cellsInOrder) {
-  console.log("heyy");
   for (let i = 0; i <= visitedCells.length - 1; i++) {
     const cell = visitedCells[i];
 
@@ -20,6 +19,20 @@ export function animateFast(visitedCells, cellsInOrder) {
         }
       }
     }
+  }
+}
+
+export function animateAstarSlow(visitedCells) {
+  for (let i = 0; i <= visitedCells.length - 1; i++) {
+    const cell = visitedCells[i];
+    visualizeCell("cell", "cell cell-previous", cell);
+  }
+}
+
+export function animateAstarFast(visitedCells) {
+  for (let i = 0; i <= visitedCells.length - 1; i++) {
+    const cell = visitedCells[i];
+    visualizeCell("cell", "cell cell-current", cell);
   }
 }
 

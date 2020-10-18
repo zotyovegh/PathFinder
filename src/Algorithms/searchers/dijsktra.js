@@ -29,13 +29,16 @@ export function dijkstra(grid, startCell, endCell, isDiagonalOn, speed) {
 
     if (nextCell.isWall && !nextCell.start && !nextCell.end) continue;
 
-    if (nextCell.distance === Infinity)
-      return DoAnimation(visitedCells, endCell, speed);
+    if (nextCell.distance === Infinity) {
+      DoAnimation(visitedCells, endCell, speed);
+      return;
+    }
     nextCell.visited = true;
     visitedCells.push(nextCell);
     if (nextCell === endCell) {
       unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
-      return DoAnimation(visitedCells, endCell, speed);
+      DoAnimation(visitedCells, endCell, speed);
+      return;
     }
 
     getUnvisitedNeighbors(nextCell, grid, direction, isDiagonalOn);

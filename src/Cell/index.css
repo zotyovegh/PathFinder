@@ -120,6 +120,16 @@
   background-color: rgb(86, 245, 253);
 }
 
+.cell-previous {
+  border: 0.5px solid rgba(221, 6, 6, 0.782);
+  background-color: rgb(248, 0, 0);
+}
+
+.cell-current {
+  border: 0.5px solid rgba(0, 255, 21, 0.782);
+  background-color: rgb(69, 255, 122);
+}
+
 .cell-visited-animated {
   background-position: center;
   background-repeat: no-repeat;
