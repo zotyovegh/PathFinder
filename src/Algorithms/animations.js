@@ -36,19 +36,26 @@ export function animateAstarSlow(allSet, cellsInOrder) {
       var closedSet = allSet[i][1];
 
       for (let j = 0; j < closedSet.length; j++) {
-        visualizeCell("cell", "cell cell-previous", closedSet[j]);
+        if (!closedSet[j].start && !closedSet[j].end) {
+          visualizeCell("cell", "cell cell-previous", closedSet[j]);
+        }
       }
       for (let k = 0; k < openSet.length; k++) {
-        visualizeCell("cell", "cell cell-current", openSet[k]);
+        if (!openSet[k].start && !openSet[k].end) {
+          visualizeCell("cell", "cell cell-current", openSet[k]);
+        }
       }
-      if (i < allSet.length-1) {
+      if (
+        i < allSet.length - 1 &&
+        !closedSet[closedSet.length - 1].start &&
+        !closedSet[closedSet.length - 1].end
+      ) {
         visualizeCell(
-        "cell",
-        "cell cell-activepath",
-        closedSet[closedSet.length - 1]
-      );
+          "cell",
+          "cell cell-activepath",
+          closedSet[closedSet.length - 1]
+        );
       }
-      
     }, 20 * i);
   }
 }
