@@ -24,7 +24,6 @@ export function animateFast(visitedCells, cellsInOrder) {
 
 export function animateAstarSlow(allSet, cellsInOrder) {
   for (let i = 0; i <= allSet.length; i++) {
-    console.log(cellsInOrder);
     if (i == allSet.length) {
       setTimeout(() => {
         animatePathSlow(cellsInOrder);
@@ -42,11 +41,14 @@ export function animateAstarSlow(allSet, cellsInOrder) {
       for (let k = 0; k < openSet.length; k++) {
         visualizeCell("cell", "cell cell-current", openSet[k]);
       }
-      visualizeCell(
+      if (i < allSet.length-1) {
+        visualizeCell(
         "cell",
         "cell cell-activepath",
         closedSet[closedSet.length - 1]
       );
+      }
+      
     }, 20 * i);
   }
 }
