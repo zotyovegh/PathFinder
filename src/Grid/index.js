@@ -145,28 +145,21 @@ class Grid extends Component {
         grid,
         startCell,
         finishCell,
-        this.state.diagonalVisualization
+        this.state.diagonalVisualization,
+        speed
       );
     } else if (this.state.currentAlg === "astar") {
       visitedCells = astar(
         grid,
         startCell,
         finishCell,
-        this.state.diagonalVisualization
+        this.state.diagonalVisualization,
+        speed
       );
     }
 
     //After search funtion is done
-    const cellsInOrder = getCellsInOrder(finishCell);
-    if (speed === "slow") {
-      if (this.state.status === "finished") {
-        clearVisitedCells();
-      }
-      this.setState({ status: "running" });
-      animateSlow(visitedCells, cellsInOrder);
-    } else if (speed === "fast") {
-      animateFast(visitedCells, cellsInOrder);
-    }
+   
   };
 
   clear = (type) => {

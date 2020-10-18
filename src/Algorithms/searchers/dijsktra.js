@@ -1,5 +1,7 @@
+import { animateFast, animateSlow } from "../../Algorithms/animations";
+import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 var id = 0;
-export function dijkstra(grid, startCell, endCell, isDiagonalOn) {
+export function dijkstra(grid, startCell, endCell, isDiagonalOn, speed) {
   const unvisitedCells = [];
   const visitedCells = [];
   var direction = "START";
@@ -27,12 +29,13 @@ export function dijkstra(grid, startCell, endCell, isDiagonalOn) {
 
     if (nextCell.isWall && !nextCell.start && !nextCell.end) continue;
 
-    if (nextCell.distance === Infinity) return visitedCells;
+    if (nextCell.distance === Infinity)
+      return DoAnimation(visitedCells, endCell, speed);
     nextCell.visited = true;
     visitedCells.push(nextCell);
     if (nextCell === endCell) {
       unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
-      return visitedCells;
+      return DoAnimation(visitedCells, endCell, speed);
     }
 
     getUnvisitedNeighbors(nextCell, grid, direction, isDiagonalOn);
@@ -142,7 +145,7 @@ function RightDown(row, col, grid, neighbors) {
 function DownLeft(row, col, grid, neighbors) {
   if (row < grid.length - 1 && col > 0) {
     let cell = grid[row + 1][col - 1];
-   
+
     if (!cell.visited && cell.previous === null) {
       neighbors.push(cell);
     }
@@ -158,5 +161,19 @@ function LeftUp(row, col, grid, neighbors) {
     if (!cell.visited && cell.previous === null) {
       neighbors.push(cell);
     }
+  }
+}
+
+function DoAnimation(visitedCells, finishCell, speed) {
+  const cellsInOrder = getCellsInOrder(finishCell);
+  if (speed === "slow") {
+    if (window.gridComponent.state.status === "finished") {
+      clearVisitedCells();
+    }
+    window.gridComponent.setState({ status: "running" });
+
+    animateSlow(visitedCells, cellsInOrder);
+  } else if (speed === "fast") {
+    animateFast(visitedCells, cellsInOrder);
   }
 }
