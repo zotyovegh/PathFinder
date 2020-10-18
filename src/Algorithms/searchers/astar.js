@@ -62,6 +62,18 @@ function findNeighbors(grid) {
       if (cell.col > 0) {
         cell.neighbors.push(grid[cell.row][cell.col - 1]);
       }
+      if (cell.row > 0 && cell.col < grid[0].length - 1) {
+        cell.neighbors.push(grid[cell.row - 1][cell.col + 1]);
+      }
+      if (cell.col < grid[0].length - 1 && cell.row < grid.length - 1) {
+        cell.neighbors.push(grid[cell.row + 1][cell.col + 1]);
+      }
+      if (cell.row < grid.length - 1 && cell.col > 0) {
+        cell.neighbors.push(grid[cell.row + 1][cell.col - 1]);
+      }
+      if (cell.col > 0 && cell.row > 0) {
+        cell.neighbors.push(grid[cell.row - 1][cell.col - 1]);
+      }
     }
   }
   console.log(grid);

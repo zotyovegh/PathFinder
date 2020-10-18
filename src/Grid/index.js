@@ -52,9 +52,9 @@ class Grid extends Component {
         () => {
           if (this.state.status === "finished") {
             clearVisitedCells();
-            if (this.state.currentAlg === "dijkstra") {
-              this.doAlgorithm("fast");
-            }
+            //  if (this.state.currentAlg === "dijkstra") {
+            this.doAlgorithm("fast");
+            //  }
           }
         }
       );
@@ -235,7 +235,10 @@ class Grid extends Component {
         Distance
         <label className="switch">
           <input
-            disabled={this.state.status === "running"}
+            disabled={
+              this.state.status === "running" ||
+              this.state.currentAlg === "astar"
+            }
             type="checkbox"
             defaultChecked={this.state.previousVisualization}
             onChange={this.handleChange}
