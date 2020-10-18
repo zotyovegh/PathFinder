@@ -50,29 +50,60 @@ function findNeighbors(grid) {
   //DIAGONALS NOT COUNTED
   for (const row of grid) {
     for (const cell of row) {
-      if (cell.row < grid.length - 1) {
-        cell.neighbors.push(grid[cell.row + 1][cell.col]);
-      }
+      cell.neighbors = [];
       if (cell.row > 0) {
+        //UP
         cell.neighbors.push(grid[cell.row - 1][cell.col]);
       }
       if (cell.col < grid[0].length - 1) {
+        //RIGHT
         cell.neighbors.push(grid[cell.row][cell.col + 1]);
       }
+
+      if (cell.row < grid.length - 1) {
+        //DOWN
+        cell.neighbors.push(grid[cell.row + 1][cell.col]);
+      }
+
       if (cell.col > 0) {
+        //LEFT
         cell.neighbors.push(grid[cell.row][cell.col - 1]);
       }
       if (cell.row > 0 && cell.col < grid[0].length - 1) {
-        cell.neighbors.push(grid[cell.row - 1][cell.col + 1]);
+        //UPRIGHT
+        if (
+          !grid[cell.row - 1][cell.col].isWall ||
+          !grid[cell.row][cell.col + 1].isWall
+        ) {
+          cell.neighbors.push(grid[cell.row - 1][cell.col + 1]);
+        }
       }
       if (cell.col < grid[0].length - 1 && cell.row < grid.length - 1) {
-        cell.neighbors.push(grid[cell.row + 1][cell.col + 1]);
+        //RIGHTDOWN
+        if (
+          !grid[cell.row + 1][cell.col].isWall ||
+          !grid[cell.row][cell.col + 1].isWall
+        ) {
+          cell.neighbors.push(grid[cell.row + 1][cell.col + 1]);
+        }
       }
       if (cell.row < grid.length - 1 && cell.col > 0) {
-        cell.neighbors.push(grid[cell.row + 1][cell.col - 1]);
+        //DOWNLEFT
+        if (
+          !grid[cell.row + 1][cell.col].isWall ||
+          !grid[cell.row][cell.col - 1].isWall
+        ) {
+          cell.neighbors.push(grid[cell.row + 1][cell.col - 1]);
+        }
       }
       if (cell.col > 0 && cell.row > 0) {
-        cell.neighbors.push(grid[cell.row - 1][cell.col - 1]);
+        //LEFTUP
+        if (
+          !grid[cell.row][cell.col - 1].isWall ||
+          !grid[cell.row - 1][cell.col].isWall
+        ) {
+          cell.neighbors.push(grid[cell.row - 1][cell.col - 1]);
+        }
       }
     }
   }

@@ -142,9 +142,7 @@ function RightDown(row, col, grid, neighbors) {
 function DownLeft(row, col, grid, neighbors) {
   if (row < grid.length - 1 && col > 0) {
     let cell = grid[row + 1][col - 1];
-    if (grid[row + 1][col].isWall && grid[row][col - 1].isWall) {
-      return;
-    }
+   
     if (!cell.visited && cell.previous === null) {
       neighbors.push(cell);
     }
