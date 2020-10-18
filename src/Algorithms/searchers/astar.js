@@ -150,6 +150,6 @@ function DoAnimation(allSet, finishCell, speed) {
 
     animateAstarSlow(allSet, cellsInOrder);
   } else if (speed === "fast") {
-    // animateAstarFast(triedPaths, cellsInOrder);
+    animateAstarFast(allSet, cellsInOrder);
   }
 }

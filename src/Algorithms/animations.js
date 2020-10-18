@@ -60,10 +60,27 @@ export function animateAstarSlow(allSet, cellsInOrder) {
   }
 }
 
-export function animateAstarFast(visitedCells) {
-  for (let i = 0; i <= visitedCells.length - 1; i++) {
-    const cell = visitedCells[i];
-    visualizeCell("cell", "cell cell-current", cell);
+export function animateAstarFast(allSet, cellsInOrder) {
+  for (let i = 0; i <= allSet.length; i++) {
+    if (i == allSet.length) {
+      animatePathFast(cellsInOrder);
+      return;
+    }
+
+    clearVisitedCells();
+    var openSet = allSet[i][0];
+    var closedSet = allSet[i][1];
+
+    for (let j = 0; j < closedSet.length; j++) {
+      if (!closedSet[j].start && !closedSet[j].end) {
+        visualizeCell("cell", "cell cell-previous", closedSet[j]);
+      }
+    }
+    for (let k = 0; k < openSet.length; k++) {
+      if (!openSet[k].start && !openSet[k].end) {
+        visualizeCell("cell", "cell cell-current", openSet[k]);
+      }
+    }
   }
 }
 
