@@ -26,6 +26,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
       if (speed === "slow") {
         DoSlowAnimation(allSet, endCell);
       } else if (speed === "fast") {
+        DoFastAnimation(allSet, openSet, endCell);
       }
       return;
     }
@@ -50,8 +51,11 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
           neighbor.g = g;
           neighbor.previous = nextCell;
           openSet.push(neighbor);
-
-          allSet.push([openSet.slice(0), closedSet.slice(0)]);
+          if (speed === "slow") {
+            allSet.push([openSet.slice(0), closedSet.slice(0)]);
+          } else if (speed === "fast") {
+            allSet.push(neighbor);
+          }
 
           betterPath = true;
         }
@@ -68,6 +72,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   if (speed === "slow") {
     DoSlowAnimation(allSet, endCell);
   } else if (speed === "fast") {
+    DoFastAnimation(allSet, openSet, endCell);
   }
   return;
 }
@@ -170,8 +175,8 @@ function DoSlowAnimation(allSet, finishCell) {
   animateAstarSlow(allSet, cellsInOrder);
 }
 
-function DoFastAnimation(allSet, finishCell) {
+function DoFastAnimation(visitedCells, openSet, finishCell) {
   const cellsInOrder = getCellsInOrder(finishCell);
 
-  animateAstarFast(allSet, cellsInOrder);
+  animateAstarFast(visitedCells, openSet, cellsInOrder);
 }

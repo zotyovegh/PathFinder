@@ -60,7 +60,19 @@ export function animateAstarSlow(allSet, cellsInOrder) {
   }
 }
 
-export function animateAstarFast(allSet, cellsInOrder) {
+export function animateAstarFast(allSet, openSet, cellsInOrder) {
+  for (let k = 0; k < allSet.length; k++) {
+    if (!allSet[k].start && !allSet[k].end) {
+      visualizeCell("cell", "cell cell-previous", allSet[k]);
+    }
+  }
+  for (let k = 0; k < openSet.length; k++) {
+    if (!openSet[k].start && !openSet[k].end) {
+      visualizeCell("cell", "cell cell-current", openSet[k]);
+    }
+  }
+  animatePathFast(cellsInOrder);
+  /*
   for (let i = 0; i <= allSet.length; i++) {
     if (i == allSet.length) {
       animatePathFast(cellsInOrder);
@@ -81,7 +93,7 @@ export function animateAstarFast(allSet, cellsInOrder) {
         visualizeCell("cell", "cell cell-current", openSet[k]);
       }
     }
-  }
+  }*/
 }
 
 function animatePathFast(cellsInOrder) {
