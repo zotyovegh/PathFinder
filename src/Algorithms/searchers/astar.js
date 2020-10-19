@@ -23,11 +23,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
 
     var nextCell = openSet[lastCell];
     if (nextCell === endCell) {
-      if (speed === "slow") {
-        DoSlowAnimation(allSet, endCell);
-      } else if (speed === "fast") {
-        DoFastAnimation(allSet, openSet, endCell);
-      }
+      DoAnimation(allSet, openSet, endCell, speed);
       return;
     }
 
@@ -69,11 +65,12 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
       }
     }
   }
-  if (speed === "slow") {
+  DoAnimation(allSet, openSet, endCell, speed);
+  /* if (speed === "slow") {
     DoSlowAnimation(allSet, endCell);
   } else if (speed === "fast") {
     DoFastAnimation(allSet, openSet, endCell);
-  }
+  }*/
   return;
 }
 
@@ -150,7 +147,7 @@ function eliminateFromSet(set, cell) {
   }
 }
 
-function DoAnimation(allSet, finishCell, speed) {
+function DoAnimation(allSet, openSet, finishCell, speed) {
   const cellsInOrder = getCellsInOrder(finishCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
@@ -160,7 +157,7 @@ function DoAnimation(allSet, finishCell, speed) {
 
     animateAstarSlow(allSet, cellsInOrder);
   } else if (speed === "fast") {
-    animateAstarFast(allSet, cellsInOrder);
+    animateAstarFast(allSet, openSet, cellsInOrder);
   }
 }
 
