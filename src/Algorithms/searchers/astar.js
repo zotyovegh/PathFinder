@@ -23,7 +23,10 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
 
     var nextCell = openSet[lastCell];
     if (nextCell === endCell) {
-      DoAnimation(allSet, endCell, speed);
+      if (speed === "slow") {
+        DoSlowAnimation(allSet, endCell);
+      } else if (speed === "fast") {
+      }
       return;
     }
 
@@ -62,8 +65,10 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
       }
     }
   }
-
-  DoAnimation(allSet, endCell, speed);
+  if (speed === "slow") {
+    DoSlowAnimation(allSet, endCell);
+  } else if (speed === "fast") {
+  }
   return;
 }
 
@@ -152,4 +157,21 @@ function DoAnimation(allSet, finishCell, speed) {
   } else if (speed === "fast") {
     animateAstarFast(allSet, cellsInOrder);
   }
+}
+
+function DoSlowAnimation(allSet, finishCell) {
+  const cellsInOrder = getCellsInOrder(finishCell);
+
+  if (window.gridComponent.state.status === "finished") {
+    clearVisitedCells();
+  }
+  window.gridComponent.setState({ status: "running" });
+
+  animateAstarSlow(allSet, cellsInOrder);
+}
+
+function DoFastAnimation(allSet, finishCell) {
+  const cellsInOrder = getCellsInOrder(finishCell);
+
+  animateAstarFast(allSet, cellsInOrder);
 }
