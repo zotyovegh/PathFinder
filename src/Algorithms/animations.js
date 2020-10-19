@@ -24,7 +24,7 @@ export function animateFast(visitedCells, cellsInOrder) {
 
 export function animateAstarSlow(allSet, cellsInOrder) {
   for (let i = 0; i <= allSet.length; i++) {
-    if (i == allSet.length) {
+    if (i === allSet.length) {
       setTimeout(() => {
         animatePathSlow(cellsInOrder);
       }, 20 * i);

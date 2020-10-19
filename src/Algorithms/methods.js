@@ -80,9 +80,7 @@ export function placeWall(cell) {
   window.gridComponent.setState({ grid: newGrid }, () => {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();
-     // if (window.gridComponent.state.currentAlg === "dijkstra") {
-        window.gridComponent.doAlgorithm("fast");
-     // }
+      window.gridComponent.doAlgorithm("fast");
     }
   });
 }

@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import Cell from "../Cell";
 import "./index.css";
 import {
-  getCellsInOrder,
   clearVisitedCells,
   createGrid,
   clearBoard,
   placeWall,
 } from "../Algorithms/methods";
-import { animateFast, animateSlow } from "../Algorithms/animations";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
 
@@ -138,10 +136,9 @@ class Grid extends Component {
     let { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const finishCell = grid[this.state.endRow][this.state.endCol];
-    var visitedCells = [];
 
     if (this.state.currentAlg === "dijkstra") {
-      visitedCells = dijkstra(
+      dijkstra(
         grid,
         startCell,
         finishCell,
@@ -149,7 +146,7 @@ class Grid extends Component {
         speed
       );
     } else if (this.state.currentAlg === "astar") {
-      visitedCells = astar(
+      astar(
         grid,
         startCell,
         finishCell,
@@ -159,7 +156,6 @@ class Grid extends Component {
     }
 
     //After search funtion is done
-   
   };
 
   clear = (type) => {

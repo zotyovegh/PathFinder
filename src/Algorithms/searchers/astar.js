@@ -1,6 +1,4 @@
 import {
-  animateFast,
-  animateSlow,
   animateAstarSlow,
   animateAstarFast,
 } from "../../Algorithms/animations";
@@ -66,16 +64,10 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     }
   }
   DoAnimation(allSet, openSet, endCell, speed);
-  /* if (speed === "slow") {
-    DoSlowAnimation(allSet, endCell);
-  } else if (speed === "fast") {
-    DoFastAnimation(allSet, openSet, endCell);
-  }*/
   return;
 }
 
 function findNeighbors(grid, isDiagonalOn) {
-  //DIAGONALS NOT COUNTED
   for (const row of grid) {
     for (const cell of row) {
       cell.neighbors = [];
@@ -159,21 +151,4 @@ function DoAnimation(allSet, openSet, finishCell, speed) {
   } else if (speed === "fast") {
     animateAstarFast(allSet, openSet, cellsInOrder);
   }
-}
-
-function DoSlowAnimation(allSet, finishCell) {
-  const cellsInOrder = getCellsInOrder(finishCell);
-
-  if (window.gridComponent.state.status === "finished") {
-    clearVisitedCells();
-  }
-  window.gridComponent.setState({ status: "running" });
-
-  animateAstarSlow(allSet, cellsInOrder);
-}
-
-function DoFastAnimation(visitedCells, openSet, finishCell) {
-  const cellsInOrder = getCellsInOrder(finishCell);
-
-  animateAstarFast(visitedCells, openSet, cellsInOrder);
 }
