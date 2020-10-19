@@ -50,9 +50,7 @@ class Grid extends Component {
         () => {
           if (this.state.status === "finished") {
             clearVisitedCells();
-            //  if (this.state.currentAlg === "dijkstra") {
             this.doAlgorithm("fast");
-            //  }
           }
         }
       );
@@ -95,9 +93,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              /* if (this.state.currentAlg === "dijkstra") {*/
-              this.doAlgorithm("fast");
-              // }
+              this.doAlgorithm("fast");            
             }
           }
         );
@@ -116,9 +112,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              /*  if (this.state.currentAlg === "dijkstra") {*/
-              this.doAlgorithm("fast");
-              //}
+              this.doAlgorithm("fast");              
             }
           }
         );
@@ -154,8 +148,6 @@ class Grid extends Component {
         speed
       );
     }
-
-    //After search funtion is done
   };
 
   clear = (type) => {
