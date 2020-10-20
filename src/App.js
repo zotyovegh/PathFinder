@@ -7,7 +7,7 @@ class App extends Component {
     this.state = {
       rows: this.getSize("row"),
       columns: this.getSize("col"),
-      startR: this.getPosition("row"),
+      startR: 5,
       startC: this.getPosition("startCol"),
       endR: this.getPosition("row"),
       endC: this.getPosition("endCol"),

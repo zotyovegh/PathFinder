@@ -5,7 +5,7 @@ import {
 import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 
 //https://en.wikipedia.org/wiki/A*_search_algorithm
-export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
+export function astarOld(grid, startCell, endCell, isDiagonalOn, speed) {
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   const closedSet = [];
@@ -65,6 +65,67 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   }
   DoAnimation(allSet, openSet, endCell, speed);
   return;
+}
+
+export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
+  findNeighbors(grid, isDiagonalOn);
+  const openSet = [];
+  openSet.push(startCell);
+  const cameFrom = [];
+  startCell.g = 0;
+  startCell.f = startCell.g + startCell.h;
+  while (!!openSet.length) {
+    var current = 0;
+    for (let j = 0; j < openSet.length; j++) {
+      if (openSet[j].f < openSet[current].f) {
+        current = j;
+      }
+    }
+    var currentCell = openSet[current];
+    if (currentCell === endCell) {
+      console.log("done");
+      DoAnimation(
+        reconstruct_path(cameFrom, currentCell),
+        openSet,
+        endCell,
+        "fast"
+      );
+      return;
+    }
+    eliminateFromSet(openSet, currentCell);
+    var neighbors = currentCell.neighbors;
+    for (let k = 0; k < neighbors.length; k++) {
+      var neighbor = neighbors[k];
+      if (neighbor.isWall) {
+        continue;
+      }
+      var tentative_gScore = currentCell.g + 1;
+
+      if (tentative_gScore < neighbor.g) {
+        cameFrom.push(neighbor);
+        neighbor.g = tentative_gScore;
+        neighbor.h =
+          Math.abs(neighbor.row - endCell.row) +
+          Math.abs(neighbor.col - endCell.col);
+        neighbor.f = neighbor.g + neighbor.h;
+        neighbor.previous = currentCell;
+        if (!openSet.includes(neighbor)) {
+          openSet.push(neighbor);
+        }
+      }
+    }
+  }
+}
+
+function reconstruct_path(cameFrom, currentCell) {
+  var totalPath = [];
+  totalPath.push(currentCell);
+  while (currentCell in cameFrom) {
+    currentCell = cameFrom[currentCell];
+    totalPath.push(currentCell);
+  }
+  console.log("HEy: " + totalPath.length);
+  return totalPath;
 }
 
 function findNeighbors(grid, isDiagonalOn) {

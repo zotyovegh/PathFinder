@@ -1,4 +1,8 @@
-import { visualizeCell, clearVisitedCells } from "../Algorithms/methods";
+import {
+  visualizeCell,
+  clearVisitedCells,
+  getCellsInOrder,
+} from "../Algorithms/methods";
 
 export function animateFast(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length - 1; i++) {
@@ -60,7 +64,8 @@ export function animateAstarSlow(allSet, cellsInOrder) {
   }
 }
 
-export function animateAstarFast(allSet, openSet, cellsInOrder) {
+export function animateAstarFast(allSet, openSet, cellsInOrderr) {
+  
   for (let k = 0; k < allSet.length; k++) {
     if (!allSet[k].start && !allSet[k].end) {
       visualizeCell("cell", "cell cell-previous", allSet[k]);
@@ -71,7 +76,9 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
       visualizeCell("cell", "cell cell-current", openSet[k]);
     }
   }
-  animatePathFast(cellsInOrder);
+  /*const cellsInOrder = getCellsInOrder(openSet[openSet.length - 1]);
+ 
+  animatePathFast(cellsInOrder);*/
 }
 
 function animatePathFast(cellsInOrder) {

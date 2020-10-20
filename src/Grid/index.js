@@ -25,7 +25,7 @@ class Grid extends Component {
       status: "pending",
       currentAlg: "astar",
       previousVisualization: false,
-      diagonalVisualization: false,
+      diagonalVisualization: true,
     };
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
@@ -93,7 +93,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              this.doAlgorithm("fast");            
+              this.doAlgorithm("fast");
             }
           }
         );
@@ -112,7 +112,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              this.doAlgorithm("fast");              
+              this.doAlgorithm("fast");
             }
           }
         );
