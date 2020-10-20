@@ -54,9 +54,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
           betterPath = true;
         }
         if (betterPath) {
-          neighbor.h =
-            Math.abs(neighbor.row - endCell.row) +
-            Math.abs(neighbor.col - endCell.col);
+          neighbor.h = heuristic(neighbor, endCell);
           neighbor.f = neighbor.g + neighbor.h; //score
           neighbor.previous = nextCell;
         }
@@ -65,6 +63,20 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   }
   DoAnimation(allSet, openSet, endCell, speed);
   return;
+}
+
+function heuristic(cell1, cell2) {
+  return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col);
+}
+
+function reconstruct_path(cameFrom, currentCell) {
+  var totalPath = [];
+  totalPath.push(currentCell);
+  while (currentCell in cameFrom) {
+    currentCell = cameFrom[currentCell];
+    totalPath.push(currentCell);
+  }
+  return totalPath;
 }
 
 function findNeighbors(grid, isDiagonalOn) {

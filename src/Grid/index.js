@@ -25,7 +25,7 @@ class Grid extends Component {
       status: "pending",
       currentAlg: "astar",
       previousVisualization: false,
-      diagonalVisualization: false,
+      diagonalVisualization: true,
     };
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
