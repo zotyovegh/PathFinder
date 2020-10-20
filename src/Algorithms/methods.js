@@ -18,7 +18,6 @@ export function createGrid(props) {
         f: Infinity,
         g: Infinity,
         h: Infinity,
-        closed: false,
         neighbors: [],
       });
     }
@@ -48,6 +47,9 @@ export function clearVisitedCells() {
       cell.visited = false;
       cell.distance = Infinity;
       cell.previous = null;
+      cell.f = Infinity;
+      cell.g = Infinity;
+      cell.h = Infinity;
 
       visualizeCell("num", "num", cell);
       if (cell.start || cell.end || cell.isWall) {

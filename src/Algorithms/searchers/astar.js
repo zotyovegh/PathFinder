@@ -65,12 +65,12 @@ import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
   return;
 }*/
 
-export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
-  let count = 0;
+export function astar(grid, startCell, endCell, isDiagonalOn, speed) { 
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   openSet.push(startCell);
   const cameFrom = [];
+  var allSet = [];
   startCell.g = 0;
   startCell.f = heuristic(startCell, endCell);
 
@@ -84,9 +84,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     var currentCell = openSet[current];
 
     if (currentCell === endCell) {
-      if(speed === "slow"){
-        animateAstarFast(cameFrom, openSet, getCellsInOrder(endCell));
-      }
+    
+      DoAnimation(allSet, openSet, endCell, speed);
+      
       return;
     }
     eliminateFromSet(openSet, currentCell);
@@ -113,6 +113,11 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
         neighbor.previous = currentCell;
         if (!openSet.includes(neighbor)) {
           openSet.push(neighbor);
+          if (speed === "slow") {
+            allSet.push([openSet.slice(0), cameFrom.slice(0)]);
+          } else if (speed === "fast") {
+            allSet.push(neighbor);
+          }
         }
       }
     }
@@ -199,14 +204,17 @@ function eliminateFromSet(set, cell) {
   }
 }
 
-/*function DoAnimation(allSet, openSet, finishCell, speed) {
+
+function DoAnimation(allSet, openSet, finishCell, speed) {
   const cellsInOrder = getCellsInOrder(finishCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();
-    } 
+    }
+    window.gridComponent.setState({ status: "running" });
 
     animateAstarSlow(allSet, cellsInOrder);
-  } 
+  } else if (speed === "fast") {
+    animateAstarFast(allSet, openSet, cellsInOrder);
+  }
 }
-*/
