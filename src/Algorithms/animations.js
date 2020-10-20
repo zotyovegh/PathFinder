@@ -64,10 +64,11 @@ export function animateAstarSlow(allSet, cellsInOrder) {
   }
 }
 
-export function animateAstarFast(cameFrom, openSet, shortestPath) {
-  for (let j = 0; j < cameFrom.length; j++) {
-    if (!cameFrom[j].start && !cameFrom[j].end) {
-      visualizeCell("cell", "cell cell-previous", cameFrom[j]);
+export function animateAstarFast(allSet, openSet, cellsInOrderr) {
+  
+  for (let k = 0; k < allSet.length; k++) {
+    if (!allSet[k].start && !allSet[k].end) {
+      visualizeCell("cell", "cell cell-previous", allSet[k]);
     }
   }
   for (let k = 0; k < openSet.length; k++) {
@@ -75,7 +76,9 @@ export function animateAstarFast(cameFrom, openSet, shortestPath) {
       visualizeCell("cell", "cell cell-current", openSet[k]);
     }
   }
-  animatePathFast(shortestPath);
+  /*const cellsInOrder = getCellsInOrder(openSet[openSet.length - 1]);
+ 
+  animatePathFast(cellsInOrder);*/
 }
 
 function animatePathFast(cellsInOrder) {

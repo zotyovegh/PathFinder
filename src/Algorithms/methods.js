@@ -17,7 +17,7 @@ export function createGrid(props) {
         //TODO: ASTAR scenario (this variables shall be handled differently later)
         f: Infinity,
         g: Infinity,
-        h: Infinity,
+        h: 0,
         neighbors: [],
       });
     }
