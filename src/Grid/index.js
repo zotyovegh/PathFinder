@@ -118,7 +118,6 @@ class Grid extends Component {
         );
         return;
       }
-
       placeWall(cell);
     }
   };

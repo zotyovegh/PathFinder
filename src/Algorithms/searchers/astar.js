@@ -5,14 +5,12 @@ import {
 import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 
 export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
-  console.log(grid);
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
-  openSet.push(startCell);
   const cameFrom = [];
   var allSet = [];
+  openSet.push(startCell);
   startCell.g = 0;
-
   startCell.f = heuristic(startCell, endCell);
 
   while (!!openSet.length) {
@@ -26,7 +24,6 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
 
     if (currentCell === endCell) {
       DoAnimation(allSet, openSet, endCell, speed);
-
       return;
     }
     eliminateFromSet(openSet, currentCell);
@@ -66,7 +63,7 @@ function heuristic(cell1, cell2) {
     (cell1.row - cell2.row) * (cell1.row - cell2.row) +
       (cell1.col - cell2.col) * (cell1.col - cell2.col)
   );*/
-  return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col);
+  return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col); //Optimal
 }
 
 function findNeighbors(grid, isDiagonalOn) {

@@ -59,7 +59,6 @@ export function clearVisitedCells() {
       visualizeCell("cell", "cell cell-empty", cell);
     }
   }
-  console.log(newGrid);
   window.gridComponent.setState({ grid: newGrid });
 }
 
