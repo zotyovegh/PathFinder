@@ -4,67 +4,6 @@ import {
 } from "../../Algorithms/animations";
 import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 
-//https://en.wikipedia.org/wiki/A*_search_algorithm
-/*export function astarOld(grid, startCell, endCell, isDiagonalOn, speed) {
-  findNeighbors(grid, isDiagonalOn);
-  const openSet = [];
-  const closedSet = [];
-  var allSet = [];
-  openSet.push(startCell);
-  while (!!openSet.length) {
-    var lastCell = 0;
-    for (let j = 0; j < openSet.length; j++) {
-      if (openSet[j].f < openSet[lastCell].f) {
-        lastCell = j;
-      }
-    }
-
-    var nextCell = openSet[lastCell];
-    if (nextCell === endCell) {
-      DoAnimation(allSet, openSet, endCell, speed);
-      return;
-    }
-
-    eliminateFromSet(openSet, nextCell);
-    closedSet.push(nextCell);
-    var neighbors = nextCell.neighbors;
-
-    for (let k = 0; k < neighbors.length; k++) {
-      var neighbor = neighbors[k];
-      if (!closedSet.includes(neighbor) && !neighbor.isWall) {
-        var betterPath = false;
-        var g = nextCell.g + 1;
-
-        if (openSet.includes(neighbor)) {
-          if (g < neighbor.g) {
-            neighbor.g = g;
-
-            betterPath = true;
-          }
-        } else {
-          neighbor.g = g;
-          neighbor.previous = nextCell;
-          openSet.push(neighbor);
-          if (speed === "slow") {
-            allSet.push([openSet.slice(0), closedSet.slice(0)]);
-          } else if (speed === "fast") {
-            allSet.push(neighbor);
-          }
-
-          betterPath = true;
-        }
-        if (betterPath) {
-          neighbor.h = heuristic(neighbor, endCell);
-          neighbor.f = neighbor.g + neighbor.h; //score
-          neighbor.previous = nextCell;
-        }
-      }
-    }
-  }
-  DoAnimation(allSet, openSet, endCell, speed);
-  return;
-}*/
-
 export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   console.log(grid);
   findNeighbors(grid, isDiagonalOn);
@@ -197,7 +136,7 @@ function findNeighbors(grid, isDiagonalOn) {
 function eliminateFromSet(set, cell) {
   for (let i = set.length - 1; i >= 0; i--) {
     if (set[i] === cell) {
-      set.splice(i, 1); //Removes cell by index from the array
+      set.splice(i, 1);
     }
   }
 }
