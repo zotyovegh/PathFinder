@@ -5,7 +5,7 @@ import {
 import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 
 //https://en.wikipedia.org/wiki/A*_search_algorithm
-export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
+export function astarOld(grid, startCell, endCell, isDiagonalOn, speed) {
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   const closedSet = [];
@@ -65,8 +65,64 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   return;
 }
 
+export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
+  let count = 0;
+  findNeighbors(grid, isDiagonalOn);
+  const openSet = [];
+  openSet.push(startCell);
+  const cameFrom = [];
+  startCell.g = 0;
+  startCell.f = heuristic(startCell, endCell);
+
+  while (!!openSet.length) {
+    var current = 0;
+    for (let j = 0; j < openSet.length; j++) {
+      if (openSet[j].f < openSet[current].f) {
+        current = j;
+      }
+    }
+    var currentCell = openSet[current];
+
+    if (currentCell === endCell) {
+      console.log(cameFrom);
+      DoAnimation(cameFrom, openSet, endCell, "fast");
+      return;
+    }
+    eliminateFromSet(openSet, currentCell);
+    currentCell.closed = true;
+    var neighbors = currentCell.neighbors;
+    for (let k = 0; k < neighbors.length; k++) {
+      var neighbor = neighbors[k];
+      if (neighbor.isWall || neighbor.closed) {
+        continue;
+      }
+      var tentative_gScore =
+        currentCell.g + 
+        (neighbor.row - currentCell.row === 0 ||
+        neighbor.col - currentCell.col === 0
+          ? 1
+          : Math.SQRT2)
+          ;
+
+      if (tentative_gScore < neighbor.g) {
+        cameFrom.push(neighbor);
+        neighbor.g = tentative_gScore;
+        neighbor.h = heuristic(neighbor, endCell);
+        neighbor.f = neighbor.g + neighbor.h;
+        neighbor.previous = currentCell;
+        if (!openSet.includes(neighbor)) {
+          openSet.push(neighbor);
+        }
+      }
+    }
+  }
+}
+
 function heuristic(cell1, cell2) {
-  return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col);
+  return Math.sqrt(
+    (cell1.row - cell2.row) * (cell1.row - cell2.row) +
+      (cell1.col - cell2.col) * (cell1.col - cell2.col)
+  );
 }
 
 function reconstruct_path(cameFrom, currentCell) {
