@@ -50,6 +50,7 @@ export function clearVisitedCells() {
       cell.f = Infinity;
       cell.g = Infinity;
       cell.h = Infinity;
+      cell.neighbors = [];
 
       visualizeCell("num", "num", cell);
       if (cell.start || cell.end || cell.isWall) {
@@ -58,6 +59,7 @@ export function clearVisitedCells() {
       visualizeCell("cell", "cell cell-empty", cell);
     }
   }
+  console.log(newGrid);
   window.gridComponent.setState({ grid: newGrid });
 }
 

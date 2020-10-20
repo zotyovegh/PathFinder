@@ -65,13 +65,15 @@ import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
   return;
 }*/
 
-export function astar(grid, startCell, endCell, isDiagonalOn, speed) { 
+export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
+  console.log(grid);
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   openSet.push(startCell);
   const cameFrom = [];
   var allSet = [];
   startCell.g = 0;
+
   startCell.f = heuristic(startCell, endCell);
 
   while (!!openSet.length) {
@@ -84,27 +86,23 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     var currentCell = openSet[current];
 
     if (currentCell === endCell) {
-    
       DoAnimation(allSet, openSet, endCell, speed);
-      
+
       return;
     }
     eliminateFromSet(openSet, currentCell);
-    currentCell.closed = true;
     var neighbors = currentCell.neighbors;
     for (let k = 0; k < neighbors.length; k++) {
       var neighbor = neighbors[k];
-      if (neighbor.isWall || neighbor.closed) {
+      if (neighbor.isWall) {
         continue;
       }
       var tentative_gScore =
-        currentCell.g + 
+        currentCell.g +
         (neighbor.row - currentCell.row === 0 ||
         neighbor.col - currentCell.col === 0
           ? 1
-          : Math.SQRT2)
-          ;
-
+          : Math.SQRT2);
       if (tentative_gScore < neighbor.g) {
         cameFrom.push(neighbor);
         neighbor.g = tentative_gScore;
@@ -125,7 +123,7 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
 }
 
 function heuristic(cell1, cell2) {
- /* return Math.sqrt(
+  /* return Math.sqrt(
     (cell1.row - cell2.row) * (cell1.row - cell2.row) +
       (cell1.col - cell2.col) * (cell1.col - cell2.col)
   );*/
@@ -203,7 +201,6 @@ function eliminateFromSet(set, cell) {
     }
   }
 }
-
 
 function DoAnimation(allSet, openSet, finishCell, speed) {
   const cellsInOrder = getCellsInOrder(finishCell);
