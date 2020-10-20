@@ -119,20 +119,11 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
 }
 
 function heuristic(cell1, cell2) {
-  return Math.sqrt(
+ /* return Math.sqrt(
     (cell1.row - cell2.row) * (cell1.row - cell2.row) +
       (cell1.col - cell2.col) * (cell1.col - cell2.col)
-  );
-}
-
-function reconstruct_path(cameFrom, currentCell) {
-  var totalPath = [];
-  totalPath.push(currentCell);
-  while (currentCell in cameFrom) {
-    currentCell = cameFrom[currentCell];
-    totalPath.push(currentCell);
-  }
-  return totalPath;
+  );*/
+  return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col);
 }
 
 function findNeighbors(grid, isDiagonalOn) {
