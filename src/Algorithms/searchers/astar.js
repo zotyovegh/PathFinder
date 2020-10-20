@@ -5,7 +5,7 @@ import {
 import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 
 //https://en.wikipedia.org/wiki/A*_search_algorithm
-export function astarOld(grid, startCell, endCell, isDiagonalOn, speed) {
+/*export function astarOld(grid, startCell, endCell, isDiagonalOn, speed) {
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   const closedSet = [];
@@ -63,7 +63,7 @@ export function astarOld(grid, startCell, endCell, isDiagonalOn, speed) {
   }
   DoAnimation(allSet, openSet, endCell, speed);
   return;
-}
+}*/
 
 export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
   let count = 0;
@@ -84,8 +84,9 @@ export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
     var currentCell = openSet[current];
 
     if (currentCell === endCell) {
-      console.log(cameFrom);
-      DoAnimation(cameFrom, openSet, endCell, "fast");
+      if(speed === "slow"){
+        animateAstarFast(cameFrom, openSet, getCellsInOrder(endCell));
+      }
       return;
     }
     eliminateFromSet(openSet, currentCell);
@@ -198,16 +199,14 @@ function eliminateFromSet(set, cell) {
   }
 }
 
-function DoAnimation(allSet, openSet, finishCell, speed) {
+/*function DoAnimation(allSet, openSet, finishCell, speed) {
   const cellsInOrder = getCellsInOrder(finishCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();
-    }
-    window.gridComponent.setState({ status: "running" });
+    } 
 
     animateAstarSlow(allSet, cellsInOrder);
-  } else if (speed === "fast") {
-    animateAstarFast(allSet, openSet, cellsInOrder);
-  }
+  } 
 }
+*/

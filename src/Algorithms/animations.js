@@ -23,6 +23,10 @@ export function animateFast(visitedCells, cellsInOrder) {
 }
 
 export function animateAstarSlow(allSet, cellsInOrder) {
+  /*if (window.gridComponent.state.status === "finished") {
+  }*/
+  clearVisitedCells();
+  window.gridComponent.setState({ status: "running" });
   for (let i = 0; i <= allSet.length; i++) {
     if (i === allSet.length) {
       setTimeout(() => {
