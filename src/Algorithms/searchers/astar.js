@@ -12,14 +12,13 @@ export function astar(
   optimized,
   speed
 ) {
-  console.log(optimized)
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   const cameFrom = [];
   var allSet = [];
   openSet.push(startCell);
   startCell.g = 0;
-  startCell.f = heuristic(startCell, endCell);
+  startCell.f = heuristic(startCell, endCell, isDiagonalOn, optimized);
 
   while (!!openSet.length) {
     var current = 0;
@@ -41,11 +40,12 @@ export function astar(
       if (neighbor.isWall) {
         continue;
       }
-      var tentative_gScore = currentCell.g + dScore(neighbor, currentCell);
+      var tentative_gScore =
+        currentCell.g + dScore(neighbor, currentCell, optimized);
       if (tentative_gScore < neighbor.g) {
         cameFrom.push(neighbor);
         neighbor.g = tentative_gScore;
-        neighbor.h = heuristic(neighbor, endCell);
+        neighbor.h = heuristic(startCell, endCell, isDiagonalOn, optimized);
         neighbor.f = neighbor.g + neighbor.h;
         neighbor.previous = currentCell;
         if (!openSet.includes(neighbor)) {
@@ -60,19 +60,22 @@ export function astar(
     }
   }
 }
-function dScore(cell1, cell2) {
-  // return 1;
-  return cell1.row - cell2.row === 0 || cell1.col - cell2.col === 0
-    ? 1
-    : Math.SQRT2;
+function dScore(cell1, cell2, optimized) {
+  if (optimized) {
+    return cell1.row - cell2.row === 0 || cell1.col - cell2.col === 0
+      ? 1
+      : Math.SQRT2;
+  } else {
+    return 1;
+  }
 }
 
-function heuristic(cell1, cell2) {
+function heuristic(cell1, cell2, diagonalOn, optimized) {
   return Math.sqrt(
     (cell1.row - cell2.row) * (cell1.row - cell2.row) +
       (cell1.col - cell2.col) * (cell1.col - cell2.col)
   );
-  /* return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col); */
+  /* return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col);*/
 }
 
 function findNeighbors(grid, isDiagonalOn) {

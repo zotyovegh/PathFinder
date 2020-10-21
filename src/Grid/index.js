@@ -26,7 +26,7 @@ class Grid extends Component {
       currentAlg: "astar",
       previousVisualization: false,
       diagonalVisualization: true,
-      optimizedVisualization: false,
+      optimizedVisualization: true,
     };
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
@@ -257,7 +257,7 @@ class Grid extends Component {
               this.state.currentAlg === "dijkstra"
             }
             type="checkbox"
-            defaultChecked={this.state.previousVisualization}
+            defaultChecked={this.state.optimizedVisualization}
             onChange={this.handleChange}
             name="optimized"
           ></input>
