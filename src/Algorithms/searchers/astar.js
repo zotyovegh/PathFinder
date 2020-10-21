@@ -45,7 +45,7 @@ export function astar(
       if (tentative_gScore < neighbor.g) {
         cameFrom.push(neighbor);
         neighbor.g = tentative_gScore;
-        neighbor.h = heuristic(startCell, endCell, isDiagonalOn, optimized);
+        neighbor.h = heuristic(neighbor, endCell, isDiagonalOn, optimized);
         neighbor.f = neighbor.g + neighbor.h;
         neighbor.previous = currentCell;
         if (!openSet.includes(neighbor)) {
@@ -70,12 +70,17 @@ function dScore(cell1, cell2, optimized) {
   }
 }
 
-function heuristic(cell1, cell2, diagonalOn, optimized) {
-  return Math.sqrt(
-    (cell1.row - cell2.row) * (cell1.row - cell2.row) +
-      (cell1.col - cell2.col) * (cell1.col - cell2.col)
-  );
-  /* return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col);*/
+function heuristic(cell1, cell2, isDiagonalOn, optimized) {
+  if (isDiagonalOn || !optimized) {
+    return Math.abs(cell1.row - cell2.row) + Math.abs(cell1.col - cell2.col);
+  } else {
+    if (optimized) {
+      return Math.sqrt(
+        (cell1.row - cell2.row) * (cell1.row - cell2.row) +
+          (cell1.col - cell2.col) * (cell1.col - cell2.col)
+      );
+    }
+  }
 }
 
 function findNeighbors(grid, isDiagonalOn) {
