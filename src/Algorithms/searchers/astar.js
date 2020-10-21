@@ -4,7 +4,15 @@ import {
 } from "../../Algorithms/animations";
 import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
 
-export function astar(grid, startCell, endCell, isDiagonalOn, speed) {
+export function astar(
+  grid,
+  startCell,
+  endCell,
+  isDiagonalOn,
+  optimized,
+  speed
+) {
+  console.log(optimized)
   findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   const cameFrom = [];

@@ -26,6 +26,7 @@ class Grid extends Component {
       currentAlg: "astar",
       previousVisualization: false,
       diagonalVisualization: true,
+      optimizedVisualization: false,
     };
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
@@ -47,6 +48,16 @@ class Grid extends Component {
     } else if (event.target.name === "diagonal") {
       this.setState(
         { diagonalVisualization: !this.state.diagonalVisualization },
+        () => {
+          if (this.state.status === "finished") {
+            clearVisitedCells();
+            this.doAlgorithm("fast");
+          }
+        }
+      );
+    } else if (event.target.name === "optimized") {
+      this.setState(
+        { optimizedVisualization: !this.state.optimizedVisualization },
         () => {
           if (this.state.status === "finished") {
             clearVisitedCells();
@@ -93,7 +104,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              this.doAlgorithm("fast");            
+              this.doAlgorithm("fast");
             }
           }
         );
@@ -112,7 +123,7 @@ class Grid extends Component {
           () => {
             if (this.state.status === "finished") {
               clearVisitedCells();
-              this.doAlgorithm("fast");              
+              this.doAlgorithm("fast");
             }
           }
         );
@@ -144,6 +155,7 @@ class Grid extends Component {
         startCell,
         finishCell,
         this.state.diagonalVisualization,
+        this.state.optimizedVisualization,
         speed
       );
     }
@@ -234,6 +246,20 @@ class Grid extends Component {
             defaultChecked={this.state.diagonalVisualization}
             onChange={this.handleChange}
             name="diagonal"
+          ></input>
+          <span className="slider round"></span>
+        </label>
+        Optimized
+        <label className="switch">
+          <input
+            disabled={
+              this.state.status === "running" ||
+              this.state.currentAlg === "dijkstra"
+            }
+            type="checkbox"
+            defaultChecked={this.state.previousVisualization}
+            onChange={this.handleChange}
+            name="optimized"
           ></input>
           <span className="slider round"></span>
         </label>
