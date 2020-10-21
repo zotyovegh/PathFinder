@@ -121,18 +121,18 @@
 }
 
 .cell-previous {
-  border: 0.5px solid rgba(221, 128, 6, 0.782);
-  background-color: rgb(248, 149, 0);
+  border: 0.5px solid rgba(0, 212, 220, 0.59);
+  background-color: rgba(0, 240, 248, 0.59);
 }
 
 .cell-current {
-  border: 0.5px solid rgba(0, 255, 21, 0.782);
-  background-color: rgb(69, 255, 122);
+  border: 0.5px solid rgb(39, 226, 92);
+  background-color: rgb(52, 255, 110);
 }
 
 .cell-activepath {
   border: 0.5px solid rgba(218, 255, 133, 0.782);
-  background-color: rgb(231, 255, 126);
+  background-color: rgb(255, 124, 2);
 }
 
 .cell-visited-animated {
