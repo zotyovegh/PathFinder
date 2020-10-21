@@ -59,6 +59,7 @@ export function astar(
       }
     }
   }
+  DoAnimation(allSet, openSet, endCell, speed);
 }
 function dScore(cell1, cell2, optimized) {
   if (optimized) {
