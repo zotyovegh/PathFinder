@@ -6,6 +6,7 @@ import {
   createGrid,
   clearBoard,
   placeWall,
+  clear,
 } from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
@@ -161,15 +162,6 @@ class Grid extends Component {
     }
   };
 
-  clear = (type) => {
-    if (type === "path") {
-      clearVisitedCells();
-    } else if (type === "grid") {
-      clearBoard(this.props);
-    }
-    this.setState({ status: "pending" });
-  };
-
   render() {
     let grid = this.state.grid.map((row, index) => {
       return (
@@ -211,7 +203,7 @@ class Grid extends Component {
         <button
           disabled={this.state.status === "running"}
           onClick={() => {
-            this.clear("path");
+            clear("path");
           }}
         >
           Clear path
@@ -219,7 +211,7 @@ class Grid extends Component {
         <button
           disabled={this.state.status === "running"}
           onClick={() => {
-            this.clear("grid");
+            clear("grid");
           }}
         >
           Clear grid

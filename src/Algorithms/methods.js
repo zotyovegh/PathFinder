@@ -39,6 +39,15 @@ export function getCellsInOrder(endCell) {
   return cells;
 }
 
+export function clear(type) {
+  if (type === "path") {
+    clearVisitedCells();
+  } else if (type === "grid") {
+    clearBoard(window.gridComponent.props);
+  }
+  window.gridComponent.setState({ status: "pending" });
+}
+
 export function clearVisitedCells() {
   let newGrid = window.gridComponent.state.grid;
   for (let i = 0; i < window.gridComponent.props.rows; i++) {
