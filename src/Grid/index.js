@@ -139,13 +139,13 @@ class Grid extends Component {
   doAlgorithm = (speed) => {
     let { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
-    const finishCell = grid[this.state.endRow][this.state.endCol];
+    const endCell = grid[this.state.endRow][this.state.endCol];
 
     if (this.state.currentAlg === "dijkstra") {
       dijkstra(
         grid,
         startCell,
-        finishCell,
+        endCell,
         this.state.diagonalVisualization,
         speed
       );
@@ -153,7 +153,7 @@ class Grid extends Component {
       astar(
         grid,
         startCell,
-        finishCell,
+        endCell,
         this.state.diagonalVisualization,
         this.state.optimizedVisualization,
         speed

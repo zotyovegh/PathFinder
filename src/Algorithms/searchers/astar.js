@@ -156,8 +156,8 @@ function eliminateFromSet(set, cell) {
   }
 }
 
-function DoAnimation(allSet, openSet, finishCell, speed) {
-  const cellsInOrder = getCellsInOrder(finishCell);
+function DoAnimation(allSet, openSet, endCell, speed) {
+  const cellsInOrder = getCellsInOrder(endCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();

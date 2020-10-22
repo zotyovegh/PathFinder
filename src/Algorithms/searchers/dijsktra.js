@@ -167,8 +167,8 @@ function LeftUp(row, col, grid, neighbors) {
   }
 }
 
-function DoAnimation(visitedCells, finishCell, speed) {
-  const cellsInOrder = getCellsInOrder(finishCell);
+function DoAnimation(visitedCells, endCell, speed) {
+  const cellsInOrder = getCellsInOrder(endCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();
