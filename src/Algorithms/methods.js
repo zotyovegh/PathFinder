@@ -29,10 +29,15 @@ export function createGrid(props) {
   return grid;
 }
 
-export function getRandomMazedGrid(grid, amount) {
+export function getRandomMazedGrid(grid) {
+  for (const row of grid) {
+    for (const cell of row) {
+      cell.isWall = false;
+    }
+  }
   var numberOfCells = (grid.length - 1) * (grid[0].length - 1);
 
-  var wallAmount = Math.floor(numberOfCells * 0.5); //0.5 should be later replaced with the amount
+  var wallAmount = Math.floor(numberOfCells * 0.4); //0.4 should be later replaced with the amount
 
   for (let i = 0; i < wallAmount; i++) {
     let row = Math.floor(Math.random() * (grid.length - 1));
@@ -45,7 +50,11 @@ export function getRandomMazedGrid(grid, amount) {
       cell.isWall = true;
     }
   }
-  return grid;
+  window.gridComponent.setState({ grid: grid, status: "pending" });
+  if (window.gridComponent.state.status === "finished") {
+    clearVisitedCells();
+    window.gridComponent.doAlgorithm("fast");
+  }
 }
 
 export function getCellsInOrder(endCell) {

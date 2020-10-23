@@ -258,7 +258,7 @@ class Grid extends Component {
         <button
           disabled={this.state.status === "running"}
           onClick={() => {
-            this.setState({ grid: getRandomMazedGrid(this.state.grid) });
+            getRandomMazedGrid(this.state.grid);
           }}
         >
           Random grid
