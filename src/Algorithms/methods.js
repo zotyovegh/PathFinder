@@ -29,13 +29,17 @@ export function createGrid(props) {
   return grid;
 }
 
-export function getRandomMazedGrid(grid) {
-  for (let i = 0; i < 30; i++) {
+export function getRandomMazedGrid(grid, amount) {
+  var numberOfCells = (grid.length - 1) * (grid[0].length - 1);
+
+  var wallAmount = Math.floor(numberOfCells * 0.5); //0.5 should be later replaced with the amount
+
+  for (let i = 0; i < wallAmount; i++) {
     let row = Math.floor(Math.random() * (grid.length - 1));
     let col = Math.floor(Math.random() * (grid[0].length - 1));
 
     let cell = grid[row][col];
-    if (cell.start || cell.end) {
+    if (cell.start || cell.end || cell.isWall) {
       i--;
     } else {
       cell.isWall = true;
