@@ -4,9 +4,9 @@ import "./index.css";
 import {
   clearVisitedCells,
   createGrid,
-  clearBoard,
   placeWall,
   clear,
+  getRandomMazedGrid,
 } from "../Algorithms/methods";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
@@ -255,6 +255,14 @@ class Grid extends Component {
           ></input>
           <span className="slider round"></span>
         </label>
+        <button
+          disabled={this.state.status === "running"}
+          onClick={() => {
+            this.setState({ grid: getRandomMazedGrid(this.state.grid) });
+          }}
+        >
+          Random grid
+        </button>
       </div>
     );
   }
