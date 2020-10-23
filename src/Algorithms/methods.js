@@ -29,6 +29,23 @@ export function createGrid(props) {
   return grid;
 }
 
+export function getRandomMazedGrid(grid){
+
+    for (let i = 0; i < 30; i++) {
+      let row = Math.floor(Math.random() * (grid.length -1));
+      let col = Math.floor(Math.random() * (grid.length[0] -1));
+
+      let cell = grid[row][col];
+
+      if (cell.start [[ cell.end]]) {
+        i--;
+      } else {
+        cell.isWall = true;
+      }
+    }
+    return grid;
+}
+
 export function getCellsInOrder(endCell) {
   const cells = [];
   let cell = endCell;
