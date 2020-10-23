@@ -30,6 +30,7 @@ export function createGrid(props) {
 }
 
 export function getRandomMazedGrid(grid) {
+  clearVisitedCells();
   for (const row of grid) {
     for (const cell of row) {
       cell.isWall = false;
@@ -50,11 +51,7 @@ export function getRandomMazedGrid(grid) {
       cell.isWall = true;
     }
   }
-  window.gridComponent.setState({ grid: grid, status: "pending" });
-  if (window.gridComponent.state.status === "finished") {
-    clearVisitedCells();
-    window.gridComponent.doAlgorithm("fast");
-  }
+  window.gridComponent.setState({ grid: grid });
 }
 
 export function getCellsInOrder(endCell) {
