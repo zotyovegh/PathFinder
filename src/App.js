@@ -34,13 +34,16 @@ class App extends Component {
     if (type === "row") {
       size = (window.innerHeight / 30).toFixed(0) - 5;
       if (size < 10) {
-        return 10;
+        return 9;
       }
     } else if (type === "col") {
       size = (window.innerWidth / 30).toFixed(0) - 5;
       if (size < 10) {
-        return 10;
+        return 9;
       }
+    }
+    if (size % 2 === 0) {
+      size--;
     }
     return size;
   };
