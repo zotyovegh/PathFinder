@@ -6,8 +6,9 @@ import {
   createGrid,
   placeWall,
   clear,
-  getRandomMazedGrid,
 } from "../Algorithms/methods";
+import { getRandomMazedGrid } from "../Algorithms/mazes/default";
+
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
 
