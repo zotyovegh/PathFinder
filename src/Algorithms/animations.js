@@ -85,7 +85,7 @@ export function animateAstarSlow(allSet, cellsInOrder) {
     if (i === allSet.length) {
       setTimeout(() => {
         animatePathSlow(cellsInOrder);
-      }, 10 * i);
+      }, 5 * i);
       return;
     }
     setTimeout(() => {
@@ -114,7 +114,7 @@ export function animateAstarSlow(allSet, cellsInOrder) {
           closedSet[closedSet.length - 1]
         );
       }
-    }, 10 * i);
+    }, 5 * i);
   }
 }
 
