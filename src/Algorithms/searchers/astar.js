@@ -37,7 +37,7 @@ export function astar(
     var neighbors = currentCell.neighbors;
     for (let k = 0; k < neighbors.length; k++) {
       var neighbor = neighbors[k];
-      if (neighbor.isWall) {
+      if (neighbor.isWall && !neighbor.start && !neighbor.end) {
         continue;
       }
       var tentative_gScore =
