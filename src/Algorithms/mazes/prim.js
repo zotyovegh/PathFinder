@@ -1,5 +1,7 @@
-export function primMaze(grid) {
-  //var grid = JSON.parse(JSON.stringify(originalGrid));
+
+
+export function primMaze(originalGrid) {
+  var grid = JSON.parse(JSON.stringify(originalGrid));
   const wallPairs = [];
 
   for (const row of grid) {
@@ -11,9 +13,7 @@ export function primMaze(grid) {
   grid[0][0].isWall = false;
   mazeCells.push(grid[0][0]);
   getNeighboringWalls(grid[0][0], grid, wallPairs);
-  let counter = 0;
   while (!!wallPairs.length) {
-    counter++;
     var currentPair = takeRandomPair(wallPairs);
     if (!currentPair[1].isWall) {
       continue;
@@ -22,6 +22,7 @@ export function primMaze(grid) {
     currentPair[1].isWall = false;
     getNeighboringWalls(currentPair[1], grid, wallPairs);
   }
+  window.gridComponent.setState({ grid: grid });
 }
 
 function getNeighboringWalls(cell, grid, wallPairs) {
@@ -80,6 +81,5 @@ function takeRandomPair(wallPairs) {
   var position = Math.floor(Math.random() * wallPairs.length);
   var pair = wallPairs[position];
   wallPairs.splice(position, 1);
-  console.log(wallPairs.length);
   return pair;
 }
