@@ -1,6 +1,6 @@
 export function primMaze(grid) {
   //var grid = JSON.parse(JSON.stringify(originalGrid));
-  const validWalls = [];
+  const wallPair = [];
 
   for (const row of grid) {
     for (const cell of row) {
@@ -10,17 +10,17 @@ export function primMaze(grid) {
   const mazeCells = [];
   grid[0][0].isWall = false;
   mazeCells.push(grid[0][0]);
-  getNeighboringWalls(grid[0][0], grid, validWalls);
-  console.log(validWalls);
+  getNeighboringWalls(grid[0][0], grid, wallPair);
+  console.log(wallPair);
 }
 
-function getNeighboringWalls(cell, grid, validWalls) {
+function getNeighboringWalls(cell, grid, wallPair) {
   var { col, row } = cell;
   if (row > 0) {
     //UP
     if (grid[row - 2][col].isWall) {
       var cell = grid[row - 1][col];
-      validWalls.push([
+      wallPair.push([
         Object.assign({}, cell),
         Object.assign({}, grid[row - 2][col]),
       ]);
@@ -30,7 +30,7 @@ function getNeighboringWalls(cell, grid, validWalls) {
     //Right
     if (grid[row][col + 2].isWall) {
       let cell = grid[row][col + 1];
-      validWalls.push([
+      wallPair.push([
         Object.assign({}, cell),
         Object.assign({}, grid[row][col + 2]),
       ]);
@@ -40,7 +40,7 @@ function getNeighboringWalls(cell, grid, validWalls) {
     //Down
     if (grid[row + 2][col]) {
       let cell = grid[row + 1][col];
-      validWalls.push([
+      wallPair.push([
         Object.assign({}, cell),
         Object.assign({}, grid[row + 2][col]),
       ]);
@@ -50,7 +50,7 @@ function getNeighboringWalls(cell, grid, validWalls) {
     //Left
     if (grid[row][col - 2]) {
       let cell = grid[row][col - 1];
-      validWalls.push([
+      wallPair.push([
         Object.assign({}, cell),
         Object.assign({}, grid[row][col - 2]),
       ]);
