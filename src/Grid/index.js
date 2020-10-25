@@ -8,7 +8,7 @@ import {
   clear,
 } from "../Algorithms/methods";
 import { getRandomMazedGrid } from "../Algorithms/mazes/default";
-
+import { primMaze } from "../Algorithms/mazes/prim";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
 
@@ -263,6 +263,14 @@ class Grid extends Component {
           }}
         >
           Random grid
+        </button>
+        <button
+          disabled={this.state.status === "running"}
+          onClick={() => {
+            primMaze(this.state.grid);
+          }}
+        >
+          Prim maze
         </button>
       </div>
     );
