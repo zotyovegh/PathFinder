@@ -18,22 +18,44 @@ function getNeighboringWalls(cell, grid, validWalls) {
   var { col, row } = cell;
   if (row > 0) {
     //UP
-    var cell = grid[row - 1][col];
-    validWalls.push(cell);
+    if (grid[row - 2][col].isWall) {
+      var cell = grid[row - 1][col];
+      validWalls.push([
+        Object.assign({}, cell),
+        Object.assign({}, grid[row - 2][col]),
+      ]);
+    }
   }
   if (col < grid[0].length - 1) {
     //Right
-    let cell = grid[row][col + 1];
-    validWalls.push(cell);
+    if (grid[row][col + 2].isWall) {
+      let cell = grid[row][col + 1];
+      validWalls.push([
+        Object.assign({}, cell),
+        Object.assign({}, grid[row][col + 2]),
+      ]);
+    }
   }
   if (row < grid.length - 1) {
     //Down
-    let cell = grid[row + 1][col];
-    validWalls.push(cell);
+    if (grid[row + 2][col]) {
+      let cell = grid[row + 1][col];
+      validWalls.push([
+        Object.assign({}, cell),
+        Object.assign({}, grid[row + 2][col]),
+      ]);
+    }
   }
   if (col > 0) {
     //Left
-    let cell = grid[row][col - 1];
-    validWalls.push(cell);
+    if (grid[row][col - 2]) {
+      let cell = grid[row][col - 1];
+      validWalls.push([
+        Object.assign({}, cell),
+        Object.assign({}, grid[row][col - 2]),
+      ]);
+    }
   }
 }
+
+function takeRandomWall(validWalls) {}
