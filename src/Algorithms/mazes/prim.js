@@ -11,7 +11,17 @@ export function primMaze(grid) {
   grid[0][0].isWall = false;
   mazeCells.push(grid[0][0]);
   getNeighboringWalls(grid[0][0], grid, wallPairs);
- 
+  let counter = 0;
+  while (!!wallPairs.length) {
+    counter++;
+    var currentPair = takeRandomPair(wallPairs);
+    if (!currentPair[1].isWall) {
+      continue;
+    }
+    currentPair[0].isWall = false;
+    currentPair[1].isWall = false;
+    getNeighboringWalls(currentPair[1], grid, wallPairs);
+  }
 }
 
 function getNeighboringWalls(cell, grid, wallPairs) {
@@ -21,8 +31,10 @@ function getNeighboringWalls(cell, grid, wallPairs) {
     if (grid[row - 2][col].isWall) {
       var cell = grid[row - 1][col];
       wallPairs.push([
-        Object.assign({}, cell),
-        Object.assign({}, grid[row - 2][col]),
+        /* Object.assign({}, cell),
+        Object.assign({}, grid[row - 2][col]),*/
+        cell,
+        grid[row - 2][col],
       ]);
     }
   }
@@ -31,8 +43,10 @@ function getNeighboringWalls(cell, grid, wallPairs) {
     if (grid[row][col + 2].isWall) {
       let cell = grid[row][col + 1];
       wallPairs.push([
-        Object.assign({}, cell),
-        Object.assign({}, grid[row][col + 2]),
+        /*  Object.assign({}, cell),
+        Object.assign({}, grid[row][col + 2]),*/
+        cell,
+        grid[row][col + 2],
       ]);
     }
   }
@@ -41,8 +55,10 @@ function getNeighboringWalls(cell, grid, wallPairs) {
     if (grid[row + 2][col]) {
       let cell = grid[row + 1][col];
       wallPairs.push([
-        Object.assign({}, cell),
-        Object.assign({}, grid[row + 2][col]),
+        /* Object.assign({}, cell),
+        Object.assign({}, grid[row + 2][col]),*/
+        cell,
+        grid[row + 2][col],
       ]);
     }
   }
@@ -51,8 +67,10 @@ function getNeighboringWalls(cell, grid, wallPairs) {
     if (grid[row][col - 2]) {
       let cell = grid[row][col - 1];
       wallPairs.push([
-        Object.assign({}, cell),
-        Object.assign({}, grid[row][col - 2]),
+        /*  Object.assign({}, cell),
+        Object.assign({}, grid[row][col - 2]),*/
+        cell,
+        grid[row][col - 2],
       ]);
     }
   }
@@ -62,5 +80,6 @@ function takeRandomPair(wallPairs) {
   var position = Math.floor(Math.random() * wallPairs.length);
   var pair = wallPairs[position];
   wallPairs.splice(position, 1);
+  console.log(wallPairs.length);
   return pair;
 }
