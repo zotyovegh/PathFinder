@@ -1,4 +1,4 @@
-import { clear, clearVisitedCells } from "../../Algorithms/methods";
+import { clear } from "../../Algorithms/methods";
 import { visualizeMaze } from "../../Algorithms/animations";
 export function primMaze(originalGrid) {
   clear("path");
