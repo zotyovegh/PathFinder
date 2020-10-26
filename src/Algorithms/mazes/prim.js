@@ -1,5 +1,4 @@
-
-
+import { clear } from "../../Algorithms/methods";
 export function primMaze(originalGrid) {
   var grid = JSON.parse(JSON.stringify(originalGrid));
   const wallPairs = [];
@@ -18,11 +17,20 @@ export function primMaze(originalGrid) {
     if (!currentPair[1].isWall) {
       continue;
     }
-    currentPair[0].isWall = false;
-    currentPair[1].isWall = false;
+    editCell(currentPair[0]);
+    editCell(currentPair[1]);
     getNeighboringWalls(currentPair[1], grid, wallPairs);
   }
+
   window.gridComponent.setState({ grid: grid });
+}
+
+function editCell(cell) {
+  cell.isWall = false;
+  cell.distance = Infinity;
+  cell.f = Infinity;
+  cell.g = Infinity;
+  cell.h = Infinity;
 }
 
 function getNeighboringWalls(cell, grid, wallPairs) {
@@ -31,40 +39,28 @@ function getNeighboringWalls(cell, grid, wallPairs) {
     //UP
     if (grid[row - 2][col].isWall) {
       var cell = grid[row - 1][col];
-      wallPairs.push([
-        cell,
-        grid[row - 2][col],
-      ]);
+      wallPairs.push([cell, grid[row - 2][col]]);
     }
   }
   if (col < grid[0].length - 2) {
     //Right
     if (grid[row][col + 2].isWall) {
       let cell = grid[row][col + 1];
-      wallPairs.push([
-        cell,
-        grid[row][col + 2],
-      ]);
+      wallPairs.push([cell, grid[row][col + 2]]);
     }
   }
   if (row < grid.length - 2) {
     //Down
     if (grid[row + 2][col]) {
       let cell = grid[row + 1][col];
-      wallPairs.push([
-        cell,
-        grid[row + 2][col],
-      ]);
+      wallPairs.push([cell, grid[row + 2][col]]);
     }
   }
   if (col > 1) {
     //Left
     if (grid[row][col - 2]) {
       let cell = grid[row][col - 1];
-      wallPairs.push([
-        cell,
-        grid[row][col - 2],
-      ]);
+      wallPairs.push([cell, grid[row][col - 2]]);
     }
   }
 }
