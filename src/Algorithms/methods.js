@@ -49,6 +49,7 @@ export function clear(type) {
 }
 
 export function clearVisitedCells() {
+  console.log("heyy");
   let newGrid = window.gridComponent.state.grid;
   for (let i = 0; i < window.gridComponent.props.rows; i++) {
     for (let j = 0; j < window.gridComponent.props.columns; j++) {
@@ -62,10 +63,12 @@ export function clearVisitedCells() {
       cell.neighbors = [];
 
       visualizeCell("num", "num", cell);
-      if (cell.start || cell.end || cell.isWall) {
-        continue;
+      if (!cell.isWall && !cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-empty", cell);
       }
-      visualizeCell("cell", "cell cell-empty", cell);
+      if (cell.isWall && !cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-wall", cell);
+      }
     }
   }
   window.gridComponent.setState({ grid: newGrid });

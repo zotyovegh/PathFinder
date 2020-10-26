@@ -1,4 +1,5 @@
-import { clear } from "../../Algorithms/methods";
+import { clear, clearVisitedCells } from "../../Algorithms/methods";
+import { visualizeMaze } from "../../Algorithms/animations";
 export function primMaze(originalGrid) {
   clear("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -22,6 +23,7 @@ export function primMaze(originalGrid) {
     getNeighboringWalls(currentPair[1], grid, wallPairs);
   }
   editGrid(grid);
+  visualizeMaze(grid);
 }
 
 function editGrid(grid) {

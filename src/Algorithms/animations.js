@@ -115,7 +115,6 @@ export function animateAstarSlow(allSet, cellsInOrder) {
         );
       }
     }, 10 * i);
-
   }
 }
 
@@ -132,4 +131,17 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
     }
   }
   animatePathFast(cellsInOrder);
+}
+
+export function visualizeMaze(grid) {
+  for (const row of grid) {
+    for (const cell of row) {
+      if (!cell.isWall && !cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-empty", cell);
+      }
+      if (cell.isWall && !cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-wall", cell);
+      }
+    }
+  }
 }

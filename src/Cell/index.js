@@ -5,9 +5,7 @@ function getColor(props) {
     return "cell-start";
   } else if (props.data.end) {
     return "cell-end";
-  } else if (props.data.isWall) {
-    return "cell-wall";
-  } else {
+  }else {
     return "";
   }
 }

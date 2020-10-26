@@ -6,6 +6,7 @@ import {
   createGrid,
   placeWall,
   clear,
+  visualizeCell,
 } from "../Algorithms/methods";
 import { getRandomMazedGrid } from "../Algorithms/mazes/default";
 import { primMaze } from "../Algorithms/mazes/prim";
@@ -85,7 +86,9 @@ class Grid extends Component {
       this.setState({ isEndOn: true });
       return;
     }
-    placeWall(cell);
+    (function () {
+      visualizeCell("cell", "cell cell-wall-animated", cell);
+    })(placeWall(cell));
   };
 
   onMouseEnter = (cell) => {
@@ -131,7 +134,9 @@ class Grid extends Component {
         );
         return;
       }
-      placeWall(cell);
+      (function () {
+        visualizeCell("cell", "cell cell-wall-animated", cell);
+      })(placeWall(cell));
     }
   };
   onMouseUp = () => {
