@@ -86,9 +86,7 @@ class Grid extends Component {
       this.setState({ isEndOn: true });
       return;
     }
-    (function () {
-      visualizeCell("cell", "cell cell-wall-animated", cell);
-    })(placeWall(cell));
+    placeWall(cell);
   };
 
   onMouseEnter = (cell) => {
@@ -134,9 +132,7 @@ class Grid extends Component {
         );
         return;
       }
-      (function () {
-        visualizeCell("cell", "cell cell-wall-animated", cell);
-      })(placeWall(cell));
+      placeWall(cell);
     }
   };
   onMouseUp = () => {

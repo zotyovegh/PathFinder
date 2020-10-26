@@ -89,6 +89,12 @@ export function placeWall(cell) {
   let newCell = cell;
   let newGrid = window.gridComponent.state.grid;
   newCell.isWall = !newCell.isWall;
+  if (newCell.isWall) {
+    visualizeCell("cell", "cell cell-wall-animated", cell);
+  } else {
+    visualizeCell("cell", "cell cell-empty", cell);
+  }
+
   visualizeCell("num", "num", newCell);
   newCell.visited = false;
 
