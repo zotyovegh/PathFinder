@@ -28,6 +28,11 @@
 }
 
 .cell-wall {
+  background-color: rgb(6, 52, 72);
+  border: 0.5px solid rgb(6, 52, 72);
+}
+
+.cell-wall-animated {
   animation-name: wallAnimation;
   animation-duration: 0.3s;
   animation-timing-function: ease-out;

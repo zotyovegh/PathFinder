@@ -27,9 +27,9 @@ export function astar(
         current = j;
       }
     }
-    var currentCell = openSet[current];
-
+    var currentCell = openSet[current];    
     if (currentCell === endCell) {
+      console.log(endCell.end);
       DoAnimation(allSet, openSet, endCell, speed);
       return;
     }

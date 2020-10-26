@@ -17,20 +17,23 @@ export function primMaze(originalGrid) {
     if (!currentPair[1].isWall) {
       continue;
     }
-    editCell(currentPair[0]);
-    editCell(currentPair[1]);
+    currentPair[0].isWall = false;
+    currentPair[1].isWall = false;
     getNeighboringWalls(currentPair[1], grid, wallPairs);
   }
-
-  window.gridComponent.setState({ grid: grid });
+  editGrid(grid);
 }
 
-function editCell(cell) {
-  cell.isWall = false;
-  cell.distance = Infinity;
-  cell.f = Infinity;
-  cell.g = Infinity;
-  cell.h = Infinity;
+function editGrid(grid) {
+  for (const row of grid) {
+    for (const cell of row) {
+      cell.distance = Infinity;
+      cell.f = Infinity;
+      cell.g = Infinity;
+      cell.h = Infinity;
+    }
+  }
+  window.gridComponent.setState({ grid: grid });
 }
 
 function getNeighboringWalls(cell, grid, wallPairs) {
