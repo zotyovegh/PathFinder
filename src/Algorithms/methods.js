@@ -49,7 +49,6 @@ export function clear(type) {
 }
 
 export function clearVisitedCells() {
-  console.log("heyy");
   let newGrid = window.gridComponent.state.grid;
   for (let i = 0; i < window.gridComponent.props.rows; i++) {
     for (let j = 0; j < window.gridComponent.props.columns; j++) {
@@ -83,6 +82,13 @@ export function clearBoard(props) {
     endRow: props.endR,
     endCol: props.endC,
   });
+  for (const row of window.gridComponent.state.grid) {
+    for (const cell of row) {
+      if (!cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-empty", cell);
+      }
+    }
+  }
 }
 
 export function placeWall(cell) {

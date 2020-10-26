@@ -27,6 +27,7 @@ class Grid extends Component {
       endCol: props.endC,
       status: "pending",
       currentAlg: "astar",
+      entered: null,
       previousVisualization: false,
       diagonalVisualization: true,
       optimizedVisualization: true,
@@ -95,6 +96,14 @@ class Grid extends Component {
         return;
       }
       if (this.state.isStartOn) {
+       /* if (this.state.entered !== null) {
+          console.log(this.state.entered);
+          visualizeCell("cell", "cell cell-wall", cell);
+          this.setState({ entered: null });
+        }
+        if (cell.isWall) {
+          this.setState({ entered: cell });
+        }*/
         let newGrid = this.state.grid.slice();
         newGrid[this.state.startRow][this.state.startCol].start = false;
         newGrid[cell.row][cell.col].start = true;
