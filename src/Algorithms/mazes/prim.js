@@ -1,8 +1,8 @@
 import { clear } from "../../Algorithms/methods";
 export function primMaze(originalGrid) {
+  clear("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
   const wallPairs = [];
-
   for (const row of grid) {
     for (const cell of row) {
       cell.isWall = true;
@@ -41,29 +41,29 @@ function getNeighboringWalls(cell, grid, wallPairs) {
   if (row > 1) {
     //UP
     if (grid[row - 2][col].isWall) {
-      var cell = grid[row - 1][col];
-      wallPairs.push([cell, grid[row - 2][col]]);
+      var neighbor = grid[row - 1][col];
+      wallPairs.push([neighbor, grid[row - 2][col]]);
     }
   }
   if (col < grid[0].length - 2) {
     //Right
     if (grid[row][col + 2].isWall) {
-      let cell = grid[row][col + 1];
-      wallPairs.push([cell, grid[row][col + 2]]);
+      let neighbor = grid[row][col + 1];
+      wallPairs.push([neighbor, grid[row][col + 2]]);
     }
   }
   if (row < grid.length - 2) {
     //Down
     if (grid[row + 2][col]) {
-      let cell = grid[row + 1][col];
-      wallPairs.push([cell, grid[row + 2][col]]);
+      let neighbor = grid[row + 1][col];
+      wallPairs.push([neighbor, grid[row + 2][col]]);
     }
   }
   if (col > 1) {
     //Left
     if (grid[row][col - 2]) {
-      let cell = grid[row][col - 1];
-      wallPairs.push([cell, grid[row][col - 2]]);
+      let neighbor = grid[row][col - 1];
+      wallPairs.push([neighbor, grid[row][col - 2]]);
     }
   }
 }
