@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/PathFinder/static/css/main.7a662397.chunk.css",
-    "main.js": "/PathFinder/static/js/main.fb0894e4.chunk.js",
-    "main.js.map": "/PathFinder/static/js/main.fb0894e4.chunk.js.map",
+    "main.css": "/PathFinder/static/css/main.c634935a.chunk.css",
+    "main.js": "/PathFinder/static/js/main.060b797a.chunk.js",
+    "main.js.map": "/PathFinder/static/js/main.060b797a.chunk.js.map",
     "runtime-main.js": "/PathFinder/static/js/runtime-main.519de40d.js",
     "runtime-main.js.map": "/PathFinder/static/js/runtime-main.519de40d.js.map",
     "static/js/2.0829112b.chunk.js": "/PathFinder/static/js/2.0829112b.chunk.js",
     "static/js/2.0829112b.chunk.js.map": "/PathFinder/static/js/2.0829112b.chunk.js.map",
     "index.html": "/PathFinder/index.html",
-    "precache-manifest.2c4f134462f28378725ab45876767ba0.js": "/PathFinder/precache-manifest.2c4f134462f28378725ab45876767ba0.js",
+    "precache-manifest.a64b2b47a7ddb6f5d577c42741e9efc5.js": "/PathFinder/precache-manifest.a64b2b47a7ddb6f5d577c42741e9efc5.js",
     "service-worker.js": "/PathFinder/service-worker.js",
-    "static/css/main.7a662397.chunk.css.map": "/PathFinder/static/css/main.7a662397.chunk.css.map",
+    "static/css/main.c634935a.chunk.css.map": "/PathFinder/static/css/main.c634935a.chunk.css.map",
     "static/js/2.0829112b.chunk.js.LICENSE.txt": "/PathFinder/static/js/2.0829112b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.519de40d.js",
     "static/js/2.0829112b.chunk.js",
-    "static/css/main.7a662397.chunk.css",
-    "static/js/main.fb0894e4.chunk.js"
+    "static/css/main.c634935a.chunk.css",
+    "static/js/main.060b797a.chunk.js"
   ]
 }
