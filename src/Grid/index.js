@@ -90,7 +90,7 @@ class Grid extends Component {
   };
 
   onMouseEnter = (cell) => {
-    if (this.state.isMouseDown) {      
+    if (this.state.isMouseDown) {
       if (cell.start || cell.end) {
         return;
       }
@@ -108,10 +108,11 @@ class Grid extends Component {
             if (this.state.status === "finished") {
               clearVisitedCells();
               this.doAlgorithm("fast");
+            } else {
+              clear("path");
             }
           }
         );
-
         return;
       } else if (this.state.isEndOn) {
         let newGrid = this.state.grid.slice();
@@ -127,6 +128,8 @@ class Grid extends Component {
             if (this.state.status === "finished") {
               clearVisitedCells();
               this.doAlgorithm("fast");
+            } else {
+              clear("path");
             }
           }
         );
