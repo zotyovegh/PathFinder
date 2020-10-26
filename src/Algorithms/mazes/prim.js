@@ -10,9 +10,9 @@ export function primMaze(originalGrid) {
     }
   }
   const mazeCells = [];
-  grid[0][0].isWall = false;
-  mazeCells.push(grid[0][0]);
-  getNeighboringWalls(grid[0][0], grid, wallPairs);
+  grid[1][1].isWall = false;
+  mazeCells.push(grid[1][1]);
+  getNeighboringWalls(grid[1][1], grid, wallPairs);
   while (!!wallPairs.length) {
     var currentPair = takeRandomPair(wallPairs);
     if (!currentPair[1].isWall) {
@@ -27,49 +27,41 @@ export function primMaze(originalGrid) {
 
 function getNeighboringWalls(cell, grid, wallPairs) {
   var { col, row } = cell;
-  if (row > 0) {
+  if (row > 1) {
     //UP
     if (grid[row - 2][col].isWall) {
       var cell = grid[row - 1][col];
       wallPairs.push([
-        /* Object.assign({}, cell),
-        Object.assign({}, grid[row - 2][col]),*/
         cell,
         grid[row - 2][col],
       ]);
     }
   }
-  if (col < grid[0].length - 1) {
+  if (col < grid[0].length - 2) {
     //Right
     if (grid[row][col + 2].isWall) {
       let cell = grid[row][col + 1];
       wallPairs.push([
-        /*  Object.assign({}, cell),
-        Object.assign({}, grid[row][col + 2]),*/
         cell,
         grid[row][col + 2],
       ]);
     }
   }
-  if (row < grid.length - 1) {
+  if (row < grid.length - 2) {
     //Down
     if (grid[row + 2][col]) {
       let cell = grid[row + 1][col];
       wallPairs.push([
-        /* Object.assign({}, cell),
-        Object.assign({}, grid[row + 2][col]),*/
         cell,
         grid[row + 2][col],
       ]);
     }
   }
-  if (col > 0) {
+  if (col > 1) {
     //Left
     if (grid[row][col - 2]) {
       let cell = grid[row][col - 1];
       wallPairs.push([
-        /*  Object.assign({}, cell),
-        Object.assign({}, grid[row][col - 2]),*/
         cell,
         grid[row][col - 2],
       ]);
