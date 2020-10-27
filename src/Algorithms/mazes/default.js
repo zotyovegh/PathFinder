@@ -1,4 +1,4 @@
-import { clearVisitedCells } from "../../Algorithms/methods";
+import { clearVisitedCells } from "../../Algorithms/cleaning";
 
 export function getRandomMazedGrid(grid) {
   clearVisitedCells();

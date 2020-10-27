@@ -1,5 +1,6 @@
 import { animateFast, animateSlow } from "../../Algorithms/animations";
-import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
+import { getCellsInOrder } from "../../Algorithms/methods";
+import { clearVisitedCells } from "../../Algorithms/cleaning";
 var id = 0;
 export function dijkstra(grid, startCell, endCell, isDiagonalOn, speed) {
   const unvisitedCells = [];

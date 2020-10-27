@@ -2,7 +2,8 @@ import {
   animateAstarSlow,
   animateAstarFast,
 } from "../../Algorithms/animations";
-import { getCellsInOrder, clearVisitedCells } from "../../Algorithms/methods";
+import { getCellsInOrder } from "../../Algorithms/methods";
+import { clearVisitedCells } from "../../Algorithms/cleaning";
 
 export function astar(
   grid,
