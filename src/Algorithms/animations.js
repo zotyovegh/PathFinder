@@ -137,12 +137,22 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
 export function visualizeMaze(grid) {
   for (const row of grid) {
     for (const cell of row) {
-      if (!cell.isWall && !cell.end && !cell.start) {
-        visualizeCell("cell", "cell cell-empty", cell);
-      }
-      if (cell.isWall && !cell.end && !cell.start) {
+      if (!cell.end && !cell.start) {
         visualizeCell("cell", "cell cell-wall", cell);
       }
     }
+  }
+  var path = [];
+  for (const row of grid) {
+    for (const cell of row) {
+      if (!cell.isWall && !cell.end && !cell.start) {
+        path.push(cell);
+      }
+    }
+  }
+  for (let i = 0; i < path.length; i++) {
+    setTimeout(() => {
+      visualizeCell("cell", "cell cell-empty", path[i]);
+    }, 20 * i);
   }
 }
