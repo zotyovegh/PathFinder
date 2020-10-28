@@ -6,15 +6,16 @@ import { visualizeMaze } from "../../Algorithms/animations";
 export function primMaze(originalGrid) {
   clearWithStatus("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
+  var path = [];
   const wallPairs = [];
   for (const row of grid) {
     for (const cell of row) {
       cell.isWall = true;
     }
   }
-  const mazeCells = [];
+  /*const mazeCells = [];
   grid[1][1].isWall = false;
-  mazeCells.push(grid[1][1]);
+  mazeCells.push(grid[1][1]);*/
   getNeighboringWalls(grid[1][1], grid, wallPairs);
   while (!!wallPairs.length) {
     var currentPair = takeRandomPair(wallPairs);
@@ -23,10 +24,12 @@ export function primMaze(originalGrid) {
     }
     currentPair[0].isWall = false;
     currentPair[1].isWall = false;
+    path.push(currentPair[0]);
+    path.push(currentPair[1]);
     getNeighboringWalls(currentPair[1], grid, wallPairs);
   }
   clearInfinityVariables(grid);
-  visualizeMaze(grid);
+  visualizeMaze(grid, path);
 }
 
 function getNeighboringWalls(cell, grid, wallPairs) {

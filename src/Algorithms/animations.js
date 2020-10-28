@@ -134,7 +134,7 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
   animatePathFast(cellsInOrder);
 }
 
-export function visualizeMaze(grid) {
+export function visualizeMaze(grid, path) {
   for (const row of grid) {
     for (const cell of row) {
       if (!cell.end && !cell.start) {
@@ -142,17 +142,12 @@ export function visualizeMaze(grid) {
       }
     }
   }
-  var path = [];
-  for (const row of grid) {
-    for (const cell of row) {
-      if (!cell.isWall && !cell.end && !cell.start) {
-        path.push(cell);
-      }
-    }
-  }
+
   for (let i = 0; i < path.length; i++) {
     setTimeout(() => {
-      visualizeCell("cell", "cell cell-empty", path[i]);
-    }, 20 * i);
+      if (!path[i].end && !path[i].start) {
+        visualizeCell("cell", "cell cell-empty", path[i]);
+      }
+    }, 10 * i);
   }
 }
