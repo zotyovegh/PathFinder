@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Cell from "../Cell";
 import "./index.css";
-import { createGrid, placeWall, visualizeCell } from "../Algorithms/methods";
+import { createGrid, placeWall } from "../Algorithms/methods";
 import { clearVisitedCells, clear } from "../Algorithms/cleaning";
 import { getRandomMazedGrid } from "../Algorithms/mazes/default";
 import { primMaze } from "../Algorithms/mazes/prim";

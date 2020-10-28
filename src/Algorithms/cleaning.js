@@ -51,3 +51,15 @@ export function clearBoard(props) {
     }
   }
 }
+
+export function clearInfinityVariables(grid) {
+  for (const row of grid) {
+    for (const cell of row) {
+      cell.distance = Infinity;
+      cell.f = Infinity;
+      cell.g = Infinity;
+      cell.h = Infinity;
+    }
+  }
+  window.gridComponent.setState({ grid: grid });
+}

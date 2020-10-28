@@ -1,4 +1,4 @@
-import { clear } from "../../Algorithms/cleaning";
+import { clear, clearInfinityVariables } from "../../Algorithms/cleaning";
 import { visualizeMaze } from "../../Algorithms/animations";
 export function primMaze(originalGrid) {
   clear("path");
@@ -22,20 +22,8 @@ export function primMaze(originalGrid) {
     currentPair[1].isWall = false;
     getNeighboringWalls(currentPair[1], grid, wallPairs);
   }
-  editGrid(grid);
+  clearInfinityVariables(grid);
   visualizeMaze(grid);
-}
-
-function editGrid(grid) {
-  for (const row of grid) {
-    for (const cell of row) {
-      cell.distance = Infinity;
-      cell.f = Infinity;
-      cell.g = Infinity;
-      cell.h = Infinity;
-    }
-  }
-  window.gridComponent.setState({ grid: grid });
 }
 
 function getNeighboringWalls(cell, grid, wallPairs) {
