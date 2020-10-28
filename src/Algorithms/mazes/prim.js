@@ -1,7 +1,10 @@
-import { clear, clearInfinityVariables } from "../../Algorithms/cleaning";
+import {
+  clearWithStatus,
+  clearInfinityVariables,
+} from "../../Algorithms/cleaning";
 import { visualizeMaze } from "../../Algorithms/animations";
 export function primMaze(originalGrid) {
-  clear("path");
+  clearWithStatus("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
   const wallPairs = [];
   for (const row of grid) {

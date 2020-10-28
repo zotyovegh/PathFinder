@@ -1,6 +1,6 @@
 import { visualizeCell, createGrid } from "../Algorithms/methods";
 
-export function clear(type) {
+export function clearWithStatus(type) {
   if (type === "path") {
     clearVisitedCells();
   } else if (type === "grid") {
