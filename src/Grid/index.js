@@ -21,13 +21,14 @@ class Grid extends Component {
       endRow: props.endR,
       endCol: props.endC,
       status: "pending",
-      currentAlg: "astar",
+      currentAlg: "dijkstra",
       previousVisualization: false,
       diagonalVisualization: true,
       optimizedVisualization: true,
     };
     this.handleChange = this.handleChange.bind(this);
     window.gridComponent = this;
+    
   }
 
   handleChange(event) {

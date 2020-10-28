@@ -146,6 +146,7 @@ export function visualizeMaze(grid, path) {
 
   for (let i = 0; i <= path.length; i++) {
     setTimeout(() => {
+      
       if (i === path.length) {
         window.gridComponent.setState({ status: "finished" });
         return;
