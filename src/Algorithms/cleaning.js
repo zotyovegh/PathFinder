@@ -4,7 +4,7 @@ export function clear(type) {
   if (type === "path") {
     clearVisitedCells();
   } else if (type === "grid") {
-    clearBoard(window.gridComponent.props);
+    resetBoard(window.gridComponent.props);
   }
   window.gridComponent.setState({ status: "pending" });
 }
@@ -34,7 +34,8 @@ export function clearVisitedCells() {
   window.gridComponent.setState({ grid: newGrid });
 }
 
-export function clearBoard(props) {
+export function resetBoard() {
+  var props = window.gridComponent.props;
   clearVisitedCells();
   window.gridComponent.setState({
     grid: createGrid(props),
