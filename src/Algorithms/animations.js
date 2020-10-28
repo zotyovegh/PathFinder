@@ -135,6 +135,7 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
 }
 
 export function visualizeMaze(grid, path) {
+  window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
       if (!cell.end && !cell.start) {
@@ -143,11 +144,15 @@ export function visualizeMaze(grid, path) {
     }
   }
 
-  for (let i = 0; i < path.length; i++) {
+  for (let i = 0; i <= path.length; i++) {
     setTimeout(() => {
+      if (i === path.length) {
+        window.gridComponent.setState({ status: "finished" });
+        return;
+      }
       if (!path[i].end && !path[i].start) {
         visualizeCell("cell", "cell cell-empty", path[i]);
       }
-    }, 10 * i);
+    }, 8 * i);
   }
 }
