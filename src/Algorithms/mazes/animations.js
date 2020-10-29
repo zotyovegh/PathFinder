@@ -44,3 +44,17 @@ export function visualizeRandom(grid, path) {
     }, 8 * i);
   }
 }
+
+export function visualizeIterative(grid) {
+  //Temporary visualization for iterative maze generation
+  for (const row of grid) {
+    for (const cell of row) {
+      if (!cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-empty", cell);
+      }
+      if (cell.isWall && !cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-wall", cell);
+      }
+    }
+  }
+}
