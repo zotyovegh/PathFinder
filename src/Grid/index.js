@@ -22,6 +22,7 @@ class Grid extends Component {
       endCol: props.endC,
       status: "pending",
       currentAlg: "dijkstra",
+      currentMaze: "default",
       previousVisualization: false,
       diagonalVisualization: true,
       optimizedVisualization: true,
@@ -70,7 +71,15 @@ class Grid extends Component {
       );
     }
   }
-  handleMazeChange(event) {}
+  handleMazeChange(event) {
+    if (event.target.value === "random") {
+      console.log("random");
+      getRandomMazedGrid(this.state.grid);
+    } else if (event.target.value === "prim") {
+      console.log("prim");
+      primMaze(this.state.grid);
+    }
+  }
 
   onMouseDown = (cell) => {
     if (this.state.status === "running") {
@@ -258,22 +267,17 @@ class Grid extends Component {
           ></input>
           <span className="slider round"></span>
         </label>
-        <button
+        <select
+          value={this.state.currentMaze}
+          onChange={this.handleMazeChange}
           disabled={this.state.status === "running"}
-          onClick={() => {
-            getRandomMazedGrid(this.state.grid);
-          }}
         >
-          Random grid
-        </button>
-        <button
-          disabled={this.state.status === "running"}
-          onClick={() => {
-            primMaze(this.state.grid);
-          }}
-        >
-          Prim maze
-        </button>
+          <option value="default" disabled hidden>
+            Mazes
+          </option>
+          <option value="random">Random</option>
+          <option value="prim">Prim</option>
+        </select>
       </div>
     );
   }
