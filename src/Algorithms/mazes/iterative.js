@@ -15,7 +15,7 @@ export function iterativeMaze(originalGrid) {
   currentCell.visited = true;
   var cellsWithUnvisitedNeighbors = [];
   cellsWithUnvisitedNeighbors.push(currentCell);
-  
+
   while (!!cellsWithUnvisitedNeighbors.length) {
     currentCell = takeLastCell(cellsWithUnvisitedNeighbors);
     var neighboringUnvisitedPairs = getNeighboringCells(currentCell, grid);
@@ -25,6 +25,10 @@ export function iterativeMaze(originalGrid) {
         neighboringUnvisitedPairs[
           Math.floor(Math.random() * neighboringUnvisitedPairs.length)
         ];
+      randomPair[0].isWall = false;
+      randomPair[1].isWall = false;
+      randomPair[1].visited = true;
+      cellsWithUnvisitedNeighbors.push(randomPair[1]);
     }
   }
 
