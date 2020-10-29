@@ -1,7 +1,7 @@
 import {
   animateAstarSlow,
   animateAstarFast,
-} from "../../Algorithms/animations";
+} from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 

@@ -1,5 +1,5 @@
 import { clearVisitedCells } from "../../Algorithms/cleaning";
-import { visualizeRandom } from "../../Algorithms/animations";
+import { visualizeRandom } from "../mazes/animations";
 
 export function getRandomMazedGrid(grid) {
   clearVisitedCells();
