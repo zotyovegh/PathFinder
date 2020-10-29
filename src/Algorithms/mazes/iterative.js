@@ -11,8 +11,9 @@ export function iterativeMaze(originalGrid) {
       cell.isWall = true;
     }
   }
-  var currentCell = grid[(1, 1)];
+  var currentCell = grid[1][1];
   currentCell.visited = true;
+  currentCell.isWall = false;
   var cellsWithUnvisitedNeighbors = [];
   cellsWithUnvisitedNeighbors.push(currentCell);
 
@@ -49,6 +50,7 @@ function getNeighboringCells(cell, grid) {
   var { col, row } = cell;
   if (row > 1) {
     //UP
+
     if (grid[row - 2][col].isWall) {
       var neighbor = grid[row - 1][col];
       if (grid[row - 2][col].visited === false) {
