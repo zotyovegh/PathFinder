@@ -2,7 +2,7 @@ import {
   clearWithStatus,
   clearInfinityVariables,
 } from "../../Algorithms/cleaning";
-import { visualizePrim } from "../mazes/animations";
+import { visualizeOnWalledGrid } from "../mazes/animations";
 export function primMaze(originalGrid) {
   clearWithStatus("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -26,7 +26,7 @@ export function primMaze(originalGrid) {
     getNeighboringWalls(currentPair[1], grid, wallPairs);
   }
   clearInfinityVariables(grid);
-  visualizePrim(grid, path);
+  visualizeOnWalledGrid(grid, path);
 }
 
 function getNeighboringWalls(cell, grid, wallPairs) {

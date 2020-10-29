@@ -1,5 +1,5 @@
 import { visualizeCell } from "../methods";
-export function visualizePrim(grid, path) {
+export function visualizeOnWalledGrid(grid, path) {
   window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
@@ -42,19 +42,5 @@ export function visualizeRandom(grid, path) {
         visualizeCell("cell", "cell cell-wall", path[i]);
       }
     }, 8 * i);
-  }
-}
-
-export function visualizeIterative(grid) {
-  //Temporary visualization for iterative maze generation
-  for (const row of grid) {
-    for (const cell of row) {
-      if (!cell.end && !cell.start) {
-        visualizeCell("cell", "cell cell-empty", cell);
-      }
-      if (cell.isWall && !cell.end && !cell.start) {
-        visualizeCell("cell", "cell cell-wall", cell);
-      }
-    }
   }
 }

@@ -2,9 +2,10 @@ import {
   clearWithStatus,
   clearInfinityVariables,
 } from "../../Algorithms/cleaning";
-import { visualizeIterative } from "../mazes/animations";
+import { visualizeOnWalledGrid } from "../mazes/animations";
 export function iterativeMaze(originalGrid) {
   clearWithStatus("path");
+  var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   for (const row of grid) {
     for (const cell of row) {
@@ -14,6 +15,7 @@ export function iterativeMaze(originalGrid) {
   var currentCell = grid[1][1];
   currentCell.visited = true;
   currentCell.isWall = false;
+  path.push(currentCell);
   var cellsWithUnvisitedNeighbors = [];
   cellsWithUnvisitedNeighbors.push(currentCell);
 
@@ -29,13 +31,15 @@ export function iterativeMaze(originalGrid) {
       randomPair[0].isWall = false;
       randomPair[1].isWall = false;
       randomPair[1].visited = true;
+      path.push(randomPair[0]);
+      path.push(randomPair[1]);
       cellsWithUnvisitedNeighbors.push(randomPair[1]);
     }
   }
 
   // clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
-  visualizeIterative(grid);
+  visualizeOnWalledGrid(grid, path);
 }
 
 function takeLastCell(cellsWithUnvisitedNeighbors) {
