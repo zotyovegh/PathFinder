@@ -147,7 +147,7 @@ export function visualizePrim(grid, path) {
   for (let i = 0; i <= path.length; i++) {
     setTimeout(() => {
       if (i === path.length) {
-        window.gridComponent.setState({ status: "finished" });
+        window.gridComponent.setState({ status: "pending" });
         return;
       }
       if (!path[i].end && !path[i].start) {
@@ -170,7 +170,7 @@ export function visualizeRandom(grid, path) {
   for (let i = 0; i <= path.length; i++) {
     setTimeout(() => {
       if (i === path.length) {
-        window.gridComponent.setState({ status: "finished" });
+        window.gridComponent.setState({ status: "pending" });
         return;
       }
       if (!path[i].end && !path[i].start) {
@@ -179,4 +179,3 @@ export function visualizeRandom(grid, path) {
     }, 8 * i);
   }
 }
-
