@@ -1,7 +1,9 @@
 import { clearVisitedCells } from "../../Algorithms/cleaning";
+import { visualizeRandom } from "../../Algorithms/animations";
 
 export function getRandomMazedGrid(grid) {
   clearVisitedCells();
+  var path = [];
   for (const row of grid) {
     for (const cell of row) {
       cell.isWall = false;
@@ -20,7 +22,9 @@ export function getRandomMazedGrid(grid) {
       i--;
     } else {
       cell.isWall = true;
+      path.push(cell);
     }
   }
   window.gridComponent.setState({ grid: grid });
+  visualizeRandom(grid, path);
 }
