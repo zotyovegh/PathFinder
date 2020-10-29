@@ -37,7 +37,7 @@ export function iterativeMaze(originalGrid) {
     }
   }
 
-  // clearInfinityVariables(grid);
+   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
   visualizeOnWalledGrid(grid, path);
 }

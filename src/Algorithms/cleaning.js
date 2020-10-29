@@ -59,6 +59,7 @@ export function clearInfinityVariables(grid) {
       cell.f = Infinity;
       cell.g = Infinity;
       cell.h = Infinity;
+      cell.visited = false;
     }
   }
   window.gridComponent.setState({ grid: grid });
