@@ -13,9 +13,6 @@ export function primMaze(originalGrid) {
       cell.isWall = true;
     }
   }
-  /*const mazeCells = [];
-  grid[1][1].isWall = false;
-  mazeCells.push(grid[1][1]);*/
   getNeighboringWalls(grid[1][1], grid, wallPairs);
   while (!!wallPairs.length) {
     var currentPair = takeRandomPair(wallPairs);

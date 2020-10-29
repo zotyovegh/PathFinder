@@ -1,4 +1,8 @@
-import { clearWithStatus } from "../../Algorithms/cleaning";
+import {
+  clearWithStatus,
+  clearInfinityVariables,
+} from "../../Algorithms/cleaning";
+import { visualizeIterative } from "../mazes/animations";
 export function iterativeMaze(originalGrid) {
   clearWithStatus("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -7,4 +11,14 @@ export function iterativeMaze(originalGrid) {
       cell.isWall = true;
     }
   }
+
+
+
+
+
+
+  
+  // clearInfinityVariables(grid);
+  window.gridComponent.setState({ grid: grid });
+  visualizeIterative(grid);
 }
