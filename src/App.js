@@ -25,7 +25,7 @@ class App extends Component {
       let margin = Math.ceil(x / 5);
       position = x - margin;
     }
-    return position % 2 == 0 ? position + 1 : position;
+    return position % 2 === 0 ? position + 1 : position;
     // return position;
   };
 

@@ -26,12 +26,16 @@ class Grid extends Component {
       diagonalVisualization: true,
       optimizedVisualization: true,
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleAlgoChange = this.handleAlgoChange.bind(this);
+    this.handleButtonChange = this.handleButtonChange.bind(this);
+    this.handleMazeChange = this.handleMazeChange.bind(this);
     window.gridComponent = this;
-    
   }
 
-  handleChange(event) {
+  handleAlgoChange(event) {
+    this.setState({ currentAlg: event.target.value });
+  }
+  handleButtonChange(event) {
     if (event.target.name === "distance") {
       this.setState(
         { previousVisualization: !this.state.previousVisualization },
@@ -64,10 +68,9 @@ class Grid extends Component {
           }
         }
       );
-    } else if (event.target.name === "choice") {
-      this.setState({ currentAlg: event.target.value });
     }
   }
+  handleMazeChange(event) {}
 
   onMouseDown = (cell) => {
     if (this.state.status === "running") {
@@ -188,8 +191,7 @@ class Grid extends Component {
         </div>
         <select
           value={this.state.currentAlg}
-          onChange={this.handleChange}
-          name="choice"
+          onChange={this.handleAlgoChange}
           disabled={this.state.status === "running"}
         >
           <option value="dijkstra">Dijkstra</option>
@@ -226,7 +228,7 @@ class Grid extends Component {
             }
             type="checkbox"
             defaultChecked={this.state.previousVisualization}
-            onChange={this.handleChange}
+            onChange={this.handleButtonChange}
             name="distance"
           ></input>
           <span className="slider round"></span>
@@ -237,7 +239,7 @@ class Grid extends Component {
             disabled={this.state.status === "running"}
             type="checkbox"
             defaultChecked={this.state.diagonalVisualization}
-            onChange={this.handleChange}
+            onChange={this.handleButtonChange}
             name="diagonal"
           ></input>
           <span className="slider round"></span>
@@ -251,7 +253,7 @@ class Grid extends Component {
             }
             type="checkbox"
             defaultChecked={this.state.optimizedVisualization}
-            onChange={this.handleChange}
+            onChange={this.handleButtonChange}
             name="optimized"
           ></input>
           <span className="slider round"></span>
