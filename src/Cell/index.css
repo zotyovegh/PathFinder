@@ -64,8 +64,8 @@
 }
 
 .cell-path {
-  border: 0.5px solid rgba(255, 196, 87, 0.782);
-  background-color: rgb(253, 245, 86);
+  border: 0.5px solid rgba(71, 86, 201, 0.433);
+    background-color: rgba(100, 118, 255, 0.905);
 }
 
 .cell-path-animated {
@@ -90,49 +90,49 @@
 
   10% {
     transform: scale(1.05);
-    background-color: rgb(84, 60, 0);
+    background-color: rgba(0, 1, 36, 0.61);
   }
 
   20% {
     transform: scale(1.1);
-    background-color: rgb(138, 94, 0);
+    background-color: rgba(0, 2, 61, 0.644);
   }
 
   40% {
     transform: scale(1.15);
-    background-color: rgb(208, 115, 26);
+    background-color: rgba(1, 4, 100, 0.645);
   }
 
   60% {
     transform: scale(1.1);
-    background-color: rgb(222, 154, 37);
+    background-color: rgba(22, 28, 201, 0.741);
   }
 
   80% {
     transform: scale(1.05);
-    background-color: rgb(255, 184, 32);
+    background-color: rgba(60, 66, 233, 0.57);
   }
 
   100% {
     transform: scale(1);
-    border: 0.5px solid rgba(255, 196, 87, 0.782);
-    background-color: rgb(253, 220, 86);
+    border: 0.5px solid rgba(71, 86, 201, 0.433);
+    background-color: rgba(100, 118, 255, 0.905);
   }
 }
 
 .cell-visited {
-  border: 0.5px solid rgba(87, 196, 255, 0.782);
-  background-color: rgb(86, 245, 253);
+  border: 0.5px solid rgb(252, 210, 73);
+  background-color: rgba(255, 234, 0, 0.541);
 }
 
 .cell-previous {
-  border: 0.5px solid rgba(0, 212, 220, 0.59);
-  background-color: rgba(0, 240, 248, 0.59);
+  border: 0.5px solid rgb(252, 210, 73);
+  background-color: rgba(255, 234, 0, 0.541);
 }
 
 .cell-current {
-  border: 0.5px solid rgb(39, 226, 92);
-  background-color: rgb(52, 255, 110);
+  border: 0.5px solid rgb(172, 103, 0);
+  background-color: rgb(218, 131, 0);
 }
 
 .cell-activepath {
@@ -163,17 +163,17 @@
 
   10% {
     transform: scale(0.2);
-    background-color: rgb(50, 44, 40);
+    background-color: rgb(39, 25, 2);
   }
 
   20% {
     transform: scale(0.3);
-    background-color:  rgb(169, 106, 13);
+    background-color: rgb(87, 55, 6);
   }
 
   40% {
     transform: scale(0.6);
-    background-color: rgb(169, 106, 13);
+    background-color: rgb(145, 92, 12);
   }
 
   60% {
@@ -188,8 +188,8 @@
 
   100% {
     transform: scale(1);
-    border: 0.5px solid rgba(87, 196, 255, 0.782);
-    background-color: rgb(255, 176, 57);
+    border: 0.5px solid rgb(252, 210, 73);
+    background-color: rgba(255, 234, 0, 0.541);
   }
 }
 
