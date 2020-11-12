@@ -7,9 +7,9 @@ export function aldousBroderMaze(originalGrid) {
     for (const cell of row) {
       cell.isWall = true;
       if (cell.row % 2 === 1 && cell.col % 2 === 1) {
-        cell.position = unvisitedCells.length;
+        cell.id = unvisitedCells.length;
         unvisitedCells.push(cell);
-        
+
         getNeighboringCells(cell, grid);
       }
     }
@@ -24,17 +24,19 @@ export function aldousBroderMaze(originalGrid) {
     if (!neighbor[1].visited) {
       neighbor[0].isWall = false;
       neighbor[1].isWall = false;
-      
+      unvisitedCells = unvisitedCells.filter(item => !(item.id = neighbor[1].id));
+      neighbor[1].visited = true;
     }
+    current = neighbor[1];
   }
-
+  console.log("ended");
   visualizeRandom(grid, unvisitedCells);
 }
 
 function takeRandomCell(unvisitedCells) {
   var position = Math.floor(Math.random() * unvisitedCells.length);
   var cell = unvisitedCells[position];
-  unvisitedCells.splice(position, 1);  
+  unvisitedCells.splice(position, 1);
   return cell;
 }
 
