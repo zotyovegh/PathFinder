@@ -45,7 +45,7 @@ export function visualizeRandom(grid, path) {
   }
 }
 
-export function visualize(grid) {
+export function visualizeABMaze(grid) {
   for (const row of grid) {
     for (const cell of row) {
       if (!cell.end && !cell.start) {

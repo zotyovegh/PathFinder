@@ -1,8 +1,9 @@
-import { visualize } from "../mazes/animations"; //Temporary, for testing
+import { visualizeABMaze } from "../mazes/animations"; //Temporary, for testing
 
 export function aldousBroderMaze(originalGrid) {
   var grid = JSON.parse(JSON.stringify(originalGrid));
   var unvisitedCells = [];
+  var visualizationList = [];
   for (const row of grid) {
     for (const cell of row) {
       cell.isWall = true;
@@ -19,22 +20,26 @@ export function aldousBroderMaze(originalGrid) {
   unvisitedCells.splice(0, 1);
   current.visited = true;
   current.isWall = false;
+  var count = 0;
 
-   while (!!unvisitedCells.length) {
+  while (!!unvisitedCells.length) {
+    count++;
     var neighbor =
       current.neighbors[Math.floor(Math.random() * current.neighbors.length)];
+    visualizationList.push(neighbor[0]);
+    visualizationList.push(neighbor[1]);
     if (!neighbor[1].visited) {
-      console.log(unvisitedCells.length);
       neighbor[0].isWall = false;
-      neighbor[1].isWall = false;     
+      neighbor[1].isWall = false;
+
       unvisitedCells = unvisitedCells.filter(
-        (item) => (item.id !== neighbor[1].id)
+        (item) => item.id !== neighbor[1].id
       );
       neighbor[1].visited = true;
     }
     current = neighbor[1];
   }
-  visualize(grid);
+  visualizeABMaze(visualizationList);
 }
 
 /*function takeRandomCell(unvisitedCells) {
