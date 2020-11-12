@@ -2,14 +2,14 @@ import { visualizeRandom } from "../mazes/animations"; //Temporary, for testing
 
 export function aldousBroderMaze(originalGrid) {
   var grid = JSON.parse(JSON.stringify(originalGrid));
-
   var unvisitedCells = [];
-
   for (const row of grid) {
     for (const cell of row) {
       cell.isWall = true;
       if (cell.row % 2 === 1 && cell.col % 2 === 1) {
+        cell.position = unvisitedCells.length;
         unvisitedCells.push(cell);
+        
         getNeighboringCells(cell, grid);
       }
     }
@@ -17,16 +17,24 @@ export function aldousBroderMaze(originalGrid) {
 
   var current = takeRandomCell(unvisitedCells);
   current.visited = true;
-  //while (!!unvisitedCells.length) {}
 
-  console.log(grid);
+  while (!!unvisitedCells.length) {
+    var neighbor =
+      current.neighbors[Math.floor(Math.random() * current.neighbors.length)];
+    if (!neighbor[1].visited) {
+      neighbor[0].isWall = false;
+      neighbor[1].isWall = false;
+      
+    }
+  }
+
   visualizeRandom(grid, unvisitedCells);
 }
 
 function takeRandomCell(unvisitedCells) {
   var position = Math.floor(Math.random() * unvisitedCells.length);
   var cell = unvisitedCells[position];
-  unvisitedCells.splice(position, 1);
+  unvisitedCells.splice(position, 1);  
   return cell;
 }
 
