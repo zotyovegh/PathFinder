@@ -7,13 +7,29 @@ export function aldousBroderMaze(originalGrid) {
 
   for (const row of grid) {
     for (const cell of row) {
-     
-      if(cell.row % 2 == 1 && cell.col % 2 == 1){ cell.isWall = true;
+     cell.isWall = true;
+      if(cell.row % 2 === 1 && cell.col % 2 === 1){ 
         unvisitedCells.push(cell);
       }
     }
   }
+
+  var current = takeRandomCell(unvisitedCells);
+  while(!!unvisitedCells.length) {
+
+  }
+
+
+
+
   visualizeRandom(grid, unvisitedCells);
+}
+
+function takeRandomCell(unvisitedCells) {
+  var position = Math.floor(Math.random() * unvisitedCells.length);
+  var cell = unvisitedCells[position];
+  unvisitedCells.splice(position, 1);  
+  return cell;
 }
 
 function getNeighboringCells(cell, grid) {
