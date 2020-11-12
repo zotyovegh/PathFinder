@@ -49,6 +49,7 @@ export function placeWall(cell) {
     visualizeCell("cell", "cell cell-wall-animated", cell);
   } else {
     visualizeCell("cell", "cell cell-empty", cell);
+    
   }
 
   visualizeCell("num", "num", newCell);
