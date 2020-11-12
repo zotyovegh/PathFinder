@@ -1,4 +1,4 @@
-import { visualizeRandom } from "../mazes/animations"; //Temporary, for testing
+import { visualize } from "../mazes/animations"; //Temporary, for testing
 
 export function aldousBroderMaze(originalGrid) {
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -18,19 +18,21 @@ export function aldousBroderMaze(originalGrid) {
   var current = takeRandomCell(unvisitedCells);
   current.visited = true;
 
-  while (!!unvisitedCells.length) {
+   while (!!unvisitedCells.length) {
     var neighbor =
       current.neighbors[Math.floor(Math.random() * current.neighbors.length)];
     if (!neighbor[1].visited) {
+      console.log(unvisitedCells.length);
       neighbor[0].isWall = false;
-      neighbor[1].isWall = false;
-      unvisitedCells = unvisitedCells.filter(item => !(item.id = neighbor[1].id));
+      neighbor[1].isWall = false;     
+      unvisitedCells = unvisitedCells.filter(
+        (item) => (item.id != neighbor[1].id)
+      );
       neighbor[1].visited = true;
     }
     current = neighbor[1];
   }
-  console.log("ended");
-  visualizeRandom(grid, unvisitedCells);
+  visualize(grid);
 }
 
 function takeRandomCell(unvisitedCells) {

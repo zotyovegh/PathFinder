@@ -44,3 +44,17 @@ export function visualizeRandom(grid, path) {
     }, 8 * i);
   }
 }
+
+export function visualize(grid) {
+  for (const row of grid) {
+    for (const cell of row) {
+      if (!cell.end && !cell.start) {
+        if(cell.isWall){
+          visualizeCell("cell", "cell cell-wall", cell);
+        }
+      }
+    }
+  }
+
+ 
+}
