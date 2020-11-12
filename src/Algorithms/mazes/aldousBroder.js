@@ -1,12 +1,19 @@
+import { visualizeRandom } from "../mazes/animations"; //Temporary, for testing
+
 export function aldousBroderMaze(originalGrid) {
   var grid = JSON.parse(JSON.stringify(originalGrid));
 
+  var unvisitedCells = [];
+
   for (const row of grid) {
     for (const cell of row) {
-      cell.isWall = true;
+     
+      if(cell.row % 2 == 1 && cell.col % 2 == 1){ cell.isWall = true;
+        unvisitedCells.push(cell);
+      }
     }
   }
-  console.log(grid);
+  visualizeRandom(grid, unvisitedCells);
 }
 
 function getNeighboringCells(cell, grid) {
