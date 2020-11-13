@@ -1,6 +1,11 @@
-import { visualizeABMaze } from "../mazes/animations"; //Temporary, for testing
+import { visualizeABMaze } from "../mazes/animations";
+import {
+  clearWithStatus,
+  clearInfinityVariables,
+} from "../../Algorithms/cleaning";
 
 export function aldousBroderMaze(originalGrid) {
+  clearWithStatus("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
   var unvisitedCells = [];
   var visualizationList = [];
@@ -36,6 +41,8 @@ export function aldousBroderMaze(originalGrid) {
     }
     current = neighbor[1];
   }
+  clearInfinityVariables(grid);
+  window.gridComponent.setState({ grid: grid });
   visualizeABMaze(grid, visualizationList);
 }
 
