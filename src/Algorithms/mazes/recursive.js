@@ -2,7 +2,7 @@ import {
   clearWithStatus,
   clearInfinityVariables,
 } from "../../Algorithms/cleaning";
-import {visualize} from "../mazes/animations";
+import { visualize } from "../mazes/animations";
 export function recursiveMaze(originalGrid) {
   clearWithStatus("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -16,21 +16,22 @@ export function recursiveMaze(originalGrid) {
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
   //visualization
+  console.log(grid);
   visualize(grid);
 }
 
 function recursion(grid, currentCell) {
-  
   currentCell.visited = true;
   currentCell.isWall = false;
-  var neighboringUnvisitedPairs = getNeighboringCells(currentCell, grid);
-  if (neighboringUnvisitedPairs.length > 0) {
-    var randomPair =
-      neighboringUnvisitedPairs[
-        Math.floor(Math.random() * neighboringUnvisitedPairs.length)
-      ];
-    randomPair[0].isWall = false;
-    recursion(grid, randomPair[1]);
+  currentCell.neighbors = getNeighboringCells(currentCell, grid);
+  while (currentCell.neighbors.length > 0) {
+    var position = Math.floor(Math.random() * currentCell.neighbors.length);
+    var randomPair = currentCell.neighbors[position];
+    currentCell.neighbors.splice(position, 1);
+    if (!randomPair[1].visited) {
+      randomPair[0].isWall = false;      
+      recursion(grid, randomPair[1]);
+    }
   }
 }
 
