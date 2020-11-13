@@ -5,8 +5,8 @@ import { createGrid, placeWall } from "../Algorithms/methods";
 import { clearVisitedCells, clearWithStatus } from "../Algorithms/cleaning";
 import { getRandomMazedGrid } from "../Algorithms/mazes/default";
 import { primMaze } from "../Algorithms/mazes/prim";
-import { iterativeMaze } from "../Algorithms/mazes/iterative";
-import { recursiveMaze } from "../Algorithms/mazes/recursive";
+import { iterativeMaze } from "../Algorithms/mazes/iterativeDF";
+import { recursiveMaze } from "../Algorithms/mazes/recursiveDF";
 import { aldousBroderMaze } from "../Algorithms/mazes/aldousBroder";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
@@ -284,8 +284,8 @@ class Grid extends Component {
           </option>
           <option value="random">Random</option>
           <option value="prim">Prim</option>
-          <option value="iterative">Iterative</option>
-          <option value="recursive">Recursive</option>
+          <option value="iterative">Iterative Depth-first</option>
+          <option value="recursive">Recursive Depth-first</option>
           <option value="aldousBroder">Aldous-Broder</option>
         </select>
       </div>

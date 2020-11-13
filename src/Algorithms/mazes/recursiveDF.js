@@ -1,9 +1,9 @@
 import {
   clearWithStatus,
   clearInfinityVariables,
-} from "../../Algorithms/cleaning";
-import { visualizeOnWalledGrid } from "../mazes/animations";
-export function iterativeMaze(originalGrid) {
+} from "../cleaning";
+import { visualizeOnWalledGrid } from "./animations";
+export function recursiveMaze(originalGrid) {
   clearWithStatus("path");
   var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -13,40 +13,28 @@ export function iterativeMaze(originalGrid) {
     }
   }
   var currentCell = grid[1][1];
-  currentCell.visited = true;
-  currentCell.isWall = false;
-  path.push(currentCell);
-  var cellsWithUnvisitedNeighbors = [];
-  cellsWithUnvisitedNeighbors.push(currentCell);
-
-  while (!!cellsWithUnvisitedNeighbors.length) {
-    currentCell = takeLastCell(cellsWithUnvisitedNeighbors);
-    var neighboringUnvisitedPairs = getNeighboringCells(currentCell, grid);
-    if (neighboringUnvisitedPairs.length > 0) {
-      cellsWithUnvisitedNeighbors.push(currentCell);
-      var randomPair =
-        neighboringUnvisitedPairs[
-          Math.floor(Math.random() * neighboringUnvisitedPairs.length)
-        ];
-      randomPair[0].isWall = false;
-      randomPair[1].isWall = false;
-      randomPair[1].visited = true;
-      path.push(randomPair[0]);
-      path.push(randomPair[1]);
-      cellsWithUnvisitedNeighbors.push(randomPair[1]);
-    }
-  }
-
+  recursion(grid, currentCell, path);
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
+  //visualization
   visualizeOnWalledGrid(grid, path);
 }
 
-function takeLastCell(cellsWithUnvisitedNeighbors) {
-  var position = cellsWithUnvisitedNeighbors.length - 1;
-  var cell = cellsWithUnvisitedNeighbors[position];
-  cellsWithUnvisitedNeighbors.splice(position, 1);
-  return cell;
+function recursion(grid, currentCell, path) {
+  currentCell.visited = true;
+  currentCell.isWall = false;
+  path.push(currentCell);
+  currentCell.neighbors = getNeighboringCells(currentCell, grid);
+  while (currentCell.neighbors.length > 0) {
+    var position = Math.floor(Math.random() * currentCell.neighbors.length);
+    var randomPair = currentCell.neighbors[position];
+    currentCell.neighbors.splice(position, 1);
+    if (!randomPair[1].visited) {
+      randomPair[0].isWall = false;
+      path.push(randomPair[0]);
+      recursion(grid, randomPair[1], path);
+    }
+  }
 }
 
 function getNeighboringCells(cell, grid) {
