@@ -15,7 +15,6 @@ export function aldousBroderMaze(originalGrid) {
       if (cell.row % 2 === 1 && cell.col % 2 === 1) {
         cell.id = unvisitedCells.length;
         unvisitedCells.push(cell);
-
         getNeighboringCells(cell, grid);
       }
     }
