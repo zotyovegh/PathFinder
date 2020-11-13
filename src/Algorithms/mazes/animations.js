@@ -76,3 +76,15 @@ export function visualizeABMaze(grid, path) {
     }, 10 * i);
   }
 }
+
+export function visualize(grid) {
+  for (const row of grid) {
+    for (const cell of row) {
+      if (!cell.end && !cell.start) {
+        if (cell.isWall) {
+          visualizeCell("cell", "cell cell-wall", cell);
+        }
+      }
+    }
+  }
+}
