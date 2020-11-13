@@ -6,6 +6,7 @@ import { clearVisitedCells, clearWithStatus } from "../Algorithms/cleaning";
 import { getRandomMazedGrid } from "../Algorithms/mazes/default";
 import { primMaze } from "../Algorithms/mazes/prim";
 import { iterativeMaze } from "../Algorithms/mazes/iterative";
+import { recursiveMaze } from "../Algorithms/mazes/recursive";
 import { aldousBroderMaze } from "../Algorithms/mazes/aldousBroder";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
@@ -75,20 +76,16 @@ class Grid extends Component {
   }
   handleMazeChange(event) {
     if (event.target.value === "random") {
-      console.log("random");
       getRandomMazedGrid(this.state.grid);
     } else if (event.target.value === "prim") {
-      console.log("prim");
       primMaze(this.state.grid);
     } else if (event.target.value === "iterative") {
-      console.log("iterative");
       iterativeMaze(this.state.grid);
-    }else if (event.target.value === "aldousBroder") {
-      console.log("aldousBroder");
+    } else if (event.target.value === "recursive") {
+      recursiveMaze(this.state.grid);
+    } else if (event.target.value === "aldousBroder") {
       aldousBroderMaze(this.state.grid);
     }
-    
-    
   }
 
   onMouseDown = (cell) => {
@@ -288,6 +285,7 @@ class Grid extends Component {
           <option value="random">Random</option>
           <option value="prim">Prim</option>
           <option value="iterative">Iterative</option>
+          <option value="recursive">Recursive</option>
           <option value="aldousBroder">Aldous-Broder</option>
         </select>
       </div>

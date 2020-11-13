@@ -2,7 +2,7 @@ import {
   clearWithStatus,
   clearInfinityVariables,
 } from "../../Algorithms/cleaning";
-import { visualizeOnWalledGrid } from "../mazes/animations";
+import {} from "../mazes/animations";
 export function recursiveMaze(originalGrid) {
   clearWithStatus("path");
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -11,12 +11,9 @@ export function recursiveMaze(originalGrid) {
       cell.isWall = true;
     }
   }
-
-
-
- 
+  
 
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
- //visualization
+  //visualization
 }
