@@ -45,16 +45,34 @@ export function visualizeRandom(grid, path) {
   }
 }
 
-export function visualizeABMaze(grid) {
+export function visualizeABMaze(grid, path) {
+  window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
       if (!cell.end && !cell.start) {
-        if(cell.isWall){
-          visualizeCell("cell", "cell cell-wall", cell);
-        }
+        visualizeCell("cell", "cell cell-wall", cell);
       }
     }
   }
-
- 
+  var previous = null;
+  for (let i = 0; i <= path.length; i++) {
+    setTimeout(() => {
+      if (i === path.length) {
+        window.gridComponent.setState({ status: "pending" });
+        visualizeCell("cell", "cell cell-empty", path[path.length - 1]);
+        return;
+      }
+      if (previous !== null) {
+        if (previous.isWall) {
+          visualizeCell("cell", "cell cell-wall", previous);
+        } else {
+          visualizeCell("cell", "cell cell-empty", previous);
+        }
+      }
+      if (!path[i].end && !path[i].start) {
+        visualizeCell("cell", "cell cell-current", path[i]);
+        previous = path[i];
+      }
+    }, 10 * i);
+  }
 }

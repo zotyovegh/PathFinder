@@ -20,10 +20,8 @@ export function aldousBroderMaze(originalGrid) {
   unvisitedCells.splice(0, 1);
   current.visited = true;
   current.isWall = false;
-  var count = 0;
 
   while (!!unvisitedCells.length) {
-    count++;
     var neighbor =
       current.neighbors[Math.floor(Math.random() * current.neighbors.length)];
     visualizationList.push(neighbor[0]);
@@ -31,7 +29,6 @@ export function aldousBroderMaze(originalGrid) {
     if (!neighbor[1].visited) {
       neighbor[0].isWall = false;
       neighbor[1].isWall = false;
-
       unvisitedCells = unvisitedCells.filter(
         (item) => item.id !== neighbor[1].id
       );
@@ -39,7 +36,7 @@ export function aldousBroderMaze(originalGrid) {
     }
     current = neighbor[1];
   }
-  visualizeABMaze(visualizationList);
+  visualizeABMaze(grid, visualizationList);
 }
 
 /*function takeRandomCell(unvisitedCells) {
