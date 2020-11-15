@@ -77,14 +77,8 @@ export function visualizeABMaze(grid, path) {
   }
 }
 
-export function visualize(grid) {
-  for (const row of grid) {
-    for (const cell of row) {
-      if (!cell.end && !cell.start) {
-        if (cell.isWall) {
-          visualizeCell("cell", "cell cell-wall", cell);
-        }
-      }
-    }
+export function visualize(list) {
+  for (const cell of list) {
+    visualizeCell("cell", "cell cell-wall", cell);
   }
 }
