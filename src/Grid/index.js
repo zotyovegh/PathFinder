@@ -8,6 +8,7 @@ import { primMaze } from "../Algorithms/mazes/prim";
 import { iterativeMaze } from "../Algorithms/mazes/iterativeDF";
 import { recursiveMaze } from "../Algorithms/mazes/recursiveDF";
 import { aldousBroderMaze } from "../Algorithms/mazes/aldousBroder";
+import { kruskalMaze } from "../Algorithms/mazes/kruskal";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
 
@@ -83,8 +84,10 @@ class Grid extends Component {
       iterativeMaze(this.state.grid);
     } else if (event.target.value === "recursive") {
       recursiveMaze(this.state.grid);
-    } else if (event.target.value === "aldousBroder") {
+    } else if (event.target.value === "aldousBroder"){
       aldousBroderMaze(this.state.grid);
+    }else if (event.target.value === "kruskal"){
+      kruskalMaze(this.state.grid);
     }
   }
 
@@ -287,6 +290,7 @@ class Grid extends Component {
           <option value="iterative">Iterative Depth-first</option>
           <option value="recursive">Recursive Depth-first</option>
           <option value="aldousBroder">Aldous-Broder</option>
+          <option value="kruskal">Kruskal</option>
         </select>
       </div>
     );
