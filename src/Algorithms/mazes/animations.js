@@ -78,7 +78,9 @@ export function visualizeABMaze(grid, path) {
 }
 
 export function visualize(list) {
-  for (const cell of list) {
-    visualizeCell("cell", "cell cell-wall", cell);
+  for (let i = 0; i <= list.length - 1; i++) {
+    setTimeout(() => {
+      visualizeCell("cell", "cell cell-wall", list[i]);
+    }, 10 * i);
   }
 }
