@@ -34,8 +34,8 @@ export function kruskalMaze(originalGrid) {
   shuffleArray(validWalls);
 
   for (const wall of validWalls) {
-    var first = map.get(wall.neighbors[0]);
-    var second = map.get(wall.neighbors[1]);
+    const first = map.get(wall.neighbors[0]);
+    const second = map.get(wall.neighbors[1]);
     if (first !== second) {
       map.forEach((value, key) => {
         if (value === second) {

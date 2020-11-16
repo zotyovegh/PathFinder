@@ -54,6 +54,7 @@ export function visualizeABMaze(grid, path) {
       }
     }
   }
+
   var previous = null;
   for (let i = 0; i <= path.length; i++) {
     setTimeout(() => {

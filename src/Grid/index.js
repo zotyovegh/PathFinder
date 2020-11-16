@@ -28,7 +28,7 @@ class Grid extends Component {
       currentAlg: "dijkstra",
       currentMaze: "default",
       previousVisualization: false,
-      diagonalVisualization: true,
+      diagonalVisualization: false,
       optimizedVisualization: true,
     };
     this.handleAlgoChange = this.handleAlgoChange.bind(this);

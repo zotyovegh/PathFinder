@@ -26,7 +26,7 @@ export function aldousBroderMaze(originalGrid) {
   current.isWall = false;
 
   while (!!unvisitedCells.length) {
-    var neighbor =
+    const neighbor =
       current.neighbors[Math.floor(Math.random() * current.neighbors.length)];
     visualizationList.push(neighbor[0]);
     visualizationList.push(neighbor[1]);
