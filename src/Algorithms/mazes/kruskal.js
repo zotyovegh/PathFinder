@@ -38,10 +38,12 @@ export function kruskalMaze(originalGrid) {
 
   for (let i = 0; i < validWalls.length - 1; i++) {
     var wall = validWalls[i];
-    if (map.get(wall.neighbors[0]) !== map.get(wall.neighbors[1])) {
+    var first = map.get(wall.neighbors[0]);
+    var second = map.get(wall.neighbors[1]);
+    if (first !== second) {
       map.forEach((value, key) => {
-        if (value === map.get(wall.neighbors[1])) {
-          map.set(key, map.get(wall.neighbors[0]));
+        if (value === second) {
+          map.set(key, first);
         }
       });
 
@@ -51,7 +53,7 @@ export function kruskalMaze(originalGrid) {
       console.log("does not equal");
     }
   }
-  console.log(map);
+  console.log(validWalls);
 
   visualize(grid);
 }
