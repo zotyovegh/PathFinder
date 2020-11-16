@@ -8,7 +8,6 @@ export function kruskalMaze(originalGrid) {
   var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   var idCounter = 0;
-  // var potentialCells = [];
   var validWalls = [];
   var map = new Map();
   for (const row of grid) {
@@ -16,8 +15,6 @@ export function kruskalMaze(originalGrid) {
       cell.isWall = true;
       if (cell.row % 2 === 1 && cell.col % 2 === 1) {
         //CELLS
-        // potentialCells.push(cell);
-
         map.set(cell, idCounter++);
       } else if (cell.row % 2 === 1 || cell.col % 2 === 1) {
         if (
@@ -47,15 +44,17 @@ export function kruskalMaze(originalGrid) {
         }
       });
 
-      wall.isWall = false;
       wall.neighbors[0].isWall = false;
+      wall.isWall = false;
       wall.neighbors[1].isWall = false;
-      console.log("does not equal");
+
+      if (!path.includes(wall.neighbors[0])) path.push(wall.neighbors[0]);
+      if (!path.includes(wall)) path.push(wall);
+      if (!path.includes(wall.neighbors[1])) path.push(wall.neighbors[1]);
     }
   }
-  console.log(validWalls);
 
-  visualize(grid);
+  visualizeOnWalledGrid(grid, path);
 }
 
 function getSurroundingCells(wall, grid) {
