@@ -18,12 +18,7 @@ export function kruskalMaze(originalGrid) {
         //CELLS
         // potentialCells.push(cell);
 
-        var values = map.get(cell);
-        if (values) {
-          values.push(cell);
-        } else {
-          map.set(idCounter++, [cell]);
-        }
+        map.set(cell, idCounter++);
       } else if (cell.row % 2 === 1 || cell.col % 2 === 1) {
         if (
           cell.row !== 0 &&
@@ -38,12 +33,24 @@ export function kruskalMaze(originalGrid) {
       }
     }
   }
-  console.log(validWalls);
-  // shuffleArray(validWalls);
 
-  visualize(validWalls);
+  for(let i = 0; i < validWalls.length-1; i++) {    
+    var wall = validWalls[i];
+    if (map.get(wall.neighbors[0]) !== map.get(wall.neighbors[1])) {
+      map.forEach((value, key) => {
+        if (value === map.get(wall.neighbors[1])) {
+          map.set(key, map.get(wall.neighbors[0]));
+          wall.isWall = false;
+        }
+      });
+
+      console.log("does not equal");
+    }
+  }
+  console.log(map);
+
+  visualize(grid);
 }
-
 function getSurroundingCells(wall, grid) {
   var { col, row } = wall;
   if (wall.row % 2 === 1) {
@@ -52,14 +59,5 @@ function getSurroundingCells(wall, grid) {
   } else {
     wall.neighbors.push(grid[row - 1][col]);
     wall.neighbors.push(grid[row + 1][col]);
-  }
-}
-
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
   }
 }
