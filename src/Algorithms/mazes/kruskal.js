@@ -2,7 +2,7 @@ import {
   clearWithStatus,
   clearInfinityVariables,
 } from "../../Algorithms/cleaning";
-import { visualizeOnWalledGrid, visualize } from "../mazes/animations";
+import { visualizeOnWalledGrid } from "../mazes/animations";
 export function kruskalMaze(originalGrid) {
   clearWithStatus("path");
   var path = [];
@@ -33,8 +33,7 @@ export function kruskalMaze(originalGrid) {
 
   shuffleArray(validWalls);
 
-  for (let i = 0; i < validWalls.length - 1; i++) {
-    var wall = validWalls[i];
+  for (const wall of validWalls) {
     var first = map.get(wall.neighbors[0]);
     var second = map.get(wall.neighbors[1]);
     if (first !== second) {
@@ -53,7 +52,7 @@ export function kruskalMaze(originalGrid) {
       if (!path.includes(wall.neighbors[1])) path.push(wall.neighbors[1]);
     }
   }
-
+  clearInfinityVariables(grid);
   visualizeOnWalledGrid(grid, path);
 }
 
