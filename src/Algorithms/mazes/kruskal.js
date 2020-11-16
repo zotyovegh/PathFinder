@@ -34,16 +34,20 @@ export function kruskalMaze(originalGrid) {
     }
   }
 
-  for(let i = 0; i < validWalls.length-1; i++) {    
+  shuffleArray(validWalls);
+
+  for (let i = 0; i < validWalls.length - 1; i++) {
     var wall = validWalls[i];
     if (map.get(wall.neighbors[0]) !== map.get(wall.neighbors[1])) {
       map.forEach((value, key) => {
         if (value === map.get(wall.neighbors[1])) {
           map.set(key, map.get(wall.neighbors[0]));
-          wall.isWall = false;
         }
       });
 
+      wall.isWall = false;
+      wall.neighbors[0].isWall = false;
+      wall.neighbors[1].isWall = false;
       console.log("does not equal");
     }
   }
@@ -51,6 +55,7 @@ export function kruskalMaze(originalGrid) {
 
   visualize(grid);
 }
+
 function getSurroundingCells(wall, grid) {
   var { col, row } = wall;
   if (wall.row % 2 === 1) {
@@ -59,5 +64,14 @@ function getSurroundingCells(wall, grid) {
   } else {
     wall.neighbors.push(grid[row - 1][col]);
     wall.neighbors.push(grid[row + 1][col]);
+  }
+}
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
 }
