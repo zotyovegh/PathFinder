@@ -19,16 +19,28 @@ export function wilsonMaze(originalGrid) {
     }
   }
   var currentPath = [];
+
   var start = takeRandomCell(unvisitedCells);
   var aim = takeRandomCell(unvisitedCells);
   var nextCell = start;
-  while (nextCell !== aim) {
+  var foundVisited = false;
+  while (nextCell !== aim && !foundVisited) {
     var newCell =
       nextCell.neighbors[Math.floor(Math.random() * nextCell.neighbors.length)];
     nextCell.direction = newCell[2];
     nextCell = newCell[1];
+
+    if (
+      unvisitedCells.includes(nextCell) &&
+      nextCell !== start &&
+      nextCell !== aim
+    ) {
+      foundVisited = true;
+    }
   }
+
   removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells);
+
 
   //clearInfinityVariables(grid);
   visualize(grid, currentPath);
@@ -42,13 +54,10 @@ function takeRandomCell(unvisitedCells) {
 }
 
 function removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells) {
-  var count = 1;
   nextCell = start;
   while (nextCell !== aim) {
     if (nextCell !== start) {
-      unvisitedCells = unvisitedCells.filter(
-        (cell) => cell.id !== nextCell.id
-      );
+      unvisitedCells = unvisitedCells.filter((cell) => cell.id !== nextCell.id);
     }
     var { col, row } = nextCell;
     currentPath.push(nextCell);
@@ -70,8 +79,6 @@ function removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells) {
       nextCell = grid[row][col - 2];
     }
   }
-  console.log("Count " + count);
-  console.log(unvisitedCells);
 }
 
 function getNeighboringCells(cell, grid) {
