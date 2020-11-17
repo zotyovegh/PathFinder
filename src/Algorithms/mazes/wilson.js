@@ -18,14 +18,23 @@ export function wilsonMaze(originalGrid) {
       }
     }
   }
+  var start = takeRandomCell(unvisitedCells);
+  var aim = takeRandomCell(unvisitedCells);
+  var nextCell = null;
+  console.log(aim);
+  /*while(nextCell !== aim){
+    
+  }*/
 
+  //clearInfinityVariables(grid);
+  // visualize(grid, unvisitedCells);
+}
 
-
-
-
-  
-  clearInfinityVariables(grid);
-  visualize(grid, unvisitedCells);
+function takeRandomCell(unvisitedCells) {
+  var position = Math.floor(Math.random() * unvisitedCells.length);
+  var cell = unvisitedCells[position];
+  unvisitedCells.splice(position, 1);
+  return cell;
 }
 
 function getNeighboringCells(cell, grid) {
