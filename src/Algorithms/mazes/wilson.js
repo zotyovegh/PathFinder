@@ -20,18 +20,38 @@ export function wilsonMaze(originalGrid) {
   }
   var currentPath = [];
   var start = takeRandomCell(unvisitedCells);
-  currentPath.push(start);
   var aim = takeRandomCell(unvisitedCells);
   var nextCell = start;
   console.log(aim);
   while (nextCell !== aim) {
     var newCell =
       nextCell.neighbors[Math.floor(Math.random() * nextCell.neighbors.length)];
-    currentPath.push(newCell[0]);
-    currentPath.push(newCell[1]);
     nextCell.direction = newCell[2];
     nextCell = newCell[1];
   }
+  nextCell = start;
+  while (nextCell !== aim) {
+    var { col, row } = nextCell;
+    currentPath.push(nextCell);
+    if (nextCell.direction === "UP") {
+      currentPath.push(grid[row - 1][col]);
+      currentPath.push(grid[row - 2][col]);
+      nextCell = grid[row - 2][col];
+    } else if (nextCell.direction === "DOWN") {
+      currentPath.push(grid[row + 1][col]);
+      currentPath.push(grid[row + 2][col]);
+      nextCell = grid[row + 2][col];
+    } else if (nextCell.direction === "RIGHT") {
+      currentPath.push(grid[row][col + 1]);
+      currentPath.push(grid[row][col + 2]);
+      nextCell = grid[row][col + 2];
+    } else if (nextCell.direction === "LEFT") {
+      currentPath.push(grid[row][col - 1]);
+      currentPath.push(grid[row][col - 2]);
+      nextCell = grid[row][col - 2];
+    }
+  }
+
   console.log(currentPath);
   //clearInfinityVariables(grid);
   visualize(grid, currentPath);
