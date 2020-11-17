@@ -25,14 +25,16 @@ export function wilsonMaze(originalGrid) {
   var nextCell = start;
   console.log(aim);
   while (nextCell !== aim) {
-    var newCell = nextCell.neighbors[Math.floor(Math.random() * nextCell.neighbors.length)];
+    var newCell =
+      nextCell.neighbors[Math.floor(Math.random() * nextCell.neighbors.length)];
     currentPath.push(newCell[0]);
     currentPath.push(newCell[1]);
+    nextCell.direction = newCell[2];
     nextCell = newCell[1];
   }
-  console.log("done");
+  console.log(currentPath);
   //clearInfinityVariables(grid);
-   visualize(grid, currentPath);
+  visualize(grid, currentPath);
 }
 
 function takeRandomCell(unvisitedCells) {
@@ -48,21 +50,21 @@ function getNeighboringCells(cell, grid) {
   if (row > 1) {
     //UP
     var neighbor = grid[row - 1][col];
-    cell.neighbors.push([neighbor, grid[row - 2][col]]);
+    cell.neighbors.push([neighbor, grid[row - 2][col], "UP"]);
   }
   if (col < grid[0].length - 2) {
     //Right
     let neighbor = grid[row][col + 1];
-    cell.neighbors.push([neighbor, grid[row][col + 2]]);
+    cell.neighbors.push([neighbor, grid[row][col + 2], "RIGHT"]);
   }
   if (row < grid.length - 2) {
     //Down
     let neighbor = grid[row + 1][col];
-    cell.neighbors.push([neighbor, grid[row + 2][col]]);
+    cell.neighbors.push([neighbor, grid[row + 2][col], "DOWN"]);
   }
   if (col > 1) {
     //Left
     let neighbor = grid[row][col - 1];
-    cell.neighbors.push([neighbor, grid[row][col - 2]]);
+    cell.neighbors.push([neighbor, grid[row][col - 2], "LEFT"]);
   }
 }

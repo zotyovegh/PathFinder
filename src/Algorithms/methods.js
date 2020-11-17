@@ -16,6 +16,7 @@ export function createGrid(props) {
         visited: false,
         isWall: false,
         previous: null,
+        direction: "",
         //TODO: ASTAR scenario (this variables shall be handled differently later)
         f: Infinity,
         g: Infinity,
