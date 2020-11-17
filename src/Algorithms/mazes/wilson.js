@@ -18,16 +18,21 @@ export function wilsonMaze(originalGrid) {
       }
     }
   }
+  var currentPath = [];
   var start = takeRandomCell(unvisitedCells);
+  currentPath.push(start);
   var aim = takeRandomCell(unvisitedCells);
-  var nextCell = null;
+  var nextCell = start;
   console.log(aim);
-  /*while(nextCell !== aim){
-    
-  }*/
-
+  while (nextCell !== aim) {
+    var newCell = nextCell.neighbors[Math.floor(Math.random() * nextCell.neighbors.length)];
+    currentPath.push(newCell[0]);
+    currentPath.push(newCell[1]);
+    nextCell = newCell[1];
+  }
+  console.log("done");
   //clearInfinityVariables(grid);
-  // visualize(grid, unvisitedCells);
+   visualize(grid, currentPath);
 }
 
 function takeRandomCell(unvisitedCells) {
