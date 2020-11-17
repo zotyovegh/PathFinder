@@ -29,6 +29,21 @@ export function wilsonMaze(originalGrid) {
     nextCell.direction = newCell[2];
     nextCell = newCell[1];
   }
+  removeCycle(nextCell, start, aim, currentPath, grid)
+
+  console.log(currentPath);
+  //clearInfinityVariables(grid);
+  visualize(grid, currentPath);
+}
+
+function takeRandomCell(unvisitedCells) {
+  var position = Math.floor(Math.random() * unvisitedCells.length);
+  var cell = unvisitedCells[position];
+  unvisitedCells.splice(position, 1);
+  return cell;
+}
+
+function removeCycle(nextCell, start, aim, currentPath, grid) {
   nextCell = start;
   while (nextCell !== aim) {
     var { col, row } = nextCell;
@@ -51,17 +66,6 @@ export function wilsonMaze(originalGrid) {
       nextCell = grid[row][col - 2];
     }
   }
-
-  console.log(currentPath);
-  //clearInfinityVariables(grid);
-  visualize(grid, currentPath);
-}
-
-function takeRandomCell(unvisitedCells) {
-  var position = Math.floor(Math.random() * unvisitedCells.length);
-  var cell = unvisitedCells[position];
-  unvisitedCells.splice(position, 1);
-  return cell;
 }
 
 function getNeighboringCells(cell, grid) {
