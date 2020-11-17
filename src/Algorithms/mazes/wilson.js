@@ -18,20 +18,14 @@ export function wilsonMaze(originalGrid) {
       }
     }
   }
-  var currentPath = [];
 
-  console.log(unvisitedCells.length);
-  for (let i = 0; i < 2; i++) {
+  while (!!unvisitedCells.length) {
     var start = takeRandomCell(unvisitedCells);
     var aim = takeRandomCell(unvisitedCells);
-    start.isWall = false;
-    aim.isWall = false;
-    console.log(start);
-    console.log(aim);
+    
     var nextCell = start;
     var foundVisited = false;
     while (nextCell !== aim && !foundVisited) {
-      console.log("hi");
       var newCell =
         nextCell.neighbors[
           Math.floor(Math.random() * nextCell.neighbors.length)
@@ -39,12 +33,11 @@ export function wilsonMaze(originalGrid) {
       nextCell.direction = newCell[2];
       nextCell = newCell[1];
 
-      if (!nextCell.isWall && nextCell !== aim && nextCell !== start) {
-        console.log(nextCell);
-        foundVisited = true;
+      if (!nextCell.isWall) {
+        aim = nextCell;         
       }
     }
-    removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells);
+    removeCycle(nextCell, start, aim, grid, unvisitedCells);
   }
 
   //clearInfinityVariables(grid);
@@ -66,14 +59,16 @@ function takeRandomCell(unvisitedCells) {
   return cell;
 }
 
-function removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells) {
+function removeCycle(nextCell, start, aim, grid, unvisitedCells) {
   nextCell = start;
+  start.isWall = false;
+  aim.isWall = false;
+
   while (nextCell !== aim) {
     if (nextCell !== start) {
       unvisitedCells = unvisitedCells.filter((cell) => cell.id !== nextCell.id);
     }
     var { col, row } = nextCell;
-    currentPath.push(nextCell);
     if (nextCell.direction === "UP") {
       grid[row - 1][col].isWall = false;
       grid[row - 2][col].isWall = false;
