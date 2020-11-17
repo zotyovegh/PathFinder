@@ -20,30 +20,43 @@ export function wilsonMaze(originalGrid) {
   }
   var currentPath = [];
 
-  var start = takeRandomCell(unvisitedCells);
-  var aim = takeRandomCell(unvisitedCells);
-  var nextCell = start;
-  var foundVisited = false;
-  while (nextCell !== aim && !foundVisited) {
-    var newCell =
-      nextCell.neighbors[Math.floor(Math.random() * nextCell.neighbors.length)];
-    nextCell.direction = newCell[2];
-    nextCell = newCell[1];
+  console.log(unvisitedCells.length);
+  for (let i = 0; i < 2; i++) {
+    var start = takeRandomCell(unvisitedCells);
+    var aim = takeRandomCell(unvisitedCells);
+    start.isWall = false;
+    aim.isWall = false;
+    console.log(start);
+    console.log(aim);
+    var nextCell = start;
+    var foundVisited = false;
+    while (nextCell !== aim && !foundVisited) {
+      console.log("hi");
+      var newCell =
+        nextCell.neighbors[
+          Math.floor(Math.random() * nextCell.neighbors.length)
+        ];
+      nextCell.direction = newCell[2];
+      nextCell = newCell[1];
 
-    if (
-      unvisitedCells.includes(nextCell) &&
-      nextCell !== start &&
-      nextCell !== aim
-    ) {
-      foundVisited = true;
+      if (!nextCell.isWall && nextCell !== aim && nextCell !== start) {
+        console.log(nextCell);
+        foundVisited = true;
+      }
     }
+    removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells);
   }
 
-  removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells);
-
-
   //clearInfinityVariables(grid);
-  visualize(grid, currentPath);
+  visualize(grid);
+}
+
+function clearDirections(grid) {
+  for (const row of grid) {
+    for (const cell of row) {
+      cell.direction = "";
+    }
+  }
 }
 
 function takeRandomCell(unvisitedCells) {
@@ -62,23 +75,24 @@ function removeCycle(nextCell, start, aim, currentPath, grid, unvisitedCells) {
     var { col, row } = nextCell;
     currentPath.push(nextCell);
     if (nextCell.direction === "UP") {
-      currentPath.push(grid[row - 1][col]);
-      currentPath.push(grid[row - 2][col]);
+      grid[row - 1][col].isWall = false;
+      grid[row - 2][col].isWall = false;
       nextCell = grid[row - 2][col];
     } else if (nextCell.direction === "DOWN") {
-      currentPath.push(grid[row + 1][col]);
-      currentPath.push(grid[row + 2][col]);
+      grid[row + 1][col].isWall = false;
+      grid[row + 2][col].isWall = false;
       nextCell = grid[row + 2][col];
     } else if (nextCell.direction === "RIGHT") {
-      currentPath.push(grid[row][col + 1]);
-      currentPath.push(grid[row][col + 2]);
+      grid[row][col + 1].isWall = false;
+      grid[row][col + 2].isWall = false;
       nextCell = grid[row][col + 2];
     } else if (nextCell.direction === "LEFT") {
-      currentPath.push(grid[row][col - 1]);
-      currentPath.push(grid[row][col - 2]);
+      grid[row][col - 1].isWall = false;
+      grid[row][col - 2].isWall = false;
       nextCell = grid[row][col - 2];
     }
   }
+  clearDirections(grid);
 }
 
 function getNeighboringCells(cell, grid) {

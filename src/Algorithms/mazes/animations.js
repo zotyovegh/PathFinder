@@ -79,7 +79,7 @@ export function visualizeABMaze(grid, path) {
 }
 
 export function visualize(grid, path) {
-  for (const row of grid) {
+ /* for (const row of grid) {
     for (const cell of row) {
       visualizeCell("cell", "cell cell-wall", cell);
     }
@@ -87,15 +87,15 @@ export function visualize(grid, path) {
   for (let i = 0; i <= path.length - 1; i++) {
     visualizeCell("cell", "cell cell-empty", path[i]);
   }
-
-  /* for (const row of grid) {
+*/
+   for (const row of grid) {
     for (const cell of row) {
       visualizeCell("cell", "cell cell-wall", cell);
       if (!cell.isWall) {
         visualizeCell("cell", "cell cell-empty", cell);
       }
     }
-  }*/
+  }
   /* for (let i = 0; i <= list.length - 1; i++) {
     setTimeout(() => {
       visualizeCell("cell", "cell cell-wall", list[i]);
