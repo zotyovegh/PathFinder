@@ -19,10 +19,10 @@ export function wilsonMaze(originalGrid) {
     }
   }
 
-  while (!!unvisitedCells.length) {
+  while (unvisitedCells.length >= 2) {
     var start = takeRandomCell(unvisitedCells);
-    var aim = takeRandomCell(unvisitedCells);
-    
+    var aim = grid[1][1];
+
     var nextCell = start;
     var foundVisited = false;
     while (nextCell !== aim && !foundVisited) {
@@ -62,7 +62,7 @@ function takeRandomCell(unvisitedCells) {
 function removeCycle(nextCell, start, aim, grid, unvisitedCells) {
   nextCell = start;
   start.isWall = false;
-  aim.isWall = false;
+ // aim.isWall = false;
 
   while (nextCell !== aim) {
     if (nextCell !== start) {
