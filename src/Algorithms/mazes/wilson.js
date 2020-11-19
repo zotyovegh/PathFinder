@@ -31,10 +31,10 @@ export function wilsonMaze(originalGrid) {
           Math.floor(Math.random() * nextCell.neighbors.length)
         ];
       nextCell.direction = newCell[2];
-      nextCell = newCell[1];
 
-      if (!nextCell.isWall) {
-        aim = nextCell;         
+      nextCell = newCell[1];
+      if (nextCell.visited) {
+        aim = nextCell;
       }
     }
     removeCycle(nextCell, start, aim, grid, unvisitedCells);
@@ -62,7 +62,6 @@ function takeRandomCell(unvisitedCells) {
 function removeCycle(nextCell, start, aim, grid, unvisitedCells) {
   nextCell = start;
   start.isWall = false;
- // aim.isWall = false;
 
   while (nextCell !== aim) {
     if (nextCell !== start) {
@@ -72,18 +71,22 @@ function removeCycle(nextCell, start, aim, grid, unvisitedCells) {
     if (nextCell.direction === "UP") {
       grid[row - 1][col].isWall = false;
       grid[row - 2][col].isWall = false;
+      grid[row - 2][col].visited = true;
       nextCell = grid[row - 2][col];
     } else if (nextCell.direction === "DOWN") {
       grid[row + 1][col].isWall = false;
       grid[row + 2][col].isWall = false;
+      grid[row + 2][col].visited = true;
       nextCell = grid[row + 2][col];
     } else if (nextCell.direction === "RIGHT") {
       grid[row][col + 1].isWall = false;
       grid[row][col + 2].isWall = false;
+      grid[row][col + 2].visited = true;
       nextCell = grid[row][col + 2];
     } else if (nextCell.direction === "LEFT") {
       grid[row][col - 1].isWall = false;
       grid[row][col - 2].isWall = false;
+      grid[row][col - 2].visited = true;
       nextCell = grid[row][col - 2];
     }
   }
