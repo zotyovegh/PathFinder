@@ -30,11 +30,12 @@ export function wilsonMaze(originalGrid) {
         nextCell.neighbors[
           Math.floor(Math.random() * nextCell.neighbors.length)
         ];
-      nextCell.direction = newCell[2];
 
-      nextCell = newCell[1];
       if (nextCell.visited) {
         aim = nextCell;
+      } else {
+        nextCell.direction = newCell[2];
+        nextCell = newCell[1];
       }
     }
     removeCycle(nextCell, start, aim, grid, unvisitedCells);
