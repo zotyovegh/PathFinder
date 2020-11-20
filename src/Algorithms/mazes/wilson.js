@@ -24,8 +24,7 @@ export function wilsonMaze(originalGrid) {
     var aim = grid[1][1];
 
     var nextCell = start;
-    var foundVisited = false;
-    while (nextCell !== aim && !foundVisited) {
+    while (nextCell !== aim) {
       var newCell =
         nextCell.neighbors[
           Math.floor(Math.random() * nextCell.neighbors.length)
@@ -38,11 +37,11 @@ export function wilsonMaze(originalGrid) {
         nextCell = newCell[1];
       }
     }
-    removeCycle(nextCell, start, aim, grid, unvisitedCells);
+    removeCycle(nextCell, start, aim, grid, unvisitedCells, path);
   }
 
   //clearInfinityVariables(grid);
-  visualize(grid);
+  visualize(grid, path);
 }
 
 function clearDirections(grid) {
@@ -60,9 +59,11 @@ function takeRandomCell(unvisitedCells) {
   return cell;
 }
 
-function removeCycle(nextCell, start, aim, grid, unvisitedCells) {
+function removeCycle(nextCell, start, aim, grid, unvisitedCells, path) {
+  var newPath = [];
   nextCell = start;
   start.isWall = false;
+  newPath.push(start);
 
   while (nextCell !== aim) {
     if (nextCell !== start) {
@@ -74,22 +75,31 @@ function removeCycle(nextCell, start, aim, grid, unvisitedCells) {
       grid[row - 2][col].isWall = false;
       grid[row - 2][col].visited = true;
       nextCell = grid[row - 2][col];
+      newPath.push(grid[row - 1][col]);
+      newPath.push(grid[row - 2][col]);
     } else if (nextCell.direction === "DOWN") {
       grid[row + 1][col].isWall = false;
       grid[row + 2][col].isWall = false;
       grid[row + 2][col].visited = true;
       nextCell = grid[row + 2][col];
+      newPath.push(grid[row + 1][col]);
+      newPath.push(grid[row + 2][col]);
     } else if (nextCell.direction === "RIGHT") {
       grid[row][col + 1].isWall = false;
       grid[row][col + 2].isWall = false;
       grid[row][col + 2].visited = true;
       nextCell = grid[row][col + 2];
+      newPath.push(grid[row][col + 1]);
+      newPath.push(grid[row][col + 2]);
     } else if (nextCell.direction === "LEFT") {
       grid[row][col - 1].isWall = false;
       grid[row][col - 2].isWall = false;
       grid[row][col - 2].visited = true;
       nextCell = grid[row][col - 2];
+      newPath.push(grid[row][col - 1]);
+      newPath.push(grid[row][col - 2]);
     }
+    path.push(newPath);
   }
   clearDirections(grid);
 }
