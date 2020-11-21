@@ -19,7 +19,7 @@ export function wilsonMaze(originalGrid) {
     }
   }
 
-  while (unvisitedCells.length >= 2) {
+  while (unvisitedCells.length >= 1) {
     var start = takeRandomCell(unvisitedCells);
     var aim = grid[1][1];
 
