@@ -62,13 +62,11 @@ function takeRandomCell(unvisitedCells) {
 function removeCycle(nextCell, start, aim, grid, unvisitedCells, path) {
   var newPath = [];
   nextCell = start;
+  nextCell.visited = true;
   start.isWall = false;
   newPath.push(start);
 
   while (nextCell !== aim) {
-    if (nextCell !== start) {
-      unvisitedCells = unvisitedCells.filter((cell) => cell.id !== nextCell.id);
-    }
     var { col, row } = nextCell;
     if (nextCell.direction === "UP") {
       grid[row - 1][col].isWall = false;
