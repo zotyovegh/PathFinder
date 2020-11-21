@@ -88,17 +88,24 @@ export function visualize(grid, path) {
     }
   }
   for (let i = 0; i <= path.length; i++) {
-    setTimeout(() => {
-      if (i === path.length) {
-        window.gridComponent.setState({ status: "pending" });
-        return;
+    if (i === path.length) {
+      window.gridComponent.setState({ status: "pending" });
+      return;
+    }
+    var currentPath = path[i][0];
+    var isOptimalPath = path[i][1];
+
+    for (let j = 0; j < currentPath.length; j++) {
+      if (!currentPath[j].end && !currentPath[j].start) {
+        visualizeCell("cell", "cell cell-empty", currentPath[j]);
       }
-      var currentPath = path[i][0];
+    }
+    if (!isOptimalPath) {
       for (let j = 0; j < currentPath.length; j++) {
         if (!currentPath[j].end && !currentPath[j].start) {
-          visualizeCell("cell", "cell cell-empty", currentPath[j]);
+          visualizeCell("cell", "cell cell-wall", currentPath[j]);
         }
       }
-    }, 20 * i);
+    }
   }
 }
