@@ -79,18 +79,26 @@ export function visualizeABMaze(grid, path) {
 }
 
 export function visualize(grid, path) {
+  window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
-      visualizeCell("cell", "cell cell-wall", cell);
+      if (!cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-wall", cell);
+      }
     }
   }
-  for (let i = 0; i < path.length; i++) {
+  for (let i = 0; i <= path.length; i++) {
     setTimeout(() => {
+      if (i === path.length) {
+        window.gridComponent.setState({ status: "pending" });
+        return;
+      }
       var currentPath = path[i];
       for (let j = 0; j < currentPath.length; j++) {
-        visualizeCell("cell", "cell cell-empty", currentPath[j]);
+        if (!currentPath[j].end && !currentPath[j].start) {
+          visualizeCell("cell", "cell cell-empty", currentPath[j]);
+        }
       }
     }, 20 * i);
   }
 }
-

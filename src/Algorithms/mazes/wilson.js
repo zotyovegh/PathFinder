@@ -40,7 +40,8 @@ export function wilsonMaze(originalGrid) {
     removeCycle(nextCell, start, aim, grid, path);
   }
 
-  //clearInfinityVariables(grid);
+  clearInfinityVariables(grid);
+  window.gridComponent.setState({ grid: grid });
   visualize(grid, path);
 }
 
