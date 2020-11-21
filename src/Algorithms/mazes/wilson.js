@@ -37,7 +37,7 @@ export function wilsonMaze(originalGrid) {
         nextCell = newCell[1];
       }
     }
-    removeCycle(nextCell, start, aim, grid, unvisitedCells, path);
+    removeCycle(nextCell, start, aim, grid, path);
   }
 
   //clearInfinityVariables(grid);
@@ -59,12 +59,12 @@ function takeRandomCell(unvisitedCells) {
   return cell;
 }
 
-function removeCycle(nextCell, start, aim, grid, unvisitedCells, path) {
+function removeCycle(nextCell, start, aim, grid, path) {
   var newPath = [];
   nextCell = start;
   nextCell.visited = true;
-  start.isWall = false;
-  newPath.push(start);
+  nextCell.isWall = false;
+  newPath.push(nextCell);
 
   while (nextCell !== aim) {
     var { col, row } = nextCell;

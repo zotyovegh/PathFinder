@@ -90,7 +90,7 @@ export function visualize(grid, path) {
       for (let j = 0; j < currentPath.length; j++) {
         visualizeCell("cell", "cell cell-empty", currentPath[j]);
       }
-    }, 200 * i);
+    }, 20 * i);
   }
 }
 
