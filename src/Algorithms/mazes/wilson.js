@@ -2,7 +2,7 @@ import {
   clearWithStatus,
   clearInfinityVariables,
 } from "../../Algorithms/cleaning";
-import { visualize } from "../mazes/animations";
+import { visualizeWilson } from "../mazes/animations";
 export function wilsonMaze(originalGrid) {
   clearWithStatus("path");
   var path = [];
@@ -43,13 +43,13 @@ export function wilsonMaze(originalGrid) {
     if (newPath.length > 1) {
       path.push([newPath, false]);
     }
-    
+
     removeCycle(nextCell, start, aim, grid, path);
   }
 
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
-  visualize(grid, path);
+  visualizeWilson(grid, path);
 }
 function clearDirections(grid) {
   for (const row of grid) {

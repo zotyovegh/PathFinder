@@ -78,9 +78,8 @@ export function visualizeABMaze(grid, path) {
   }
 }
 
-export async function visualize(grid, path) {
+export async function visualizeWilson(grid, path) {
   window.gridComponent.setState({ status: "running" });
-  //console.log(path);
   for (const row of grid) {
     for (const cell of row) {
       if (!cell.end && !cell.start) {
