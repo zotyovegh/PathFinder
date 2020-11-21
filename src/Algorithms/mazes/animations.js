@@ -88,19 +88,26 @@ export async function visualize(grid, path) {
       }
     }
   }
+
   for (let i = 0; i <= path.length; i++) {
     if (i === path.length) {
       window.gridComponent.setState({ status: "pending" });
       return;
     }
+    var previous = null;
     var currentPath = path[i][0];
-
     var isOptimalPath = path[i][1];
     if (!isOptimalPath) {
       for (let j = currentPath.length - 1; j > 0; j--) {
-        if (!currentPath[j].end && !currentPath[j].start) {
-          visualizeCell("cell", "cell cell-current", currentPath[j]);
+        if (previous !== null) {
+          visualizeCell("cell", "cell cell-current", previous);
         }
+
+        if (!currentPath[j].end && !currentPath[j].start) {
+          visualizeCell("cell", "cell cell-previous", currentPath[j]);
+          previous = currentPath[j];
+        }
+
         if (currentPath[j] !== currentPath.length - 1) {
           await new Promise((r) => setTimeout(r, 5));
         }
