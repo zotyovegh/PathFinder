@@ -78,7 +78,7 @@ export function visualizeABMaze(grid, path) {
   }
 }
 
-export function visualize(grid, path) {
+export async function visualize(grid, path) {
   window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
@@ -94,18 +94,27 @@ export function visualize(grid, path) {
     }
     var currentPath = path[i][0];
     var isOptimalPath = path[i][1];
+    if (!isOptimalPath) {
+      for (let j = currentPath.length - 1; j > 0; j--) {
+        if (!currentPath[j].end && !currentPath[j].start) {
+          visualizeCell("cell", "cell cell-current", currentPath[j]);
+        }
+        await new Promise((r) => setTimeout(r, 5));
+      }
+    }
 
     for (let j = 0; j < currentPath.length; j++) {
       if (!currentPath[j].end && !currentPath[j].start) {
-        visualizeCell("cell", "cell cell-empty", currentPath[j]);
-      }
-    }
-    if (!isOptimalPath) {
-      for (let j = 0; j < currentPath.length; j++) {
-        if (!currentPath[j].end && !currentPath[j].start) {
+        if (!isOptimalPath) {
           visualizeCell("cell", "cell cell-wall", currentPath[j]);
+        } else {
+          visualizeCell("cell", "cell cell-empty", currentPath[j]);
         }
       }
+    }
+
+    if (isOptimalPath) {
+      await new Promise((r) => setTimeout(r, 500));
     }
   }
 }
