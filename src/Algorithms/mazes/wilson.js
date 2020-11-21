@@ -18,12 +18,13 @@ export function wilsonMaze(originalGrid) {
       }
     }
   }
-
+  var newPath = [];
   while (unvisitedCells.length >= 1) {
     var start = takeRandomCell(unvisitedCells);
     var aim = grid[1][1];
-
+    newPath = [];
     var nextCell = start;
+    newPath.push(nextCell);
     while (nextCell !== aim) {
       var newCell =
         nextCell.neighbors[
@@ -35,8 +36,11 @@ export function wilsonMaze(originalGrid) {
       } else {
         nextCell.direction = newCell[2];
         nextCell = newCell[1];
+        newPath.push(newCell[0]);
+        newPath.push(newCell[1]);
       }
     }
+    path.push(newPath);
     removeCycle(nextCell, start, aim, grid, path);
   }
 
@@ -44,7 +48,6 @@ export function wilsonMaze(originalGrid) {
   window.gridComponent.setState({ grid: grid });
   visualize(grid, path);
 }
-
 function clearDirections(grid) {
   for (const row of grid) {
     for (const cell of row) {
