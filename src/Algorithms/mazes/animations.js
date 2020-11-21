@@ -93,7 +93,7 @@ export function visualize(grid, path) {
         window.gridComponent.setState({ status: "pending" });
         return;
       }
-      var currentPath = path[i];
+      var currentPath = path[i][0];
       for (let j = 0; j < currentPath.length; j++) {
         if (!currentPath[j].end && !currentPath[j].start) {
           visualizeCell("cell", "cell cell-empty", currentPath[j]);

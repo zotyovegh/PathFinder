@@ -40,7 +40,7 @@ export function wilsonMaze(originalGrid) {
         newPath.push(newCell[1]);
       }
     }
-    path.push(newPath);
+    path.push([newPath, false]);
     removeCycle(nextCell, start, aim, grid, path);
   }
 
@@ -101,8 +101,8 @@ function removeCycle(nextCell, start, aim, grid, path) {
       newPath.push(grid[row][col - 1]);
       newPath.push(grid[row][col - 2]);
     }
-    path.push(newPath);
   }
+  path.push([newPath, true]);
   clearDirections(grid);
 }
 
