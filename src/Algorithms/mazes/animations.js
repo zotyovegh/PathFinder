@@ -80,6 +80,7 @@ export function visualizeABMaze(grid, path) {
 
 export async function visualize(grid, path) {
   window.gridComponent.setState({ status: "running" });
+  //console.log(path);
   for (const row of grid) {
     for (const cell of row) {
       if (!cell.end && !cell.start) {
@@ -93,13 +94,16 @@ export async function visualize(grid, path) {
       return;
     }
     var currentPath = path[i][0];
+
     var isOptimalPath = path[i][1];
     if (!isOptimalPath) {
       for (let j = currentPath.length - 1; j > 0; j--) {
         if (!currentPath[j].end && !currentPath[j].start) {
           visualizeCell("cell", "cell cell-current", currentPath[j]);
         }
-        await new Promise((r) => setTimeout(r, 5));
+        if (currentPath[j] !== currentPath.length - 1) {
+          await new Promise((r) => setTimeout(r, 5));
+        }
       }
     }
 
@@ -111,10 +115,6 @@ export async function visualize(grid, path) {
           visualizeCell("cell", "cell cell-empty", currentPath[j]);
         }
       }
-    }
-
-    if (isOptimalPath) {
-      await new Promise((r) => setTimeout(r, 500));
     }
   }
 }
