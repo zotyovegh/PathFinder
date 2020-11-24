@@ -1,9 +1,6 @@
-import {
-  clearWithStatus,
-  clearInfinityVariables,
-} from "../cleaning";
+import { clearWithStatus, clearInfinityVariables } from "../cleaning";
 import { visualizeOnWalledGrid } from "./animations";
-export function recursiveMaze(originalGrid) {
+export function recursiveDivision(originalGrid) {
   clearWithStatus("path");
   var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
@@ -19,6 +16,4 @@ export function recursiveMaze(originalGrid) {
   visualizeOnWalledGrid(grid, path);*/
 }
 
-function recursion(grid, currentCell) {
- 
-}
+function recursion(grid, currentCell) {}
