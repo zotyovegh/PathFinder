@@ -34,26 +34,30 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
   if (width < 2 || height < 2) return;
   if (width >= height) {
     orientation = "vertical";
-    var half = Math.ceil(width / 2);
-    var middle = half % 2 === 0 ? half : half + (Math.random() < 0.5 ? -1 : 1);
-    var num = Math.floor(Math.random() * (height - 1 + 1)) + 1;
-    var randomPosition =
-      num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
+    var middle = getMiddleLine(width);
+    var randomPosition = getRandomPosition(height);
     for (let i = topLeft.row; i < topLeft.row + height; i++) {
       if (i === topLeft.row + randomPosition - 1) continue;
       path.push(grid[i][middle]);
     }
   } else {
     orientation = "horizontal";
-    var half = Math.ceil(height / 2);
-    var middle = half % 2 === 0 ? half : half + (Math.random() < 0.5 ? -1 : 1);
-    var num = Math.floor(Math.random() * (width - 1 + 1)) + 1;
-    var randomPosition =
-      num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
+    var middle = getMiddleLine(height);
+    var randomPosition = getRandomPosition(width);
 
     for (let i = topLeft.col; i < topLeft.col + width; i++) {
       if (i === topLeft.col + randomPosition - 1) continue;
       path.push(grid[middle][i]);
     }
   }
+}
+
+function getMiddleLine(position) {
+  var half = Math.ceil(position / 2);
+  return half % 2 === 0 ? half : half + (Math.random() < 0.5 ? -1 : 1);
+}
+
+function getRandomPosition(size) {
+  var num = Math.floor(Math.random() * (size - 1 + 1)) + 1;
+  return num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
 }
