@@ -124,3 +124,9 @@ export async function visualizeWilson(grid, path) {
     }
   }
 }
+
+export function visualizeRD(grid, path) {
+  for (let i = 0; i < path.length; i++) {
+    visualizeCell("cell", "cell cell-wall", path[i]);
+  }
+}

@@ -1,5 +1,5 @@
 import { clearWithStatus, clearInfinityVariables } from "../cleaning";
-import { visualizeOnWalledGrid } from "./animations";
+import { visualizeRD } from "./animations";
 export function recursiveDivision(originalGrid) {
   clearWithStatus("path");
   var path = [];
@@ -9,11 +9,23 @@ export function recursiveDivision(originalGrid) {
       cell.isWall = true;
     }
   }
-  /*var currentCell = grid[1][1];
-  recursion(grid, currentCell);
-  clearInfinityVariables(grid);
-  window.gridComponent.setState({ grid: grid }); 
-  visualizeOnWalledGrid(grid, path);*/
+  recursion(
+    grid[1][1],
+    grid[1][grid[1].length - 2],
+    grid[grid.length - 2][1],
+    grid[grid.length - 2][grid[1].length - 2],
+    grid, path
+  );
+ 
+  
+ /* clearInfinityVariables(grid);
+  window.gridComponent.setState({ grid: grid });*/
+  visualizeRD(grid, path);
 }
 
-function recursion(grid, currentCell) {}
+function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
+   path.push(topLeft);
+  path.push(topRight);
+  path.push(bottomLeft);
+  path.push(bottomRight);
+}
