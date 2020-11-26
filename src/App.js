@@ -12,8 +12,8 @@ class App extends Component {
       endR: this.getPosition("row"),
       endC: this.getPosition("endCol"),
       */
-      rows: 5,
-      columns: 7,
+      rows: 17,
+      columns:17,
       startR: 0,
       startC: 0,
       endR: 0,

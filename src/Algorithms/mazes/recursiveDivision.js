@@ -34,12 +34,30 @@ function recursion(
   path,
   pathTest
 ) {
-  // console.log("heyy");
-  console.log(topLeft.row + " " + topLeft.col);
-  console.log(topRight.row + " " + topRight.col);
-  console.log(bottomLeft.row + " " + bottomLeft.col);
-  console.log(bottomRight.row + " " + bottomRight.col);
   console.log("------------");
+
+  // console.log("heyy");
+  console.log(
+    JSON.parse(JSON.stringify(topLeft.row)) +
+      " " +
+      JSON.parse(JSON.stringify(topLeft.col))
+  );
+  console.log(
+    JSON.parse(JSON.stringify(topRight.row)) +
+      " " +
+      JSON.parse(JSON.stringify(topRight.col))
+  );
+  console.log(
+    JSON.parse(JSON.stringify(bottomLeft.row)) +
+      " " +
+      JSON.parse(JSON.stringify(bottomLeft.col))
+  );
+  console.log(
+    JSON.parse(JSON.stringify(bottomRight.row)) +
+      " " +
+      JSON.parse(JSON.stringify(bottomRight.col))
+  );
+
   /* if (topLeft.col > topRight.col || topLeft.row > bottomLeft.row) return;*/
 
   var orientation = "";
@@ -56,14 +74,20 @@ function recursion(
   if (orientation === "vertical") {
     console.log("hi");
     orientation = "vertical";
-    middle = getMiddleLine(width);
+    middle = getMiddleLine(width) + topLeft.col - 1;
     randomPosition = getRandomPosition(height);
+    console.log("topLeft");
+    console.log(topLeft);
+    console.log("***");
 
     for (let i = topLeft.row; i < topLeft.row + height; i++) {
       console.log(grid[i][middle]);
       if (i !== topLeft.row + randomPosition - 1) {
         path.push(grid[i][middle]);
       }
+    }
+    if (height < 4 && width < 4) {
+      return;
     }
     (function () {
       verticalLeft(grid, topLeft, bottomLeft, middle, path, pathTest);
@@ -84,13 +108,16 @@ function recursion(
   } else if (orientation === "horizontal") {
     console.log("heyy");
     orientation = "horizontal";
-    middle = getMiddleLine(height);
+    middle = getMiddleLine(height) + topLeft.row - 1;
     randomPosition = getRandomPosition(width);
 
     for (let i = topLeft.col; i < topLeft.col + width; i++) {
       if (i !== topLeft.col + randomPosition - 1) {
         path.push(grid[middle][i]);
       }
+    }
+    if (height < 4 && width < 4) {
+      return;
     }
     (function () {
       horizontalTop(
@@ -114,6 +141,7 @@ function verticalLeft(grid, topLeft, bottomLeft, middle, path, pathTest) {
     grid[topLeft.row][middle - 1].col - topLeft.col > 0 &&
     bottomLeft.row - topLeft.row > 0
   ) {
+    console.log("good");
     recursion(
       topLeft,
       grid[topLeft.row][middle - 1],
@@ -141,6 +169,7 @@ function verticalRight(
     topRight.col - grid[topLeft.row][middle + 1].col > 0 &&
     grid[bottomLeft.row][middle + 1].row - grid[topLeft.row][middle + 1].row > 0
   ) {
+    console.log("wrong");
     recursion(
       grid[topLeft.row][middle + 1],
       topRight,
@@ -208,23 +237,25 @@ function horizontalBottom(
       path,
       pathTest
     );
-    pathTest.push(grid[middle + 1][bottomLeft.col]);
+    /* pathTest.push(grid[middle + 1][bottomLeft.col]);
     pathTest.push(grid[middle + 1][bottomRight.col]);
     pathTest.push(bottomLeft);
-    pathTest.push(bottomRight);
+    pathTest.push(bottomRight);*/
   }
   return;
 }
 
 function getMiddleLine(position) {
   var half = Math.ceil(position / 2);
-  return half % 2 === 0 ? half : half + (Math.random() < 0.5 ? -1 : 1);
+  half = half % 2 === 0 ? half : half + (Math.random() < 0.5 ? -1 : 1);
+  console.log("Position " + position + " half: " + half);
+  return half;
 }
 
 function getRandomPosition(size) {
   var num = Math.floor(Math.random() * (size - 1 + 1)) + 1;
 
   num = num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
-  //console.log("Size " + size + " result: " + num);
+  console.log("Size " + size + " result: " + num);
   return num;
 }
