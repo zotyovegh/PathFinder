@@ -125,12 +125,15 @@ export async function visualizeWilson(grid, path) {
   }
 }
 
-export function visualizeRD(grid, path, pathTest) {
-  
-  for (let i = 0; i < path.length; i++) {
-    visualizeCell("cell", "cell cell-wall", path[i]);
-  }
-  for (let i = 0; i < pathTest.length; i++) {
-    visualizeCell("cell", "cell cell-previous", pathTest[i]);
+export function visualizeRD(grid, path) {
+  window.gridComponent.setState({ status: "running" });
+  for (let i = 0; i <= path.length; i++) {
+    setTimeout(() => {
+      if (i === path.length) {
+        window.gridComponent.setState({ status: "pending" });
+        return;
+      }
+      visualizeCell("cell", "cell cell-wall", path[i]);
+    }, 8 * i);
   }
 }

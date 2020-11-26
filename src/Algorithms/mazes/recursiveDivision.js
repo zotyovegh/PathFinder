@@ -3,13 +3,8 @@ import { visualizeRD } from "./animations";
 export function recursiveDivision(originalGrid) {
   clearWithStatus("path");
   var path = [];
-  var pathTest = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
-  for (const row of grid) {
-    for (const cell of row) {
-      cell.isWall = true;
-    }
-  }
+
   drawEdges(grid, path);
   recursion(
     grid[1][1],
@@ -17,13 +12,12 @@ export function recursiveDivision(originalGrid) {
     grid[grid.length - 2][1],
     grid[grid.length - 2][grid[1].length - 2],
     grid,
-    path,
-    pathTest
+    path
   );
 
-  /* clearInfinityVariables(grid);
-  window.gridComponent.setState({ grid: grid });*/
-  visualizeRD(grid, path, pathTest);
+  //clearInfinityVariables(grid);
+  window.gridComponent.setState({ grid: grid });
+  visualizeRD(grid, path);
 }
 
 function drawEdges(grid, path) {
@@ -54,15 +48,7 @@ function drawEdges(grid, path) {
   path.push(grid[grid.length - 1][middle]);
 }
 
-function recursion(
-  topLeft,
-  topRight,
-  bottomLeft,
-  bottomRight,
-  grid,
-  path,
-  pathTest
-) {
+function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
   var width = topRight.col - topLeft.col + 1;
   var height = bottomLeft.row - topLeft.row + 1;
   if (height < 3 || width < 3) return;
@@ -83,7 +69,7 @@ function recursion(
       return;
     }
     (function () {
-      verticalLeft(grid, topLeft, bottomLeft, middle, path, pathTest);
+      verticalLeft(grid, topLeft, bottomLeft, middle, path);
     })(
       verticalRight(
         grid,
@@ -92,8 +78,7 @@ function recursion(
         bottomLeft,
         bottomRight,
         middle,
-        path,
-        pathTest
+        path
       )
     );
 
@@ -118,16 +103,15 @@ function recursion(
         bottomLeft,
         bottomRight,
         middle,
-        path,
-        pathTest
+        path
       );
-    })(horizontalBottom(grid, bottomLeft, bottomRight, middle, path, pathTest));
+    })(horizontalBottom(grid, bottomLeft, bottomRight, middle, path));
 
     return;
   }
 }
 
-function verticalLeft(grid, topLeft, bottomLeft, middle, path, pathTest) {
+function verticalLeft(grid, topLeft, bottomLeft, middle, path) {
   if (
     grid[topLeft.row][middle - 1].col - topLeft.col > 0 &&
     bottomLeft.row - topLeft.row > 0
@@ -138,8 +122,7 @@ function verticalLeft(grid, topLeft, bottomLeft, middle, path, pathTest) {
       bottomLeft,
       grid[bottomLeft.row][middle - 1],
       grid,
-      path,
-      pathTest
+      path
     );
   }
   return;
@@ -152,8 +135,7 @@ function verticalRight(
   bottomLeft,
   bottomRight,
   middle,
-  path,
-  pathTest
+  path
 ) {
   if (
     topRight.col - grid[topLeft.row][middle + 1].col > 0 &&
@@ -165,8 +147,7 @@ function verticalRight(
       grid[bottomLeft.row][middle + 1],
       bottomRight,
       grid,
-      path,
-      pathTest
+      path
     );
   }
   return;
@@ -179,8 +160,7 @@ function horizontalTop(
   bottomLeft,
   bottomRight,
   middle,
-  path,
-  pathTest
+  path
 ) {
   if (
     topRight.col - topLeft.col > 0 &&
@@ -192,21 +172,13 @@ function horizontalTop(
       grid[middle - 1][bottomLeft.col],
       grid[middle - 1][bottomRight.col],
       grid,
-      path,
-      pathTest
+      path
     );
   }
   return;
 }
 
-function horizontalBottom(
-  grid,
-  bottomLeft,
-  bottomRight,
-  middle,
-  path,
-  pathTest
-) {
+function horizontalBottom(grid, bottomLeft, bottomRight, middle, path) {
   if (
     grid[middle + 1][bottomRight.col].col -
       grid[middle + 1][bottomLeft.col].col >
@@ -219,13 +191,8 @@ function horizontalBottom(
       bottomLeft,
       bottomRight,
       grid,
-      path,
-      pathTest
+      path
     );
-    /* pathTest.push(grid[middle + 1][bottomLeft.col]);
-    pathTest.push(grid[middle + 1][bottomRight.col]);
-    pathTest.push(bottomLeft);
-    pathTest.push(bottomRight);*/
   }
   return;
 }
