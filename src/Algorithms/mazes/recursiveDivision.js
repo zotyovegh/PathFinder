@@ -39,19 +39,13 @@ function recursion(
   if (height < 3 || width < 3) return;
   var middle = null;
   var randomPosition = null;
-  var orientation = "";
 
-  if (width > height) orientation = "vertical";
-  else if (height > width) orientation = "horizontal";
-  else orientation = "vertical";
-
-  if (orientation === "vertical") {
-    orientation = "vertical";
+  if (width >= height) {
+    //Vertical
     middle = getMiddleLine(width) + topLeft.col - 1;
     randomPosition = getRandomPosition(height);
 
     for (let i = topLeft.row; i < topLeft.row + height; i++) {
-      console.log(grid[i][middle]);
       if (i !== topLeft.row + randomPosition - 1) {
         path.push(grid[i][middle]);
       }
@@ -75,12 +69,10 @@ function recursion(
     );
 
     return;
-  } else if (orientation === "horizontal") {
-    console.log("heyy");
-    orientation = "horizontal";
+  } else  {
+    //Horizontal
     middle = getMiddleLine(height) + topLeft.row - 1;
     randomPosition = getRandomPosition(width);
-
     for (let i = topLeft.col; i < topLeft.col + width; i++) {
       if (i !== topLeft.col + randomPosition - 1) {
         path.push(grid[middle][i]);
@@ -111,7 +103,6 @@ function verticalLeft(grid, topLeft, bottomLeft, middle, path, pathTest) {
     grid[topLeft.row][middle - 1].col - topLeft.col > 0 &&
     bottomLeft.row - topLeft.row > 0
   ) {
-    console.log("good");
     recursion(
       topLeft,
       grid[topLeft.row][middle - 1],
@@ -139,7 +130,6 @@ function verticalRight(
     topRight.col - grid[topLeft.row][middle + 1].col > 0 &&
     grid[bottomLeft.row][middle + 1].row - grid[topLeft.row][middle + 1].row > 0
   ) {
-    console.log("wrong");
     recursion(
       grid[topLeft.row][middle + 1],
       topRight,
@@ -218,7 +208,7 @@ function horizontalBottom(
 function getMiddleLine(position) {
   var half = Math.ceil(position / 2);
   half = half % 2 === 0 ? half : half + (Math.random() < 0.5 ? -1 : 1);
-  console.log("Position " + position + " half: " + half);
+  
   return half;
 }
 
@@ -226,6 +216,5 @@ function getRandomPosition(size) {
   var num = Math.floor(Math.random() * (size - 1 + 1)) + 1;
 
   num = num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
-  console.log("Size " + size + " result: " + num);
   return num;
 }
