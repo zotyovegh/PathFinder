@@ -42,7 +42,7 @@ function recursion(
 
   if (width >= height) {
     //Vertical
-    middle = getMiddleLine(width) + topLeft.col - 1;
+    middle = getMiddleLine(width, topLeft.col);
     randomPosition = getRandomPosition(height);
 
     for (let i = topLeft.row; i < topLeft.row + height; i++) {
@@ -69,9 +69,9 @@ function recursion(
     );
 
     return;
-  } else  {
+  } else {
     //Horizontal
-    middle = getMiddleLine(height) + topLeft.row - 1;
+    middle = getMiddleLine(height, topLeft.row);
     randomPosition = getRandomPosition(width);
     for (let i = topLeft.col; i < topLeft.col + width; i++) {
       if (i !== topLeft.col + randomPosition - 1) {
@@ -139,10 +139,6 @@ function verticalRight(
       path,
       pathTest
     );
-    pathTest.push(grid[topLeft.row][middle + 1]);
-    pathTest.push(topRight);
-    pathTest.push(grid[bottomLeft.row][middle + 1]);
-    pathTest.push(bottomRight);
   }
   return;
 }
@@ -205,16 +201,13 @@ function horizontalBottom(
   return;
 }
 
-function getMiddleLine(position) {
+function getMiddleLine(position, reference) {
   var half = Math.ceil(position / 2);
   half = half % 2 === 0 ? half : half + (Math.random() < 0.5 ? -1 : 1);
-  
-  return half;
+  return half + reference - 1;
 }
 
 function getRandomPosition(size) {
   var num = Math.floor(Math.random() * (size - 1 + 1)) + 1;
-
-  num = num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
-  return num;
+  return num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
 }
