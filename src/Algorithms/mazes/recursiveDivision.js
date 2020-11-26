@@ -63,6 +63,7 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
   var width = topRight.col - topLeft.col + 1;
   var height = bottomLeft.row - topLeft.row + 1;
   if (height < 3 || width < 3) return;
+  
   var middle = null;
   var randomPosition = null;
 

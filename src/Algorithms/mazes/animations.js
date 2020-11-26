@@ -127,13 +127,23 @@ export async function visualizeWilson(grid, path) {
 
 export function visualizeRD(grid, path) {
   window.gridComponent.setState({ status: "running" });
+  for (const row of grid) {
+    for (const cell of row) {
+      if (!cell.end && !cell.start) {
+        visualizeCell("cell", "cell cell-empty", cell);
+      }
+    }
+  }
+
   for (let i = 0; i <= path.length; i++) {
     setTimeout(() => {
       if (i === path.length) {
         window.gridComponent.setState({ status: "pending" });
         return;
       }
-      visualizeCell("cell", "cell cell-wall", path[i]);
-    }, 8 * i);
+      if (!path[i].end && !path[i].start) {
+        visualizeCell("cell", "cell cell-wall", path[i]);
+      }
+    }, 10 * i);
   }
 }
