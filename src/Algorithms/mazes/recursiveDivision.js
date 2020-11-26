@@ -34,51 +34,21 @@ function recursion(
   path,
   pathTest
 ) {
-  console.log("------------");
-
-  // console.log("heyy");
-  console.log(
-    JSON.parse(JSON.stringify(topLeft.row)) +
-      " " +
-      JSON.parse(JSON.stringify(topLeft.col))
-  );
-  console.log(
-    JSON.parse(JSON.stringify(topRight.row)) +
-      " " +
-      JSON.parse(JSON.stringify(topRight.col))
-  );
-  console.log(
-    JSON.parse(JSON.stringify(bottomLeft.row)) +
-      " " +
-      JSON.parse(JSON.stringify(bottomLeft.col))
-  );
-  console.log(
-    JSON.parse(JSON.stringify(bottomRight.row)) +
-      " " +
-      JSON.parse(JSON.stringify(bottomRight.col))
-  );
-
-  /* if (topLeft.col > topRight.col || topLeft.row > bottomLeft.row) return;*/
-
-  var orientation = "";
   var width = topRight.col - topLeft.col + 1;
   var height = bottomLeft.row - topLeft.row + 1;
   if (height < 3 || width < 3) return;
   var middle = null;
   var randomPosition = null;
+  var orientation = "";
 
   if (width > height) orientation = "vertical";
   else if (height > width) orientation = "horizontal";
   else orientation = "vertical";
-  console.log("w: " + width + "h: " + height + orientation);
+
   if (orientation === "vertical") {
-    console.log("hi");
     orientation = "vertical";
     middle = getMiddleLine(width) + topLeft.col - 1;
     randomPosition = getRandomPosition(height);
-    console.log("topLeft");
-    console.log(topLeft);
-    console.log("***");
 
     for (let i = topLeft.row; i < topLeft.row + height; i++) {
       console.log(grid[i][middle]);

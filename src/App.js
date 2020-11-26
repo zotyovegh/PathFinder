@@ -5,20 +5,12 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-     /* rows: this.getSize("row"),
+      rows: this.getSize("row"),
       columns: this.getSize("col"),
       startR: this.getPosition("row"),
       startC: this.getPosition("startCol"),
       endR: this.getPosition("row"),
       endC: this.getPosition("endCol"),
-      */
-      rows: 17,
-      columns:17,
-      startR: 0,
-      startC: 0,
-      endR: 0,
-      endC: 0,
-      
     };
   }
 
