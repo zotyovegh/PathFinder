@@ -24,10 +24,14 @@ export function recursiveDivision(originalGrid) {
 }
 
 function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
-  var orientation = "asd";
+  //console.log(topLeft.row + " " + bottomLeft.row);
+  /* if (topLeft.col > topRight.col || topLeft.row > bottomLeft.row) return;*/
+
+  var orientation = "";
   var width = topRight.col - topLeft.col + 1;
   var height = bottomLeft.row - topLeft.row + 1;
-  if (width < 5 || height < 5) return;
+  if (height < 3 || width < 2) return;
+
   if (width >= height) {
     orientation = "vertical";
     var middle = getMiddleLine(width);
@@ -37,8 +41,13 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       path.push(grid[i][middle]);
     }
 
+    if (
+      grid[topLeft.row][middle - 1].col - topLeft.col < 1 ||
+      bottomLeft.row - topLeft.row < 1
+    )
+      return;
 
-  /*  recursion(
+    recursion(
       topLeft,
       grid[topLeft.row][middle - 1],
       bottomLeft,
@@ -46,6 +55,14 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       grid,
       path
     );
+
+    if (
+      topRight.col - grid[topLeft.row][middle + 1].col < 1 ||
+      grid[bottomLeft.row][middle + 1].row - grid[topLeft.row][middle + 1].row <
+        1
+    )
+      return;
+
     recursion(
       grid[topLeft.row][middle + 1],
       topRight,
@@ -53,7 +70,9 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       bottomRight,
       grid,
       path
-    );*/
+    );
+
+    return;
   } else {
     orientation = "horizontal";
     var middle = getMiddleLine(height);
@@ -64,16 +83,11 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       path.push(grid[middle][i]);
     }
 
-    /* path.push(topLeft);
-    path.push(topRight);
-    path.push(grid[middle - 1][bottomLeft.col]);
-    path.push(grid[middle - 1][bottomRight.col]);
-
-    path.push(grid[middle + 1][bottomLeft.col]);
-    path.push(grid[middle + 1][bottomRight.col]);
-    path.push(bottomLeft);
-    path.push(bottomRight);*/
-
+    if (
+      topRight.col - topLeft.col < 1 ||
+      grid[middle - 1][bottomLeft.col].row - topLeft.row < 1
+    )
+      return;
     recursion(
       topLeft,
       topRight,
@@ -82,6 +96,15 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       grid,
       path
     );
+
+     if (
+      grid[middle + 1][bottomRight.col].col -
+        grid[middle + 1][bottomLeft.col].col <
+        1 ||
+      bottomLeft.row - grid[middle + 1][bottomLeft.col].row < 1
+    )
+      return;
+
     recursion(
       grid[middle + 1][bottomLeft.col],
       grid[middle + 1][bottomRight.col],
@@ -90,7 +113,10 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       grid,
       path
     );
+
+    return;
   }
+  return;
 }
 
 function getMiddleLine(position) {
@@ -99,6 +125,7 @@ function getMiddleLine(position) {
 }
 
 function getRandomPosition(size) {
+  //console.log(size);
   var num = Math.floor(Math.random() * (size - 1 + 1)) + 1;
   return num % 2 === 1 ? num : num + (Math.random() < 0.5 ? -1 : 1);
 }
