@@ -80,20 +80,16 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
     if (height < 4 && width < 4) {
       return;
     }
-    (function () {
-      verticalLeft(grid, topLeft, bottomLeft, middle, path);
-    })(
-      verticalRight(
-        grid,
-        topLeft,
-        topRight,
-        bottomLeft,
-        bottomRight,
-        middle,
-        path
-      )
+    verticalLeft(grid, topLeft, bottomLeft, middle, path);
+    verticalRight(
+      grid,
+      topLeft,
+      topRight,
+      bottomLeft,
+      bottomRight,
+      middle,
+      path
     );
-
     return;
   } else {
     //Horizontal
@@ -108,18 +104,16 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
     if (height < 4 && width < 4) {
       return;
     }
-    (function () {
-      horizontalTop(
-        grid,
-        topLeft,
-        topRight,
-        bottomLeft,
-        bottomRight,
-        middle,
-        path
-      );
-    })(horizontalBottom(grid, bottomLeft, bottomRight, middle, path));
-
+    horizontalTop(
+      grid,
+      topLeft,
+      topRight,
+      bottomLeft,
+      bottomRight,
+      middle,
+      path
+    );
+    horizontalBottom(grid, bottomLeft, bottomRight, middle, path);
     return;
   }
 }
