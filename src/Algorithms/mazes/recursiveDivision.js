@@ -10,6 +10,7 @@ export function recursiveDivision(originalGrid) {
       cell.isWall = true;
     }
   }
+  drawEdges(grid, path);
   recursion(
     grid[1][1],
     grid[1][grid[1].length - 2],
@@ -23,6 +24,34 @@ export function recursiveDivision(originalGrid) {
   /* clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });*/
   visualizeRD(grid, path, pathTest);
+}
+
+function drawEdges(grid, path) {
+  var middle = Math.floor(grid[0].length / 2);
+  var leftIndex = middle - 1;
+  var rightIndex = middle + 1;
+  path.push(grid[0][middle]);
+  while (leftIndex >= 0) {
+    path.push(grid[0][leftIndex]);
+    path.push(grid[0][rightIndex]);
+    leftIndex--;
+    rightIndex++;
+  }
+  for (let i = 1; i < grid.length - 1; i++) {
+    path.push(grid[i][0]);
+    path.push(grid[i][grid[0].length - 1]);
+  }
+  leftIndex = 0;
+  rightIndex = grid[0].length - 1;
+
+  while (leftIndex !== middle) {
+    path.push(grid[grid.length - 1][leftIndex]);
+    path.push(grid[grid.length - 1][rightIndex]);
+
+    leftIndex++;
+    rightIndex--;
+  }
+  path.push(grid[grid.length - 1][middle]);
 }
 
 function recursion(
