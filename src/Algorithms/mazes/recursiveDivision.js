@@ -4,7 +4,11 @@ export function recursiveDivision(originalGrid) {
   clearWithStatus("path");
   var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
-
+  for (const row of grid) {
+    for (const cell of row) {
+      cell.isWall = false;
+    }
+  }
   drawEdges(grid, path);
   recursion(
     grid[1][1],
@@ -15,7 +19,7 @@ export function recursiveDivision(originalGrid) {
     path
   );
 
-  //clearInfinityVariables(grid);
+  clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
   visualizeRD(grid, path);
 }
@@ -25,15 +29,20 @@ function drawEdges(grid, path) {
   var leftIndex = middle - 1;
   var rightIndex = middle + 1;
   path.push(grid[0][middle]);
+  grid[0][middle].isWall = true;
   while (leftIndex >= 0) {
     path.push(grid[0][leftIndex]);
     path.push(grid[0][rightIndex]);
+    grid[0][leftIndex].isWall = true;
+    grid[0][rightIndex].isWall = true;
     leftIndex--;
     rightIndex++;
   }
   for (let i = 1; i < grid.length - 1; i++) {
     path.push(grid[i][0]);
     path.push(grid[i][grid[0].length - 1]);
+    grid[i][0].isWall = true;
+    grid[i][grid[0].length - 1].isWall = true;
   }
   leftIndex = 0;
   rightIndex = grid[0].length - 1;
@@ -41,11 +50,13 @@ function drawEdges(grid, path) {
   while (leftIndex !== middle) {
     path.push(grid[grid.length - 1][leftIndex]);
     path.push(grid[grid.length - 1][rightIndex]);
-
+    grid[grid.length - 1][leftIndex].isWall = true;
+    grid[grid.length - 1][rightIndex].isWall = true;
     leftIndex++;
     rightIndex--;
   }
   path.push(grid[grid.length - 1][middle]);
+  grid[grid.length - 1][middle].isWall = true;
 }
 
 function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
@@ -63,6 +74,7 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
     for (let i = topLeft.row; i < topLeft.row + height; i++) {
       if (i !== topLeft.row + randomPosition - 1) {
         path.push(grid[i][middle]);
+        grid[i][middle].isWall = true;
       }
     }
     if (height < 4 && width < 4) {
@@ -90,6 +102,7 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
     for (let i = topLeft.col; i < topLeft.col + width; i++) {
       if (i !== topLeft.col + randomPosition - 1) {
         path.push(grid[middle][i]);
+        grid[middle][i].isWall = true;
       }
     }
     if (height < 4 && width < 4) {
