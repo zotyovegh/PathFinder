@@ -24,10 +24,6 @@ export function recursiveDivision(originalGrid) {
 }
 
 function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
-  path.push(topLeft);
-  path.push(topRight);
-  path.push(bottomLeft);
-  path.push(bottomRight);
   var orientation = "asd";
   var width = topRight.col - topLeft.col + 1;
   var height = bottomLeft.row - topLeft.row + 1;
@@ -40,6 +36,28 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       if (i === topLeft.row + randomPosition - 1) continue;
       path.push(grid[i][middle]);
     }
+
+    path.push(grid[topLeft.row][middle + 1]);
+    path.push(topRight);
+    path.push(grid[bottomLeft.row][middle + 1]);
+    path.push(bottomRight);
+
+    recursion(
+      topLeft,
+      grid[topLeft.row][middle - 1],
+      bottomLeft,
+      grid[bottomLeft.row][middle - 1],
+      grid,
+      path
+    );
+    recursion(
+      grid[topLeft.row][middle + 1],
+      topRight,
+      grid[bottomLeft.row][middle + 1],
+      bottomRight,
+      grid,
+      path
+    );
   } else {
     orientation = "horizontal";
     var middle = getMiddleLine(height);
@@ -49,6 +67,8 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
       if (i === topLeft.col + randomPosition - 1) continue;
       path.push(grid[middle][i]);
     }
+
+   
   }
 }
 
