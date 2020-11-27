@@ -297,16 +297,20 @@ class Grid extends Component {
           <option value="default" disabled hidden>
             Mazes
           </option>
-          <option value="random">Random</option>
-          <option value="prim">Prim</option>
-          <option value="iterative">Iterative Depth-first</option>
-          <option value="recursive">Recursive Depth-first</option>
-          <option value="aldousBroder">Aldous-Broder</option>
-          <option value="kruskal">Kruskal</option>
-          <option value="wilson">Wilson</option>
-          <option value="recursiveDivision">Recursive Division</option>
-          <option value="basicHorizontal">Basic Horizontal</option>
-          <option value="basicVertical">Basic Vertical</option>
+          <optgroup label="Patterns">
+            <option value="random">Random</option>
+            <option value="basicHorizontal">Basic Horizontal</option>
+            <option value="basicVertical">Basic Vertical</option>
+          </optgroup>
+          <optgroup label="Algorithms">
+            <option value="prim">Prim</option>
+            <option value="iterative">Iterative Depth-first</option>
+            <option value="recursive">Recursive Depth-first</option>
+            <option value="aldousBroder">Aldous-Broder</option>
+            <option value="kruskal">Kruskal</option>
+            <option value="wilson">Wilson</option>
+            <option value="recursiveDivision">Recursive Division</option>
+          </optgroup>
         </select>
       </div>
     );
