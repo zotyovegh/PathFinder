@@ -9,7 +9,6 @@ export function basicVertical(originalGrid) {
       cell.isWall = false;
     }
   }
-  console.log("vertical");
 
 
   clearInfinityVariables(grid);

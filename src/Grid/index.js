@@ -306,7 +306,6 @@ class Grid extends Component {
           <option value="wilson">Wilson</option>
           <option value="recursiveDivision">Recursive Division</option>
           <option value="basicHorizontal">Basic Horizontal</option>
-          <option value="basicVertical">Basic Vertical</option>
         </select>
       </div>
     );
@@ -314,3 +313,5 @@ class Grid extends Component {
 }
 
 export default Grid;
+
+//<option value="basicVertical">Basic Vertical</option>
