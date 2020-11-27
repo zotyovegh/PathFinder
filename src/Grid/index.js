@@ -11,6 +11,8 @@ import { aldousBroderMaze } from "../Algorithms/mazes/aldousBroder";
 import { kruskalMaze } from "../Algorithms/mazes/kruskal";
 import { wilsonMaze } from "../Algorithms/mazes/wilson";
 import { recursiveDivision } from "../Algorithms/mazes/recursiveDivision";
+import { basicHorizontal } from "../Algorithms/mazes/basicHorizontal";
+import { basicVertical } from "../Algorithms/mazes/basicVertical";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
 
@@ -94,6 +96,10 @@ class Grid extends Component {
       wilsonMaze(this.state.grid);
     } else if (event.target.value === "recursiveDivision") {
       recursiveDivision(this.state.grid);
+    } else if (event.target.value === "basicHorizontal") {
+      basicHorizontal(this.state.grid);
+    } else if (event.target.value === "basicVertical") {
+      basicVertical(this.state.grid);
     }
   }
 
@@ -299,6 +305,8 @@ class Grid extends Component {
           <option value="kruskal">Kruskal</option>
           <option value="wilson">Wilson</option>
           <option value="recursiveDivision">Recursive Division</option>
+          <option value="basicHorizontal">Basic Horizontal</option>
+          <option value="basicVertical">Basic Vertical</option>
         </select>
       </div>
     );

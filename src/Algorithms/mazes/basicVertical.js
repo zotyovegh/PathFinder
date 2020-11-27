@@ -9,9 +9,9 @@ export function basicVertical(originalGrid) {
       cell.isWall = false;
     }
   }
- 
+  console.log("vertical");
 
-  
+
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
   visualizeOnEmptyGrid(grid, path);
