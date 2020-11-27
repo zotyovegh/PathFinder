@@ -125,7 +125,7 @@ export async function visualizeWilson(grid, path) {
   }
 }
 
-export function visualizeRD(grid, path) {
+export function visualizeOnEmptyGrid(grid, path) {
   window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {

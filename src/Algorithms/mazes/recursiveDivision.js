@@ -1,5 +1,5 @@
 import { clearWithStatus, clearInfinityVariables } from "../cleaning";
-import { visualizeRD } from "./animations";
+import { visualizeOnEmptyGrid } from "./animations";
 export function recursiveDivision(originalGrid) {
   clearWithStatus("path");
   var path = [];
@@ -21,7 +21,7 @@ export function recursiveDivision(originalGrid) {
 
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
-  visualizeRD(grid, path);
+  visualizeOnEmptyGrid(grid, path);
 }
 
 function drawEdges(grid, path) {
@@ -63,7 +63,7 @@ function recursion(topLeft, topRight, bottomLeft, bottomRight, grid, path) {
   var width = topRight.col - topLeft.col + 1;
   var height = bottomLeft.row - topLeft.row + 1;
   if (height < 3 || width < 3) return;
-  
+
   var middle = null;
   var randomPosition = null;
 
