@@ -11,15 +11,14 @@ export function basicHorizontal(originalGrid) {
   }
   drawEdges(grid, path);
   for (let i = 2; i < grid.length - 1; i += 2) {
+    var exc = Math.floor(Math.random() * (grid[0].length - 2 - 1 + 1)) + 1;
     if (i % 4 === 0) {
-      var exc = Math.floor(Math.random() * (grid[0].length - 2 - 1 + 1)) + 1;
       for (let j = grid[0].length - 2; j > 0; j--) {
         if (j === exc) continue;
         path.push(grid[i][j]);
         grid[i][j].isWall = true;
       }
     } else {
-      var exc = Math.floor(Math.random() * (grid[0].length - 2 - 1 + 1)) + 1;
       for (let j = 1; j < grid[0].length - 1; j++) {
         if (j === exc) continue;
         path.push(grid[i][j]);
