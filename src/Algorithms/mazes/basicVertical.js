@@ -19,7 +19,7 @@ export function basicVertical(originalGrid) {
         grid[j][i].isWall = true;
       }
     } else {
-      for (let j = 1; j < grid[0].length - 1; j++) {
+      for (let j = 1; j < grid.length - 1; j++) {
         if (j === exc) continue;
         path.push(grid[j][i]);
         grid[j][i].isWall = true;
