@@ -80,27 +80,20 @@ class Grid extends Component {
     }
   }
   handleMazeChange(event) {
-    if (event.target.value === "random") {
-      getRandomMazedGrid(this.state.grid);
-    } else if (event.target.value === "prim") {
-      primMaze(this.state.grid);
-    } else if (event.target.value === "iterative") {
-      iterativeMaze(this.state.grid);
-    } else if (event.target.value === "recursive") {
-      recursiveMaze(this.state.grid);
-    } else if (event.target.value === "aldousBroder") {
+    if (event.target.value === "random") getRandomMazedGrid(this.state.grid);
+    else if (event.target.value === "prim") primMaze(this.state.grid);
+    else if (event.target.value === "iterative") iterativeMaze(this.state.grid);
+    else if (event.target.value === "recursive") recursiveMaze(this.state.grid);
+    else if (event.target.value === "aldousBroder")
       aldousBroderMaze(this.state.grid);
-    } else if (event.target.value === "kruskal") {
-      kruskalMaze(this.state.grid);
-    } else if (event.target.value === "wilson") {
-      wilsonMaze(this.state.grid);
-    } else if (event.target.value === "recursiveDivision") {
+    else if (event.target.value === "kruskal") kruskalMaze(this.state.grid);
+    else if (event.target.value === "wilson") wilsonMaze(this.state.grid);
+    else if (event.target.value === "recursiveDivision")
       recursiveDivision(this.state.grid);
-    } else if (event.target.value === "basicHorizontal") {
+    else if (event.target.value === "basicHorizontal")
       basicHorizontal(this.state.grid);
-    } else if (event.target.value === "basicVertical") {
+    else if (event.target.value === "basicVertical")
       basicVertical(this.state.grid);
-    }
   }
 
   onMouseDown = (cell) => {
