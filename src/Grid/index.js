@@ -13,6 +13,7 @@ import { wilsonMaze } from "../Algorithms/mazes/wilson";
 import { recursiveDivision } from "../Algorithms/mazes/recursiveDivision";
 import { basicHorizontal } from "../Algorithms/mazes/basicHorizontal";
 import { basicVertical } from "../Algorithms/mazes/basicVertical";
+import { binaryTreeAlg } from "../Algorithms/mazes/binaryTree";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
 
@@ -94,6 +95,8 @@ class Grid extends Component {
       basicHorizontal(this.state.grid);
     else if (event.target.value === "basicVertical")
       basicVertical(this.state.grid);
+    else if (event.target.value === "binaryTree")
+      binaryTreeAlg(this.state.grid);
   }
 
   onMouseDown = (cell) => {
@@ -303,6 +306,7 @@ class Grid extends Component {
             <option value="kruskal">Kruskal</option>
             <option value="wilson">Wilson</option>
             <option value="recursiveDivision">Recursive Division</option>
+            <option value="binaryTree">Binary Tree Algorithm</option>
           </optgroup>
         </select>
       </div>

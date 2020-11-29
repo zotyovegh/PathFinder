@@ -9,7 +9,6 @@ export function binaryTreeAlg(originalGrid) {
       cell.isWall = true;
     }
   }
-  console.log("binaryTree");
 
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
