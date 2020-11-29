@@ -95,8 +95,14 @@ class Grid extends Component {
       basicHorizontal(this.state.grid);
     else if (event.target.value === "basicVertical")
       basicVertical(this.state.grid);
-    else if (event.target.value === "binaryTree")
-      binaryTreeAlg(this.state.grid);
+    else if (event.target.value === "binaryTreeNW")
+      binaryTreeAlg(this.state.grid, "NorthWest");
+    else if (event.target.value === "binaryTreeNE")
+      binaryTreeAlg(this.state.grid, "NorthEast");
+    else if (event.target.value === "binaryTreeSW")
+      binaryTreeAlg(this.state.grid, "SouthWest");
+    else if (event.target.value === "binaryTreeSE")
+      binaryTreeAlg(this.state.grid, "SouthEast");
   }
 
   onMouseDown = (cell) => {
@@ -306,7 +312,12 @@ class Grid extends Component {
             <option value="kruskal">Kruskal</option>
             <option value="wilson">Wilson</option>
             <option value="recursiveDivision">Recursive Division</option>
-            <option value="binaryTree">Binary Tree Algorithm</option>
+          </optgroup>
+          <optgroup label="&nbsp;&nbsp;&nbsp;Binary Tree Algorithm">
+            <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
+            <option value="binaryTreeNE">&nbsp;&nbsp;&nbsp;North-East</option>
+            <option value="binaryTreeSW">&nbsp;&nbsp;&nbsp;South-West</option>
+            <option value="binaryTreeSE">&nbsp;&nbsp;&nbsp;South-East</option>
           </optgroup>
         </select>
       </div>

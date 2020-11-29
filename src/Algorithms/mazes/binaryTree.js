@@ -1,8 +1,8 @@
 import { clearWithStatus, clearInfinityVariables } from "../cleaning";
 import { visualizeOnWalledGrid } from "./animations";
-export function binaryTreeAlg(originalGrid) {
+export function binaryTreeAlg(originalGrid, direction) {
   clearWithStatus("path");
-  var direction = "NorthWest";
+ 
   var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   for (const row of grid) {
