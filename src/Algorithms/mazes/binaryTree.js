@@ -15,27 +15,7 @@ export function binaryTreeAlg(originalGrid) {
   var id = 0;
   for (let i = 1; i < grid.length; i += 2) {
     for (let j = 1; j < grid[0].length; j += 2) {
-      grid[i][j].isWall = false;
-      path.push(grid[i][j]);
-
-      getNeighboringCells(grid[i][j], grid, path, param1, param2);
-      var current = grid[i][j];
-      current.id = id;
-      id++;
-      if (current.neighbors.length !== 0) {
-        const neighbor =
-          current.neighbors[
-            Math.floor(Math.random() * current.neighbors.length)
-          ];
-
-        neighbor[0].isWall = false;
-        path.push(neighbor[0]);
-
-        if (!path.some((e) => e.id === neighbor[1].id)) {
-          neighbor[1].isWall = false;
-          path.push(neighbor[1]);
-        }
-      }
+      updateCells(grid, grid[i][j], path, param1, param2, id);
     }
   }
   clearInfinityVariables(grid);
@@ -43,7 +23,28 @@ export function binaryTreeAlg(originalGrid) {
   visualizeOnWalledGrid(grid, path);
 }
 
-function getNeighboringCells(cell, grid, path, param1, param2) {
+function updateCells(grid, current, path, param1, param2, id) {
+  current.isWall = false;
+  path.push(current);
+
+  getNeighboringCells(current, grid, param1, param2);
+  current.id = id;
+  id++;
+  if (current.neighbors.length !== 0) {
+    const neighbor =
+      current.neighbors[Math.floor(Math.random() * current.neighbors.length)];
+
+    neighbor[0].isWall = false;
+    path.push(neighbor[0]);
+
+    if (!path.some((e) => e.id === neighbor[1].id)) {
+      neighbor[1].isWall = false;
+      path.push(neighbor[1]);
+    }
+  }
+}
+
+function getNeighboringCells(cell, grid, param1, param2) {
   //pair[neighboringWall, neighbor]
   var { col, row } = cell;
   if (row > 1 && (param1 === "North" || param2 === "North")) {
