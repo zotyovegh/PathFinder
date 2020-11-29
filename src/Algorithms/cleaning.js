@@ -60,6 +60,7 @@ export function clearInfinityVariables(grid) {
       cell.g = Infinity;
       cell.h = Infinity;
       cell.visited = false;
+      cell.id = 0;
     }
   }
   window.gridComponent.setState({ grid: grid });
