@@ -2,8 +2,7 @@ import { clearWithStatus, clearInfinityVariables } from "../cleaning";
 import { visualizeOnWalledGrid } from "./animations";
 export function binaryTreeAlg(originalGrid) {
   clearWithStatus("path");
-  var param1 = "South";
-  var param2 = "East";
+  var direction = "SouthEast";
   var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   for (const row of grid) {
@@ -12,15 +11,25 @@ export function binaryTreeAlg(originalGrid) {
     }
   }
 
-  var id = 0;
-  for (let i = 1; i < grid.length; i += 2) {
-    for (let j = 1; j < grid[0].length; j += 2) {
-      updateCells(grid, grid[i][j], path, param1, param2, id);
-    }
-  }
+  getDirection(direction, grid, path);
+
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
   visualizeOnWalledGrid(grid, path);
+}
+
+function getDirection(direction, grid, path) {
+  var id = 0;
+  if (direction === "NorthWest") {
+  } else if (direction === "NorthEast") {
+  } else if (direction === "SouthWest") {
+  } else if (direction === "SouthEast") {
+    for (let i = 1; i < grid.length; i += 2) {
+      for (let j = 1; j < grid[0].length; j += 2) {
+        updateCells(grid, grid[i][j], path, "South", "East", id);
+      }
+    }
+  }
 }
 
 function updateCells(grid, current, path, param1, param2, id) {
