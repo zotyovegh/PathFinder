@@ -24,10 +24,12 @@ export function ellerMaze(originalGrid) {
       getNeighboringCells(currentCell, grid);
       if (grid.length - 2 !== i) {
         path.push(currentCell);
+        currentCell.isWall = false;
       }
       if (Math.random() < 0.5 && currentCell.neighbors[0] !== null) {
         if (grid.length - 2 !== i) {
           path.push(currentCell.neighbors[0][0]);
+          currentCell.neighbors[0][0].isWall = false;
         }
         currentCell.neighbors[0][1].id = currentCell.id;
       }
@@ -40,9 +42,10 @@ export function ellerMaze(originalGrid) {
       for (let j = 1; j < grid[0].length; j += 2) {
         var currentCell = grid[i][j];
         path.push(currentCell);
+        currentCell.isWall = false;
         if (currentCell.neighbors[0] !== null) {
           path.push(currentCell.neighbors[0][0]);
-
+          currentCell.neighbors[0][0].isWall = false;
           currentCell.neighbors[0][1].id = currentCell.id;
         }
       }
@@ -58,6 +61,7 @@ export function ellerMaze(originalGrid) {
       });
       if (counter === 1) {
         path.push(currentCell.neighbors[1][0]);
+        currentCell.neighbors[1][0].isWall = false;
       } else if (counter > 1) {
         if (Math.random() > 0.5) {
           map.forEach((value, key) => {
@@ -66,6 +70,7 @@ export function ellerMaze(originalGrid) {
             }
           });
           path.push(currentCell.neighbors[1][0]);
+          currentCell.neighbors[1][0].isWall = false;
         } else {
           map.forEach((value, key) => {
             if (key === currentCell) {
