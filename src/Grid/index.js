@@ -14,6 +14,7 @@ import { recursiveDivision } from "../Algorithms/mazes/recursiveDivision";
 import { basicHorizontal } from "../Algorithms/mazes/basicHorizontal";
 import { basicVertical } from "../Algorithms/mazes/basicVertical";
 import { binaryTreeAlg } from "../Algorithms/mazes/binaryTree";
+import { ellerMaze } from "../Algorithms/mazes/eller";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
 
@@ -95,6 +96,7 @@ class Grid extends Component {
       basicHorizontal(this.state.grid);
     else if (event.target.value === "basicVertical")
       basicVertical(this.state.grid);
+    else if (event.target.value === "eller") ellerMaze(this.state.grid);
     else if (event.target.value === "binaryTreeNW")
       binaryTreeAlg(this.state.grid, "NorthWest");
     else if (event.target.value === "binaryTreeNE")
@@ -319,9 +321,9 @@ class Grid extends Component {
             <option value="binaryTreeNE">&nbsp;&nbsp;&nbsp;North-East</option>
             <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
           </optgroup>
+          <option value="eller">Eller's Maze</option>
         </select>
       </div>
-      
     );
   }
 }

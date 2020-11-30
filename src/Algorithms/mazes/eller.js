@@ -9,7 +9,11 @@ export function ellerMaze(originalGrid) {
       cell.isWall = true;
     }
   }
-
+  for (let i = 1; i < grid.length; i += 2) {
+    for (let j = 1; j < grid[0].length; j += 2) {
+      path.push(grid[i][j])
+    }
+  }
 
 
   clearInfinityVariables(grid);
@@ -20,12 +24,12 @@ export function ellerMaze(originalGrid) {
 function getNeighboringCells(cell, grid) {
   //pair[neighboringWall, neighbor]
   var { col, row } = cell;
-  if (row > 1) {
+  /*if (row > 1) {
     //UP
     var neighbor = grid[row - 1][col];
     cell.neighbors.push([neighbor, grid[row - 2][col]]);
-  }
-  if (col < grid[0].length - 2 &&) {
+  }*/
+  if (col < grid[0].length - 2) {
     //Right
     let neighbor = grid[row][col + 1];
     cell.neighbors.push([neighbor, grid[row][col + 2]]);
@@ -35,9 +39,9 @@ function getNeighboringCells(cell, grid) {
     let neighbor = grid[row + 1][col];
     cell.neighbors.push([neighbor, grid[row + 2][col]]);
   }
-  if (col > 1) {
+ /* if (col > 1) {
     //Left
     let neighbor = grid[row][col - 1];
     cell.neighbors.push([neighbor, grid[row][col - 2]]);
-  }
+  }*/
 }
