@@ -18,7 +18,7 @@ export function visualizeOnWalledGrid(grid, path) {
       if (!path[i].end && !path[i].start) {
         visualizeCell("cell", "cell cell-empty", path[i]);
       }
-    }, 20 * i);
+    }, 10 * i);
   }
 }
 

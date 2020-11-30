@@ -10,12 +10,11 @@ export function ellerMaze(originalGrid) {
     }
   }
   var idCounter = 1;
-  for (let i = 1; i < 2; i += 2) {
+  for (let i = 1; i < grid.length; i += 2) {
     var map = new Map();
     for (let j = 1; j < grid[0].length; j += 2) {
       if (grid[i][j].id === 0) {
         grid[i][j].id = idCounter;
-        // map.set(grid[i][j], idCounter++);
         idCounter++;
       }
     }
@@ -23,9 +22,13 @@ export function ellerMaze(originalGrid) {
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
       getNeighboringCells(currentCell, grid);
-      path.push(currentCell);
+      if (grid.length - 2 !== i) {
+        path.push(currentCell);
+      }
       if (Math.random() < 0.5 && currentCell.neighbors[0] !== null) {
-        path.push(currentCell.neighbors[0][0]);
+        if (grid.length - 2 !== i) {
+          path.push(currentCell.neighbors[0][0]);
+        }
         currentCell.neighbors[0][1].id = currentCell.id;
       }
     }
@@ -33,7 +36,45 @@ export function ellerMaze(originalGrid) {
       var currentCell = grid[i][j];
       map.set(currentCell, currentCell.id);
     }
-    console.log(map);
+    if (grid.length - 2 === i) {
+      for (let j = 1; j < grid[0].length; j += 2) {
+        var currentCell = grid[i][j];
+        path.push(currentCell);
+        if (currentCell.neighbors[0] !== null) {
+          path.push(currentCell.neighbors[0][0]);
+
+          currentCell.neighbors[0][1].id = currentCell.id;
+        }
+      }
+      continue;
+    }
+    for (let j = 1; j < grid[0].length; j += 2) {
+      var currentCell = grid[i][j];
+      var counter = 0;
+      map.forEach((value, key) => {
+        if (value === currentCell.id) {
+          counter++;
+        }
+      });
+      if (counter === 1) {
+        path.push(currentCell.neighbors[1][0]);
+      } else if (counter > 1) {
+        if (Math.random() > 0.5) {
+          map.forEach((value, key) => {
+            if (value === currentCell.id) {
+              map.delete(key);
+            }
+          });
+          path.push(currentCell.neighbors[1][0]);
+        } else {
+          map.forEach((value, key) => {
+            if (key === currentCell) {
+              map.delete(key);
+            }
+          });
+        }
+      }
+    }
   }
 
   clearInfinityVariables(grid);
