@@ -23,6 +23,10 @@ export function ellerMaze(originalGrid) {
       var currentCell = grid[i][j];
       getNeighboringCells(currentCell, grid);
       path.push(currentCell);
+      if (Math.random() < 0.5 && currentCell.neighbors[0] !== null) {
+        console.log(currentCell.neighbors);
+        path.push(currentCell.neighbors[0][0]);
+      }
     }
   }
 

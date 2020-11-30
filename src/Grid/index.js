@@ -323,6 +323,14 @@ class Grid extends Component {
           </optgroup>
           <option value="eller">Eller's Maze</option>
         </select>
+        <button
+          disabled={this.state.status === "running"}
+          onClick={() => {
+            ellerMaze(this.state.grid);
+          }}
+        >
+          Eller
+        </button>
       </div>
     );
   }
