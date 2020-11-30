@@ -314,6 +314,7 @@ class Grid extends Component {
             <option value="kruskal">Kruskal</option>
             <option value="wilson">Wilson</option>
             <option value="recursiveDivision">Recursive Division</option>
+            <option value="eller">Eller</option>
           </optgroup>
           <optgroup label="&nbsp;&nbsp;&nbsp;Binary Tree Algorithm">
             <option value="binaryTreeSE">&nbsp;&nbsp;&nbsp;South-East</option>
@@ -321,16 +322,7 @@ class Grid extends Component {
             <option value="binaryTreeNE">&nbsp;&nbsp;&nbsp;North-East</option>
             <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
           </optgroup>
-          <option value="eller">Eller's Maze</option>
         </select>
-        <button
-          disabled={this.state.status === "running"}
-          onClick={() => {
-            ellerMaze(this.state.grid);
-          }}
-        >
-          Eller
-        </button>
       </div>
     );
   }

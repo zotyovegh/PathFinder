@@ -89,12 +89,7 @@ export function ellerMaze(originalGrid) {
 
 function getNeighboringCells(cell, grid) {
   //pair[neighboringWall, neighbor]
-  var { col, row } = cell;
-  /*if (row > 1) {
-    //UP
-    var neighbor = grid[row - 1][col];
-    cell.neighbors.push([neighbor, grid[row - 2][col]]);
-  }*/
+  var { col, row } = cell;  
   if (col < grid[0].length - 2) {
     //Right
     let neighbor = grid[row][col + 1];
@@ -109,9 +104,4 @@ function getNeighboringCells(cell, grid) {
   } else {
     cell.neighbors.push(null);
   }
-  /* if (col > 1) {
-    //Left
-    let neighbor = grid[row][col - 1];
-    cell.neighbors.push([neighbor, grid[row][col - 2]]);
-  }*/
 }
