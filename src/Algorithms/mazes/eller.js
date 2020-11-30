@@ -1,7 +1,7 @@
 import { clearWithStatus, clearInfinityVariables } from "../cleaning";
 import { visualizeOnWalledGrid } from "./animations";
 export function ellerMaze(originalGrid) {
-  clearWithStatus("path"); 
+  clearWithStatus("path");
   var path = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   for (const row of grid) {
@@ -9,12 +9,22 @@ export function ellerMaze(originalGrid) {
       cell.isWall = true;
     }
   }
-  for (let i = 1; i < grid.length; i += 2) {
+  var idCounter = 1;
+  for (let i = 1; i < 2; i += 2) {
+    var map = new Map();
     for (let j = 1; j < grid[0].length; j += 2) {
-      path.push(grid[i][j])
+      if (grid[i][j].id === 0) {
+        grid[i][j].id = idCounter;
+        map.set(grid[i][j], idCounter++);
+      }
+    }
+
+    for (let j = 1; j < grid[0].length; j += 2) {
+      var currentCell = grid[i][j];
+      getNeighboringCells(currentCell, grid);
+      path.push(currentCell);
     }
   }
-
 
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
@@ -33,13 +43,17 @@ function getNeighboringCells(cell, grid) {
     //Right
     let neighbor = grid[row][col + 1];
     cell.neighbors.push([neighbor, grid[row][col + 2]]);
+  } else {
+    cell.neighbors.push(null);
   }
   if (row < grid.length - 2) {
     //Down
     let neighbor = grid[row + 1][col];
     cell.neighbors.push([neighbor, grid[row + 2][col]]);
+  } else {
+    cell.neighbors.push(null);
   }
- /* if (col > 1) {
+  /* if (col > 1) {
     //Left
     let neighbor = grid[row][col - 1];
     cell.neighbors.push([neighbor, grid[row][col - 2]]);
