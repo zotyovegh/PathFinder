@@ -314,13 +314,14 @@ class Grid extends Component {
             <option value="recursiveDivision">Recursive Division</option>
           </optgroup>
           <optgroup label="&nbsp;&nbsp;&nbsp;Binary Tree Algorithm">
-            <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
-            <option value="binaryTreeNE">&nbsp;&nbsp;&nbsp;North-East</option>
-            <option value="binaryTreeSW">&nbsp;&nbsp;&nbsp;South-West</option>
             <option value="binaryTreeSE">&nbsp;&nbsp;&nbsp;South-East</option>
+            <option value="binaryTreeSW">&nbsp;&nbsp;&nbsp;South-West</option>
+            <option value="binaryTreeNE">&nbsp;&nbsp;&nbsp;North-East</option>
+            <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
           </optgroup>
         </select>
       </div>
+      
     );
   }
 }
