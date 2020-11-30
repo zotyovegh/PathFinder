@@ -15,7 +15,8 @@ export function ellerMaze(originalGrid) {
     for (let j = 1; j < grid[0].length; j += 2) {
       if (grid[i][j].id === 0) {
         grid[i][j].id = idCounter;
-        map.set(grid[i][j], idCounter++);
+        // map.set(grid[i][j], idCounter++);
+        idCounter++;
       }
     }
 
@@ -24,10 +25,15 @@ export function ellerMaze(originalGrid) {
       getNeighboringCells(currentCell, grid);
       path.push(currentCell);
       if (Math.random() < 0.5 && currentCell.neighbors[0] !== null) {
-        console.log(currentCell.neighbors);
         path.push(currentCell.neighbors[0][0]);
+        currentCell.neighbors[0][1].id = currentCell.id;
       }
     }
+    for (let j = 1; j < grid[0].length; j += 2) {
+      var currentCell = grid[i][j];
+      map.set(currentCell, currentCell.id);
+    }
+    console.log(map);
   }
 
   clearInfinityVariables(grid);
