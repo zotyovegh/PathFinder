@@ -96,8 +96,16 @@ export async function visualizeWilson(grid, path) {
     var previous = null;
     var currentPath = path[i][0];
     var isOptimalPath = path[i][1];
+
+    var aim = path[i][2];
+    console.log(currentPath[currentPath.length - 1].isWall);
+    console.log(aim.isWall);
+    console.log("---------");
+    if (!aim.end && !aim.start) {
+      visualizeCell("cell", "cell cell-previous", aim);
+    }
     if (!isOptimalPath) {
-      for (let j = currentPath.length - 1; j > 0; j--) {
+      for (let j = 0; j < currentPath.length; j++) {
         if (previous !== null) {
           visualizeCell("cell", "cell cell-current", previous);
         }
@@ -113,7 +121,7 @@ export async function visualizeWilson(grid, path) {
       }
     }
 
-    for (let j = 0; j < currentPath.length; j++) {
+    for (let j = currentPath.length - 1; j >= 0; j--) {
       if (!currentPath[j].end && !currentPath[j].start) {
         if (!isOptimalPath) {
           visualizeCell("cell", "cell cell-wall", currentPath[j]);
@@ -121,6 +129,9 @@ export async function visualizeWilson(grid, path) {
           visualizeCell("cell", "cell cell-empty", currentPath[j]);
         }
       }
+    }
+    if (!aim.end && !aim.start) {
+      visualizeCell("cell", "cell cell-empty", aim);
     }
   }
 }
