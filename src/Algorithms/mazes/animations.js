@@ -98,8 +98,10 @@ export async function visualizeWilson(grid, path) {
     var isOptimalPath = path[i][1];
     var aim = path[i][2] === null ? null : path[i][2];
 
-    var type = aim === null ? null :document.getElementById(`${"cell"}-${aim.row}-${aim.col}`)
-      .className;
+    var type =
+      aim === null
+        ? null
+        : document.getElementById(`${"cell"}-${aim.row}-${aim.col}`).className;
     if (aim !== null) {
       if (!aim.end && !aim.start) {
         visualizeCell("cell", "cell cell-previous", aim);
