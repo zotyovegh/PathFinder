@@ -98,10 +98,6 @@ export async function visualizeWilson(grid, path) {
     var isOptimalPath = path[i][1];
     var aim = path[i][2];
 
-    console.log(currentPath[currentPath.length - 1]);
-    console.log(aim);
-    console.log("---------");
-
     var type = document.getElementById(`${"cell"}-${aim.row}-${aim.col}`)
       .className;
 
