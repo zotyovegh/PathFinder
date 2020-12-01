@@ -96,14 +96,16 @@ export async function visualizeWilson(grid, path) {
     var previous = null;
     var currentPath = path[i][0];
     var isOptimalPath = path[i][1];
-    var aim = path[i][2];
+    var aim = path[i][2] === null ? null : path[i][2];
 
-    var type = document.getElementById(`${"cell"}-${aim.row}-${aim.col}`)
+    var type = aim === null ? null :document.getElementById(`${"cell"}-${aim.row}-${aim.col}`)
       .className;
-
-    if (!aim.end && !aim.start) {
-      visualizeCell("cell", "cell cell-previous", aim);
+    if (aim !== null) {
+      if (!aim.end && !aim.start) {
+        visualizeCell("cell", "cell cell-previous", aim);
+      }
     }
+
     if (!isOptimalPath) {
       for (let j = 0; j < currentPath.length; j++) {
         if (previous !== null) {
@@ -120,11 +122,13 @@ export async function visualizeWilson(grid, path) {
         }
       }
     }
-    if (!aim.end && !aim.start) {
-      if (type === "cell cell-wall") {
-        visualizeCell("cell", "cell cell-wall", aim);
-      } else {
-        visualizeCell("cell", "cell cell-empty", aim);
+    if (aim !== null) {
+      if (!aim.end && !aim.start) {
+        if (type === "cell cell-wall") {
+          visualizeCell("cell", "cell cell-wall", aim);
+        } else {
+          visualizeCell("cell", "cell cell-empty", aim);
+        }
       }
     }
 
