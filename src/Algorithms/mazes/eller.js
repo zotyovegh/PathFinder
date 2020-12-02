@@ -18,11 +18,15 @@ export function ellerMaze(originalGrid) {
         idCounter++;
       }
     }
-
+    for (let j = 1; j < grid[0].length; j += 2) {
+      var currentCell = grid[i][j];
+      map.set(currentCell, currentCell.id);
+    }
+   /* console.log(map);
+    console.log("----------");*/
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
       getNeighboringCells(currentCell, grid);
-
       path.push(currentCell);
       currentCell.isWall = false;
 
@@ -31,28 +35,18 @@ export function ellerMaze(originalGrid) {
         currentCell.neighbors[0] !== null &&
         currentCell.neighbors[0][1].id !== currentCell.id
       ) {
-        console.log("******");
-        console.log(currentCell.id);
-        console.log(currentCell.neighbors[0][1].id);
-        console.log("******");
         path.push(currentCell.neighbors[0][0]);
         currentCell.neighbors[0][0].isWall = false;
         map.forEach((value, key) => {
           if (value === currentCell.neighbors[0][1].id) {
-            key.id = currentCell.id;
             map.set(key, currentCell.id);
+            grid[key.row][key.col].id = currentCell.id;
           }
         });
-        currentCell.neighbors[0][1].id = currentCell.id;
+        //
       }
     }
-    for (let j = 1; j < grid[0].length; j += 2) {
-      var currentCell = grid[i][j];
-      map.set(currentCell, currentCell.id);
-    }
-    console.log(map);
-    console.log("----------");
-
+    //DOWN
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
       var counter = 0;
@@ -65,23 +59,11 @@ export function ellerMaze(originalGrid) {
         path.push(currentCell.neighbors[1][0]);
         currentCell.neighbors[1][0].isWall = false;
         currentCell.neighbors[1][1].id = currentCell.id;
-        /* map.forEach((value, key) => {
-            if (value === currentCell.neighbors[1][1].id) {
-              map.set(key, currentCell.id);
-            }
-          });*/
       } else if (counter > 1) {
         if (Math.random() > 0.5) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;
           currentCell.neighbors[1][1].id = currentCell.id;
-          /* map.forEach((value, key) => {
-              if (value === currentCell.neighbors[1][1].id) {
-                map.set(key, currentCell.id);
-                key.id = currentCell.id;
-                key.isWall = currentCell.isWall;
-              }
-            });*/
         }
       }
     }
