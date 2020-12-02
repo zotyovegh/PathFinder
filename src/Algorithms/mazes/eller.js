@@ -3,6 +3,7 @@ import { visualizeOnWalledGrid } from "./animations";
 export function ellerMaze(originalGrid) {
   clearWithStatus("path");
   var path = [];
+  var used = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   for (const row of grid) {
     for (const cell of row) {
@@ -34,19 +35,22 @@ export function ellerMaze(originalGrid) {
         currentCell.neighbors[0] !== null &&
         currentCell.neighbors[0][1].id !== currentCell.id
       ) {
+        /*if(!used.includes(currentCell.neighbors[0][1].id)){} */
         path.push(currentCell.neighbors[0][0]);
         currentCell.neighbors[0][0].isWall = false;
-
+        const aim = currentCell.neighbors[0][1].id;
         map.forEach((value, key) => {
-          if (value === currentCell.neighbors[0][1].id) {
+          if (value === aim) {
             map.set(key, currentCell.id);
+            console.log(value + " " + map.get(key));
             grid[key.row][key.col].id = currentCell.id;
           }
         });
+
         currentCell.neighbors[0][1].id = currentCell.id;
-        //
       }
     }
+    console.log("*******");
     //DOWN
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
