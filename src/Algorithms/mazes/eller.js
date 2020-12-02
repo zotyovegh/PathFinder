@@ -22,8 +22,7 @@ export function ellerMaze(originalGrid) {
       var currentCell = grid[i][j];
       map.set(currentCell, currentCell.id);
     }
-   /* console.log(map);
-    console.log("----------");*/
+
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
       getNeighboringCells(currentCell, grid);
@@ -37,12 +36,14 @@ export function ellerMaze(originalGrid) {
       ) {
         path.push(currentCell.neighbors[0][0]);
         currentCell.neighbors[0][0].isWall = false;
+
         map.forEach((value, key) => {
           if (value === currentCell.neighbors[0][1].id) {
             map.set(key, currentCell.id);
             grid[key.row][key.col].id = currentCell.id;
           }
         });
+        currentCell.neighbors[0][1].id = currentCell.id;
         //
       }
     }
