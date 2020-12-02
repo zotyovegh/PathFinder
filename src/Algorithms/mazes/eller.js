@@ -27,11 +27,34 @@ export function ellerMaze(originalGrid) {
       currentCell.isWall = false;
 
       if (Math.random() < 0.5 && currentCell.neighbors[0] !== null) {
-        if (currentCell.neighbors[0][1].id !== currentCell.id) {
-          path.push(currentCell.neighbors[0][0]);
+        console.log("******");
+        console.log(currentCell.id);
+        console.log(currentCell.neighbors[0][1].id);
 
+        console.log("******");
+        if (currentCell.neighbors[0][1].id > currentCell.id) {
+          console.log(true);
+          path.push(currentCell.neighbors[0][0]);
           currentCell.neighbors[0][0].isWall = false;
           currentCell.neighbors[0][1].id = currentCell.id;
+
+          map.forEach((value, key) => {
+            if (value === currentCell.neighbors[0][1].id) {
+              map.set(key, currentCell.id);
+              key.id = currentCell.id;
+            }
+          });
+        } else if (currentCell.neighbors[0][1].id < currentCell.id) {
+          path.push(currentCell.neighbors[0][0]);
+          currentCell.neighbors[0][0].isWall = false;
+          currentCell.id = currentCell.neighbors[0][1].id;
+
+         /* map.forEach((value, key) => {
+            if (value === currentCell.id) {
+              map.set(key, currentCell.id);
+              key.id = currentCell.neighbors[0][1].id;
+            }
+          });*/
         }
       }
     }
@@ -41,37 +64,36 @@ export function ellerMaze(originalGrid) {
     }
     console.log(map);
     console.log("----------");
-    if (i < 2) {
-      for (let j = 1; j < grid[0].length; j += 2) {
-        var currentCell = grid[i][j];
-        var counter = 0;
-        map.forEach((value, key) => {
-          if (value === currentCell.id) {
-            counter++;
-          }
-        });
-        if (counter === 1) {
+
+    for (let j = 1; j < grid[0].length; j += 2) {
+      var currentCell = grid[i][j];
+      var counter = 0;
+      map.forEach((value, key) => {
+        if (value === currentCell.id) {
+          counter++;
+        }
+      });
+      if (counter === 1) {
+        path.push(currentCell.neighbors[1][0]);
+        currentCell.neighbors[1][0].isWall = false;
+        currentCell.neighbors[1][1].id = currentCell.id;
+        /* map.forEach((value, key) => {
+            if (value === currentCell.neighbors[1][1].id) {
+              map.set(key, currentCell.id);
+            }
+          });*/
+      } else if (counter > 1) {
+        if (Math.random() > 0.5) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;
           currentCell.neighbors[1][1].id = currentCell.id;
-        } else if (counter > 1) {
-          if (Math.random() > 0.5) {
-            /* map.forEach((value, key) => {
-            if (value === currentCell.id) {
-              map.delete(key);
-            }
-          });*/
-            path.push(currentCell.neighbors[1][0]);
-            currentCell.neighbors[1][0].isWall = false;
-            currentCell.neighbors[1][1].id = currentCell.id;
-          }
-          /*else {
-          map.forEach((value, key) => {
-            if (key === currentCell) {
-              map.delete(key);
-            }
-          });
-        }*/
+          /* map.forEach((value, key) => {
+              if (value === currentCell.neighbors[1][1].id) {
+                map.set(key, currentCell.id);
+                key.id = currentCell.id;
+                key.isWall = currentCell.isWall;
+              }
+            });*/
         }
       }
     }
