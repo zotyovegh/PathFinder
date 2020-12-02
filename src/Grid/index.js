@@ -33,7 +33,7 @@ class Grid extends Component {
       status: "pending",
       currentAlg: "dijkstra",
       currentMaze: "default",
-      previousVisualization: false,
+      previousVisualization: true,
       diagonalVisualization: false,
       optimizedVisualization: true,
     };

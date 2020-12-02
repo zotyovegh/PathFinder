@@ -20,6 +20,10 @@ export function visualizeOnWalledGrid(grid, path) {
       }
     }, 10 * i);
   }
+  for (let i = 0; i < path.length; i++) {
+    const cell = path[i];
+    visualizeCell("num", "num num-path", cell);
+  }
 }
 
 export function visualizeRandom(grid, path) {
