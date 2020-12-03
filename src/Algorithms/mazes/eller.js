@@ -3,13 +3,22 @@ import { visualizeOnWalledGrid } from "./animations";
 export function ellerMaze(originalGrid) {
   clearWithStatus("path");
   var path = [];
-  var used = [];
+  var list = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   for (const row of grid) {
     for (const cell of row) {
       cell.isWall = true;
     }
   }
+  /*var test = [];
+  test.push(4);
+  test.push(3);
+  test.push(3);
+  test.push(5);
+  test = test.filter(function(item) {
+    return item !== 3
+})
+  console.log(test);*/
   var idCounter = 1;
   for (let i = 1; i < 4; i += 2) {
     var map = new Map();
@@ -23,7 +32,7 @@ export function ellerMaze(originalGrid) {
       var currentCell = grid[i][j];
       map.set(currentCell, currentCell.id);
     }
-
+    //SIDE
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
       getNeighboringCells(currentCell, grid);
@@ -42,7 +51,7 @@ export function ellerMaze(originalGrid) {
         map.forEach((value, key) => {
           if (value === aim) {
             map.set(key, currentCell.id);
-            console.log(value + " " + map.get(key));
+            /*console.log(value + " " + map.get(key));*/
             grid[key.row][key.col].id = currentCell.id;
           }
         });
@@ -50,16 +59,24 @@ export function ellerMaze(originalGrid) {
         currentCell.neighbors[0][1].id = currentCell.id;
       }
     }
-    console.log("*******");
     //DOWN
+    list = [];
+
+    map.forEach((value, key) => {
+      list.push(value);
+    });
+
+    // console.log(list);
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
-      var counter = 0;
-      map.forEach((value, key) => {
-        if (value === currentCell.id) {
-          counter++;
-        }
-      });
+      if (i === 3) {
+        /*console.log(
+          currentCell.id + " " + list.filter((x) => x === currentCell.id).length
+        );*/
+      }
+
+      var counter = list.filter((x) => x === currentCell.id).length;
+      console.log(counter);
       if (counter === 1) {
         path.push(currentCell.neighbors[1][0]);
         currentCell.neighbors[1][0].isWall = false;
@@ -69,6 +86,7 @@ export function ellerMaze(originalGrid) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;
           currentCell.neighbors[1][1].id = currentCell.id;
+          //remove 1 currentcell.id item
         }
       }
     }
