@@ -5,7 +5,7 @@ function getColor(props) {
     return "cell-start";
   } else if (props.data.end) {
     return "cell-end";
-  } else {
+  }else {
     return "";
   }
 }
@@ -29,7 +29,7 @@ const Cell = (props) => {
         className={`num ${""}`}
         id={`num-${props.data.row}-${props.data.col}`}
       >
-        {props.data.id === 0 ? "" : props.data.id}
+        {props.data.distance === Infinity ? "" : props.data.distance}
       </div>
     </div>
   );

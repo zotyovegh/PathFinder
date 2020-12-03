@@ -33,21 +33,15 @@ export function ellerMaze(originalGrid) {
       path.push(currentCell);
       currentCell.isWall = false;
 
-     
-
-        if (
-        Math.random() < 0.5 &&
+      if (
         currentCell.neighbors[0] !== null &&
-        currentCell.neighbors[0][1].id !== currentCell.id &&
-        grid.length - 2 !== i
+        currentCell.neighbors[0][1].id !== currentCell.id
       ) {
-        sideMove(grid, currentCell, map, path);
-      } else if (
-        currentCell.neighbors[0] !== null &&
-        currentCell.neighbors[0][1].id !== currentCell.id &&
-        grid.length - 2 === i
-      ) {
-        sideMove(grid, currentCell, map, path);
+        if (grid.length - 2 === i) {
+          sideMove(grid, currentCell, map, path);
+        } else if (Math.random() < 0.5) {
+          sideMove(grid, currentCell, map, path);
+        }
       }
     }
     if (grid.length - 2 !== i) {
