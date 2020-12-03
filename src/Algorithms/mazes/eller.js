@@ -33,39 +33,21 @@ export function ellerMaze(originalGrid) {
       path.push(currentCell);
       currentCell.isWall = false;
 
-      if (
+     
+
+        if (
         Math.random() < 0.5 &&
         currentCell.neighbors[0] !== null &&
         currentCell.neighbors[0][1].id !== currentCell.id &&
         grid.length - 2 !== i
       ) {
-        path.push(currentCell.neighbors[0][0]);
-        currentCell.neighbors[0][0].isWall = false;
-        const aim = currentCell.neighbors[0][1].id;
-        map.forEach((value, key) => {
-          if (value === aim) {
-            map.set(key, currentCell.id);
-            grid[key.row][key.col].id = currentCell.id;
-          }
-        });
-
-        currentCell.neighbors[0][1].id = currentCell.id;
+        sideMove(grid, currentCell, map, path);
       } else if (
         currentCell.neighbors[0] !== null &&
         currentCell.neighbors[0][1].id !== currentCell.id &&
         grid.length - 2 === i
       ) {
-        path.push(currentCell.neighbors[0][0]);
-        currentCell.neighbors[0][0].isWall = false;
-        const aim = currentCell.neighbors[0][1].id;
-        map.forEach((value, key) => {
-          if (value === aim) {
-            map.set(key, currentCell.id);
-            grid[key.row][key.col].id = currentCell.id;
-          }
-        });
-
-        currentCell.neighbors[0][1].id = currentCell.id;
+        sideMove(grid, currentCell, map, path);
       }
     }
     if (grid.length - 2 !== i) {
@@ -100,6 +82,20 @@ export function ellerMaze(originalGrid) {
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
   visualizeOnWalledGrid(grid, path);
+}
+
+function sideMove(grid, currentCell, map, path) {
+  path.push(currentCell.neighbors[0][0]);
+  currentCell.neighbors[0][0].isWall = false;
+  const aim = currentCell.neighbors[0][1].id;
+  map.forEach((value, key) => {
+    if (value === aim) {
+      map.set(key, currentCell.id);
+      grid[key.row][key.col].id = currentCell.id;
+    }
+  });
+
+  currentCell.neighbors[0][1].id = currentCell.id;
 }
 
 function remove(array, visited, item, isVisited) {
