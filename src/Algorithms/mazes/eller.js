@@ -4,6 +4,7 @@ export function ellerMaze(originalGrid) {
   clearWithStatus("path");
   var path = [];
   var list = [];
+  var visited = [];
   var grid = JSON.parse(JSON.stringify(originalGrid));
   for (const row of grid) {
     for (const cell of row) {
@@ -24,6 +25,7 @@ export function ellerMaze(originalGrid) {
       var currentCell = grid[i][j];
       map.set(currentCell, currentCell.id);
     }
+
     //SIDE
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
@@ -53,12 +55,13 @@ export function ellerMaze(originalGrid) {
     }
     //DOWN
     list = [];
+    visited = [];
 
     map.forEach((value, key) => {
       list.push(value);
     });
 
-    // console.log(list);
+    console.log(list);
     for (let j = 1; j < grid[0].length; j += 2) {
       var currentCell = grid[i][j];
       if (i === 3) {
@@ -66,21 +69,26 @@ export function ellerMaze(originalGrid) {
           currentCell.id + " " + list.filter((x) => x === currentCell.id).length
         );*/
       }
-
+      console.log("******");
       var counter = list.filter((x) => x === currentCell.id).length;
       console.log(counter);
-      if (counter === 1) {
-        console.log(currentCell.id);
+      if (counter === 1 && !visited.includes(currentCell.id)) {
+        console.log("1: " + currentCell.id);
         path.push(currentCell.neighbors[1][0]);
         currentCell.neighbors[1][0].isWall = false;
         currentCell.neighbors[1][1].id = currentCell.id;
       } else if (counter > 1) {
-        if (Math.random() > 0.8) {
+        console.log("More: " + currentCell.id);
+        if (Math.random() > 0.5) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;
           currentCell.neighbors[1][1].id = currentCell.id;
+          remove(list, visited, currentCell.id, true);
         }
-        remove(list, currentCell.id);
+        remove(list, visited, currentCell.id, false);
+        /* if (list.filter((x) => x === currentCell.id).length === 1) {
+          remove(list, currentCell.id);
+        }*/
       }
     }
     console.log(list);
@@ -91,9 +99,13 @@ export function ellerMaze(originalGrid) {
   visualizeOnWalledGrid(grid, path);
 }
 
-function remove(array, item) {
+function remove(array, visited, item, isVisited) {
   for (let i = 0; i < array.length; i++) {
     if (array[i] === item) {
+      if (isVisited) {
+        visited.push(item);
+      }
+
       array.splice(i, 1);
     }
   }
