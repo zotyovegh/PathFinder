@@ -38,14 +38,12 @@ export function ellerMaze(originalGrid) {
         currentCell.neighbors[0] !== null &&
         currentCell.neighbors[0][1].id !== currentCell.id
       ) {
-        /*if(!used.includes(currentCell.neighbors[0][1].id)){} */
         path.push(currentCell.neighbors[0][0]);
         currentCell.neighbors[0][0].isWall = false;
         const aim = currentCell.neighbors[0][1].id;
         map.forEach((value, key) => {
           if (value === aim) {
             map.set(key, currentCell.id);
-            /*console.log(value + " " + map.get(key));*/
             grid[key.row][key.col].id = currentCell.id;
           }
         });
@@ -63,22 +61,13 @@ export function ellerMaze(originalGrid) {
 
     console.log(list);
     for (let j = 1; j < grid[0].length; j += 2) {
-      var currentCell = grid[i][j];
-      if (i === 3) {
-        /*console.log(
-          currentCell.id + " " + list.filter((x) => x === currentCell.id).length
-        );*/
-      }
-      console.log("******");
+      var currentCell = grid[i][j];    
       var counter = list.filter((x) => x === currentCell.id).length;
-      console.log(counter);
       if (counter === 1 && !visited.includes(currentCell.id)) {
-        console.log("1: " + currentCell.id);
         path.push(currentCell.neighbors[1][0]);
         currentCell.neighbors[1][0].isWall = false;
         currentCell.neighbors[1][1].id = currentCell.id;
       } else if (counter > 1) {
-        console.log("More: " + currentCell.id);
         if (Math.random() > 0.5) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;
@@ -86,12 +75,8 @@ export function ellerMaze(originalGrid) {
           remove(list, visited, currentCell.id, true);
         }
         remove(list, visited, currentCell.id, false);
-        /* if (list.filter((x) => x === currentCell.id).length === 1) {
-          remove(list, currentCell.id);
-        }*/
       }
     }
-    console.log(list);
   }
 
   clearInfinityVariables(grid);
