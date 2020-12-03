@@ -13,7 +13,7 @@ export function ellerMaze(originalGrid) {
   }
 
   var idCounter = 1;
-  for (let i = 1; i < grid.length - 2; i += 2) {
+  for (let i = 1; i < grid.length; i += 2) {
     var map = new Map();
     for (let j = 1; j < grid[0].length; j += 2) {
       if (grid[i][j].id === 0) {
@@ -36,7 +36,24 @@ export function ellerMaze(originalGrid) {
       if (
         Math.random() < 0.5 &&
         currentCell.neighbors[0] !== null &&
-        currentCell.neighbors[0][1].id !== currentCell.id
+        currentCell.neighbors[0][1].id !== currentCell.id &&
+        grid.length - 2 !== i
+      ) {
+        path.push(currentCell.neighbors[0][0]);
+        currentCell.neighbors[0][0].isWall = false;
+        const aim = currentCell.neighbors[0][1].id;
+        map.forEach((value, key) => {
+          if (value === aim) {
+            map.set(key, currentCell.id);
+            grid[key.row][key.col].id = currentCell.id;
+          }
+        });
+
+        currentCell.neighbors[0][1].id = currentCell.id;
+      } else if (
+        currentCell.neighbors[0] !== null &&
+        currentCell.neighbors[0][1].id !== currentCell.id &&
+        grid.length - 2 === i
       ) {
         path.push(currentCell.neighbors[0][0]);
         currentCell.neighbors[0][0].isWall = false;
@@ -51,30 +68,31 @@ export function ellerMaze(originalGrid) {
         currentCell.neighbors[0][1].id = currentCell.id;
       }
     }
-    //DOWN
-    list = [];
-    visited = [];
+    if (grid.length - 2 !== i) {
+      //DOWN
+      list = [];
+      visited = [];
 
-    map.forEach((value, key) => {
-      list.push(value);
-    });
+      map.forEach((value, key) => {
+        list.push(value);
+      });
 
-    console.log(list);
-    for (let j = 1; j < grid[0].length; j += 2) {
-      var currentCell = grid[i][j];    
-      var counter = list.filter((x) => x === currentCell.id).length;
-      if (counter === 1 && !visited.includes(currentCell.id)) {
-        path.push(currentCell.neighbors[1][0]);
-        currentCell.neighbors[1][0].isWall = false;
-        currentCell.neighbors[1][1].id = currentCell.id;
-      } else if (counter > 1) {
-        if (Math.random() > 0.5) {
+      for (let j = 1; j < grid[0].length; j += 2) {
+        var currentCell = grid[i][j];
+        var counter = list.filter((x) => x === currentCell.id).length;
+        if (counter === 1 && !visited.includes(currentCell.id)) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;
           currentCell.neighbors[1][1].id = currentCell.id;
-          remove(list, visited, currentCell.id, true);
+        } else if (counter > 1) {
+          if (Math.random() > 0.5) {
+            path.push(currentCell.neighbors[1][0]);
+            currentCell.neighbors[1][0].isWall = false;
+            currentCell.neighbors[1][1].id = currentCell.id;
+            remove(list, visited, currentCell.id, true);
+          }
+          remove(list, visited, currentCell.id, false);
         }
-        remove(list, visited, currentCell.id, false);
       }
     }
   }
