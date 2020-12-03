@@ -10,17 +10,9 @@ export function ellerMaze(originalGrid) {
       cell.isWall = true;
     }
   }
-  /*var test = [];
-  test.push(4);
-  test.push(3);
-  test.push(3);
-  test.push(5);
-  test = test.filter(function(item) {
-    return item !== 3
-})
-  console.log(test);*/
+
   var idCounter = 1;
-  for (let i = 1; i < 4; i += 2) {
+  for (let i = 1; i < grid.length - 2; i += 2) {
     var map = new Map();
     for (let j = 1; j < grid[0].length; j += 2) {
       if (grid[i][j].id === 0) {
@@ -78,23 +70,33 @@ export function ellerMaze(originalGrid) {
       var counter = list.filter((x) => x === currentCell.id).length;
       console.log(counter);
       if (counter === 1) {
+        console.log(currentCell.id);
         path.push(currentCell.neighbors[1][0]);
         currentCell.neighbors[1][0].isWall = false;
         currentCell.neighbors[1][1].id = currentCell.id;
       } else if (counter > 1) {
-        if (Math.random() > 0.5) {
+        if (Math.random() > 0.8) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;
           currentCell.neighbors[1][1].id = currentCell.id;
-          //remove 1 currentcell.id item
         }
+        remove(list, currentCell.id);
       }
     }
+    console.log(list);
   }
 
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
   visualizeOnWalledGrid(grid, path);
+}
+
+function remove(array, item) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === item) {
+      array.splice(i, 1);
+    }
+  }
 }
 
 function getNeighboringCells(cell, grid) {
