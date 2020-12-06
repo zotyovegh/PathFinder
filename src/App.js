@@ -12,6 +12,14 @@ class App extends Component {
       endR: this.getPosition("row"),
       endC: this.getPosition("endCol"),
     };
+    this.title = "PathFinder & Maze generator";
+  }
+  componentWillReceiveProps(nextProps) {
+    document.title = this.title;
+  }
+
+  componentDidMount() {
+    document.title = this.title;
   }
 
   getPosition = (parameter) => {
@@ -51,6 +59,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        This project is still under construction! 
         <Grid
           rows={this.state.rows}
           columns={this.state.columns}
