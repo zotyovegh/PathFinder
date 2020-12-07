@@ -200,13 +200,7 @@ class Grid extends Component {
         speed
       );
     } else if (this.state.currentAlg === "depthFirst") {
-      depthFirst(
-        grid,
-        startCell,
-        endCell,
-        this.state.diagonalVisualization,
-        speed
-      );
+      depthFirst(grid, startCell, endCell, speed);
     }
   };
 
@@ -269,7 +263,8 @@ class Grid extends Component {
           <input
             disabled={
               this.state.status === "running" ||
-              this.state.currentAlg === "astar"
+              this.state.currentAlg === "astar" ||
+              this.state.currentAlg === "depthFirst"
             }
             type="checkbox"
             defaultChecked={this.state.previousVisualization}
@@ -281,7 +276,10 @@ class Grid extends Component {
         Diagonal
         <label className="switch">
           <input
-            disabled={this.state.status === "running"}
+            disabled={
+              this.state.status === "running" ||
+              this.state.currentAlg === "depthFirst"
+            }
             type="checkbox"
             defaultChecked={this.state.diagonalVisualization}
             onChange={this.handleButtonChange}
@@ -294,7 +292,8 @@ class Grid extends Component {
           <input
             disabled={
               this.state.status === "running" ||
-              this.state.currentAlg === "dijkstra"
+              this.state.currentAlg === "dijkstra" ||
+              this.state.currentAlg === "depthFirst"
             }
             type="checkbox"
             defaultChecked={this.state.optimizedVisualization}
@@ -333,19 +332,6 @@ class Grid extends Component {
             <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
           </optgroup>
         </select>
-        <button
-          onClick={() => {
-            depthFirst(
-              this.state.grid,
-              this.state.grid[this.state.startRow][this.state.startCol],
-              this.state.grid[this.state.endRow][this.state.endCol],
-              this.state.diagonalVisualization,
-              "slow"
-            );
-          }}
-        >
-          Depth-First Temp button
-        </button>
       </div>
     );
   }

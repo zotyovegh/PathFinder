@@ -2,7 +2,7 @@ import { animateFast, animateSlow } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var id = 0;
-export function depthFirst(grid, startCell, endCell, isDiagonalOn, speed) {
+export function depthFirst(grid, startCell, endCell, speed) {
   console.log("heyy");
   var mainList = [];
   var visitedCells = [];
