@@ -1,7 +1,6 @@
 import { animateFast, animateSlow } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
-var id = 0;
 export function depthFirst(grid, startCell, endCell, speed) {
   clearVisitedCells();
   var mainList = [];

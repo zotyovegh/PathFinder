@@ -14,9 +14,6 @@ class App extends Component {
     };
     this.title = "PathFinder & Maze generator";
   }
-  componentWillReceiveProps(nextProps) {
-    document.title = this.title;
-  }
 
   componentDidMount() {
     document.title = this.title;
@@ -59,7 +56,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        This project is still under construction! 
+        This project is still under construction!
         <Grid
           rows={this.state.rows}
           columns={this.state.columns}

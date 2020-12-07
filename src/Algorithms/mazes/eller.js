@@ -13,6 +13,7 @@ export function ellerMaze(originalGrid) {
   }
 
   var idCounter = 1;
+  var currentCell = null;
   for (let i = 1; i < grid.length; i += 2) {
     var map = new Map();
     for (let j = 1; j < grid[0].length; j += 2) {
@@ -22,13 +23,13 @@ export function ellerMaze(originalGrid) {
       }
     }
     for (let j = 1; j < grid[0].length; j += 2) {
-      var currentCell = grid[i][j];
+      currentCell = grid[i][j];
       map.set(currentCell, currentCell.id);
     }
 
     //SIDE
     for (let j = 1; j < grid[0].length; j += 2) {
-      var currentCell = grid[i][j];
+      currentCell = grid[i][j];
       getNeighboringCells(currentCell, grid);
       path.push(currentCell);
       currentCell.isWall = false;
@@ -54,7 +55,7 @@ export function ellerMaze(originalGrid) {
       });
 
       for (let j = 1; j < grid[0].length; j += 2) {
-        var currentCell = grid[i][j];
+        currentCell = grid[i][j];
         var counter = list.filter((x) => x === currentCell.id).length;
         if (counter === 1 && !visited.includes(currentCell.id)) {
           path.push(currentCell.neighbors[1][0]);
