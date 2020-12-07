@@ -9,20 +9,17 @@ export function depthFirst(grid, startCell, endCell, isDiagonalOn, speed) {
   startCell.visited = true;
   mainList.push(startCell);
   visitedCells.push(startCell);
-  var neighbors = getUnvisitedNeighbors(startCell, grid);
-  console.log(neighbors);
-
   while (!!mainList.length) {
     const currentCell = mainList.pop();
-    visitedCells.push(currentCell);
+    currentCell.visited = true;
 
     if (currentCell.end === true) {
       DoAnimation(visitedCells, endCell, speed);
       return;
     }
+    visitedCells.push(currentCell);
     var neighbors = getUnvisitedNeighbors(currentCell, grid);
     for (let i = 0; i < neighbors.length; i++) {
-      neighbors[i].visited = true;
       neighbors[i].previous = currentCell;
       mainList.push(neighbors[i]);
     }
@@ -44,7 +41,7 @@ function getUnvisitedNeighbors(cell, grid) {
 function Up(row, col, grid, neighbors) {
   if (row > 0) {
     var cell = grid[row - 1][col];
-    if (!cell.visited && cell.previous === null) {
+    if (!cell.visited) {
       neighbors.push(cell);
     }
   }
@@ -53,7 +50,7 @@ function Up(row, col, grid, neighbors) {
 function Right(row, col, grid, neighbors) {
   if (col < grid[0].length - 1) {
     let cell = grid[row][col + 1];
-    if (!cell.visited && cell.previous === null) {
+    if (!cell.visited) {
       neighbors.push(cell);
     }
   }
@@ -62,7 +59,7 @@ function Right(row, col, grid, neighbors) {
 function Down(row, col, grid, neighbors) {
   if (row < grid.length - 1) {
     let cell = grid[row + 1][col];
-    if (!cell.visited && cell.previous === null) {
+    if (!cell.visited) {
       neighbors.push(cell);
     }
   }
@@ -71,7 +68,7 @@ function Down(row, col, grid, neighbors) {
 function Left(row, col, grid, neighbors) {
   if (col > 0) {
     let cell = grid[row][col - 1];
-    if (!cell.visited && cell.previous === null) {
+    if (!cell.visited) {
       neighbors.push(cell);
     }
   }
