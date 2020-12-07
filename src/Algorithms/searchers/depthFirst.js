@@ -3,6 +3,7 @@ import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var id = 0;
 export function depthFirst(grid, startCell, endCell, isDiagonalOn, speed) {
+  
   const unvisitedCells = [];
   for (const row of grid) {
     for (const cell of row) {
@@ -10,7 +11,7 @@ export function depthFirst(grid, startCell, endCell, isDiagonalOn, speed) {
     }
   }
 
-  while (!!unvisitedCells.length) {}
+  // while (!!unvisitedCells.length) {}
 }
 
 function DoAnimation(visitedCells, endCell, speed) {

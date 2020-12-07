@@ -17,6 +17,7 @@ import { binaryTreeAlg } from "../Algorithms/mazes/binaryTree";
 import { ellerMaze } from "../Algorithms/mazes/eller";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
+import { depthFirst } from "../Algorithms/searchers/depthFirst";
 
 class Grid extends Component {
   constructor(props) {
@@ -198,6 +199,14 @@ class Grid extends Component {
         this.state.optimizedVisualization,
         speed
       );
+    } else if (this.state.currentAlg === "depthFirst") {
+      depthFirst(
+        grid,
+        startCell,
+        endCell,
+        this.state.diagonalVisualization,
+        speed
+      );
     }
   };
 
@@ -231,6 +240,7 @@ class Grid extends Component {
         >
           <option value="dijkstra">Dijkstra</option>
           <option value="astar">A* Search</option>
+          <option value="depthFirst">Depth-First Search</option>
         </select>
         <button
           disabled={this.state.status === "running"}
@@ -323,6 +333,19 @@ class Grid extends Component {
             <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
           </optgroup>
         </select>
+        <button
+          onClick={() => {
+            depthFirst(
+              this.state.grid,
+              this.state.grid[this.state.startRow][this.state.startCol],
+              this.state.grid[this.state.endRow][this.state.endCol],
+              this.state.diagonalVisualization,
+              "slow"
+            );
+          }}
+        >
+          Depth-First Temp button
+        </button>
       </div>
     );
   }
