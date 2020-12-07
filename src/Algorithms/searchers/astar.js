@@ -30,7 +30,6 @@ export function astar(
     }
     var currentCell = openSet[current];    
     if (currentCell === endCell) {
-      console.log(endCell.end);
       DoAnimation(allSet, openSet, endCell, speed);
       return;
     }

@@ -53,10 +53,11 @@ export function animateFast(visitedCells, cellsInOrder) {
 
     if (cell.start && window.gridComponent.state.previousVisualization) {
       visualizeCell("num", "num num-start", cell);
-    } else if (cell.end) {
+    } else if (cell.end || i === visitedCells.length - 1) {
       if (window.gridComponent.state.previousVisualization) {
         visualizeCell("num", "num num-end", cell);
       }
+
       animatePathFast(cellsInOrder);
     } else if (!cell.isWall) {
       if (!cell.start && !cell.end) {
