@@ -20,8 +20,10 @@ export function depthFirst(grid, startCell, endCell, isDiagonalOn, speed) {
     visitedCells.push(currentCell);
     var neighbors = getUnvisitedNeighbors(currentCell, grid);
     for (let i = 0; i < neighbors.length; i++) {
-      neighbors[i].previous = currentCell;
-      mainList.push(neighbors[i]);
+      if (neighbors[i].isWall === false) {
+        neighbors[i].previous = currentCell;
+        mainList.push(neighbors[i]);
+      }
     }
   }
 }
@@ -29,11 +31,11 @@ export function depthFirst(grid, startCell, endCell, isDiagonalOn, speed) {
 function getUnvisitedNeighbors(cell, grid) {
   const neighbors = [];
   var { col, row } = cell;
-
   Left(row, col, grid, neighbors);
-  Up(row, col, grid, neighbors);
-  Right(row, col, grid, neighbors);
+
   Down(row, col, grid, neighbors);
+  Right(row, col, grid, neighbors);
+  Up(row, col, grid, neighbors);
 
   return neighbors;
 }
