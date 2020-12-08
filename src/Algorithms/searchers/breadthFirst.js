@@ -3,6 +3,7 @@ import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var id = 0;
 export function breadthFirst(grid, startCell, endCell, speed) {
+  clearVisitedCells();
   var mainList = [];
   var visitedCells = [];
   startCell.visited = true;
@@ -17,6 +18,7 @@ export function breadthFirst(grid, startCell, endCell, speed) {
       DoAnimation(visitedCells, endCell, speed);
       return;
     }
+    if (currentCell.isWall && !currentCell.start && !currentCell.end) continue;
     var neighbors = getUnvisitedNeighbors(currentCell, grid);
     for (let i = 0; i < neighbors.length; i++) {
       neighbors[i].visited = true;
@@ -24,6 +26,7 @@ export function breadthFirst(grid, startCell, endCell, speed) {
       mainList.push(neighbors[i]);
     }
   }
+  DoAnimation(visitedCells, endCell, speed);
 }
 
 function getUnvisitedNeighbors(cell, grid) {
