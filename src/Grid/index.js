@@ -268,7 +268,8 @@ class Grid extends Component {
             disabled={
               this.state.status === "running" ||
               this.state.currentAlg === "astar" ||
-              this.state.currentAlg === "depthFirst"
+              this.state.currentAlg === "depthFirst" ||
+              this.state.currentAlg === "breadthFirst"
             }
             type="checkbox"
             defaultChecked={this.state.previousVisualization}
@@ -282,7 +283,8 @@ class Grid extends Component {
           <input
             disabled={
               this.state.status === "running" ||
-              this.state.currentAlg === "depthFirst"
+              this.state.currentAlg === "depthFirst" ||
+              this.state.currentAlg === "breadthFirst"
             }
             type="checkbox"
             defaultChecked={this.state.diagonalVisualization}
@@ -297,7 +299,8 @@ class Grid extends Component {
             disabled={
               this.state.status === "running" ||
               this.state.currentAlg === "dijkstra" ||
-              this.state.currentAlg === "depthFirst"
+              this.state.currentAlg === "depthFirst" ||
+              this.state.currentAlg === "breadthFirst"
             }
             type="checkbox"
             defaultChecked={this.state.optimizedVisualization}
