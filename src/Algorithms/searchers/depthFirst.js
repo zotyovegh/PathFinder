@@ -17,7 +17,10 @@ export function depthFirst(grid, startCell, endCell, speed) {
       return;
     }
     if (currentCell.isWall && !currentCell.start && !currentCell.end) continue;
-    visitedCells.push(currentCell);
+    if (!visitedCells.includes(currentCell)) {
+      visitedCells.push(currentCell);
+    }
+
     var neighbors = getUnvisitedNeighbors(currentCell, grid);
     for (let i = 0; i < neighbors.length; i++) {
       neighbors[i].previous = currentCell;
