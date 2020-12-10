@@ -2,17 +2,11 @@ import { animateAstarSlow, animateAstarFast } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 
-export function idastar(
-  grid,
-  startCell,
-  endCell,
-  isDiagonalOn,
-
-  speed
-) {
+export function idastar(grid, startCell, endCell, isDiagonalOn, speed) {
   findNeighbors(grid, isDiagonalOn);
+  console.log("asdasdasd");
 
-  DoAnimation(allSet, openSet, endCell, speed);
+  // DoAnimation(allSet, openSet, endCell, speed);
 }
 
 function findNeighbors(grid, isDiagonalOn) {
