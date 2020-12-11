@@ -2,7 +2,6 @@ import { animateFast, animateSlow } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var id = 0;
-var idTemp = 0;
 export function dijkstra(
   grid,
   startCell,
@@ -11,113 +10,54 @@ export function dijkstra(
   bidirectionalOn,
   speed
 ) {
-  const unvisitedCellsStart = [];
+  const unvisitedCells = [];
   const visitedCells = [];
-  const unvisitedCellsEnd = [];
-  //const visitedCellsEnd = [];
-  var directionStart = "START";
-  var directionEnd = "START";
-  var previousStartRow = startCell.row;
-  var previousEndRow = endCell.row;
+  var direction = "START";
+  var previousRow = startCell.row;
   startCell.distance = 0;
-  endCell.distanceTemp = 0;
 
   for (const row of grid) {
     for (const cell of row) {
-      unvisitedCellsStart.push(cell);
-      if (bidirectionalOn) unvisitedCellsEnd.push(cell);
+      unvisitedCells.push(cell);
     }
   }
 
-  while (!!unvisitedCellsStart.length) {
-    unvisitedCellsStart.sort((cell1, cell2) => cell1.id - cell2.id);
-    unvisitedCellsStart.sort((cell1, cell2) => cell1.distance - cell2.distance);
-    if (bidirectionalOn) {
-      unvisitedCellsEnd.sort((cell1, cell2) => cell1.idTemp - cell2.idTemp);
-      unvisitedCellsEnd.sort(
-        (cell1, cell2) => cell1.distanceTemp - cell2.distanceTemp
-      );
-    }
+  while (!!unvisitedCells.length) {
+    unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
+    unvisitedCells.sort((cell1, cell2) => cell1.distance - cell2.distance);
 
-    const nextStartCell = unvisitedCellsStart.shift();
-    const nextEndCell = unvisitedCellsEnd.shift();
-
-    if (directionStart !== "START") {
-      if (nextStartCell.row < previousStartRow) {
-        directionStart = "UP";
+    const nextCell = unvisitedCells.shift();
+    if (direction !== "START") {
+      if (nextCell.row < previousRow) {
+        direction = "UP";
       } else {
-        directionStart = "DOWN";
-      }
-    }
-    if (bidirectionalOn) {
-      if (directionEnd !== "START") {
-        if (nextEndCell.row < previousEndRow) {
-          directionEnd = "UP";
-        } else {
-          directionEnd = "DOWN";
-        }
+        direction = "DOWN";
       }
     }
 
-    //Handle
-    /*  if (nextStartCell.isWall && !nextStartCell.start && !nextStartCell.end)
-      continue;*/
+    if (nextCell.isWall && !nextCell.start && !nextCell.end) continue;
 
-    if (nextStartCell.distance === Infinity) {
+    if (nextCell.distance === Infinity) {
+      DoAnimation(visitedCells, endCell, speed);
+      return;
+    }
+    nextCell.visited = true;
+    visitedCells.push(nextCell);
+    if (nextCell === endCell) {
+      unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
       DoAnimation(visitedCells, endCell, speed);
       return;
     }
 
-    if (bidirectionalOn && nextEndCell.distanceTemp === Infinity) {
-      DoAnimation(visitedCells, endCell, speed);
-
-      return;
+    getUnvisitedNeighbors(nextCell, grid, direction, isDiagonalOn);
+    if (direction !== "START") {
+      previousRow = nextCell.row;
     }
-
-    nextStartCell.visited = true;
-    if (bidirectionalOn) nextEndCell.visited = true;
-    visitedCells.push(nextStartCell);
-    if (bidirectionalOn) visitedCells.push(nextEndCell);
-    if (nextStartCell === endCell) {
-      unvisitedCellsStart.sort((cell1, cell2) => cell1.id - cell2.id);
-      DoAnimation(visitedCells, endCell, speed);
-
-      return;
-    }
-
-    if (bidirectionalOn && nextEndCell === startCell) {
-      unvisitedCellsEnd.sort((cell1, cell2) => cell1.idTemp - cell2.idTemp);
-      DoAnimation(visitedCells, endCell, speed);
-      return;
-    }
-
-    getUnvisitedNeighbors(
-      nextStartCell,
-      grid,
-      directionStart,
-      isDiagonalOn,
-      "start"
-    );
-    if (bidirectionalOn)
-      getUnvisitedNeighbors(
-        nextEndCell,
-        grid,
-        directionEnd,
-        isDiagonalOn,
-        "end"
-      );
-    if (directionStart !== "START") {
-      previousStartRow = nextStartCell.row;
-    }
-    if (bidirectionalOn && directionEnd !== "START") {
-      previousEndRow = nextEndCell.row;
-    }
-    directionStart = "CHANGED";
-    if (bidirectionalOn) directionEnd = "CHANGED";
+    direction = "CHANGED";
   }
 }
 
-function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, position) {
+function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn) {
   const neighbors = [];
   var { col, row } = cell;
 
@@ -144,20 +84,12 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, position) {
       RightDown(row, col, grid, neighbors);
     }
   }
-  if (position === "start") {
-    for (const neighbor of neighbors) {
-      neighbor.distance = cell.distance + 1;
-      neighbor.previous = cell;
-      neighbor.id = id;
-      id++;
-    }
-  } else {
-    for (const neighbor of neighbors) {
-      neighbor.distanceTemp = cell.distanceTemp + 1;
-      neighbor.previous = cell;
-      neighbor.idTemp = idTemp;
-      idTemp++;
-    }
+
+  for (const neighbor of neighbors) {
+    neighbor.distance = cell.distance + 1;
+    neighbor.previous = cell;
+    neighbor.id = id;
+    id++;
   }
 }
 
