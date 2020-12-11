@@ -38,6 +38,7 @@ class Grid extends Component {
       previousVisualization: false,
       diagonalVisualization: false,
       optimizedVisualization: true,
+      bidirectionalVisualization: true,
     };
     this.handleAlgoChange = this.handleAlgoChange.bind(this);
     this.handleButtonChange = this.handleButtonChange.bind(this);
@@ -74,6 +75,16 @@ class Grid extends Component {
     } else if (event.target.name === "optimized") {
       this.setState(
         { optimizedVisualization: !this.state.optimizedVisualization },
+        () => {
+          if (this.state.status === "finished") {
+            clearVisitedCells();
+            this.doAlgorithm("fast");
+          }
+        }
+      );
+    }else if (event.target.name === "bidirectional") {
+      this.setState(
+        { bidirectionalVisualization: !this.state.bidirectionalVisualization },
         () => {
           if (this.state.status === "finished") {
             clearVisitedCells();
@@ -189,6 +200,7 @@ class Grid extends Component {
         startCell,
         endCell,
         this.state.diagonalVisualization,
+        this.state.bidirectionalVisualization,
         speed
       );
     } else if (this.state.currentAlg === "astar") {
@@ -306,6 +318,19 @@ class Grid extends Component {
             defaultChecked={this.state.optimizedVisualization}
             onChange={this.handleButtonChange}
             name="optimized"
+          ></input>
+          <span className="slider round"></span>
+        </label>
+        Bidirectional
+        <label className="switch">
+          <input
+            disabled={
+              this.state.status === "running"
+            }
+            type="checkbox"
+            defaultChecked={this.state.bidirectionalVisualization}
+            onChange={this.handleButtonChange}
+            name="bidirectional"
           ></input>
           <span className="slider round"></span>
         </label>

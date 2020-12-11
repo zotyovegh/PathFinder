@@ -2,7 +2,14 @@ import { animateFast, animateSlow } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var id = 0;
-export function dijkstra(grid, startCell, endCell, isDiagonalOn, speed) {
+export function dijkstra(
+  grid,
+  startCell,
+  endCell,
+  isDiagonalOn,
+  bidirectionalOn,
+  speed
+) {
   const unvisitedCells = [];
   const visitedCells = [];
   var direction = "START";
