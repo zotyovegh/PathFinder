@@ -48,24 +48,22 @@ function animatePathSlow(cellsInOrder) {
 }
 
 export function animateFast(visitedCells, cellsInOrder) {
-  for (let i = 0; i <= visitedCells.length - 1; i++) {
+  console.log(visitedCells[visitedCells.length - 1]);
+  for (let i = 0; i < visitedCells.length; i++) {
     const cell = visitedCells[i];
 
     if (cell.start && window.gridComponent.state.previousVisualization) {
       visualizeCell("num", "num num-start", cell);
-    } else if (cell.end || i === visitedCells.length - 1) {
+    } else if (!cell.end && !cell.start) {
+      visualizeCell("cell", "cell cell-visited", cell);
+      if (window.gridComponent.state.previousVisualization) {
+        visualizeCell("num", "num num-visited", cell);
+      }
+    } else {
       if (window.gridComponent.state.previousVisualization) {
         visualizeCell("num", "num num-end", cell);
       }
-
       animatePathFast(cellsInOrder);
-    } else if (!cell.isWall) {
-      if (!cell.start && !cell.end) {
-        visualizeCell("cell", "cell cell-visited", cell);
-        if (window.gridComponent.state.previousVisualization) {
-          visualizeCell("num", "num num-visited", cell);
-        }
-      }
     }
   }
 }
