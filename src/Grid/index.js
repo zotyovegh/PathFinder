@@ -17,7 +17,6 @@ import { binaryTreeAlg } from "../Algorithms/mazes/binaryTree";
 import { ellerMaze } from "../Algorithms/mazes/eller";
 import { dijkstra } from "../Algorithms/searchers/dijsktra";
 import { astar } from "../Algorithms/searchers/astar";
-import { idastar } from "../Algorithms/searchers/idastar";
 import { depthFirst } from "../Algorithms/searchers/depthFirst";
 import { breadthFirst } from "../Algorithms/searchers/breadthFirst";
 
@@ -201,14 +200,6 @@ class Grid extends Component {
         this.state.optimizedVisualization,
         speed
       );
-    } else if (this.state.currentAlg === "idastar") {
-      idastar(
-        grid,
-        startCell,
-        endCell,
-        this.state.diagonalVisualization,
-        speed
-      );
     } else if (this.state.currentAlg === "depthFirst") {
       depthFirst(grid, startCell, endCell, speed);
     } else if (this.state.currentAlg === "breadthFirst") {
@@ -246,7 +237,6 @@ class Grid extends Component {
         >
           <option value="dijkstra">Dijkstra</option>
           <option value="astar">A* Search</option>
-          <option value="idastar">IDA* Search</option>
           <option value="depthFirst">Depth-First Search</option>
           <option value="breadthFirst">Breadth-First Search</option>
         </select>
@@ -349,19 +339,6 @@ class Grid extends Component {
             <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
           </optgroup>
         </select>
-        <button
-          onClick={() =>
-            idastar(
-              this.state.grid,
-              this.state.grid[this.state.startRow][this.state.startCol],
-              this.state.grid[this.state.endRow][this.state.endCol],
-              this.state.diagonalVisualization,
-              "slow"
-            )
-          }
-        >
-          IDA* temp button
-        </button>
       </div>
     );
   }
