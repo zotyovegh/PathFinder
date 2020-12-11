@@ -1,58 +1,12 @@
-import { animateSlow, animateFast } from "./animations";
+import { animateAstarSlow, animateAstarFast } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 
 export function idastar(grid, startCell, endCell, isDiagonalOn, speed) {
   findNeighbors(grid, isDiagonalOn);
-  var threshold = heuristic(startCell);
-  var test = 0;
-  var visitedCells = [];
+  console.log("asdasdasd");
 
-  while (test < 10) {
-    console.log("while");
-    var temp = Search(startCell, 0, threshold, endCell, visitedCells);
-    if (temp === "FOUND") {
-      //Solution found
-      return;
-    }
-    if (temp === Infinity) {
-      return;
-    }
-    threshold = temp;
-    test++;
-  }
-  console.log("DONE");
-
-  DoAnimation(visitedCells, endCell, speed);
-}
-
-function Search(cell, g, threshold, endCell, visitedCells) {
-  console.log("search");
-  console.log(cell);
-  var f = g + heuristic(cell);
-  if (f > threshold) return f;
-  if (cell === endCell) return "FOUND";
-  var min = Number.MAX_SAFE_INTEGER;
-  for (const neighbor of cell.neighbors) {
-    var temp = Search(neighbor, g + cost(cell, neighbor), threshold, endCell);
-    if (temp === "FOUND") return "FOUND";
-    if (temp !== "FOUND") {
-      if (temp < min) min = temp;
-    }
-  }
-  return min;
-}
-
-function heuristic(cell) {
-  return Math.sqrt(cell.row * cell.row + cell.col * cell.col);
-  // return cell.row + cell.col;
-}
-
-function cost(cell1, cell2) {
-  return Math.sqrt(
-    (cell1.row - cell2.row) * (cell1.row - cell2.row) +
-      (cell1.col - cell2.col) * (cell1.col - cell2.col)
-  );
+  // DoAnimation(allSet, openSet, endCell, speed);
 }
 
 function findNeighbors(grid, isDiagonalOn) {
@@ -119,7 +73,7 @@ function findNeighbors(grid, isDiagonalOn) {
   }
 }
 
-function DoAnimation(visitedCells, endCell, speed) {
+function DoAnimation(allSet, openSet, endCell, speed) {
   const cellsInOrder = getCellsInOrder(endCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
@@ -127,8 +81,8 @@ function DoAnimation(visitedCells, endCell, speed) {
     }
     window.gridComponent.setState({ status: "running" });
 
-    animateSlow(visitedCells, cellsInOrder);
+    animateAstarSlow(allSet, cellsInOrder);
   } else if (speed === "fast") {
-    animateFast(visitedCells, cellsInOrder);
+    animateAstarFast(allSet, openSet, cellsInOrder);
   }
 }
