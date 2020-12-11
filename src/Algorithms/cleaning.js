@@ -16,11 +16,14 @@ export function clearVisitedCells() {
       let cell = newGrid[i][j];
       cell.visited = false;
       cell.distance = Infinity;
+      cell.distanceTemp = Infinity;
       cell.previous = null;
       cell.f = Infinity;
       cell.g = Infinity;
       cell.h = Infinity;
       cell.neighbors = [];
+      cell.id = 0;
+      cell.id = 0;
 
       visualizeCell("num", "num", cell);
       if (!cell.isWall && !cell.end && !cell.start) {
