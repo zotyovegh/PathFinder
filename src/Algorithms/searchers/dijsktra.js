@@ -10,50 +10,56 @@ export function dijkstra(
   bidirectionalOn,
   speed
 ) {
-  const unvisitedCells = [];
+  const unvisitedCellsMain = [];
   const visitedCells = [];
-  var direction = "START";
-  var previousRow = startCell.row;
+  var directionMain = "START";
+  var previousRowMain = startCell.row;
   startCell.distance = 0;
 
   for (const row of grid) {
     for (const cell of row) {
-      unvisitedCells.push(cell);
+      unvisitedCellsMain.push(cell);
     }
   }
 
-  while (!!unvisitedCells.length) {
-    unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
-    unvisitedCells.sort((cell1, cell2) => cell1.distance - cell2.distance);
+  while (!!unvisitedCellsMain.length) {
+    unvisitedCellsMain.sort((cell1, cell2) => cell1.id - cell2.id);
+    unvisitedCellsMain.sort((cell1, cell2) => cell1.distance - cell2.distance);
 
-    const nextCell = unvisitedCells.shift();
-    if (direction !== "START") {
-      if (nextCell.row < previousRow) {
-        direction = "UP";
+    const nextMainCell = unvisitedCellsMain.shift();
+    if (directionMain !== "START") {
+      if (nextMainCell.row < previousRowMain) {
+        directionMain = "UP";
       } else {
-        direction = "DOWN";
+        directionMain = "DOWN";
       }
     }
 
-    if (nextCell.isWall && !nextCell.start && !nextCell.end) continue;
+    if (nextMainCell.isWall && !nextMainCell.start && !nextMainCell.end) continue;
 
-    if (nextCell.distance === Infinity) {
+    if (nextMainCell.distance === Infinity) {
       DoAnimation(visitedCells, endCell, speed);
       return;
     }
-    nextCell.visited = true;
-    visitedCells.push(nextCell);
-    if (nextCell === endCell) {
-      unvisitedCells.sort((cell1, cell2) => cell1.id - cell2.id);
+    nextMainCell.visited = true;
+    visitedCells.push(nextMainCell);
+    if (nextMainCell === endCell) {
+      unvisitedCellsMain.sort((cell1, cell2) => cell1.id - cell2.id);
       DoAnimation(visitedCells, endCell, speed);
       return;
     }
 
-    getUnvisitedNeighbors(nextCell, grid, direction, isDiagonalOn);
-    if (direction !== "START") {
-      previousRow = nextCell.row;
+    getUnvisitedNeighbors(nextMainCell, grid, directionMain, isDiagonalOn);
+    if (directionMain !== "START") {
+      previousRowMain = nextMainCell.row;
     }
-    direction = "CHANGED";
+    directionMain = "CHANGED";
+
+    //*****************
+    //*****************
+    //*****************
+    //*****************
+    //*****************
   }
 }
 

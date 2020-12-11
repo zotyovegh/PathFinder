@@ -8,16 +8,18 @@ export function createGrid(props) {
     for (let j = 0; j < props.columns; j++) {
       grid[i].push({
         id: 0,
+        idSec: 0,
         row: i,
         col: j,
         start: false,
         end: false,
         distance: Infinity,
+        distanceSec: Infinity,
         visited: false,
         isWall: false,
         previous: null,
         direction: "",
-        //TODO: ASTAR scenario (this variables shall be handled differently later)
+        directionSec: "",
         f: Infinity,
         g: Infinity,
         h: Infinity,
@@ -50,7 +52,6 @@ export function placeWall(cell) {
     visualizeCell("cell", "cell cell-wall-animated", cell);
   } else {
     visualizeCell("cell", "cell cell-empty", cell);
-    
   }
 
   visualizeCell("num", "num", newCell);
