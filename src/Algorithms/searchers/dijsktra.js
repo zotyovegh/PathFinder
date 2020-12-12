@@ -1,9 +1,9 @@
 import { animateFast, animateSlow } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
-var idMain = 0;
-var idSec = 0;
-var isFinished = false;
+var idMain;
+var idSec;
+var isFinished;
 export function dijkstra(
   grid,
   startCell,
@@ -12,6 +12,9 @@ export function dijkstra(
   bidirectionalOn,
   speed
 ) {
+  idMain = 0;
+  idSec = 0;
+  isFinished = false;
   const unvisitedCellsMain = [];
   const unvisitedCellsSec = [];
   const visitedCells = [];
@@ -25,7 +28,7 @@ export function dijkstra(
   for (const row of grid) {
     for (const cell of row) {
       unvisitedCellsMain.push(cell);
-      unvisitedCellsSec.push(cell);
+      //  unvisitedCellsSec.push(cell);
     }
   }
 
@@ -99,14 +102,14 @@ export function dijkstra(
       }
 
       if (!(nextSecCell.isWall && !nextSecCell.start && !nextSecCell.end)) {
-        if (nextSecCell.distancSec === Infinity) {
+        if (nextSecCell.distanceSec === Infinity) {
           DoAnimation(visitedCells, endCell, speed);
           return;
         }
         nextSecCell.visitedSec = true;
         visitedCells.push(nextSecCell);
         if (nextSecCell === startCell) {
-          unvisitedCellsMain.sort((cell1, cell2) => cell1.idSec - cell2.idSec);
+          unvisitedCellsSec.sort((cell1, cell2) => cell1.idSec - cell2.idSec);
           DoAnimation(visitedCells, endCell, speed);
           return;
         }

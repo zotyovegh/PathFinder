@@ -48,7 +48,6 @@ function animatePathSlow(cellsInOrder) {
 }
 
 export function animateFast(visitedCells, cellsInOrder) {
-  console.log(visitedCells[visitedCells.length - 1]);
   for (let i = 0; i < visitedCells.length; i++) {
     const cell = visitedCells[i];
 
