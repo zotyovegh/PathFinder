@@ -3,7 +3,6 @@ import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var idMain = 0;
 var idSec = 0;
-var isFinished = false;
 export function dijkstra(
   grid,
   startCell,
@@ -30,10 +29,6 @@ export function dijkstra(
   }
 
   while (!!unvisitedCellsMain.length || !!unvisitedCellsSec.length) {
-    if (isFinished) {
-      DoAnimation(visitedCells, endCell, speed);
-      return;
-    }
     if (!!unvisitedCellsMain.length) {
       unvisitedCellsMain.sort((cell1, cell2) => cell1.id - cell2.id);
       unvisitedCellsMain.sort(
@@ -130,26 +125,26 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
   var { col, row } = cell;
 
   if (direction === "DOWN" || direction === "START") {
-    Up(row, col, grid, neighbors, category);
-    Right(row, col, grid, neighbors, category);
-    Down(row, col, grid, neighbors, category);
-    Left(row, col, grid, neighbors, category);
+    Up(row, col, grid, neighbors);
+    Right(row, col, grid, neighbors);
+    Down(row, col, grid, neighbors);
+    Left(row, col, grid, neighbors);
     if (isDiagonalOn) {
-      UpRight(row, col, grid, neighbors, category);
-      RightDown(row, col, grid, neighbors, category);
-      DownLeft(row, col, grid, neighbors, category);
-      LeftUp(row, col, grid, neighbors, category);
+      UpRight(row, col, grid, neighbors);
+      RightDown(row, col, grid, neighbors);
+      DownLeft(row, col, grid, neighbors);
+      LeftUp(row, col, grid, neighbors);
     }
   } else if (direction === "UP") {
-    Down(row, col, grid, neighbors, category);
-    Left(row, col, grid, neighbors, category);
-    Up(row, col, grid, neighbors, category);
-    Right(row, col, grid, neighbors, category);
+    Down(row, col, grid, neighbors);
+    Left(row, col, grid, neighbors);
+    Up(row, col, grid, neighbors);
+    Right(row, col, grid, neighbors);
     if (isDiagonalOn) {
-      DownLeft(row, col, grid, neighbors, category);
-      LeftUp(row, col, grid, neighbors, category);
-      UpRight(row, col, grid, neighbors, category);
-      RightDown(row, col, grid, neighbors, category);
+      DownLeft(row, col, grid, neighbors);
+      LeftUp(row, col, grid, neighbors);
+      UpRight(row, col, grid, neighbors);
+      RightDown(row, col, grid, neighbors);
     }
   }
   if (category === "MAIN") {
@@ -169,95 +164,43 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
   }
 }
 
-function Up(row, col, grid, neighbors, category) {
-  if (row > 0 && !isFinished) {
+function Up(row, col, grid, neighbors) {
+  if (row > 0) {
     var cell = grid[row - 1][col];
-    if (
-      (category === "MAIN" && cell.visitedSec) ||
-      (category === "SEC" && cell.visited)
-    )
-      isFinished = true;
-    else {
-      if (category === "MAIN" && !cell.visited && cell.previous === null) {
-        neighbors.push(cell);
-      } else if (
-        category === "SEC" &&
-        !cell.visitedSec &&
-        cell.previous === null
-      ) {
-        neighbors.push(cell);
-      }
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
-function Right(row, col, grid, neighbors, category) {
-  if (col < grid[0].length - 1 && !isFinished) {
+function Right(row, col, grid, neighbors) {
+  if (col < grid[0].length - 1) {
     let cell = grid[row][col + 1];
-    if (
-      (category === "MAIN" && cell.visitedSec) ||
-      (category === "SEC" && cell.visited)
-    )
-      isFinished = true;
-    else {
-      if (category === "MAIN" && !cell.visited && cell.previous === null) {
-        neighbors.push(cell);
-      } else if (
-        category === "SEC" &&
-        !cell.visitedSec &&
-        cell.previous === null
-      ) {
-        neighbors.push(cell);
-      }
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
-function Down(row, col, grid, neighbors, category) {
-  if (row < grid.length - 1 && !isFinished) {
+function Down(row, col, grid, neighbors) {
+  if (row < grid.length - 1) {
     let cell = grid[row + 1][col];
-    if (
-      (category === "MAIN" && cell.visitedSec) ||
-      (category === "SEC" && cell.visited)
-    )
-      isFinished = true;
-    else {
-      if (category === "MAIN" && !cell.visited && cell.previous === null) {
-        neighbors.push(cell);
-      } else if (
-        category === "SEC" &&
-        !cell.visitedSec &&
-        cell.previous === null
-      ) {
-        neighbors.push(cell);
-      }
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
-function Left(row, col, grid, neighbors, category) {
-  if (col > 0 && !isFinished) {
+function Left(row, col, grid, neighbors) {
+  if (col > 0) {
     let cell = grid[row][col - 1];
-    if (
-      (category === "MAIN" && cell.visitedSec) ||
-      (category === "SEC" && cell.visited)
-    )
-      isFinished = true;
-    else {
-      if (category === "MAIN" && !cell.visited && cell.previous === null) {
-        neighbors.push(cell);
-      } else if (
-        category === "SEC" &&
-        !cell.visitedSec &&
-        cell.previous === null
-      ) {
-        neighbors.push(cell);
-      }
+    if (!cell.visited && cell.previous === null) {
+      neighbors.push(cell);
     }
   }
 }
 
-function UpRight(row, col, grid, neighbors, category) {
+function UpRight(row, col, grid, neighbors) {
   if (row > 0 && col < grid[0].length - 1) {
     let cell = grid[row - 1][col + 1];
     if (grid[row - 1][col].isWall && grid[row][col + 1].isWall) {
@@ -269,7 +212,7 @@ function UpRight(row, col, grid, neighbors, category) {
   }
 }
 
-function RightDown(row, col, grid, neighbors, category) {
+function RightDown(row, col, grid, neighbors) {
   if (col < grid[0].length - 1 && row < grid.length - 1) {
     let cell = grid[row + 1][col + 1];
     if (grid[row + 1][col].isWall && grid[row][col + 1].isWall) {
@@ -281,7 +224,7 @@ function RightDown(row, col, grid, neighbors, category) {
   }
 }
 
-function DownLeft(row, col, grid, neighbors, category) {
+function DownLeft(row, col, grid, neighbors) {
   if (row < grid.length - 1 && col > 0) {
     let cell = grid[row + 1][col - 1];
     if (grid[row + 1][col].isWall && grid[row][col - 1].isWall) {
@@ -293,7 +236,7 @@ function DownLeft(row, col, grid, neighbors, category) {
   }
 }
 
-function LeftUp(row, col, grid, neighbors, category) {
+function LeftUp(row, col, grid, neighbors) {
   if (col > 0 && row > 0) {
     let cell = grid[row - 1][col - 1];
     if (grid[row][col - 1].isWall && grid[row - 1][col].isWall) {
