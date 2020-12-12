@@ -1,7 +1,12 @@
 import { visualizeCell } from "../methods";
 import { clearVisitedCells } from "../cleaning";
 
-export function bidirectionalSlow(main, sec, cellsInOrder) {}
+export function bidirectionalSlow(main, sec, cellsInOrder) {
+  console.log("SLOW");
+}
+export function bidirectionalFast(main, sec, cellsInOrder) {
+  console.log("FAST");
+}
 
 export function animateSlow(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length; i++) {

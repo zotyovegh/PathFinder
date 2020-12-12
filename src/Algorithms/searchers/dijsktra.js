@@ -1,4 +1,9 @@
-import { animateFast, animateSlow } from "./animations";
+import {
+  animateFast,
+  animateSlow,
+  bidirectionalSlow,
+  bidirectionalFast,
+} from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var idMain;
@@ -13,6 +18,7 @@ export function dijkstra(
   bidirectionalOn,
   speed
 ) {
+  
   idMain = 0;
   idSec = 0;
   isFinished = false;
@@ -40,6 +46,7 @@ export function dijkstra(
       DoBidirectionalAnimation(
         visitedCellsMain,
         visitedCellsSec,
+        startCell,
         endCell,
         speed
       );
@@ -304,4 +311,16 @@ function DoBidirectionalAnimation(
   startCell,
   endCell,
   speed
-) {}
+) {
+  var cellsInOrder = null;
+  if (speed === "slow") {
+    if (window.gridComponent.state.status === "finished") {
+      clearVisitedCells();
+    }
+    window.gridComponent.setState({ status: "running" });
+
+    bidirectionalSlow(mainCells, secondaryCells, cellsInOrder);
+  } else if (speed === "fast") {
+    bidirectionalFast(mainCells, secondaryCells, cellsInOrder);
+  }
+}
