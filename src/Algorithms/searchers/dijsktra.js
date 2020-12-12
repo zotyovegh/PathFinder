@@ -28,7 +28,7 @@ export function dijkstra(
   for (const row of grid) {
     for (const cell of row) {
       unvisitedCellsMain.push(cell);
-      //  unvisitedCellsSec.push(cell);
+      if (bidirectionalOn) unvisitedCellsSec.push(cell);
     }
   }
 
@@ -85,7 +85,7 @@ export function dijkstra(
     //*****************
     //*****************
     //*****************
-    if (!!unvisitedCellsSec.length) {
+    if (!!unvisitedCellsSec.length && bidirectionalOn) {
       unvisitedCellsSec.sort((cell1, cell2) => cell1.idSec - cell2.idSec);
       unvisitedCellsSec.sort(
         (cell1, cell2) => cell1.distanceSec - cell2.distanceSec
