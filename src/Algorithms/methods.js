@@ -16,6 +16,7 @@ export function createGrid(props) {
         distance: Infinity,
         distanceSec: Infinity,
         visited: false,
+        visitedSec: false,
         isWall: false,
         previous: null,
         direction: "",
