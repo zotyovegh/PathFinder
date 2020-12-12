@@ -41,6 +41,7 @@ export function dijkstra(
       );
 
       const nextMainCell = unvisitedCellsMain.shift();
+      if (nextMainCell.visitedSec) isFinished = true;
       if (directionMain !== "START") {
         if (nextMainCell.row < previousRowMain) {
           directionMain = "UP";
@@ -88,6 +89,7 @@ export function dijkstra(
       );
 
       const nextSecCell = unvisitedCellsSec.shift();
+      if (nextSecCell.visited) isFinished = true;
       if (directionSec !== "START") {
         if (nextSecCell.row < previousRowSec) {
           directionSec = "UP";
