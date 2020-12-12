@@ -295,7 +295,7 @@ function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
   }
 }
 
-function getCellsInOrderBidirectional(mainCells, secondaryCells) {
+function getCellsInOrderBidirectional() {
   if (meetingCell !== null) {
     console.log(meetingCell);
     const cells = [];

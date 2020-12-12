@@ -64,13 +64,18 @@
 }
 
 .cell-path {
-  border: 0.5px solid  rgb(189, 189, 77);
+  border: 0.5px solid rgb(189, 189, 77);
   background-color: rgb(255, 254, 106);
 }
 
 .cell-pathSec {
   border: 0.5px solid rgba(71, 86, 201, 0.433);
-    background-color: rgba(100, 118, 255, 0.905);
+  background-color: rgba(100, 118, 255, 0.905);
+}
+
+.cell-pathThird {
+  border: 0.5px solid rgba(147, 71, 201, 0.433);
+  background-color: rgba(172, 100, 255, 0.905);
 }
 
 .cell-path-animated {
@@ -153,6 +158,57 @@
     transform: scale(1);
     border: 0.5px solid rgba(71, 86, 201, 0.433);
     background-color: rgba(100, 118, 255, 0.905);
+  }
+}
+.cell-pathThirdly-animated {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: pathThirdlyAnim;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes pathThirdlyAnim {
+  0% {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0);
+  }
+
+  10% {
+    transform: scale(1.05);
+    background-color: rgba(25, 4, 48, 0.905);
+  }
+
+  20% {
+    transform: scale(1.1);
+    background-color: rgba(51, 9, 99, 0.905);
+  }
+
+  40% {
+    transform: scale(1.15);
+    background-color: rgba(72, 14, 138, 0.905);
+  }
+
+  60% {
+    transform: scale(1.1);
+    background-color: rgba(116, 30, 214, 0.905);
+  }
+
+  80% {
+    transform: scale(1.05);
+    background-color: rgba(156, 69, 255, 0.905);
+  }
+
+  100% {
+    transform: scale(1);
+    border: 0.5px solid rgba(147, 71, 201, 0.433);
+    background-color: rgba(172, 100, 255, 0.905);
   }
 }
 
