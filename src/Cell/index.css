@@ -64,6 +64,11 @@
 }
 
 .cell-path {
+  border: 0.5px solid  rgb(189, 189, 77);
+  background-color: rgb(255, 254, 106);
+}
+
+.cell-pathSec {
   border: 0.5px solid rgba(71, 86, 201, 0.433);
     background-color: rgba(100, 118, 255, 0.905);
 }
@@ -83,6 +88,37 @@
 }
 
 @keyframes pathAnim {
+  0% {
+    transform: scale(0.6);
+    background-color: rgb(255, 254, 106);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(255, 254, 106);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(255, 254, 106);
+  }
+}
+
+.cell-pathSecondary-animated {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: pathSecondaryAnim;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes pathSecondaryAnim {
   0% {
     transform: scale(1);
     background-color: rgba(0, 0, 0);
@@ -121,6 +157,11 @@
 }
 
 .cell-visited {
+  border: 0.5px solid rgb(180, 245, 255);
+  background-color: rgba(0, 190, 218, 0.75);
+}
+
+.cell-visitedSec {
   border: 0.5px solid rgb(252, 210, 73);
   background-color: rgba(255, 234, 0, 0.541);
 }
@@ -155,6 +196,42 @@
 }
 
 @keyframes visitedAnim {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+.cell-visitedSecondary-animated {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: visitedSecondaryAnim;
+  animation-duration: 1.4s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes visitedSecondaryAnim {
   0% {
     transform: scale(0.1);
     background-color: rgba(0, 0, 0);

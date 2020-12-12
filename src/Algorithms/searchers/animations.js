@@ -19,7 +19,18 @@ export function bidirectionalSlow(main, sec, cellsInOrder) {
   }
 }
 export function bidirectionalFast(main, sec, cellsInOrder) {
-  console.log("FAST");
+  var length = main.length >= sec.length ? main.length : sec.length;
+  for (let i = 0; i <= length; i++) {
+    if (i === length) {
+    }
+
+    if (i < main.length && !main[i].start && !main[i].end) {
+      visualizeCell("cell", "cell cell-visited", main[i]);
+    }
+    if (i < sec.length && !sec[i].start && !sec[i].end) {
+      visualizeCell("cell", "cell cell-visited", sec[i]);
+    }
+  }
 }
 
 export function animateSlow(visitedCells, cellsInOrder) {
@@ -104,7 +115,7 @@ export function animateAstarSlow(allSet, cellsInOrder) {
   for (let i = 0; i <= allSet.length; i++) {
     if (i === allSet.length) {
       setTimeout(() => {
-        animatePathSlow(cellsInOrder);
+        animateAstarPathSlow(cellsInOrder);
       }, 10 * i);
       return;
     }
@@ -150,5 +161,29 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
       visualizeCell("cell", "cell cell-current", openSet[k]);
     }
   }
-  animatePathFast(cellsInOrder);
+  animateAstarPathFast(cellsInOrder);
+}
+
+function animateAstarPathFast(cellsInOrder) {
+  for (let i = 0; i < cellsInOrder.length; i++) {
+    const cell = cellsInOrder[i];
+    if (!cell.start && !cell.end) {
+      visualizeCell("cell", "cell cell-pathSec", cell);     
+    }
+  }
+}
+
+function animateAstarPathSlow(cellsInOrder) {
+  for (let i = 0; i <= cellsInOrder.length; i++) {
+    setTimeout(() => {
+      if (i === cellsInOrder.length) {
+        window.gridComponent.setState({ status: "finished" });
+        return;
+      }
+      const cell = cellsInOrder[i];
+      if (!cell.start && !cell.end) {
+        visualizeCell("cell", "cell cell-pathSecondary-animated", cell);
+      }
+    }, 20 * i);
+  }
 }
