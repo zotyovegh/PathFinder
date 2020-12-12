@@ -45,9 +45,7 @@ function animateBidirectionalPathSlow(cellsInOrder) {
       }
       const cell = cellsInOrder[i];
       visualizeCell("cell", "cell cell-pathThirdly-animated", cell);
-      if (window.gridComponent.state.previousVisualization) {
-        visualizeCell("num", "num num-path", cell);
-      }
+     
     }, 20 * i);
   }
 }
@@ -56,9 +54,7 @@ function animateBidirectionalPathFast(cellsInOrder) {
   for (let i = 0; i < cellsInOrder.length; i++) {
     const cell = cellsInOrder[i];
     visualizeCell("cell", "cell cell-pathThird", cell);
-    if (window.gridComponent.state.previousVisualization) {
-      visualizeCell("num", "num num-path", cell);
-    }
+   
   }
 }
 
