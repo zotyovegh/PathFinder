@@ -171,64 +171,34 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
   }
 }
 
-function Up(row, col, grid, neighbors, category) {
-  if (row > 0) {
-    var cell = grid[row - 1][col];
-    if (category === "MAIN" && !cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    } else if (
-      category === "SEC" &&
-      !cell.visitedSec &&
-      cell.previousSec === null
-    ) {
-      neighbors.push(cell);
-    }
+function addNeighbor(cell, neighbors, category) {
+  if (category === "MAIN" && !cell.visited && cell.previous === null) {
+    neighbors.push(cell);
+  } else if (
+    category === "SEC" &&
+    !cell.visitedSec &&
+    cell.previousSec === null
+  ) {
+    neighbors.push(cell);
   }
+}
+
+function Up(row, col, grid, neighbors, category) {
+  if (row > 0) addNeighbor(grid[row - 1][col], neighbors, category);
 }
 
 function Right(row, col, grid, neighbors, category) {
-  if (col < grid[0].length - 1) {
-    let cell = grid[row][col + 1];
-    if (category === "MAIN" && !cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    } else if (
-      category === "SEC" &&
-      !cell.visitedSec &&
-      cell.previousSec === null
-    ) {
-      neighbors.push(cell);
-    }
-  }
+  if (col < grid[0].length - 1)
+    addNeighbor(grid[row][col + 1], neighbors, category);
 }
 
 function Down(row, col, grid, neighbors, category) {
-  if (row < grid.length - 1) {
-    let cell = grid[row + 1][col];
-    if (category === "MAIN" && !cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    } else if (
-      category === "SEC" &&
-      !cell.visitedSec &&
-      cell.previousSec === null
-    ) {
-      neighbors.push(cell);
-    }
-  }
+  if (row < grid.length - 1)
+    addNeighbor(grid[row + 1][col], neighbors, category);
 }
 
 function Left(row, col, grid, neighbors, category) {
-  if (col > 0) {
-    let cell = grid[row][col - 1];
-    if (category === "MAIN" && !cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    } else if (
-      category === "SEC" &&
-      !cell.visitedSec &&
-      cell.previousSec === null
-    ) {
-      neighbors.push(cell);
-    }
-  }
+  if (col > 0) addNeighbor(grid[row][col - 1], neighbors, category);
 }
 
 function UpRight(row, col, grid, neighbors, category) {
@@ -237,9 +207,7 @@ function UpRight(row, col, grid, neighbors, category) {
     if (grid[row - 1][col].isWall && grid[row][col + 1].isWall) {
       return;
     }
-    if (!cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    }
+    addNeighbor(cell, neighbors, category);
   }
 }
 
@@ -249,9 +217,7 @@ function RightDown(row, col, grid, neighbors, category) {
     if (grid[row + 1][col].isWall && grid[row][col + 1].isWall) {
       return;
     }
-    if (!cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    }
+    addNeighbor(cell, neighbors, category);
   }
 }
 
@@ -261,9 +227,7 @@ function DownLeft(row, col, grid, neighbors, category) {
     if (grid[row + 1][col].isWall && grid[row][col - 1].isWall) {
       return;
     }
-    if (!cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    }
+    addNeighbor(cell, neighbors, category);
   }
 }
 
@@ -273,9 +237,7 @@ function LeftUp(row, col, grid, neighbors, category) {
     if (grid[row][col - 1].isWall && grid[row - 1][col].isWall) {
       return;
     }
-    if (!cell.visited && cell.previous === null) {
-      neighbors.push(cell);
-    }
+    addNeighbor(cell, neighbors, category);
   }
 }
 
