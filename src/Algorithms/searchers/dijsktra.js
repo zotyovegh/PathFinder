@@ -4,6 +4,7 @@ import { clearVisitedCells } from "../../Algorithms/cleaning";
 var idMain;
 var idSec;
 var isFinished;
+var bidirectional;
 export function dijkstra(
   grid,
   startCell,
@@ -15,9 +16,11 @@ export function dijkstra(
   idMain = 0;
   idSec = 0;
   isFinished = false;
+  bidirectional = bidirectionalOn;
   const unvisitedCellsMain = [];
   const unvisitedCellsSec = [];
-  const visitedCells = [];
+  const visitedCellsMain = [];
+  const visitedCellsSec = [];
   var directionMain = "START";
   var directionSec = "START";
   var previousRowMain = startCell.row;
@@ -34,7 +37,12 @@ export function dijkstra(
 
   while (!!unvisitedCellsMain.length || !!unvisitedCellsSec.length) {
     if (isFinished) {
-      DoAnimation(visitedCells, endCell, speed);
+      DoBidirectionalAnimation(
+        visitedCellsMain,
+        visitedCellsSec,
+        endCell,
+        speed
+      );
       return;
     }
     if (!!unvisitedCellsMain.length) {
@@ -55,14 +63,35 @@ export function dijkstra(
 
       if (!(nextMainCell.isWall && !nextMainCell.start && !nextMainCell.end)) {
         if (nextMainCell.distance === Infinity) {
-          DoAnimation(visitedCells, endCell, speed);
+          if (!bidirectional) {
+            DoSingleAnimation(visitedCellsMain, endCell, speed);
+          } else {
+            DoBidirectionalAnimation(
+              visitedCellsMain,
+              visitedCellsSec,
+              startCell,
+              endCell,
+              speed
+            );
+          }
+
           return;
         }
         nextMainCell.visited = true;
-        visitedCells.push(nextMainCell);
+        visitedCellsMain.push(nextMainCell);
         if (nextMainCell === endCell) {
           unvisitedCellsMain.sort((cell1, cell2) => cell1.id - cell2.id);
-          DoAnimation(visitedCells, endCell, speed);
+          if (!bidirectional) {
+            DoSingleAnimation(visitedCellsMain, endCell, speed);
+          } else {
+            DoBidirectionalAnimation(
+              visitedCellsMain,
+              visitedCellsSec,
+              startCell,
+              endCell,
+              speed
+            );
+          }
           return;
         }
 
@@ -103,14 +132,26 @@ export function dijkstra(
 
       if (!(nextSecCell.isWall && !nextSecCell.start && !nextSecCell.end)) {
         if (nextSecCell.distanceSec === Infinity) {
-          DoAnimation(visitedCells, endCell, speed);
+          DoBidirectionalAnimation(
+            visitedCellsMain,
+            visitedCellsSec,
+            startCell,
+            endCell,
+            speed
+          );
           return;
         }
         nextSecCell.visitedSec = true;
-        visitedCells.push(nextSecCell);
+        visitedCellsSec.push(nextSecCell);
         if (nextSecCell === startCell) {
           unvisitedCellsSec.sort((cell1, cell2) => cell1.idSec - cell2.idSec);
-          DoAnimation(visitedCells, endCell, speed);
+          DoBidirectionalAnimation(
+            visitedCellsMain,
+            visitedCellsSec,
+            startCell,
+            endCell,
+            speed
+          );
           return;
         }
 
@@ -244,7 +285,7 @@ function LeftUp(row, col, grid, neighbors, category) {
   }
 }
 
-function DoAnimation(visitedCells, endCell, speed) {
+function DoSingleAnimation(visitedCells, endCell, speed) {
   const cellsInOrder = getCellsInOrder(endCell);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
@@ -257,3 +298,10 @@ function DoAnimation(visitedCells, endCell, speed) {
     animateFast(visitedCells, cellsInOrder);
   }
 }
+function DoBidirectionalAnimation(
+  mainCells,
+  secondaryCells,
+  startCell,
+  endCell,
+  speed
+) {}
