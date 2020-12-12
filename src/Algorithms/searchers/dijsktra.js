@@ -3,6 +3,7 @@ import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var idMain = 0;
 var idSec = 0;
+var isFinished = false;
 export function dijkstra(
   grid,
   startCell,
@@ -29,6 +30,10 @@ export function dijkstra(
   }
 
   while (!!unvisitedCellsMain.length || !!unvisitedCellsSec.length) {
+    if (isFinished) {
+      DoAnimation(visitedCells, endCell, speed);
+      return;
+    }
     if (!!unvisitedCellsMain.length) {
       unvisitedCellsMain.sort((cell1, cell2) => cell1.id - cell2.id);
       unvisitedCellsMain.sort(
@@ -96,7 +101,7 @@ export function dijkstra(
           DoAnimation(visitedCells, endCell, speed);
           return;
         }
-        nextSecCell.visited = true;
+        nextSecCell.visitedSec = true;
         visitedCells.push(nextSecCell);
         if (nextSecCell === startCell) {
           unvisitedCellsMain.sort((cell1, cell2) => cell1.idSec - cell2.idSec);
@@ -125,26 +130,26 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
   var { col, row } = cell;
 
   if (direction === "DOWN" || direction === "START") {
-    Up(row, col, grid, neighbors);
-    Right(row, col, grid, neighbors);
-    Down(row, col, grid, neighbors);
-    Left(row, col, grid, neighbors);
+    Up(row, col, grid, neighbors, category);
+    Right(row, col, grid, neighbors, category);
+    Down(row, col, grid, neighbors, category);
+    Left(row, col, grid, neighbors, category);
     if (isDiagonalOn) {
-      UpRight(row, col, grid, neighbors);
-      RightDown(row, col, grid, neighbors);
-      DownLeft(row, col, grid, neighbors);
-      LeftUp(row, col, grid, neighbors);
+      UpRight(row, col, grid, neighbors, category);
+      RightDown(row, col, grid, neighbors, category);
+      DownLeft(row, col, grid, neighbors, category);
+      LeftUp(row, col, grid, neighbors, category);
     }
   } else if (direction === "UP") {
-    Down(row, col, grid, neighbors);
-    Left(row, col, grid, neighbors);
-    Up(row, col, grid, neighbors);
-    Right(row, col, grid, neighbors);
+    Down(row, col, grid, neighbors, category);
+    Left(row, col, grid, neighbors, category);
+    Up(row, col, grid, neighbors, category);
+    Right(row, col, grid, neighbors, category);
     if (isDiagonalOn) {
-      DownLeft(row, col, grid, neighbors);
-      LeftUp(row, col, grid, neighbors);
-      UpRight(row, col, grid, neighbors);
-      RightDown(row, col, grid, neighbors);
+      DownLeft(row, col, grid, neighbors, category);
+      LeftUp(row, col, grid, neighbors, category);
+      UpRight(row, col, grid, neighbors, category);
+      RightDown(row, col, grid, neighbors, category);
     }
   }
   if (category === "MAIN") {
@@ -157,50 +162,74 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
   } else if ("SEC") {
     for (const neighbor of neighbors) {
       neighbor.distanceSec = cell.distanceSec + 1;
-      neighbor.previous = cell;
+      neighbor.previousSec = cell;
       neighbor.idSec = idSec;
       idSec++;
     }
   }
 }
 
-function Up(row, col, grid, neighbors) {
+function Up(row, col, grid, neighbors, category) {
   if (row > 0) {
     var cell = grid[row - 1][col];
-    if (!cell.visited && cell.previous === null) {
+    if (category === "MAIN" && !cell.visited && cell.previous === null) {
+      neighbors.push(cell);
+    } else if (
+      category === "SEC" &&
+      !cell.visitedSec &&
+      cell.previousSec === null
+    ) {
       neighbors.push(cell);
     }
   }
 }
 
-function Right(row, col, grid, neighbors) {
+function Right(row, col, grid, neighbors, category) {
   if (col < grid[0].length - 1) {
     let cell = grid[row][col + 1];
-    if (!cell.visited && cell.previous === null) {
+    if (category === "MAIN" && !cell.visited && cell.previous === null) {
+      neighbors.push(cell);
+    } else if (
+      category === "SEC" &&
+      !cell.visitedSec &&
+      cell.previousSec === null
+    ) {
       neighbors.push(cell);
     }
   }
 }
 
-function Down(row, col, grid, neighbors) {
+function Down(row, col, grid, neighbors, category) {
   if (row < grid.length - 1) {
     let cell = grid[row + 1][col];
-    if (!cell.visited && cell.previous === null) {
+    if (category === "MAIN" && !cell.visited && cell.previous === null) {
+      neighbors.push(cell);
+    } else if (
+      category === "SEC" &&
+      !cell.visitedSec &&
+      cell.previousSec === null
+    ) {
       neighbors.push(cell);
     }
   }
 }
 
-function Left(row, col, grid, neighbors) {
+function Left(row, col, grid, neighbors, category) {
   if (col > 0) {
     let cell = grid[row][col - 1];
-    if (!cell.visited && cell.previous === null) {
+    if (category === "MAIN" && !cell.visited && cell.previous === null) {
+      neighbors.push(cell);
+    } else if (
+      category === "SEC" &&
+      !cell.visitedSec &&
+      cell.previousSec === null
+    ) {
       neighbors.push(cell);
     }
   }
 }
 
-function UpRight(row, col, grid, neighbors) {
+function UpRight(row, col, grid, neighbors, category) {
   if (row > 0 && col < grid[0].length - 1) {
     let cell = grid[row - 1][col + 1];
     if (grid[row - 1][col].isWall && grid[row][col + 1].isWall) {
@@ -212,7 +241,7 @@ function UpRight(row, col, grid, neighbors) {
   }
 }
 
-function RightDown(row, col, grid, neighbors) {
+function RightDown(row, col, grid, neighbors, category) {
   if (col < grid[0].length - 1 && row < grid.length - 1) {
     let cell = grid[row + 1][col + 1];
     if (grid[row + 1][col].isWall && grid[row][col + 1].isWall) {
@@ -224,7 +253,7 @@ function RightDown(row, col, grid, neighbors) {
   }
 }
 
-function DownLeft(row, col, grid, neighbors) {
+function DownLeft(row, col, grid, neighbors, category) {
   if (row < grid.length - 1 && col > 0) {
     let cell = grid[row + 1][col - 1];
     if (grid[row + 1][col].isWall && grid[row][col - 1].isWall) {
@@ -236,7 +265,7 @@ function DownLeft(row, col, grid, neighbors) {
   }
 }
 
-function LeftUp(row, col, grid, neighbors) {
+function LeftUp(row, col, grid, neighbors, category) {
   if (col > 0 && row > 0) {
     let cell = grid[row - 1][col - 1];
     if (grid[row][col - 1].isWall && grid[row - 1][col].isWall) {
