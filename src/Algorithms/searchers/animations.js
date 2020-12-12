@@ -2,7 +2,6 @@ import { visualizeCell } from "../methods";
 import { clearVisitedCells } from "../cleaning";
 
 export function bidirectionalSlow(main, sec, cellsInOrder) {
-  console.log(cellsInOrder.length);
   var length = main.length >= sec.length ? main.length : sec.length;
   for (let i = 0; i <= length; i++) {
     if (i === length) {

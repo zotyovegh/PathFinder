@@ -297,17 +297,15 @@ function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
 
 function getCellsInOrderBidirectional() {
   if (meetingCell !== null) {
-    console.log(meetingCell);
     const cells = [];
-    cells.unshift(meetingCell);
+    cells.push(meetingCell);
     let cellMain = meetingCell;
     let cellSec = meetingCell;
-    while (cellMain !== null && cellSec !== null) {
+    while (cellMain !== null || cellSec !== null) {
       if (cellMain !== null) {
         if (cellMain !== meetingCell && !cellMain.start && !cellMain.end) {
           cells.push(cellMain);
         }
-
         cellMain = cellMain.previous;
       }
       if (cellSec !== null) {
