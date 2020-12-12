@@ -13,7 +13,7 @@ export function bidirectionalSlow(main, sec, cellsInOrder) {
         visualizeCell("cell", "cell cell-visited-animated", main[i]);
       }
       if (i < sec.length && !sec[i].start && !sec[i].end) {
-        visualizeCell("cell", "cell cell-visited-animated", sec[i]);
+        visualizeCell("cell", "cell cell-visitedSecondary-animated", sec[i]);
       }
     }, 10 * i);
   }
@@ -28,7 +28,7 @@ export function bidirectionalFast(main, sec, cellsInOrder) {
       visualizeCell("cell", "cell cell-visited", main[i]);
     }
     if (i < sec.length && !sec[i].start && !sec[i].end) {
-      visualizeCell("cell", "cell cell-visited", sec[i]);
+      visualizeCell("cell", "cell cell-visitedSec", sec[i]);
     }
   }
 }

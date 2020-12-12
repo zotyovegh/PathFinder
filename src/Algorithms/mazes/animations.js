@@ -1,3 +1,4 @@
+import { clearVisitedCells } from "../cleaning";
 import { visualizeCell } from "../methods";
 export function visualizeOnWalledGrid(grid, path) {
   window.gridComponent.setState({ status: "running" });
@@ -13,6 +14,7 @@ export function visualizeOnWalledGrid(grid, path) {
     setTimeout(() => {
       if (i === path.length) {
         window.gridComponent.setState({ status: "pending" });
+        clearVisitedCells();
         return;
       }
       if (!path[i].end && !path[i].start) {
@@ -36,6 +38,7 @@ export function visualizeRandom(grid, path) {
     setTimeout(() => {
       if (i === path.length) {
         window.gridComponent.setState({ status: "pending" });
+        clearVisitedCells();
         return;
       }
       if (!path[i].end && !path[i].start) {
@@ -61,6 +64,7 @@ export function visualizeABMaze(grid, path) {
       if (i === path.length) {
         window.gridComponent.setState({ status: "pending" });
         visualizeCell("cell", "cell cell-empty", path[path.length - 1]);
+        clearVisitedCells();
         return;
       }
       if (previous !== null) {
@@ -91,6 +95,7 @@ export async function visualizeWilson(grid, path) {
   for (let i = 0; i <= path.length; i++) {
     if (i === path.length) {
       window.gridComponent.setState({ status: "pending" });
+      clearVisitedCells();
       return;
     }
     var previous = null;
@@ -160,6 +165,7 @@ export function visualizeOnEmptyGrid(grid, path) {
     setTimeout(() => {
       if (i === path.length) {
         window.gridComponent.setState({ status: "pending" });
+        clearVisitedCells();
         return;
       }
       if (!path[i].end && !path[i].start) {

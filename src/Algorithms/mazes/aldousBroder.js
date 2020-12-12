@@ -2,6 +2,7 @@ import { visualizeABMaze } from "../mazes/animations";
 import {
   clearWithStatus,
   clearInfinityVariables,
+  clearVisitedCells,
 } from "../../Algorithms/cleaning";
 
 export function aldousBroderMaze(originalGrid) {
@@ -41,6 +42,7 @@ export function aldousBroderMaze(originalGrid) {
     current = neighbor[1];
   }
   clearInfinityVariables(grid);
+  
   window.gridComponent.setState({ grid: grid });
   visualizeABMaze(grid, visualizationList);
 }
