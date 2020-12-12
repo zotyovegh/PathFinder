@@ -2,7 +2,21 @@ import { visualizeCell } from "../methods";
 import { clearVisitedCells } from "../cleaning";
 
 export function bidirectionalSlow(main, sec, cellsInOrder) {
-  console.log("SLOW");
+  var length = main.length >= sec.length ? main.length : sec.length;
+  for (let i = 0; i <= length; i++) {
+    if (i === length) {
+      window.gridComponent.setState({ status: "finished" });
+      return;
+    }
+    setTimeout(() => {
+      if (i < main.length && !main[i].start && !main[i].end) {
+        visualizeCell("cell", "cell cell-visited-animated", main[i]);
+      }
+      if (i < sec.length && !sec[i].start && !sec[i].end) {
+        visualizeCell("cell", "cell cell-visited-animated", sec[i]);
+      }
+    }, 10 * i);
+  }
 }
 export function bidirectionalFast(main, sec, cellsInOrder) {
   console.log("FAST");
