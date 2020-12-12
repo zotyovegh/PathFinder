@@ -9,6 +9,7 @@ import { clearVisitedCells } from "../../Algorithms/cleaning";
 var idMain;
 var idSec;
 var isFinished;
+var meetingCell = null;
 var bidirectional;
 export function dijkstra(
   grid,
@@ -18,7 +19,6 @@ export function dijkstra(
   bidirectionalOn,
   speed
 ) {
-  
   idMain = 0;
   idSec = 0;
   isFinished = false;
@@ -43,13 +43,7 @@ export function dijkstra(
 
   while (!!unvisitedCellsMain.length || !!unvisitedCellsSec.length) {
     if (isFinished) {
-      DoBidirectionalAnimation(
-        visitedCellsMain,
-        visitedCellsSec,
-        startCell,
-        endCell,
-        speed
-      );
+      DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
       return;
     }
     if (!!unvisitedCellsMain.length) {
@@ -59,7 +53,10 @@ export function dijkstra(
       );
 
       const nextMainCell = unvisitedCellsMain.shift();
-      if (nextMainCell.visitedSec) isFinished = true;
+      if (nextMainCell.visitedSec) {
+        isFinished = true;
+        meetingCell = nextMainCell;
+      }
       if (directionMain !== "START") {
         if (nextMainCell.row < previousRowMain) {
           directionMain = "UP";
@@ -73,13 +70,7 @@ export function dijkstra(
           if (!bidirectional) {
             DoSingleAnimation(visitedCellsMain, endCell, speed);
           } else {
-            DoBidirectionalAnimation(
-              visitedCellsMain,
-              visitedCellsSec,
-              startCell,
-              endCell,
-              speed
-            );
+            DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
           }
 
           return;
@@ -91,13 +82,7 @@ export function dijkstra(
           if (!bidirectional) {
             DoSingleAnimation(visitedCellsMain, endCell, speed);
           } else {
-            DoBidirectionalAnimation(
-              visitedCellsMain,
-              visitedCellsSec,
-              startCell,
-              endCell,
-              speed
-            );
+            DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
           }
           return;
         }
@@ -128,7 +113,10 @@ export function dijkstra(
       );
 
       const nextSecCell = unvisitedCellsSec.shift();
-      if (nextSecCell.visited) isFinished = true;
+      if (nextSecCell.visited) {
+        isFinished = true;
+        meetingCell = nextSecCell;
+      }
       if (directionSec !== "START") {
         if (nextSecCell.row < previousRowSec) {
           directionSec = "UP";
@@ -139,26 +127,14 @@ export function dijkstra(
 
       if (!(nextSecCell.isWall && !nextSecCell.start && !nextSecCell.end)) {
         if (nextSecCell.distanceSec === Infinity) {
-          DoBidirectionalAnimation(
-            visitedCellsMain,
-            visitedCellsSec,
-            startCell,
-            endCell,
-            speed
-          );
+          DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
           return;
         }
         nextSecCell.visitedSec = true;
         visitedCellsSec.push(nextSecCell);
         if (nextSecCell === startCell) {
           unvisitedCellsSec.sort((cell1, cell2) => cell1.idSec - cell2.idSec);
-          DoBidirectionalAnimation(
-            visitedCellsMain,
-            visitedCellsSec,
-            startCell,
-            endCell,
-            speed
-          );
+          DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
           return;
         }
 
@@ -305,14 +281,8 @@ function DoSingleAnimation(visitedCells, endCell, speed) {
     animateFast(visitedCells, cellsInOrder);
   }
 }
-function DoBidirectionalAnimation(
-  mainCells,
-  secondaryCells,
-  startCell,
-  endCell,
-  speed
-) {
-  var cellsInOrder = null;
+function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
+  var cellsInOrder = getCellsInOrderBidirectional(mainCells, secondaryCells);
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();
@@ -322,5 +292,32 @@ function DoBidirectionalAnimation(
     bidirectionalSlow(mainCells, secondaryCells, cellsInOrder);
   } else if (speed === "fast") {
     bidirectionalFast(mainCells, secondaryCells, cellsInOrder);
+  }
+}
+
+function getCellsInOrderBidirectional(mainCells, secondaryCells) {
+  if (meetingCell !== null) {
+    console.log(meetingCell);
+    const cells = [];
+    cells.unshift(meetingCell);
+    let cellMain = meetingCell;
+    let cellSec = meetingCell;
+    while (cellMain !== null && cellSec !== null) {
+      if (cellMain !== null) {
+        if (cellMain !== meetingCell && !cellMain.start && !cellMain.end) {
+          cells.push(cellMain);
+        }
+
+        cellMain = cellMain.previous;
+      }
+      if (cellSec !== null) {
+        if (cellSec !== meetingCell && !cellSec.start && !cellSec.end) {
+          cells.push(cellSec);
+        }
+        cellSec = cellSec.previousSec;
+      }
+    }
+    return cells;
+  } else {
   }
 }
