@@ -1,9 +1,9 @@
-import { animateFast, animateSlow } from "./animations/standardAnimations";
+import { animateFast, animateSlow } from "../animations/standardAnimations";
 import {
   bidirectionalSlow,
   bidirectionalFast,
-} from "./animations/bidirectionalAnim";
-import { getCellsInOrder } from "../../Algorithms/methods";
+} from "../animations/bidirectionalAnim";
+import { getCellsInOrder } from "../../methods";
 
 var idMain;
 var idSec;

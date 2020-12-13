@@ -15,7 +15,7 @@ import { basicHorizontal } from "../Algorithms/mazes/basicHorizontal";
 import { basicVertical } from "../Algorithms/mazes/basicVertical";
 import { binaryTreeAlg } from "../Algorithms/mazes/binaryTree";
 import { ellerMaze } from "../Algorithms/mazes/eller";
-import { dijkstra } from "../Algorithms/searchers/dijsktra";
+import { dijkstraStandard } from "../Algorithms/searchers/dijkstra/dijkstraStandard";
 import { astar } from "../Algorithms/searchers/astar";
 import { depthFirst } from "../Algorithms/searchers/depthFirst";
 import { breadthFirst } from "../Algorithms/searchers/breadthFirst";
@@ -196,14 +196,16 @@ class Grid extends Component {
     const endCell = grid[this.state.endRow][this.state.endCol];
 
     if (this.state.currentAlg === "dijkstra") {
-      dijkstra(
-        grid,
-        startCell,
-        endCell,
-        this.state.diagonalVisualization,
-        this.state.bidirectionalVisualization,
-        speed
-      );
+      if (this.state.bidirectionalVisualization) {
+      } else {
+        dijkstraStandard(
+          grid,
+          startCell,
+          endCell,
+          this.state.diagonalVisualization,
+          speed
+        );
+      }
     } else if (this.state.currentAlg === "astar") {
       astar(
         grid,
