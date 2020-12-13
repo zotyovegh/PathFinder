@@ -303,6 +303,7 @@ function DoSingleAnimation(visitedCells, endCell, speed) {
   }
 }
 function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
+  reformatId(secondaryCells);
   var cellsInOrder = getCellsInOrderBidirectional(mainCells, secondaryCells);
   if (speed === "slow") {
     window.gridComponent.setState({ status: "running" });
@@ -310,6 +311,15 @@ function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
   } else if (speed === "fast") {
     bidirectionalFast(mainCells, secondaryCells, cellsInOrder);
   }
+}
+
+function reformatId(secondaryCells) {
+  for (let i = 0; i < secondaryCells.length; i++) {
+    if (!secondaryCells[i].start && !secondaryCells[i].end) {
+      secondaryCells[i].distance = secondaryCells[i].distanceSec;
+    }
+  }
+  console.log(secondaryCells);
 }
 
 function getCellsInOrderBidirectional() {

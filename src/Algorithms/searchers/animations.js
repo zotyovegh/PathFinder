@@ -17,6 +17,12 @@ export function bidirectionalSlow(main, sec, cellsInOrder) {
       if (i < sec.length && !sec[i].start && !sec[i].end) {
         visualizeCell("cell", "cell cell-visitedSecondary-animated", sec[i]);
       }
+      if (i < main.length && window.gridComponent.state.previousVisualization) {
+        visualizeCell("num", "num num-visited", main[i]);
+      }
+      if (i < sec.length && window.gridComponent.state.previousVisualization) {
+        visualizeCell("num", "num num-visited", sec[i]);
+      }
     }, 10 * i);
   }
 }
@@ -33,6 +39,12 @@ export function bidirectionalFast(main, sec, cellsInOrder) {
     if (i < sec.length && !sec[i].start && !sec[i].end) {
       visualizeCell("cell", "cell cell-visitedSec", sec[i]);
     }
+    if (i < main.length && window.gridComponent.state.previousVisualization) {
+      visualizeCell("num", "num num-visited", main[i]);
+    }
+    if (i < sec.length && window.gridComponent.state.previousVisualization) {
+      visualizeCell("num", "num num-visited", sec[i]);
+    }
   }
 }
 
@@ -44,8 +56,9 @@ function animateBidirectionalPathSlow(cellsInOrder) {
         return;
       }
       const cell = cellsInOrder[i];
-      visualizeCell("cell", "cell cell-pathThirdly-animated", cell);
-     
+      if (!cell.start && !cell.end) {
+        visualizeCell("cell", "cell cell-pathThirdly-animated", cell);
+      }
     }, 20 * i);
   }
 }
@@ -53,8 +66,9 @@ function animateBidirectionalPathSlow(cellsInOrder) {
 function animateBidirectionalPathFast(cellsInOrder) {
   for (let i = 0; i < cellsInOrder.length; i++) {
     const cell = cellsInOrder[i];
-    visualizeCell("cell", "cell cell-pathThird", cell);
-   
+    if (!cell.start && !cell.end) {
+      visualizeCell("cell", "cell cell-pathThird", cell);
+    }
   }
 }
 
