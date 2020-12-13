@@ -314,11 +314,14 @@ function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
 
 function reformatId(secondaryCells) {
   for (let i = 0; i < secondaryCells.length; i++) {
-    if (!secondaryCells[i].start && !secondaryCells[i].end) {
+    if (
+      !secondaryCells[i].start &&
+      !secondaryCells[i].end &&
+      secondaryCells[i] !== meetingCell
+    ) {
       secondaryCells[i].distance = secondaryCells[i].distanceSec;
     }
   }
-  console.log(secondaryCells);
 }
 
 function getCellsInOrderBidirectional() {
