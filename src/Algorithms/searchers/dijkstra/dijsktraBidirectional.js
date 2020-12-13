@@ -4,7 +4,8 @@ import {
   bidirectionalFast,
 } from "../animations/bidirectionalAnim";
 import { getCellsInOrder } from "../../methods";
-
+var idMain = 0;
+var idSec = 0;
 var isFinished;
 var meetingCell = null;
 export function dijkstraBidirectional(
@@ -192,11 +193,15 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
     for (const neighbor of neighbors) {
       neighbor.distance = cell.distance + 1;
       neighbor.previous = cell;
+      neighbor.id = idMain;
+      idMain++;
     }
   } else if ("SEC") {
     for (const neighbor of neighbors) {
       neighbor.distanceSec = cell.distanceSec + 1;
       neighbor.previousSec = cell;
+      neighbor.idSec = idSec;
+      idSec++;
     }
   }
 }
@@ -296,7 +301,6 @@ function reformatId(secondaryCells) {
 
 function getCellsInOrderBidirectional() {
   var cells = [];
-  console.log(meetingCell);
   if (meetingCell !== null) {
     if (
       meetingCell.distance !== Infinity &&
@@ -321,6 +325,5 @@ function getCellsInOrderBidirectional() {
       }
     }
   }
-  console.log(cells.length);
   return cells;
 }
