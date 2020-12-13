@@ -56,9 +56,7 @@ class Grid extends Component {
         () => {
           if (this.state.status === "finished") {
             clearVisitedCells();
-            if (this.state.currentAlg === "dijkstra") {
-              this.doAlgorithm("fast");
-            }
+            this.doAlgorithm("fast");
           }
         }
       );
@@ -190,6 +188,9 @@ class Grid extends Component {
   };
 
   doAlgorithm = (speed) => {
+    if (this.state.status === "finished") {
+      clearVisitedCells();
+    }
     let { grid } = this.state;
     const startCell = grid[this.state.startRow][this.state.startCol];
     const endCell = grid[this.state.endRow][this.state.endCol];

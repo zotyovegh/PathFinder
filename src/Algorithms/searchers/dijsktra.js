@@ -5,7 +5,7 @@ import {
   bidirectionalFast,
 } from "./animations";
 import { getCellsInOrder } from "../../Algorithms/methods";
-import { clearVisitedCells } from "../../Algorithms/cleaning";
+
 var idMain;
 var idSec;
 var isFinished;
@@ -271,11 +271,7 @@ function LeftUp(row, col, grid, neighbors, category) {
 function DoSingleAnimation(visitedCells, endCell, speed) {
   const cellsInOrder = getCellsInOrder(endCell);
   if (speed === "slow") {
-    if (window.gridComponent.state.status === "finished") {
-      clearVisitedCells();
-    }
     window.gridComponent.setState({ status: "running" });
-
     animateSlow(visitedCells, cellsInOrder);
   } else if (speed === "fast") {
     animateFast(visitedCells, cellsInOrder);
@@ -284,11 +280,7 @@ function DoSingleAnimation(visitedCells, endCell, speed) {
 function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
   var cellsInOrder = getCellsInOrderBidirectional(mainCells, secondaryCells);
   if (speed === "slow") {
-    if (window.gridComponent.state.status === "finished") {
-      clearVisitedCells();
-    }
     window.gridComponent.setState({ status: "running" });
-
     bidirectionalSlow(mainCells, secondaryCells, cellsInOrder);
   } else if (speed === "fast") {
     bidirectionalFast(mainCells, secondaryCells, cellsInOrder);
@@ -316,6 +308,5 @@ function getCellsInOrderBidirectional() {
       }
     }
     return cells;
-  } else {
   }
 }
