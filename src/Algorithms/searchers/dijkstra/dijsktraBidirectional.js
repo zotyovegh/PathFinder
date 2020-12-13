@@ -9,19 +9,16 @@ var idMain;
 var idSec;
 var isFinished;
 var meetingCell = null;
-var bidirectional;
-export function dijkstra(
+export function dijkstraBidirectional(
   grid,
   startCell,
   endCell,
   isDiagonalOn,
-  bidirectionalOn,
   speed
 ) {
   idMain = 0;
   idSec = 0;
   isFinished = false;
-  bidirectional = bidirectionalOn;
   const unvisitedCellsMain = [];
   const unvisitedCellsSec = [];
   const visitedCellsMain = [];
@@ -36,7 +33,7 @@ export function dijkstra(
   for (const row of grid) {
     for (const cell of row) {
       unvisitedCellsMain.push(cell);
-      if (bidirectionalOn) unvisitedCellsSec.push(cell);
+      unvisitedCellsSec.push(cell);
     }
   }
 
@@ -66,11 +63,7 @@ export function dijkstra(
 
       if (!(nextMainCell.isWall && !nextMainCell.start && !nextMainCell.end)) {
         if (nextMainCell.distance === Infinity) {
-          if (!bidirectional) {
-            DoSingleAnimation(visitedCellsMain, endCell, speed);
-          } else {
-            DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
-          }
+          DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
 
           return;
         }
@@ -78,11 +71,9 @@ export function dijkstra(
         visitedCellsMain.push(nextMainCell);
         if (nextMainCell === endCell) {
           unvisitedCellsMain.sort((cell1, cell2) => cell1.id - cell2.id);
-          if (!bidirectional) {
-            DoSingleAnimation(visitedCellsMain, endCell, speed);
-          } else {
-            DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
-          }
+
+          DoBidirectionalAnimation(visitedCellsMain, visitedCellsSec, speed);
+
           return;
         }
 
@@ -101,11 +92,7 @@ export function dijkstra(
     }
 
     //*****************
-    //*****************
-    //*****************
-    //*****************
-    //*****************
-    if (!!unvisitedCellsSec.length && bidirectionalOn) {
+    if (!!unvisitedCellsSec.length) {
       unvisitedCellsSec.sort((cell1, cell2) => cell1.idSec - cell2.idSec);
       unvisitedCellsSec.sort(
         (cell1, cell2) => cell1.distanceSec - cell2.distanceSec
