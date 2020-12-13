@@ -5,7 +5,7 @@ function getColor(props) {
     return "cell-start";
   } else if (props.data.end) {
     return "cell-end";
-  }else {
+  } else {
     return "";
   }
 }

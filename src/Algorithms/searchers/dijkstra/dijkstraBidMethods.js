@@ -184,6 +184,9 @@ function reformatId(secondaryCells, meetingCell) {
     ) {
       secondaryCells[i].distance = secondaryCells[i].distanceSec;
     }
+    if (secondaryCells[i] !== meetingCell && secondaryCells[i].end) {
+      secondaryCells[i].distance = 0;
+    }
   }
 }
 
@@ -199,13 +202,13 @@ function getCellsInOrderBidirectional(meetingCell) {
       let cellSec = meetingCell;
       while (cellMain !== null || cellSec !== null) {
         if (cellMain !== null) {
-          if (cellMain !== meetingCell && !cellMain.start && !cellMain.end) {
+          if (cellMain !== meetingCell) {
             cells.push(cellMain);
           }
           cellMain = cellMain.previous;
         }
         if (cellSec !== null) {
-          if (cellSec !== meetingCell && !cellSec.start && !cellSec.end) {
+          if (cellSec !== meetingCell) {
             cells.push(cellSec);
           }
           cellSec = cellSec.previousSec;

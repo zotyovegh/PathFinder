@@ -62,9 +62,9 @@ export function animateFast(visitedCells, cellsInOrder) {
       if (window.gridComponent.state.previousVisualization) {
         visualizeCell("num", "num num-end", cell);
       }
-      animatePathFast(cellsInOrder);
     }
   }
+  animatePathFast(cellsInOrder);
 }
 
 function animatePathFast(cellsInOrder) {
