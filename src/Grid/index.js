@@ -39,7 +39,7 @@ class Grid extends Component {
       previousVisualization: true,
       diagonalVisualization: false,
       optimizedVisualization: true,
-      bidirectionalVisualization: true,
+      bidirectionalVisualization: false,
     };
     this.handleAlgoChange = this.handleAlgoChange.bind(this);
     this.handleButtonChange = this.handleButtonChange.bind(this);

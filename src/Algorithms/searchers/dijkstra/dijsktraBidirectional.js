@@ -1,11 +1,8 @@
-import { animateFast, animateSlow } from "../animations/standardAnimations";
 import {
   bidirectionalSlow,
   bidirectionalFast,
 } from "../animations/bidirectionalAnim";
-import { getCellsInOrder } from "../../methods";
-var idMain = 0;
-var idSec = 0;
+
 var isFinished;
 var meetingCell = null;
 export function dijkstraBidirectional(
@@ -15,6 +12,8 @@ export function dijkstraBidirectional(
   isDiagonalOn,
   speed
 ) {
+  var idMain = 0;
+  var idSec = 0;
   isFinished = false;
   const unvisitedCellsMain = [];
   const unvisitedCellsSec = [];
@@ -74,12 +73,13 @@ export function dijkstraBidirectional(
           return;
         }
 
-        getUnvisitedNeighbors(
+        idMain = getMainUnvisitedNeighbors(
           nextMainCell,
           grid,
           directionMain,
           isDiagonalOn,
-          "MAIN"
+          "MAIN",
+          idMain
         );
         if (directionMain !== "START") {
           previousRowMain = nextMainCell.row;
@@ -121,12 +121,13 @@ export function dijkstraBidirectional(
           return;
         }
 
-        getUnvisitedNeighbors(
+        idSec = getSecUnvisitedNeighbors(
           nextSecCell,
           grid,
           directionSec,
           isDiagonalOn,
-          "SEC"
+          "SEC",
+          idSec
         );
         if (directionSec !== "START") {
           previousRowSec = nextSecCell.row;
@@ -137,73 +138,91 @@ export function dijkstraBidirectional(
   }
 }
 
-function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
+function getMainUnvisitedNeighbors(
+  cell,
+  grid,
+  direction,
+  isDiagonalOn,
+  category,
+  id
+) {
   const neighbors = [];
   var { col, row } = cell;
-  if (category === "MAIN") {
-    if (direction === "DOWN" || direction === "START") {
-      Up(row, col, grid, neighbors, category);
-      Right(row, col, grid, neighbors, category);
-      Down(row, col, grid, neighbors, category);
-      Left(row, col, grid, neighbors, category);
-      if (isDiagonalOn) {
-        UpRight(row, col, grid, neighbors, category);
-        RightDown(row, col, grid, neighbors, category);
-        DownLeft(row, col, grid, neighbors, category);
-        LeftUp(row, col, grid, neighbors, category);
-      }
-    } else if (direction === "UP") {
-      Down(row, col, grid, neighbors, category);
-      Left(row, col, grid, neighbors, category);
-      Up(row, col, grid, neighbors, category);
-      Right(row, col, grid, neighbors, category);
-      if (isDiagonalOn) {
-        DownLeft(row, col, grid, neighbors, category);
-        LeftUp(row, col, grid, neighbors, category);
-        UpRight(row, col, grid, neighbors, category);
-        RightDown(row, col, grid, neighbors, category);
-      }
+  if (direction === "DOWN" || direction === "START") {
+    Up(row, col, grid, neighbors, category);
+    Right(row, col, grid, neighbors, category);
+    Down(row, col, grid, neighbors, category);
+    Left(row, col, grid, neighbors, category);
+    if (isDiagonalOn) {
+      UpRight(row, col, grid, neighbors, category);
+      RightDown(row, col, grid, neighbors, category);
+      DownLeft(row, col, grid, neighbors, category);
+      LeftUp(row, col, grid, neighbors, category);
     }
-  } else if ("SEC") {
-    if (direction === "DOWN" || direction === "START") {
-      Up(row, col, grid, neighbors, category);
-      Left(row, col, grid, neighbors, category);
-      Down(row, col, grid, neighbors, category);
-      Right(row, col, grid, neighbors, category);
-      if (isDiagonalOn) {
-        UpRight(row, col, grid, neighbors, category);
-        LeftUp(row, col, grid, neighbors, category);
-        DownLeft(row, col, grid, neighbors, category);
-        RightDown(row, col, grid, neighbors, category);
-      }
-    } else if (direction === "UP") {
-      Down(row, col, grid, neighbors, category);
-      Right(row, col, grid, neighbors, category);
-      Up(row, col, grid, neighbors, category);
-      Left(row, col, grid, neighbors, category);
-      if (isDiagonalOn) {
-        DownLeft(row, col, grid, neighbors, category);
-        RightDown(row, col, grid, neighbors, category);
-        UpRight(row, col, grid, neighbors, category);
-        LeftUp(row, col, grid, neighbors, category);
-      }
+  } else if (direction === "UP") {
+    Down(row, col, grid, neighbors, category);
+    Left(row, col, grid, neighbors, category);
+    Up(row, col, grid, neighbors, category);
+    Right(row, col, grid, neighbors, category);
+    if (isDiagonalOn) {
+      DownLeft(row, col, grid, neighbors, category);
+      LeftUp(row, col, grid, neighbors, category);
+      UpRight(row, col, grid, neighbors, category);
+      RightDown(row, col, grid, neighbors, category);
     }
   }
-  if (category === "MAIN") {
-    for (const neighbor of neighbors) {
-      neighbor.distance = cell.distance + 1;
-      neighbor.previous = cell;
-      neighbor.id = idMain;
-      idMain++;
+
+  for (const neighbor of neighbors) {
+    neighbor.distance = cell.distance + 1;
+    neighbor.previous = cell;
+    neighbor.id = id;
+    id++;
+  }
+  return id;
+}
+
+function getSecUnvisitedNeighbors(
+  cell,
+  grid,
+  direction,
+  isDiagonalOn,
+  category,
+  id
+) {
+  const neighbors = [];
+  var { col, row } = cell;
+
+  if (direction === "DOWN" || direction === "START") {
+    Up(row, col, grid, neighbors, category);
+    Left(row, col, grid, neighbors, category);
+    Down(row, col, grid, neighbors, category);
+    Right(row, col, grid, neighbors, category);
+    if (isDiagonalOn) {
+      UpRight(row, col, grid, neighbors, category);
+      LeftUp(row, col, grid, neighbors, category);
+      DownLeft(row, col, grid, neighbors, category);
+      RightDown(row, col, grid, neighbors, category);
     }
-  } else if ("SEC") {
-    for (const neighbor of neighbors) {
-      neighbor.distanceSec = cell.distanceSec + 1;
-      neighbor.previousSec = cell;
-      neighbor.idSec = idSec;
-      idSec++;
+  } else if (direction === "UP") {
+    Down(row, col, grid, neighbors, category);
+    Right(row, col, grid, neighbors, category);
+    Up(row, col, grid, neighbors, category);
+    Left(row, col, grid, neighbors, category);
+    if (isDiagonalOn) {
+      DownLeft(row, col, grid, neighbors, category);
+      RightDown(row, col, grid, neighbors, category);
+      UpRight(row, col, grid, neighbors, category);
+      LeftUp(row, col, grid, neighbors, category);
     }
   }
+
+  for (const neighbor of neighbors) {
+    neighbor.distanceSec = cell.distanceSec + 1;
+    neighbor.previousSec = cell;
+    neighbor.idSec = id;
+    id++;
+  }
+  return id;
 }
 
 function addNeighbor(cell, neighbors, category) {

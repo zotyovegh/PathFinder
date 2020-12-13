@@ -1,7 +1,14 @@
 import { animateFast, animateSlow } from "../animations/standardAnimations";
 import { getCellsInOrder } from "../../methods";
-var id = 0;
-export function dijkstraStandard(grid, startCell, endCell, isDiagonalOn, speed) {
+
+export function dijkstraStandard(
+  grid,
+  startCell,
+  endCell,
+  isDiagonalOn,
+  speed
+) {
+  var id = 0;
   const unvisitedCells = [];
   const visitedCells = [];
   var direction = "START";
@@ -41,7 +48,14 @@ export function dijkstraStandard(grid, startCell, endCell, isDiagonalOn, speed) 
       return;
     }
 
-    getUnvisitedNeighbors(nextCell, grid, direction, isDiagonalOn);
+    var neighbors = getUnvisitedNeighbors(
+      nextCell,
+      grid,
+      direction,
+      isDiagonalOn
+    );
+    id = updateNeighbors(neighbors, nextCell, id);
+
     if (direction !== "START") {
       previousRow = nextCell.row;
     }
@@ -76,13 +90,17 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn) {
       RightDown(row, col, grid, neighbors);
     }
   }
+  return neighbors;
+}
 
+function updateNeighbors(neighbors, cell, id) {
   for (const neighbor of neighbors) {
     neighbor.distance = cell.distance + 1;
     neighbor.previous = cell;
     neighbor.id = id;
     id++;
   }
+  return id;
 }
 
 function Up(row, col, grid, neighbors) {
