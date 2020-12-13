@@ -5,7 +5,6 @@ import {
 } from "../animations/bidirectionalAnim";
 import { getCellsInOrder } from "../../methods";
 
-
 var isFinished;
 var meetingCell = null;
 export function dijkstraBidirectional(
@@ -15,7 +14,6 @@ export function dijkstraBidirectional(
   isDiagonalOn,
   speed
 ) {
-
   isFinished = false;
   const unvisitedCellsMain = [];
   const unvisitedCellsSec = [];
@@ -194,13 +192,11 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
     for (const neighbor of neighbors) {
       neighbor.distance = cell.distance + 1;
       neighbor.previous = cell;
-     
     }
   } else if ("SEC") {
     for (const neighbor of neighbors) {
       neighbor.distanceSec = cell.distanceSec + 1;
       neighbor.previousSec = cell;
-    
     }
   }
 }
@@ -275,15 +271,6 @@ function LeftUp(row, col, grid, neighbors, category) {
   }
 }
 
-function DoSingleAnimation(visitedCells, endCell, speed) {
-  const cellsInOrder = getCellsInOrder(endCell);
-  if (speed === "slow") {
-    window.gridComponent.setState({ status: "running" });
-    animateSlow(visitedCells, cellsInOrder);
-  } else if (speed === "fast") {
-    animateFast(visitedCells, cellsInOrder);
-  }
-}
 function DoBidirectionalAnimation(mainCells, secondaryCells, speed) {
   reformatId(secondaryCells);
   var cellsInOrder = getCellsInOrderBidirectional(mainCells, secondaryCells);
@@ -308,25 +295,32 @@ function reformatId(secondaryCells) {
 }
 
 function getCellsInOrderBidirectional() {
+  var cells = [];
+  console.log(meetingCell);
   if (meetingCell !== null) {
-    const cells = [];
-    cells.push(meetingCell);
-    let cellMain = meetingCell;
-    let cellSec = meetingCell;
-    while (cellMain !== null || cellSec !== null) {
-      if (cellMain !== null) {
-        if (cellMain !== meetingCell && !cellMain.start && !cellMain.end) {
-          cells.push(cellMain);
+    if (
+      meetingCell.distance !== Infinity &&
+      meetingCell.distanceSec !== Infinity
+    ) {
+      cells.push(meetingCell);
+      let cellMain = meetingCell;
+      let cellSec = meetingCell;
+      while (cellMain !== null || cellSec !== null) {
+        if (cellMain !== null) {
+          if (cellMain !== meetingCell && !cellMain.start && !cellMain.end) {
+            cells.push(cellMain);
+          }
+          cellMain = cellMain.previous;
         }
-        cellMain = cellMain.previous;
-      }
-      if (cellSec !== null) {
-        if (cellSec !== meetingCell && !cellSec.start && !cellSec.end) {
-          cells.push(cellSec);
+        if (cellSec !== null) {
+          if (cellSec !== meetingCell && !cellSec.start && !cellSec.end) {
+            cells.push(cellSec);
+          }
+          cellSec = cellSec.previousSec;
         }
-        cellSec = cellSec.previousSec;
       }
     }
-    return cells;
   }
+  console.log(cells.length);
+  return cells;
 }
