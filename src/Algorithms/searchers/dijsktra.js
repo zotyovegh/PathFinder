@@ -157,28 +157,53 @@ export function dijkstra(
 function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
   const neighbors = [];
   var { col, row } = cell;
-
-  if (direction === "DOWN" || direction === "START") {
-    Up(row, col, grid, neighbors, category);
-    Right(row, col, grid, neighbors, category);
-    Down(row, col, grid, neighbors, category);
-    Left(row, col, grid, neighbors, category);
-    if (isDiagonalOn) {
-      UpRight(row, col, grid, neighbors, category);
-      RightDown(row, col, grid, neighbors, category);
-      DownLeft(row, col, grid, neighbors, category);
-      LeftUp(row, col, grid, neighbors, category);
+  if (category === "MAIN") {
+    if (direction === "DOWN" || direction === "START") {
+      Up(row, col, grid, neighbors, category);
+      Right(row, col, grid, neighbors, category);
+      Down(row, col, grid, neighbors, category);
+      Left(row, col, grid, neighbors, category);
+      if (isDiagonalOn) {
+        UpRight(row, col, grid, neighbors, category);
+        RightDown(row, col, grid, neighbors, category);
+        DownLeft(row, col, grid, neighbors, category);
+        LeftUp(row, col, grid, neighbors, category);
+      }
+    } else if (direction === "UP") {
+      Down(row, col, grid, neighbors, category);
+      Left(row, col, grid, neighbors, category);
+      Up(row, col, grid, neighbors, category);
+      Right(row, col, grid, neighbors, category);
+      if (isDiagonalOn) {
+        DownLeft(row, col, grid, neighbors, category);
+        LeftUp(row, col, grid, neighbors, category);
+        UpRight(row, col, grid, neighbors, category);
+        RightDown(row, col, grid, neighbors, category);
+      }
     }
-  } else if (direction === "UP") {
-    Down(row, col, grid, neighbors, category);
-    Left(row, col, grid, neighbors, category);
-    Up(row, col, grid, neighbors, category);
-    Right(row, col, grid, neighbors, category);
-    if (isDiagonalOn) {
-      DownLeft(row, col, grid, neighbors, category);
-      LeftUp(row, col, grid, neighbors, category);
-      UpRight(row, col, grid, neighbors, category);
-      RightDown(row, col, grid, neighbors, category);
+  } else if ("SEC") {
+    if (direction === "DOWN" || direction === "START") {
+      Up(row, col, grid, neighbors, category);
+      Left(row, col, grid, neighbors, category);
+      Down(row, col, grid, neighbors, category);
+      Right(row, col, grid, neighbors, category);
+      if (isDiagonalOn) {
+        UpRight(row, col, grid, neighbors, category);
+        LeftUp(row, col, grid, neighbors, category);
+        DownLeft(row, col, grid, neighbors, category);
+        RightDown(row, col, grid, neighbors, category);
+      }
+    } else if (direction === "UP") {
+      Down(row, col, grid, neighbors, category);
+      Right(row, col, grid, neighbors, category);
+      Up(row, col, grid, neighbors, category);
+      Left(row, col, grid, neighbors, category);
+      if (isDiagonalOn) {
+        DownLeft(row, col, grid, neighbors, category);
+        RightDown(row, col, grid, neighbors, category);
+        UpRight(row, col, grid, neighbors, category);
+        LeftUp(row, col, grid, neighbors, category);
+      }
     }
   }
   if (category === "MAIN") {
