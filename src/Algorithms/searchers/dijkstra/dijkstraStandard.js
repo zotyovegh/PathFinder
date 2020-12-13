@@ -1,10 +1,6 @@
 import { animateFast, animateSlow } from "../animations/standardAnimations";
-import {
-  bidirectionalSlow,
-  bidirectionalFast,
-} from "../animations/bidirectionalAnim";
 import { getCellsInOrder } from "../../methods";
-var id = 0;
+
 export function dijkstraStandard(grid, startCell, endCell, isDiagonalOn, speed) {
   const unvisitedCells = [];
   const visitedCells = [];
@@ -84,8 +80,6 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn) {
   for (const neighbor of neighbors) {
     neighbor.distance = cell.distance + 1;
     neighbor.previous = cell;
-    neighbor.id = id;
-    id++;
   }
 }
 
