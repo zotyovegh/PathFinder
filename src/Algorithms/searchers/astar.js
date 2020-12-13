@@ -1,7 +1,4 @@
-import {
-  animateAstarSlow,
-  animateAstarFast,
-} from "./animations";
+import { animateAstarSlow, animateAstarFast } from "./animations/astarAnim";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 
@@ -28,7 +25,7 @@ export function astar(
         current = j;
       }
     }
-    var currentCell = openSet[current];    
+    var currentCell = openSet[current];
     if (currentCell === endCell) {
       DoAnimation(allSet, openSet, endCell, speed);
       return;

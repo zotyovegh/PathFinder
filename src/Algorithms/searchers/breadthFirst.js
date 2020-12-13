@@ -1,4 +1,4 @@
-import { animateFast, animateSlow } from "./animations";
+import { animateFast, animateSlow } from "./animations/standardAnimations";
 import { getCellsInOrder } from "../../Algorithms/methods";
 import { clearVisitedCells } from "../../Algorithms/cleaning";
 var id = 0;
