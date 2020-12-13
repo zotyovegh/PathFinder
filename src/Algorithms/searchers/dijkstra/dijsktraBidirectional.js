@@ -5,8 +5,7 @@ import {
 } from "../animations/bidirectionalAnim";
 import { getCellsInOrder } from "../../methods";
 
-var idMain;
-var idSec;
+
 var isFinished;
 var meetingCell = null;
 export function dijkstraBidirectional(
@@ -16,8 +15,7 @@ export function dijkstraBidirectional(
   isDiagonalOn,
   speed
 ) {
-  idMain = 0;
-  idSec = 0;
+
   isFinished = false;
   const unvisitedCellsMain = [];
   const unvisitedCellsSec = [];
@@ -196,15 +194,13 @@ function getUnvisitedNeighbors(cell, grid, direction, isDiagonalOn, category) {
     for (const neighbor of neighbors) {
       neighbor.distance = cell.distance + 1;
       neighbor.previous = cell;
-      neighbor.id = idMain;
-      idMain++;
+     
     }
   } else if ("SEC") {
     for (const neighbor of neighbors) {
       neighbor.distanceSec = cell.distanceSec + 1;
       neighbor.previousSec = cell;
-      neighbor.idSec = idSec;
-      idSec++;
+    
     }
   }
 }
