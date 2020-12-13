@@ -39,7 +39,7 @@ class Grid extends Component {
       previousVisualization: true,
       diagonalVisualization: false,
       optimizedVisualization: true,
-      bidirectionalVisualization: false,
+      bidirectionalVisualization: true,
     };
     this.handleAlgoChange = this.handleAlgoChange.bind(this);
     this.handleButtonChange = this.handleButtonChange.bind(this);
@@ -335,7 +335,12 @@ class Grid extends Component {
         Bidirectional
         <label className="switch">
           <input
-            disabled={this.state.status === "running"}
+            disabled={
+              this.state.status === "running" ||
+              this.state.currentAlg === "astar" ||
+              this.state.currentAlg === "depthFirst" ||
+              this.state.currentAlg === "breadthFirst"
+            }
             type="checkbox"
             defaultChecked={this.state.bidirectionalVisualization}
             onChange={this.handleButtonChange}
