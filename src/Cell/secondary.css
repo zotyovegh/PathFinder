@@ -1,0 +1,114 @@
+.cell-pathSec {
+  border: 0.5px solid rgba(71, 86, 201, 0.433);
+  background-color: rgba(100, 118, 255, 0.905);
+}
+
+.cell-pathSecondary-animated {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: pathSecondaryAnim;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes pathSecondaryAnim {
+  0% {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0);
+  }
+
+  10% {
+    transform: scale(1.05);
+    background-color: rgba(0, 1, 36, 0.61);
+  }
+
+  20% {
+    transform: scale(1.1);
+    background-color: rgba(0, 2, 61, 0.644);
+  }
+
+  40% {
+    transform: scale(1.15);
+    background-color: rgba(1, 4, 100, 0.645);
+  }
+
+  60% {
+    transform: scale(1.1);
+    background-color: rgba(22, 28, 201, 0.741);
+  }
+
+  80% {
+    transform: scale(1.05);
+    background-color: rgba(60, 66, 233, 0.57);
+  }
+
+  100% {
+    transform: scale(1);
+    border: 0.5px solid rgba(71, 86, 201, 0.433);
+    background-color: rgba(100, 118, 255, 0.905);
+  }
+}
+
+.cell-visitedSec {
+  border: 0.5px solid rgb(252, 210, 73);
+  background-color: rgba(255, 234, 0, 0.541);
+}
+
+.cell-visitedSecondary-animated {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: visitedSecondaryAnim;
+  animation-duration: 1.4s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes visitedSecondaryAnim {
+  0% {
+    transform: scale(0.1);
+    background-color: rgba(0, 0, 0);
+    border-radius: 100%;
+  }
+
+  10% {
+    transform: scale(0.2);
+    background-color: rgb(39, 25, 2);
+  }
+
+  20% {
+    transform: scale(0.3);
+    background-color: rgb(87, 55, 6);
+  }
+
+  40% {
+    transform: scale(0.6);
+    background-color: rgb(145, 92, 12);
+  }
+
+  60% {
+    transform: scale(0.85);
+    background-color: rgb(208, 132, 18);
+  }
+
+  80% {
+    transform: scale(1.1);
+    background-color: rgb(240, 157, 32);
+  }
+
+  100% {
+    transform: scale(1);
+    border: 0.5px solid rgb(252, 210, 73);
+    background-color: rgba(255, 234, 0, 0.541);
+  }
+}

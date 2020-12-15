@@ -1,5 +1,8 @@
 import React from "react";
 import "./index.css";
+import "./primary.css";
+import "./secondary.css";
+import "./tertiary.css";
 function getColor(props) {
   if (props.data.start) {
     return "cell-start";
