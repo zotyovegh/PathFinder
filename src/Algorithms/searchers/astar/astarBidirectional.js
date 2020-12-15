@@ -5,7 +5,7 @@ import {
   eliminateFromSet,
   dScore,
 } from "./astarMethods";
-export function astar(
+export function astarBidirectional(
   grid,
   startCell,
   endCell,
@@ -13,7 +13,7 @@ export function astar(
   optimized,
   speed
 ) {
-  findNeighbors(grid, isDiagonalOn);
+  /*findNeighbors(grid, isDiagonalOn);
   const openSet = [];
   const cameFrom = [];
   var allSet = [];
@@ -59,5 +59,5 @@ export function astar(
       }
     }
   }
-  DoAnimation(allSet, openSet, endCell, speed);
+  DoAnimation(allSet, openSet, endCell, speed);*/
 }

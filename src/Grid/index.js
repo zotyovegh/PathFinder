@@ -17,7 +17,8 @@ import { binaryTreeAlg } from "../Algorithms/mazes/binaryTree";
 import { ellerMaze } from "../Algorithms/mazes/eller";
 import { dijkstraStandard } from "../Algorithms/searchers/dijkstra/dijkstraStandard";
 import { dijkstraBidirectional } from "../Algorithms/searchers/dijkstra/dijsktraBidirectional";
-import { astar } from "../Algorithms/searchers/astar/astar";
+import { astarStandard } from "../Algorithms/searchers/astar/astarStandard";
+import { astarBidirectional } from "../Algorithms/searchers/astar/astarBidirectional";
 import { depthFirst } from "../Algorithms/searchers/depthFirst";
 import { breadthFirst } from "../Algorithms/searchers/breadthFirst";
 
@@ -34,7 +35,7 @@ class Grid extends Component {
       endRow: props.endR,
       endCol: props.endC,
       status: "pending",
-      currentAlg: "dijkstra",
+      currentAlg: "astar",
       currentMaze: "default",
       previousVisualization: true,
       diagonalVisualization: false,
@@ -215,14 +216,25 @@ class Grid extends Component {
         );
       }
     } else if (this.state.currentAlg === "astar") {
-      astar(
-        grid,
-        startCell,
-        endCell,
-        this.state.diagonalVisualization,
-        this.state.optimizedVisualization,
-        speed
-      );
+      if (this.state.bidirectionalVisualization) {
+        astarBidirectional(
+          grid,
+          startCell,
+          endCell,
+          this.state.diagonalVisualization,
+          this.state.optimizedVisualization,
+          speed
+        );
+      } else {
+        astarStandard(
+          grid,
+          startCell,
+          endCell,
+          this.state.diagonalVisualization,
+          this.state.optimizedVisualization,
+          speed
+        );
+      }
     } else if (this.state.currentAlg === "depthFirst") {
       depthFirst(grid, startCell, endCell, speed);
     } else if (this.state.currentAlg === "breadthFirst") {
@@ -337,7 +349,6 @@ class Grid extends Component {
           <input
             disabled={
               this.state.status === "running" ||
-              this.state.currentAlg === "astar" ||
               this.state.currentAlg === "depthFirst" ||
               this.state.currentAlg === "breadthFirst"
             }
