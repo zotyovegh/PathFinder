@@ -13,51 +13,105 @@ export function astarBidirectional(
   optimized,
   speed
 ) {
-  /*findNeighbors(grid, isDiagonalOn);
-  const openSet = [];
-  const cameFrom = [];
-  var allSet = [];
-  openSet.push(startCell);
+  findNeighbors(grid, isDiagonalOn);
+  const openSetMain = [];
+  const openSetSec = [];
+  const cameFromMain = [];
+  const cameFromSec = [];
+  var allSetMain = [];
+  var allSetSec = [];
+  openSetMain.push(startCell);
+  openSetSec.push(endCell);
   startCell.g = 0;
+  endCell.gSec = 0;
   startCell.f = heuristic(startCell, endCell, isDiagonalOn, optimized);
+  endCell.fSec = heuristic(startCell, endCell, isDiagonalOn, optimized);
 
-  while (!!openSet.length) {
-    var current = 0;
-    for (let j = 0; j < openSet.length; j++) {
-      if (openSet[j].f < openSet[current].f) {
-        current = j;
+  while (!!openSetMain.length || !!openSetSec.length) {
+    var currentMain = 0;
+    var currentSec = 0;
+    for (let j = 0; j < openSetMain.length; j++) {
+      if (openSetMain[j].f < openSetMain[currentMain].f) {
+        currentMain = j;
       }
     }
-    var currentCell = openSet[current];
-    if (currentCell === endCell) {
-      DoAnimation(allSet, openSet, endCell, speed);
+    for (let j = 0; j < openSetSec.length; j++) {
+      if (openSetSec[j].f < openSetSec[currentSec].f) {
+        currentSec = j;
+      }
+    }
+    var currentCellMain = openSetMain[currentMain];
+    var currentCellSec = openSetSec[currentSec];
+    if (currentCellMain === endCell) {
+      console.log("end found");
+      // DoAnimation(allSet, openSet, endCell, speed);
       return;
     }
-    eliminateFromSet(openSet, currentCell);
-    var neighbors = currentCell.neighbors;
-    for (let k = 0; k < neighbors.length; k++) {
-      var neighbor = neighbors[k];
-      if (neighbor.isWall && !neighbor.start && !neighbor.end) {
-        continue;
+    if (currentCellSec === startCell) {
+      console.log("start found");
+      // DoAnimation(allSet, openSet, endCell, speed);
+      return;
+    }
+    eliminateFromSet(openSetMain, currentCellMain);
+    eliminateFromSet(openSetSec, currentCellSec);
+    var neighborsMain = currentCellMain.neighbors;
+    var neighborsSec = currentCellSec.neighbors;
+    for (let k = 0; k < neighborsMain.length; k++) {
+      var neighborMain = neighborsMain[k];
+      if (!(neighborMain.isWall && !neighborMain.start && !neighborMain.end)) {
+        var tentative_gScoreMain =
+          currentCellMain.g + dScore(neighborMain, currentCellMain, optimized);
+        if (tentative_gScoreMain < neighborMain.g) {
+          cameFromMain.push(neighborMain);
+          neighborMain.g = tentative_gScoreMain;
+          neighborMain.h = heuristic(
+            neighborMain,
+            endCell,
+            isDiagonalOn,
+            optimized
+          );
+          neighborMain.f = neighborMain.g + neighborMain.h;
+          neighborMain.previous = currentCellMain;
+          if (!openSetMain.includes(neighborMain)) {
+            openSetMain.push(neighborMain);
+            if (speed === "slow") {
+              allSetMain.push([openSetMain.slice(0), cameFromMain.slice(0)]);
+            } else if (speed === "fast") {
+              allSetMain.push(neighborMain);
+            }
+          }
+        }
       }
-      var tentative_gScore =
-        currentCell.g + dScore(neighbor, currentCell, optimized);
-      if (tentative_gScore < neighbor.g) {
-        cameFrom.push(neighbor);
-        neighbor.g = tentative_gScore;
-        neighbor.h = heuristic(neighbor, endCell, isDiagonalOn, optimized);
-        neighbor.f = neighbor.g + neighbor.h;
-        neighbor.previous = currentCell;
-        if (!openSet.includes(neighbor)) {
-          openSet.push(neighbor);
-          if (speed === "slow") {
-            allSet.push([openSet.slice(0), cameFrom.slice(0)]);
-          } else if (speed === "fast") {
-            allSet.push(neighbor);
+    }
+    //----------------------------------------------
+    for (let k = 0; k < neighborsSec.length; k++) {
+      var neighborSec = neighborsSec[k];
+      if (!(neighborSec.isWall && !neighborSec.start && !neighborSec.end)) {
+        var tentative_gScoreSec =
+          currentCellSec.gSec + dScore(neighborSec, currentCellSec, optimized);
+        if (tentative_gScoreSec < neighborSec.gSec) {
+          cameFromSec.push(neighborSec);
+          neighborSec.gSec = tentative_gScoreSec;
+          neighborSec.hSec = heuristic(
+            neighborSec,
+            endCell,
+            isDiagonalOn,
+            optimized
+          );
+          neighborSec.fSec = neighborSec.gSec + neighborSec.hSec;
+          neighborSec.previous = currentCellSec;
+          if (!openSetSec.includes(neighborSec)) {
+            openSetSec.push(neighborSec);
+            if (speed === "slow") {
+              allSetSec.push([openSetSec.slice(0), cameFromSec.slice(0)]);
+            } else if (speed === "fast") {
+              allSetSec.push(neighborSec);
+            }
           }
         }
       }
     }
   }
-  DoAnimation(allSet, openSet, endCell, speed);*/
+  console.log("finish in the end");
+  // DoAnimation(allSet, openSet, endCell, speed);
 }
