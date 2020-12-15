@@ -17,7 +17,7 @@ import { binaryTreeAlg } from "../Algorithms/mazes/binaryTree";
 import { ellerMaze } from "../Algorithms/mazes/eller";
 import { dijkstraStandard } from "../Algorithms/searchers/dijkstra/dijkstraStandard";
 import { dijkstraBidirectional } from "../Algorithms/searchers/dijkstra/dijsktraBidirectional";
-import { astar } from "../Algorithms/searchers/astar";
+import { astar } from "../Algorithms/searchers/astar/astar";
 import { depthFirst } from "../Algorithms/searchers/depthFirst";
 import { breadthFirst } from "../Algorithms/searchers/breadthFirst";
 
