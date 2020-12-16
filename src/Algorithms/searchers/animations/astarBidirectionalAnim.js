@@ -87,5 +87,7 @@ export function animateAstarBidirectionalFast(
       visualizeCell("cell", "cell cell-currentSec", openSetSec[k]);
     }
   }
-  animateAstarPathFast(cellsInOrder, "cell cell-pathThird");
+  if (cellsInOrder !== null) {
+    animateAstarPathFast(cellsInOrder, "cell cell-pathThird");
+  }
 }

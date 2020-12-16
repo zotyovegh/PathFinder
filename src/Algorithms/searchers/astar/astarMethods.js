@@ -126,7 +126,6 @@ export function DoBidirectionalAnimation(
   var cellsInOrder = null;
   if (intersector !== null) {
     cellsInOrder = getCellsInOrderBidirectional(intersector);
-    console.log(cellsInOrder.length);
   }
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {

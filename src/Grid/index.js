@@ -37,7 +37,7 @@ class Grid extends Component {
       status: "pending",
       currentAlg: "astar",
       currentMaze: "default",
-      previousVisualization: true,
+      previousVisualization: false,
       diagonalVisualization: false,
       optimizedVisualization: true,
       bidirectionalVisualization: true,

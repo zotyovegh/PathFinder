@@ -51,6 +51,7 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
       visualizeCell("cell", "cell cell-current", openSet[k]);
     }
   }
+  
   animateAstarPathFast(cellsInOrder, "cell cell-path");
 }
 

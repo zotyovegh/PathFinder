@@ -71,6 +71,7 @@ function animateBidirectionalPathSlow(cellsInOrder) {
 }
 
 function animateBidirectionalPathFast(cellsInOrder) {
+  
   for (let i = 0; i < cellsInOrder.length; i++) {
     const cell = cellsInOrder[i];
     if (!cell.start && !cell.end) {
