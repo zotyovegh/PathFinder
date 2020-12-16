@@ -18,6 +18,17 @@ export function animateAstarBidirectionalSlow(main, sec, cellsInOrder) {
         for (let k = 0; k < openSetMain.length; k++) {
           visualizeCell("cell", "cell cell-current", openSetMain[k]);
         }
+        if (
+          i < main.length - 1 &&
+          !closedSetMain[closedSetMain.length - 1].start &&
+          !closedSetMain[closedSetMain.length - 1].end
+        ) {
+          visualizeCell(
+            "cell",
+            "cell cell-activepath",
+            closedSetMain[closedSetMain.length - 1]
+          );
+        }
       }
       if (i < sec.length && !sec[i].start && !sec[i].end) {
         var openSetSec = sec[i][0];
@@ -28,19 +39,18 @@ export function animateAstarBidirectionalSlow(main, sec, cellsInOrder) {
         for (let k = 0; k < openSetSec.length; k++) {
           visualizeCell("cell", "cell cell-currentSec", openSetSec[k]);
         }
+        if (
+          i < sec.length - 1 &&
+          !closedSetSec[closedSetSec.length - 1].start &&
+          !closedSetSec[closedSetSec.length - 1].end
+        ) {
+          visualizeCell(
+            "cell",
+            "cell cell-activepathSec",
+            closedSetSec[closedSetSec.length - 1]
+          );
+        }
       }
-
-      /* if (
-        i < allSet.length - 1 &&
-        !closedSet[closedSet.length - 1].start &&
-        !closedSet[closedSet.length - 1].end
-      ) {
-        visualizeCell(
-          "cell",
-          "cell cell-activepath",
-          closedSet[closedSet.length - 1]
-        );
-      }*/
     }, 10 * i);
   }
 }

@@ -46,8 +46,8 @@
 }
 
 .cell-activepath {
-  border: 0.5px solid rgba(133, 255, 218, 0.782);
-  background-color: rgba(123, 255, 70, 0.672);
+  border: 0.5px solid rgba(0, 135, 0, 0.782);
+  background-color: rgba(0, 89, 7, 0.672);
 }
 /*ASTAR--------*/
 .cell-visited {
