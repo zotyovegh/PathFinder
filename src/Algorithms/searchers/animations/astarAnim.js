@@ -65,7 +65,6 @@ export function animateAstarPathFast(cellsInOrder, type) {
 }
 
 export function animateAstarPathSlow(cellsInOrder, type) {
-  window.gridComponent.setState({ status: "finished" });
   if (cellsInOrder !== null) {
     for (let i = 0; i <= cellsInOrder.length; i++) {
       setTimeout(() => {
@@ -80,5 +79,4 @@ export function animateAstarPathSlow(cellsInOrder, type) {
       }, 20 * i);
     }
   }
-  window.gridComponent.setState({ status: "finished" });
 }
