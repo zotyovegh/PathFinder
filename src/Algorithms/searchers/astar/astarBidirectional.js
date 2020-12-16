@@ -36,7 +36,7 @@ export function astarBidirectional(
       }
     }
     for (let j = 0; j < openSetSec.length; j++) {
-      if (openSetSec[j].f < openSetSec[currentSec].f) {
+      if (openSetSec[j].fSec < openSetSec[currentSec].fSec) {
         currentSec = j;
       }
     }
@@ -126,7 +126,7 @@ export function astarBidirectional(
             neighborSec.gSec = tentative_gScoreSec;
             neighborSec.hSec = heuristic(
               neighborSec,
-              endCell,
+              startCell,
               isDiagonalOn,
               optimized
             );

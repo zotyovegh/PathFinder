@@ -8,7 +8,7 @@ export function animateAstarBidirectionalSlow(main, sec, cellsInOrder) {
       return;
     }
     setTimeout(() => {
-      clearVisitedCells();
+      //clearVisitedCells();
 
       if (i < main.length && !main[i].start && !main[i].end) {
         var openSetMain = main[i][0];
