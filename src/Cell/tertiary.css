@@ -3,11 +3,11 @@
   background-color: rgba(172, 100, 255, 0.905);
 }
 
-.cell-pathThirdly-animated {
+.cell-pathThird-animated {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  animation-name: pathThirdlyAnim;
+  animation-name: pathThirdAnim;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-delay: 0;
@@ -17,7 +17,7 @@
   animation-play-state: running;
 }
 
-@keyframes pathThirdlyAnim {
+@keyframes pathThirdAnim {
   0% {
     transform: scale(1);
     background-color: rgba(0, 0, 0);

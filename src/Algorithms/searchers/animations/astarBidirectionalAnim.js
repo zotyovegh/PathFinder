@@ -1,12 +1,15 @@
 import { clearVisitedCells } from "../../cleaning";
 import { visualizeCell } from "../../methods";
+import { animateAstarPathSlow, animateAstarPathFast } from "./astarAnim";
 
 export function animateAstarBidirectionalSlow(main, sec, cellsInOrder) {
   var length = main.length >= sec.length ? main.length : sec.length;
   for (let i = 0; i <= length; i++) {
     if (i === length) {
-      window.gridComponent.setState({ status: "finished" });
-      return;
+      setTimeout(() => {
+        animateAstarPathSlow(cellsInOrder, "cell cell-pathThird-animated");
+        return;
+      }, 10 * i);
     }
     setTimeout(() => {
       if (i < main.length && !main[i].start && !main[i].end) {
@@ -84,5 +87,5 @@ export function animateAstarBidirectionalFast(
       visualizeCell("cell", "cell cell-currentSec", openSetSec[k]);
     }
   }
-  // animateAstarPathFast(cellsInOrder);
+  animateAstarPathFast(cellsInOrder, "cell cell-pathThird");
 }

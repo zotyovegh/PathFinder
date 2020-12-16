@@ -1,5 +1,5 @@
 .cell-path {
-  border: 0.5px solid rgb(189, 189, 77);
+  border: 0.5px solid rgba(208, 208, 31, 0.761);
   background-color: rgb(255, 254, 106);
 }
 
@@ -30,6 +30,7 @@
 
   100% {
     transform: scale(1);
+    border: 0.5px solid rgba(208, 208, 31, 0.761);
     background-color: rgb(255, 254, 106);
   }
 }

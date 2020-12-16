@@ -5,7 +5,7 @@ export function animateAstarSlow(allSet, cellsInOrder) {
   for (let i = 0; i <= allSet.length; i++) {
     if (i === allSet.length) {
       setTimeout(() => {
-        animateAstarPathSlow(cellsInOrder);
+        animateAstarPathSlow(cellsInOrder, "cell cell-path-animated");
       }, 10 * i);
       return;
     }
@@ -51,19 +51,19 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
       visualizeCell("cell", "cell cell-current", openSet[k]);
     }
   }
-  animateAstarPathFast(cellsInOrder);
+  animateAstarPathFast(cellsInOrder, "cell cell-path");
 }
 
-function animateAstarPathFast(cellsInOrder) {
+export function animateAstarPathFast(cellsInOrder, type) {
   for (let i = 0; i < cellsInOrder.length; i++) {
     const cell = cellsInOrder[i];
     if (!cell.start && !cell.end) {
-      visualizeCell("cell", "cell cell-pathSec", cell);
+      visualizeCell("cell", type, cell);
     }
   }
 }
 
-function animateAstarPathSlow(cellsInOrder) {
+export function animateAstarPathSlow(cellsInOrder, type) {
   for (let i = 0; i <= cellsInOrder.length; i++) {
     setTimeout(() => {
       if (i === cellsInOrder.length) {
@@ -72,7 +72,7 @@ function animateAstarPathSlow(cellsInOrder) {
       }
       const cell = cellsInOrder[i];
       if (!cell.start && !cell.end) {
-        visualizeCell("cell", "cell cell-pathSecondary-animated", cell);
+        visualizeCell("cell", type, cell);
       }
     }, 20 * i);
   }

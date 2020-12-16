@@ -64,7 +64,7 @@ function animateBidirectionalPathSlow(cellsInOrder) {
       }
       const cell = cellsInOrder[i];
       if (!cell.start && !cell.end) {
-        visualizeCell("cell", "cell cell-pathThirdly-animated", cell);
+        visualizeCell("cell", "cell cell-pathThird-animated", cell);
       }
     }, 20 * i);
   }
