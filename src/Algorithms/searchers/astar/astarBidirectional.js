@@ -42,8 +42,31 @@ export function astarBidirectional(
     }
     var currentCellMain = openSetMain[currentMain];
     var currentCellSec = openSetSec[currentSec];
+    console.log(currentCellMain);
+    if (currentCellMain.visitedSec) {
+      DoBidirectionalAnimation(
+        allSetMain,
+        allSetSec,
+        openSetMain,
+        openSetSec,
+        endCell,
+        speed
+      );
+      return;
+    }
+    if (currentCellSec.visited) {
+      console.log(currentCellSec);
+      DoBidirectionalAnimation(
+        allSetMain,
+        allSetSec,
+        openSetMain,
+        openSetSec,
+        endCell,
+        speed
+      );
+      return;
+    }
     if (currentCellMain === endCell) {
-      console.log("end found");
       DoBidirectionalAnimation(
         allSetMain,
         allSetSec,
@@ -96,6 +119,7 @@ export function astarBidirectional(
             neighborMain.previous = currentCellMain;
             if (!openSetMain.includes(neighborMain)) {
               openSetMain.push(neighborMain);
+              neighborMain.visited = true;
               if (speed === "slow") {
                 allSetMain.push([openSetMain.slice(0), cameFromMain.slice(0)]);
               } else if (speed === "fast") {
@@ -134,6 +158,7 @@ export function astarBidirectional(
             neighborSec.previous = currentCellSec;
             if (!openSetSec.includes(neighborSec)) {
               openSetSec.push(neighborSec);
+              neighborSec.visitedSec = true;
               if (speed === "slow") {
                 allSetSec.push([openSetSec.slice(0), cameFromSec.slice(0)]);
               } else if (speed === "fast") {
