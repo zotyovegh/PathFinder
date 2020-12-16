@@ -51,7 +51,7 @@ export function animateAstarFast(allSet, openSet, cellsInOrder) {
       visualizeCell("cell", "cell cell-current", openSet[k]);
     }
   }
-  
+
   animateAstarPathFast(cellsInOrder, "cell cell-path");
 }
 
@@ -65,16 +65,20 @@ export function animateAstarPathFast(cellsInOrder, type) {
 }
 
 export function animateAstarPathSlow(cellsInOrder, type) {
-  for (let i = 0; i <= cellsInOrder.length; i++) {
-    setTimeout(() => {
-      if (i === cellsInOrder.length) {
-        window.gridComponent.setState({ status: "finished" });
-        return;
-      }
-      const cell = cellsInOrder[i];
-      if (!cell.start && !cell.end) {
-        visualizeCell("cell", type, cell);
-      }
-    }, 20 * i);
+  window.gridComponent.setState({ status: "finished" });
+  if (cellsInOrder !== null) {
+    for (let i = 0; i <= cellsInOrder.length; i++) {
+      setTimeout(() => {
+        if (i === cellsInOrder.length) {
+          window.gridComponent.setState({ status: "finished" });
+          return;
+        }
+        const cell = cellsInOrder[i];
+        if (!cell.start && !cell.end) {
+          visualizeCell("cell", type, cell);
+        }
+      }, 20 * i);
+    }
   }
+  window.gridComponent.setState({ status: "finished" });
 }
