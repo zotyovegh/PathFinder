@@ -25,8 +25,11 @@ export function clearVisitedCells() {
       cell.direction = "";
       cell.directionSec = "";
       cell.f = Infinity;
+      cell.fSec = Infinity;
       cell.g = Infinity;
+      cell.gSec = Infinity;
       cell.h = Infinity;
+      cell.hSec = Infinity;
       cell.neighbors = [];
 
       visualizeCell("num", "num", cell);
