@@ -42,30 +42,7 @@ export function astarBidirectional(
     }
     var currentCellMain = openSetMain[currentMain];
     var currentCellSec = openSetSec[currentSec];
-    console.log(currentCellMain);
-    if (currentCellMain.visitedSec) {
-      DoBidirectionalAnimation(
-        allSetMain,
-        allSetSec,
-        openSetMain,
-        openSetSec,
-        endCell,
-        speed
-      );
-      return;
-    }
-    if (currentCellSec.visited) {
-      console.log(currentCellSec);
-      DoBidirectionalAnimation(
-        allSetMain,
-        allSetSec,
-        openSetMain,
-        openSetSec,
-        endCell,
-        speed
-      );
-      return;
-    }
+
     if (currentCellMain === endCell) {
       DoBidirectionalAnimation(
         allSetMain,
@@ -95,6 +72,17 @@ export function astarBidirectional(
     //----------------------------------------------
     //----------------------------------------------
     if (!!openSetMain.length) {
+      if (currentCellMain.visitedSec) {
+        DoBidirectionalAnimation(
+          allSetMain,
+          allSetSec,
+          openSetMain,
+          openSetSec,
+          endCell,
+          speed
+        );
+        return;
+      }
       eliminateFromSet(openSetMain, currentCellMain);
       var neighborsMain = currentCellMain.neighbors;
 
@@ -136,6 +124,17 @@ export function astarBidirectional(
     //----------------------------------------------
     //----------------------------------------------
     if (!!openSetSec.length) {
+      if (currentCellSec.visited) {
+        DoBidirectionalAnimation(
+          allSetMain,
+          allSetSec,
+          openSetMain,
+          openSetSec,
+          endCell,
+          speed
+        );
+        return;
+      }
       var neighborsSec = currentCellSec.neighbors;
       eliminateFromSet(openSetSec, currentCellSec);
 
