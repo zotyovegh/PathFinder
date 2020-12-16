@@ -24,10 +24,10 @@ export function animateAstarBidirectionalSlow(main, sec, cellsInOrder) {
         var openSetSec = sec[i][0];
         var closedSetSec = sec[i][1];
         for (let j = 0; j < closedSetSec.length; j++) {
-          visualizeCell("cell", "cell cell-previous", closedSetSec[j]);
+          visualizeCell("cell", "cell cell-previousSec", closedSetSec[j]);
         }
         for (let k = 0; k < openSetSec.length; k++) {
-          visualizeCell("cell", "cell cell-current", openSetSec[k]);
+          visualizeCell("cell", "cell cell-currentSec", openSetSec[k]);
         }
       }
 

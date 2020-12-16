@@ -55,6 +55,23 @@
   }
 }
 
+/*ASTAR---------*/
+.cell-previousSec {
+  border: 0.5px solid rgb(252, 210, 73);
+  background-color: rgba(255, 234, 0, 0.541);
+}
+
+.cell-currentSec {
+  border: 0.5px solid rgb(172, 103, 0);
+  background-color: rgb(218, 131, 0);
+}
+
+.cell-activepathSec {
+  border: 0.5px solid rgba(218, 255, 133, 0.782);
+  background-color: rgba(70, 255, 123, 0.672);
+}
+/*ASTAR--------*/
+
 .cell-visitedSec {
   border: 0.5px solid rgb(252, 210, 73);
   background-color: rgba(255, 234, 0, 0.541);

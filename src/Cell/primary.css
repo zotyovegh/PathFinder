@@ -36,18 +36,18 @@
 
 /*ASTAR---------*/
 .cell-previous {
-  border: 0.5px solid rgb(252, 210, 73);
-  background-color: rgba(255, 234, 0, 0.541);
+  border: 0.5px solid rgb(73, 210, 252);
+  background-color: rgba(0, 234, 255, 0.541);
 }
 
 .cell-current {
-  border: 0.5px solid rgb(172, 103, 0);
-  background-color: rgb(218, 131, 0);
+  border: 0.5px solid rgb(0, 103, 172);
+  background-color: rgb(0, 131, 218);
 }
 
 .cell-activepath {
-  border: 0.5px solid rgba(218, 255, 133, 0.782);
-  background-color: rgba(70, 255, 123, 0.672);
+  border: 0.5px solid rgba(133, 255, 218, 0.782);
+  background-color: rgba(123, 255, 70, 0.672);
 }
 /*ASTAR--------*/
 .cell-visited {
