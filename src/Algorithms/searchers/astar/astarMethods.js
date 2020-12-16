@@ -120,12 +120,14 @@ export function DoBidirectionalAnimation(
   allSetSec,
   openSetMain,
   openSetSec,
-  endCell,
+  intersector,
   speed
 ) {
-  console.log("hi");
-  const cellsInOrder = null;
-  console.log("hi");
+  var cellsInOrder = null;
+  if (intersector !== null) {
+    cellsInOrder = getCellsInOrderBidirectional(intersector);
+    console.log(cellsInOrder.length);
+  }
   if (speed === "slow") {
     if (window.gridComponent.state.status === "finished") {
       clearVisitedCells();
@@ -141,4 +143,26 @@ export function DoBidirectionalAnimation(
       cellsInOrder
     );
   }
+}
+
+function getCellsInOrderBidirectional(meetingCell) {
+  var cells = [];
+  cells.push(meetingCell);
+  let cellMain = meetingCell;
+  let cellSec = meetingCell;
+  while (cellMain !== null || cellSec !== null) {
+    if (cellMain !== null) {
+      if (cellMain !== meetingCell) {
+        cells.push(cellMain);
+      }
+      cellMain = cellMain.previous;
+    }
+    if (cellSec !== null) {
+      if (cellSec !== meetingCell) {
+        cells.push(cellSec);
+      }
+      cellSec = cellSec.previousSec;
+    }
+  }
+  return cells;
 }

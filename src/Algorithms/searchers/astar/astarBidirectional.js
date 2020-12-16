@@ -49,7 +49,7 @@ export function astarBidirectional(
         allSetSec,
         openSetMain,
         openSetSec,
-        endCell,
+        null,
         speed
       );
       return;
@@ -60,7 +60,7 @@ export function astarBidirectional(
         allSetSec,
         openSetMain,
         openSetSec,
-        startCell,
+        null,
         speed
       );
       return;
@@ -75,7 +75,7 @@ export function astarBidirectional(
           allSetSec,
           openSetMain,
           openSetSec,
-          endCell,
+          currentCellMain,
           speed
         );
         return;
@@ -125,7 +125,7 @@ export function astarBidirectional(
           allSetSec,
           openSetMain,
           openSetSec,
-          endCell,
+          currentCellSec,
           speed
         );
         return;
@@ -149,7 +149,7 @@ export function astarBidirectional(
               optimized
             );
             neighborSec.fSec = neighborSec.gSec + neighborSec.hSec;
-            neighborSec.previous = currentCellSec;
+            neighborSec.previousSec = currentCellSec;
             if (!openSetSec.includes(neighborSec)) {
               openSetSec.push(neighborSec);
               neighborSec.visitedSec = true;
@@ -169,8 +169,7 @@ export function astarBidirectional(
     allSetSec,
     openSetMain,
     openSetSec,
-    endCell,
+    null,
     speed
   );
-  // DoAnimation(allSet, openSet, endCell, speed);
 }
