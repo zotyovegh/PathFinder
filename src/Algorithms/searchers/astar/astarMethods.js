@@ -1,7 +1,10 @@
 import { animateAstarSlow, animateAstarFast } from "../animations/astarAnim";
 import { getCellsInOrder } from "../../methods";
 import { clearVisitedCells } from "../../cleaning";
-import { animateAstarBidirectionalSlow } from "../animations/astarBidirectionalAnim";
+import {
+  animateAstarBidirectionalSlow,
+  animateAstarBidirectionalFast,
+} from "../animations/astarBidirectionalAnim";
 
 export function dScore(cell1, cell2, optimized) {
   if (optimized) {
@@ -130,6 +133,12 @@ export function DoBidirectionalAnimation(
     window.gridComponent.setState({ status: "running" });
     animateAstarBidirectionalSlow(allSetMain, allSetSec, cellsInOrder);
   } else if (speed === "fast") {
-    //  animateAstarBidirectionalFast(allSet, openSet, cellsInOrder);
+    animateAstarBidirectionalFast(
+      allSetMain,
+      allSetSec,
+      openSetMain,
+      openSetSec,
+      cellsInOrder
+    );
   }
 }

@@ -5,11 +5,10 @@ export function animateAstarBidirectionalSlow(main, sec, cellsInOrder) {
   var length = main.length >= sec.length ? main.length : sec.length;
   for (let i = 0; i <= length; i++) {
     if (i === length) {
+      window.gridComponent.setState({ status: "finished" });
       return;
     }
     setTimeout(() => {
-      //clearVisitedCells();
-
       if (i < main.length && !main[i].start && !main[i].end) {
         var openSetMain = main[i][0];
         var closedSetMain = main[i][1];
@@ -44,4 +43,36 @@ export function animateAstarBidirectionalSlow(main, sec, cellsInOrder) {
       }*/
     }, 10 * i);
   }
+}
+
+export function animateAstarBidirectionalFast(
+  allSetMain,
+  allSetSec,
+  openSetMain,
+  openSetSec,
+  cellsInOrder
+) {
+  clearVisitedCells();
+  for (let k = 0; k < allSetMain.length; k++) {
+    if (!allSetMain[k].start && !allSetMain[k].end) {
+      visualizeCell("cell", "cell cell-previous", allSetMain[k]);
+    }
+  }
+  for (let k = 0; k < allSetSec.length; k++) {
+    if (!allSetSec[k].start && !allSetSec[k].end) {
+      visualizeCell("cell", "cell cell-previousSec", allSetSec[k]);
+    }
+  }
+  for (let k = 0; k < openSetMain.length; k++) {
+    if (!openSetMain[k].start && !openSetMain[k].end) {
+      visualizeCell("cell", "cell cell-current", openSetMain[k]);
+    }
+  }
+
+  for (let k = 0; k < openSetSec.length; k++) {
+    if (!openSetSec[k].start && !openSetSec[k].end) {
+      visualizeCell("cell", "cell cell-currentSec", openSetSec[k]);
+    }
+  }
+  // animateAstarPathFast(cellsInOrder);
 }

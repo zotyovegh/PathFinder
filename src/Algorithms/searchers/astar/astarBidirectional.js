@@ -52,11 +52,9 @@ export function astarBidirectional(
         endCell,
         speed
       );
-      // DoAnimation(allSet, openSet, endCell, speed);
       return;
     }
     if (currentCellSec === startCell) {
-      console.log("start found");
       DoBidirectionalAnimation(
         allSetMain,
         allSetSec,
@@ -65,12 +63,11 @@ export function astarBidirectional(
         startCell,
         speed
       );
-      // DoAnimation(allSet, openSet, endCell, speed);
       return;
     }
 
     //----------------------------------------------
-    //----------------------------------------------
+
     if (!!openSetMain.length) {
       if (currentCellMain.visitedSec) {
         DoBidirectionalAnimation(
@@ -118,11 +115,9 @@ export function astarBidirectional(
         }
       }
     }
-    //----------------------------------------------
-    //----------------------------------------------
-    //----------------------------------------------
-    //----------------------------------------------
-    //----------------------------------------------
+
+    //SECOND--------------------------------------
+
     if (!!openSetSec.length) {
       if (currentCellSec.visited) {
         DoBidirectionalAnimation(
@@ -169,7 +164,6 @@ export function astarBidirectional(
       }
     }
   }
-  console.log("finish in the end");
   DoBidirectionalAnimation(
     allSetMain,
     allSetSec,
