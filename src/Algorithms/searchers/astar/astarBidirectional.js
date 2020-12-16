@@ -1,5 +1,5 @@
 import {
-  DoAnimation,
+  DoBidirectionalAnimation,
   findNeighbors,
   heuristic,
   eliminateFromSet,
@@ -44,11 +44,13 @@ export function astarBidirectional(
     var currentCellSec = openSetSec[currentSec];
     if (currentCellMain === endCell) {
       console.log("end found");
+      DoBidirectionalAnimation(allSetMain, allSetSec, openSetMain, openSetSec, endCell, speed)
       // DoAnimation(allSet, openSet, endCell, speed);
       return;
     }
     if (currentCellSec === startCell) {
       console.log("start found");
+      DoBidirectionalAnimation(allSetMain, allSetSec, openSetMain, openSetSec, endCell, speed)
       // DoAnimation(allSet, openSet, endCell, speed);
       return;
     }
@@ -113,5 +115,6 @@ export function astarBidirectional(
     }
   }
   console.log("finish in the end");
+  DoBidirectionalAnimation(allSetMain, allSetSec, openSetMain, openSetSec, endCell, speed)
   // DoAnimation(allSet, openSet, endCell, speed);
 }

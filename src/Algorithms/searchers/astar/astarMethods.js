@@ -1,6 +1,7 @@
 import { animateAstarSlow, animateAstarFast } from "../animations/astarAnim";
 import { getCellsInOrder } from "../../methods";
 import { clearVisitedCells } from "../../cleaning";
+import { animateAstarBidirectionalSlow } from "../animations/astarBidirectionalAnim";
 
 export function dScore(cell1, cell2, optimized) {
   if (optimized) {
@@ -108,5 +109,27 @@ export function DoAnimation(allSet, openSet, endCell, speed) {
     animateAstarSlow(allSet, cellsInOrder);
   } else if (speed === "fast") {
     animateAstarFast(allSet, openSet, cellsInOrder);
+  }
+}
+
+export function DoBidirectionalAnimation(
+  allSetMain,
+  allSetSec,
+  openSetMain,
+  openSetSec,
+  endCell,
+  speed
+) {
+  console.log("hi");
+  const cellsInOrder = null;
+  console.log("hi");
+  if (speed === "slow") {
+    if (window.gridComponent.state.status === "finished") {
+      clearVisitedCells();
+    }
+    window.gridComponent.setState({ status: "running" });
+    animateAstarBidirectionalSlow(allSetMain, allSetSec, cellsInOrder);
+  } else if (speed === "fast") {
+    //  animateAstarBidirectionalFast(allSet, openSet, cellsInOrder);
   }
 }
