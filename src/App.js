@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Grid from "../../path-finder/src/Grid";
+import Grid from "../../PathFinder/src/Grid";
 
 class App extends Component {
   constructor(props) {
