@@ -31,7 +31,6 @@ class App extends Component {
       position = x - margin;
     }
     return position % 2 === 0 ? position + 1 : position;
-    // return position;
   };
 
   getSize = (type) => {

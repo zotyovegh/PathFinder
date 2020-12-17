@@ -2,7 +2,6 @@ import { visualizeABMaze } from "../mazes/animations";
 import {
   clearWithStatus,
   clearInfinityVariables,
-  clearVisitedCells,
 } from "../../Algorithms/cleaning";
 
 export function aldousBroderMaze(originalGrid) {
@@ -46,13 +45,6 @@ export function aldousBroderMaze(originalGrid) {
   window.gridComponent.setState({ grid: grid });
   visualizeABMaze(grid, visualizationList);
 }
-
-/*function takeRandomCell(unvisitedCells) {
-  var position = Math.floor(Math.random() * unvisitedCells.length);
-  var cell = unvisitedCells[0];
-  unvisitedCells.splice(0, 1);
-  return cell;
-}*/
 
 function getNeighboringCells(cell, grid) {
   //pair[neighboringWall, neighbor]

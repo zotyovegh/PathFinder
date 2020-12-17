@@ -50,13 +50,14 @@ export function ellerMaze(originalGrid) {
       list = [];
       visited = [];
 
-      map.forEach((value, key) => {
+      for (let value of map.values()) {
         list.push(value);
-      });
+      }
 
       for (let j = 1; j < grid[0].length; j += 2) {
         currentCell = grid[i][j];
-        var counter = list.filter((x) => x === currentCell.id).length;
+        const id = grid[i][j].id;
+        var counter = list.filter((x) => x === id).length;
         if (counter === 1 && !visited.includes(currentCell.id)) {
           path.push(currentCell.neighbors[1][0]);
           currentCell.neighbors[1][0].isWall = false;

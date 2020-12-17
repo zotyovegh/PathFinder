@@ -1,5 +1,4 @@
 import { visualizeCell } from "../../methods";
-import { clearVisitedCells } from "../../cleaning";
 
 export function animateSlow(visitedCells, cellsInOrder) {
   for (let i = 0; i <= visitedCells.length; i++) {

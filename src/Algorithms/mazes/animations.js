@@ -48,7 +48,7 @@ export function visualizeRandom(grid, path) {
   }
 }
 
-export function visualizeABMaze(grid, path) {
+export async function visualizeABMaze(grid, path) {
   window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
@@ -57,28 +57,26 @@ export function visualizeABMaze(grid, path) {
       }
     }
   }
-
   var previous = null;
   for (let i = 0; i <= path.length; i++) {
-    setTimeout(() => {
-      if (i === path.length) {
-        window.gridComponent.setState({ status: "pending" });
-        visualizeCell("cell", "cell cell-empty", path[path.length - 1]);
-        clearVisitedCells();
-        return;
+    if (i === path.length) {
+      window.gridComponent.setState({ status: "pending" });
+      visualizeCell("cell", "cell cell-empty", path[path.length - 1]);
+      clearVisitedCells();
+      return;
+    }
+    if (previous !== null) {
+      if (previous.isWall) {
+        visualizeCell("cell", "cell cell-wall", previous);
+      } else {
+        visualizeCell("cell", "cell cell-empty", previous);
       }
-      if (previous !== null) {
-        if (previous.isWall) {
-          visualizeCell("cell", "cell cell-wall", previous);
-        } else {
-          visualizeCell("cell", "cell cell-empty", previous);
-        }
-      }
-      if (!path[i].end && !path[i].start) {
-        visualizeCell("cell", "cell cell-currentSec", path[i]);
-        previous = path[i];
-      }
-    }, 10 * i);
+    }
+    if (!path[i].end && !path[i].start) {
+      visualizeCell("cell", "cell cell-currentSec", path[i]);
+      previous = path[i];
+    }
+    await new Promise((r) => setTimeout(r, 10));
   }
 }
 

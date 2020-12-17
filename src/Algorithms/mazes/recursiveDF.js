@@ -16,7 +16,6 @@ export function recursiveMaze(originalGrid) {
   recursion(grid, currentCell, path);
   clearInfinityVariables(grid);
   window.gridComponent.setState({ grid: grid });
-  //visualization
   visualizeOnWalledGrid(grid, path);
 }
 
@@ -68,6 +67,5 @@ function getNeighboringCells(cell, grid) {
       neighboringUnvisitedPairs.push([neighbor, grid[row][col - 2]]);
     }
   }
-
   return neighboringUnvisitedPairs;
 }

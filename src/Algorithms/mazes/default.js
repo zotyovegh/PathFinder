@@ -11,7 +11,7 @@ export function getRandomMazedGrid(grid) {
   }
   var numberOfCells = (grid.length - 1) * (grid[0].length - 1);
 
-  var wallAmount = Math.floor(numberOfCells * 0.4); //0.4 should be later replaced with the amount
+  var wallAmount = Math.floor(numberOfCells * 0.3); //0.4 should be later replaced with the amount
 
   for (let i = 0; i < wallAmount; i++) {
     let row = Math.floor(Math.random() * (grid.length - 1));
