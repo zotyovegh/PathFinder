@@ -78,11 +78,7 @@ function Left(row, col, grid, neighbors) {
 function DoAnimation(visitedCells, endCell, speed) {
   const cellsInOrder = getCellsInOrder(endCell);
   if (speed === "slow") {
-    if (window.gridComponent.state.status === "finished") {
-      clearVisitedCells();
-    }
     window.gridComponent.setState({ status: "running" });
-
     animateSlow(visitedCells, cellsInOrder);
   } else if (speed === "fast") {
     animateFast(visitedCells, cellsInOrder);

@@ -75,7 +75,7 @@ export function visualizeABMaze(grid, path) {
         }
       }
       if (!path[i].end && !path[i].start) {
-        visualizeCell("cell", "cell cell-current", path[i]);
+        visualizeCell("cell", "cell cell-currentSec", path[i]);
         previous = path[i];
       }
     }, 10 * i);
@@ -109,18 +109,18 @@ export async function visualizeWilson(grid, path) {
         : document.getElementById(`${"cell"}-${aim.row}-${aim.col}`).className;
     if (aim !== null) {
       if (!aim.end && !aim.start) {
-        visualizeCell("cell", "cell cell-previous", aim);
+        visualizeCell("cell", "cell cell-previousSec", aim);
       }
     }
 
     if (!isOptimalPath) {
       for (let j = 0; j < currentPath.length; j++) {
         if (previous !== null) {
-          visualizeCell("cell", "cell cell-current", previous);
+          visualizeCell("cell", "cell cell-currentSec", previous);
         }
 
         if (!currentPath[j].end && !currentPath[j].start) {
-          visualizeCell("cell", "cell cell-previous", currentPath[j]);
+          visualizeCell("cell", "cell cell-previousSec", currentPath[j]);
           previous = currentPath[j];
         }
 

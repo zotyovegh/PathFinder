@@ -53,7 +53,7 @@ export function animateFast(visitedCells, cellsInOrder) {
 
     if (cell.start && window.gridComponent.state.previousVisualization) {
       visualizeCell("num", "num num-start", cell);
-    } else if (!cell.end && !cell.start) {
+    } else if (!cell.end && !cell.start && !cell.isWall) {
       visualizeCell("cell", "cell cell-visited", cell);
       if (window.gridComponent.state.previousVisualization) {
         visualizeCell("num", "num num-visited", cell);
