@@ -1,6 +1,6 @@
 import { clearVisitedCells } from "../cleaning";
 import { visualizeCell } from "../methods";
-export function visualizeOnWalledGrid(grid, path) {
+export async function visualizeOnWalledGrid(grid, path) {
   window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
@@ -11,7 +11,7 @@ export function visualizeOnWalledGrid(grid, path) {
   }
 
   for (let i = 0; i <= path.length; i++) {
-    setTimeout(() => {
+  
       if (i === path.length) {
         window.gridComponent.setState({ status: "pending" });
         clearVisitedCells();
@@ -20,7 +20,7 @@ export function visualizeOnWalledGrid(grid, path) {
       if (!path[i].end && !path[i].start) {
         visualizeCell("cell", "cell cell-empty", path[i]);
       }
-    }, 10 * i);
+      await new Promise((r) => setTimeout(r, 10));
   }
 }
 
@@ -149,7 +149,7 @@ export async function visualizeWilson(grid, path) {
   }
 }
 
-export function visualizeOnEmptyGrid(grid, path) {
+export async function visualizeOnEmptyGrid(grid, path) {
   window.gridComponent.setState({ status: "running" });
   for (const row of grid) {
     for (const cell of row) {
@@ -160,15 +160,14 @@ export function visualizeOnEmptyGrid(grid, path) {
   }
 
   for (let i = 0; i <= path.length; i++) {
-    setTimeout(() => {
-      if (i === path.length) {
-        window.gridComponent.setState({ status: "pending" });
-        clearVisitedCells();
-        return;
-      }
-      if (!path[i].end && !path[i].start) {
-        visualizeCell("cell", "cell cell-wall", path[i]);
-      }
-    }, 10 * i);
+    if (i === path.length) {
+      window.gridComponent.setState({ status: "pending" });
+      clearVisitedCells();
+      return;
+    }
+    if (!path[i].end && !path[i].start) {
+      visualizeCell("cell", "cell cell-wall", path[i]);
+    }
+    await new Promise((r) => setTimeout(r, 10));
   }
 }
