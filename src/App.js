@@ -55,7 +55,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        This project is still under construction!
         <Grid
           rows={this.state.rows}
           columns={this.state.columns}

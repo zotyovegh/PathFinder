@@ -266,130 +266,146 @@ class Grid extends Component {
         <div className="grid" onMouseLeave={this.onMouseUp}>
           {grid}
         </div>
-        <select
-          value={this.state.currentAlg}
-          onChange={this.handleAlgoChange}
-          disabled={this.state.status === "running"}
-        >
-          <option value="dijkstra">Dijkstra</option>
-          <option value="astar">A* Search</option>
-          <option value="depthFirst">Depth-First Search</option>
-          <option value="breadthFirst">Breadth-First Search</option>
-        </select>
-        <button
-          disabled={this.state.status === "running"}
-          onClick={() => this.doAlgorithm("slow")}
-        >
-          Start
-        </button>
-        <button
-          disabled={this.state.status === "running"}
-          onClick={() => {
-            clearWithStatus("path");
-          }}
-        >
-          Clear path
-        </button>
-        <button
-          disabled={this.state.status === "running"}
-          onClick={() => {
-            clearWithStatus("grid");
-          }}
-        >
-          Clear grid
-        </button>
-        Distance
-        <label className="switch">
-          <input
-            disabled={
-              this.state.status === "running" ||
-              this.state.currentAlg === "astar" ||
-              this.state.currentAlg === "depthFirst" ||
-              this.state.currentAlg === "breadthFirst"
-            }
-            type="checkbox"
-            defaultChecked={this.state.previousVisualization}
-            onChange={this.handleButtonChange}
-            name="distance"
-          ></input>
-          <span className="slider round"></span>
-        </label>
-        Diagonal
-        <label className="switch">
-          <input
-            disabled={
-              this.state.status === "running" ||
-              this.state.currentAlg === "depthFirst" ||
-              this.state.currentAlg === "breadthFirst"
-            }
-            type="checkbox"
-            defaultChecked={this.state.diagonalVisualization}
-            onChange={this.handleButtonChange}
-            name="diagonal"
-          ></input>
-          <span className="slider round"></span>
-        </label>
-        Optimized
-        <label className="switch">
-          <input
-            disabled={
-              this.state.status === "running" ||
-              this.state.currentAlg === "dijkstra" ||
-              this.state.currentAlg === "depthFirst" ||
-              this.state.currentAlg === "breadthFirst"
-            }
-            type="checkbox"
-            defaultChecked={this.state.optimizedVisualization}
-            onChange={this.handleButtonChange}
-            name="optimized"
-          ></input>
-          <span className="slider round"></span>
-        </label>
-        Bidirectional
-        <label className="switch">
-          <input
-            disabled={
-              this.state.status === "running" ||
-              this.state.currentAlg === "depthFirst" ||
-              this.state.currentAlg === "breadthFirst"
-            }
-            type="checkbox"
-            defaultChecked={this.state.bidirectionalVisualization}
-            onChange={this.handleButtonChange}
-            name="bidirectional"
-          ></input>
-          <span className="slider round"></span>
-        </label>
-        <select
-          value={this.state.currentMaze}
-          onChange={this.handleMazeChange}
-          disabled={this.state.status === "running"}
-        >
-          <option value="default" disabled hidden>
-            Mazes
-          </option>
-          <optgroup label="Patterns">
-            <option value="random">Random</option>
-            <option value="basicHorizontal">Basic Horizontal</option>
-            <option value="basicVertical">Basic Vertical</option>
-          </optgroup>
-          <optgroup label="Algorithms">
-            <option value="prim">Prim</option>
-            <option value="iterative">Iterative Depth-first</option>
-            <option value="recursive">Recursive Depth-first</option>
-            <option value="aldousBroder">Aldous-Broder</option>
-            <option value="kruskal">Kruskal</option>
-            <option value="wilson">Wilson</option>
-            <option value="recursiveDivision">Recursive Division</option>
-            <option value="eller">Eller</option>
-          </optgroup>
-          <optgroup label="&nbsp;&nbsp;&nbsp;Binary Tree Algorithm">
-            <option value="binaryTreeSE">&nbsp;&nbsp;&nbsp;South-East</option>
-            <option value="binaryTreeSW">&nbsp;&nbsp;&nbsp;South-West</option>
-            <option value="binaryTreeNE">&nbsp;&nbsp;&nbsp;North-East</option>
-            <option value="binaryTreeNW">&nbsp;&nbsp;&nbsp;North-West</option>
-          </optgroup>
-        </select>
+        <div className="header">
+          <div className="header__group">
+            <select
+              value={this.state.currentAlg}
+              onChange={this.handleAlgoChange}
+              disabled={this.state.status === "running"}
+            >
+              <option value="dijkstra">Dijkstra</option>
+              <option value="astar">A* Search</option>
+              <option value="depthFirst">Depth-First Search</option>
+              <option value="breadthFirst">Breadth-First Search</option>
+            </select>
+            <select
+              value={this.state.currentMaze}
+              onChange={this.handleMazeChange}
+              disabled={this.state.status === "running"}
+            >
+              <option value="default" disabled hidden>
+                Mazes
+              </option>
+              <optgroup label="Patterns">
+                <option value="random">Random</option>
+                <option value="basicHorizontal">Basic Horizontal</option>
+                <option value="basicVertical">Basic Vertical</option>
+              </optgroup>
+              <optgroup label="Algorithms">
+                <option value="prim">Prim</option>
+                <option value="iterative">Iterative Depth-first</option>
+                <option value="recursive">Recursive Depth-first</option>
+                <option value="aldousBroder">Aldous-Broder</option>
+                <option value="kruskal">Kruskal</option>
+                <option value="wilson">Wilson</option>
+                <option value="recursiveDivision">Recursive Division</option>
+                <option value="eller">Eller</option>
+              </optgroup>
+              <optgroup label="&nbsp;&nbsp;&nbsp;Binary Tree Algorithm">
+                <option value="binaryTreeSE">
+                  &nbsp;&nbsp;&nbsp;South-East
+                </option>
+                <option value="binaryTreeSW">
+                  &nbsp;&nbsp;&nbsp;South-West
+                </option>
+                <option value="binaryTreeNE">
+                  &nbsp;&nbsp;&nbsp;North-East
+                </option>
+                <option value="binaryTreeNW">
+                  &nbsp;&nbsp;&nbsp;North-West
+                </option>
+              </optgroup>
+            </select>
+          </div>
+          <div className="header__group">
+            <button
+              disabled={this.state.status === "running"}
+              onClick={() => this.doAlgorithm("slow")}
+            >
+              Start
+            </button>
+            <button
+              disabled={this.state.status === "running"}
+              onClick={() => {
+                clearWithStatus("path");
+              }}
+            >
+              Clear path
+            </button>
+            <button
+              disabled={this.state.status === "running"}
+              onClick={() => {
+                clearWithStatus("grid");
+              }}
+            >
+              Clear grid
+            </button>{" "}
+          </div>
+          <div className="header__group">
+            Distance
+            <label className="switch">
+              <input
+                disabled={
+                  this.state.status === "running" ||
+                  this.state.currentAlg === "astar" ||
+                  this.state.currentAlg === "depthFirst" ||
+                  this.state.currentAlg === "breadthFirst"
+                }
+                type="checkbox"
+                defaultChecked={this.state.previousVisualization}
+                onChange={this.handleButtonChange}
+                name="distance"
+              ></input>
+              <span className="slider round"></span>
+            </label>
+            Diagonal
+            <label className="switch">
+              <input
+                disabled={
+                  this.state.status === "running" ||
+                  this.state.currentAlg === "depthFirst" ||
+                  this.state.currentAlg === "breadthFirst"
+                }
+                type="checkbox"
+                defaultChecked={this.state.diagonalVisualization}
+                onChange={this.handleButtonChange}
+                name="diagonal"
+              ></input>
+              <span className="slider round"></span>
+            </label>
+            Optimized
+            <label className="switch">
+              <input
+                disabled={
+                  this.state.status === "running" ||
+                  this.state.currentAlg === "dijkstra" ||
+                  this.state.currentAlg === "depthFirst" ||
+                  this.state.currentAlg === "breadthFirst"
+                }
+                type="checkbox"
+                defaultChecked={this.state.optimizedVisualization}
+                onChange={this.handleButtonChange}
+                name="optimized"
+              ></input>
+              <span className="slider round"></span>
+            </label>
+            Bidirectional
+            <label className="switch">
+              <input
+                disabled={
+                  this.state.status === "running" ||
+                  this.state.currentAlg === "depthFirst" ||
+                  this.state.currentAlg === "breadthFirst"
+                }
+                type="checkbox"
+                defaultChecked={this.state.bidirectionalVisualization}
+                onChange={this.handleButtonChange}
+                name="bidirectional"
+              ></input>
+              <span className="slider round"></span>
+            </label>
+          </div>{" "}
+        </div>{" "}
       </div>
     );
   }

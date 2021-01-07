@@ -1,1 +1,16 @@
-/* No CSS *//*# sourceMappingURL=header.css.map */
+body {
+  margin: 0;
+}
+
+.header {
+  background-color: burlywood;
+  height: 50px;
+}
+
+.header .header__group {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  float: left;
+}
+/*# sourceMappingURL=header.css.map */

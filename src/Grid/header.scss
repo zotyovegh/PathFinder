@@ -1,0 +1,13 @@
+body{
+  margin: 0;
+}
+
+.header{
+  background-color:burlywood;
+  height: 50px;
+
+  .header__group{
+    width: fit-content;
+    float: left;
+  }
+}
