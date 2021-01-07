@@ -11,8 +11,13 @@ body {
 }
 
 .header {
-  background-color: burlywood;
-  height: 50px;
+  background-color: #ffc77e;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 6px;
 }
 
 .header__group {
@@ -23,14 +28,18 @@ body {
 }
 
 .header__selector {
-  background-color: crimson;
+  margin-right: 3px;
+  /* background-color: crimson;*/
 }
 
 .header__button {
-  background-color: green;
+  margin-right: 3px;
+  /* background-color: green;*/
 }
 
 .header__switch {
+  margin-right: 5px;
+  margin-left: 3px;
   position: relative;
   display: inline-block;
   width: 40px;

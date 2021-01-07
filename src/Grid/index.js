@@ -35,7 +35,7 @@ class Grid extends Component {
       endRow: props.endR,
       endCol: props.endC,
       status: "pending",
-      currentAlg: "astar",
+      currentAlg: "dijkstra",
       currentMaze: "default",
       previousVisualization: false,
       diagonalVisualization: false,
@@ -269,17 +269,6 @@ class Grid extends Component {
           <div className="header__group">
             <select
               className="header__selector"
-              value={this.state.currentAlg}
-              onChange={this.handleAlgoChange}
-              disabled={this.state.status === "running"}
-            >
-              <option value="dijkstra">Dijkstra</option>
-              <option value="astar">A* Search</option>
-              <option value="depthFirst">Depth-First Search</option>
-              <option value="breadthFirst">Breadth-First Search</option>
-            </select>
-            <select
-              className="header__selector"
               value={this.state.currentMaze}
               onChange={this.handleMazeChange}
               disabled={this.state.status === "running"}
@@ -316,6 +305,17 @@ class Grid extends Component {
                   &nbsp;&nbsp;&nbsp;North-West
                 </option>
               </optgroup>
+            </select>
+            <select
+              className="header__selector"
+              value={this.state.currentAlg}
+              onChange={this.handleAlgoChange}
+              disabled={this.state.status === "running"}
+            >
+              <option value="dijkstra">Dijkstra</option>
+              <option value="astar">A* Search</option>
+              <option value="depthFirst">Depth-First Search</option>
+              <option value="breadthFirst">Breadth-First Search</option>
             </select>
           </div>
           <div className="header__group">
