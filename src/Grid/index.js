@@ -269,6 +269,7 @@ class Grid extends Component {
         <div className="header">
           <div className="header__group">
             <select
+              className="header__selector"
               value={this.state.currentAlg}
               onChange={this.handleAlgoChange}
               disabled={this.state.status === "running"}
@@ -279,6 +280,7 @@ class Grid extends Component {
               <option value="breadthFirst">Breadth-First Search</option>
             </select>
             <select
+              className="header__selector"
               value={this.state.currentMaze}
               onChange={this.handleMazeChange}
               disabled={this.state.status === "running"}
@@ -319,12 +321,14 @@ class Grid extends Component {
           </div>
           <div className="header__group">
             <button
+              className="header__button"
               disabled={this.state.status === "running"}
               onClick={() => this.doAlgorithm("slow")}
             >
               Start
             </button>
             <button
+              className="header__button"
               disabled={this.state.status === "running"}
               onClick={() => {
                 clearWithStatus("path");
@@ -333,6 +337,7 @@ class Grid extends Component {
               Clear path
             </button>
             <button
+              className="header__button"
               disabled={this.state.status === "running"}
               onClick={() => {
                 clearWithStatus("grid");
@@ -343,7 +348,7 @@ class Grid extends Component {
           </div>
           <div className="header__group">
             Distance
-            <label className="switch">
+            <label className="header__switch">
               <input
                 disabled={
                   this.state.status === "running" ||
@@ -359,7 +364,7 @@ class Grid extends Component {
               <span className="slider round"></span>
             </label>
             Diagonal
-            <label className="switch">
+            <label className="header__switch">
               <input
                 disabled={
                   this.state.status === "running" ||
@@ -374,7 +379,7 @@ class Grid extends Component {
               <span className="slider round"></span>
             </label>
             Optimized
-            <label className="switch">
+            <label className="header__switch">
               <input
                 disabled={
                   this.state.status === "running" ||
@@ -390,7 +395,7 @@ class Grid extends Component {
               <span className="slider round"></span>
             </label>
             Bidirectional
-            <label className="switch">
+            <label className="header__switch">
               <input
                 disabled={
                   this.state.status === "running" ||
