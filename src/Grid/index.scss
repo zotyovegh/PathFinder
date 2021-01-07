@@ -2,6 +2,13 @@ body{
   margin: 0;
 }
 
+.grid {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .header{
   background-color:burlywood;
   height: 50px;
