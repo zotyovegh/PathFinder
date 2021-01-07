@@ -27,8 +27,22 @@ body{
    /* background-color: crimson;*/
   }
   &__button{
-    margin-right: 3px;   
-   /* background-color: green;*/
+    margin-right: 3px;  
+    background-color: rgb(225, 225, 225);
+    border-radius:3px;
+    border:2px solid #7c7c7c;
+    outline: 0;
+    &:hover{
+      background-color:rgb(210, 210, 210);
+      border:2px solid #7c7c7c;
+      outline: 0;
+    }
+    &:active{
+      background-color: rgb(116, 116, 116);
+      border:2px solid rgb(116, 116, 116);
+      color: white;
+      outline: 0;
+    }    
   }
 
   &__switch {
