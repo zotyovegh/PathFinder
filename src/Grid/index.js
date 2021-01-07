@@ -49,7 +49,11 @@ class Grid extends Component {
   }
 
   handleAlgoChange(event) {
-    this.setState({ currentAlg: event.target.value });
+    this.setState({ currentAlg: event.target.value }, () => {
+      if (this.state.status === "finished") {
+        this.doAlgorithm("fast");
+      }
+    });
   }
   handleButtonChange(event) {
     if (event.target.name === "distance") {
