@@ -350,70 +350,75 @@ class Grid extends Component {
             </button>{" "}
           </div>
           <div className="header__group">
-            Distance
-            <label className="header__switch">
-              <input
-                disabled={
-                  this.state.status === "running" ||
-                  this.state.currentAlg === "astar" ||
-                  this.state.currentAlg === "depthFirst" ||
-                  this.state.currentAlg === "breadthFirst"
-                }
-                type="checkbox"
-                defaultChecked={this.state.previousVisualization}
-                onChange={this.handleButtonChange}
-                name="distance"
-              ></input>
-              <span className="slider round"></span>
-            </label>
-            Diagonal
-            <label className="header__switch">
-              <input
-                disabled={
-                  this.state.status === "running" ||
-                  this.state.currentAlg === "depthFirst" ||
-                  this.state.currentAlg === "breadthFirst"
-                }
-                type="checkbox"
-                defaultChecked={this.state.diagonalVisualization}
-                onChange={this.handleButtonChange}
-                name="diagonal"
-              ></input>
-              <span className="slider round"></span>
-            </label>
-            Optimized
-            <label className="header__switch">
-              <input
-                disabled={
-                  this.state.status === "running" ||
-                  this.state.currentAlg === "dijkstra" ||
-                  this.state.currentAlg === "depthFirst" ||
-                  this.state.currentAlg === "breadthFirst"
-                }
-                type="checkbox"
-                defaultChecked={this.state.optimizedVisualization}
-                onChange={this.handleButtonChange}
-                name="optimized"
-              ></input>
-              <span className="slider round"></span>
-            </label>
-            Bidirectional
-            <label className="header__switch">
-              <input
-                disabled={
-                  this.state.status === "running" ||
-                  this.state.currentAlg === "depthFirst" ||
-                  this.state.currentAlg === "breadthFirst"
-                }
-                type="checkbox"
-                defaultChecked={this.state.bidirectionalVisualization}
-                onChange={this.handleButtonChange}
-                name="bidirectional"
-              ></input>
-              <span className="slider round"></span>
-            </label>
-          </div>{" "}
-        </div>{" "}
+            {this.state.currentAlg !== "astar" &&
+            this.state.currentAlg !== "depthFirst" &&
+            this.state.currentAlg !== "breadthFirst" ? (
+              <div>
+                Distance
+                <label className="header__switch">
+                  <input
+                    disabled={this.state.status === "running"}
+                    type="checkbox"
+                    defaultChecked={this.state.previousVisualization}
+                    onChange={this.handleButtonChange}
+                    name="distance"
+                  ></input>
+                  <span className="slider round"></span>
+                </label>
+              </div>
+            ) : null}
+
+            {this.state.currentAlg !== "depthFirst" &&
+            this.state.currentAlg !== "breadthFirst" ? (
+              <div>
+                Diagonal
+                <label className="header__switch">
+                  <input
+                    disabled={this.state.status === "running"}
+                    type="checkbox"
+                    defaultChecked={this.state.diagonalVisualization}
+                    onChange={this.handleButtonChange}
+                    name="diagonal"
+                  ></input>
+                  <span className="slider round"></span>
+                </label>
+              </div>
+            ) : null}
+            {this.state.currentAlg !== "dijkstra" &&
+            this.state.currentAlg !== "depthFirst" &&
+            this.state.currentAlg !== "breadthFirst" ? (
+              <div>
+                Optimized
+                <label className="header__switch">
+                  <input
+                    disabled={this.state.status === "running"}
+                    type="checkbox"
+                    defaultChecked={this.state.optimizedVisualization}
+                    onChange={this.handleButtonChange}
+                    name="optimized"
+                  ></input>
+                  <span className="slider round"></span>
+                </label>
+              </div>
+            ) : null}
+            {this.state.currentAlg !== "depthFirst" &&
+            this.state.currentAlg !== "breadthFirst" ? (
+              <div>
+                Bidirectional
+                <label className="header__switch">
+                  <input
+                    disabled={this.state.status === "running"}
+                    type="checkbox"
+                    defaultChecked={this.state.bidirectionalVisualization}
+                    onChange={this.handleButtonChange}
+                    name="bidirectional"
+                  ></input>
+                  <span className="slider round"></span>
+                </label>
+              </div>
+            ) : null}
+          </div>
+        </div>
       </div>
     );
   }

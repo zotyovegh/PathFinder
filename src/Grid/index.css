@@ -62,6 +62,10 @@ body {
   height: 20px;
 }
 
+.header__switchHolder {
+  position: left;
+}
+
 .slider {
   position: absolute;
   cursor: pointer;
