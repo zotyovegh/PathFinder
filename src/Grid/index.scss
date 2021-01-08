@@ -20,9 +20,13 @@ body{
 
   &__group{
     width: fit-content;
-    float: left;   
-  
+    float: left;    
   } 
+
+  &__switchHolder{
+    float: left;  
+  }
+
   &__selector{
     margin-right: 3px;
    /* background-color: crimson;*/

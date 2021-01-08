@@ -27,6 +27,10 @@ body {
   float: left;
 }
 
+.header__switchHolder {
+  float: left;
+}
+
 .header__selector {
   margin-right: 3px;
   /* background-color: crimson;*/
@@ -60,10 +64,6 @@ body {
   display: inline-block;
   width: 40px;
   height: 20px;
-}
-
-.header__switchHolder {
-  position: left;
 }
 
 .slider {

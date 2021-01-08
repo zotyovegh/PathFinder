@@ -353,7 +353,7 @@ class Grid extends Component {
             {this.state.currentAlg !== "astar" &&
             this.state.currentAlg !== "depthFirst" &&
             this.state.currentAlg !== "breadthFirst" ? (
-              <div>
+              <div className="header__switchHolder">
                 Distance
                 <label className="header__switch">
                   <input
@@ -370,7 +370,7 @@ class Grid extends Component {
 
             {this.state.currentAlg !== "depthFirst" &&
             this.state.currentAlg !== "breadthFirst" ? (
-              <div>
+              <div className="header__switchHolder">
                 Diagonal
                 <label className="header__switch">
                   <input
@@ -387,7 +387,7 @@ class Grid extends Component {
             {this.state.currentAlg !== "dijkstra" &&
             this.state.currentAlg !== "depthFirst" &&
             this.state.currentAlg !== "breadthFirst" ? (
-              <div>
+              <div className="header__switchHolder">
                 Optimized
                 <label className="header__switch">
                   <input
@@ -403,7 +403,7 @@ class Grid extends Component {
             ) : null}
             {this.state.currentAlg !== "depthFirst" &&
             this.state.currentAlg !== "breadthFirst" ? (
-              <div>
+              <div className="header__switchHolder">
                 Bidirectional
                 <label className="header__switch">
                   <input
