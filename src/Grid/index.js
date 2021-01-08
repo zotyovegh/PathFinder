@@ -350,18 +350,17 @@ class Grid extends Component {
             </button>{" "}
           </div>
           <div className="header__group">
-            {this.state.currentAlg !== "astar" &&
-            this.state.currentAlg !== "depthFirst" &&
+            {this.state.currentAlg !== "depthFirst" &&
             this.state.currentAlg !== "breadthFirst" ? (
               <div className="header__switchHolder">
-                Distance
+                Bidirectional
                 <label className="header__switch">
                   <input
                     disabled={this.state.status === "running"}
                     type="checkbox"
-                    defaultChecked={this.state.previousVisualization}
+                    defaultChecked={this.state.bidirectionalVisualization}
                     onChange={this.handleButtonChange}
-                    name="distance"
+                    name="bidirectional"
                   ></input>
                   <span className="slider round"></span>
                 </label>
@@ -384,6 +383,23 @@ class Grid extends Component {
                 </label>
               </div>
             ) : null}
+            {this.state.currentAlg !== "astar" &&
+            this.state.currentAlg !== "depthFirst" &&
+            this.state.currentAlg !== "breadthFirst" ? (
+              <div className="header__switchHolder">
+                Distance
+                <label className="header__switch">
+                  <input
+                    disabled={this.state.status === "running"}
+                    type="checkbox"
+                    defaultChecked={this.state.previousVisualization}
+                    onChange={this.handleButtonChange}
+                    name="distance"
+                  ></input>
+                  <span className="slider round"></span>
+                </label>
+              </div>
+            ) : null}
             {this.state.currentAlg !== "dijkstra" &&
             this.state.currentAlg !== "depthFirst" &&
             this.state.currentAlg !== "breadthFirst" ? (
@@ -396,22 +412,6 @@ class Grid extends Component {
                     defaultChecked={this.state.optimizedVisualization}
                     onChange={this.handleButtonChange}
                     name="optimized"
-                  ></input>
-                  <span className="slider round"></span>
-                </label>
-              </div>
-            ) : null}
-            {this.state.currentAlg !== "depthFirst" &&
-            this.state.currentAlg !== "breadthFirst" ? (
-              <div className="header__switchHolder">
-                Bidirectional
-                <label className="header__switch">
-                  <input
-                    disabled={this.state.status === "running"}
-                    type="checkbox"
-                    defaultChecked={this.state.bidirectionalVisualization}
-                    onChange={this.handleButtonChange}
-                    name="bidirectional"
                   ></input>
                   <span className="slider round"></span>
                 </label>
