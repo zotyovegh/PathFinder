@@ -52,8 +52,8 @@
 }
 /*ASTAR--------*/
 .cell-visited {
-  border: 0.5px solid rgb(180, 245, 255);
-  background-color: rgba(0, 190, 218, 0.75);
+  border: 0.5px solid rgb(73, 210, 252);
+  background-color: rgba(0, 234, 255, 0.541);
 }
 
 .cell-visited-animated {
@@ -83,11 +83,12 @@
 
   75% {
     transform: scale(1.2);
-    background-color: rgba(0, 217, 159, 0.75);
+    background-color: rgba(52, 255, 201, 0.75);
   }
 
   100% {
     transform: scale(1);
-    background-color: rgba(0, 190, 218, 0.75);
+    border: 0.5px solid rgb(73, 210, 252);
+    background-color: rgba(0, 234, 255, 0.541);
   }
 }
