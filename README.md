@@ -1,3 +1,4 @@
+# Pathfinder Visualizer
 
 Based on development time, working hours and final product, this pathfinder visualizer project has been my biggest side-project during my education.
 
